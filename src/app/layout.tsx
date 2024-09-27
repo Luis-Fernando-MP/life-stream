@@ -1,11 +1,10 @@
 import { MontserratFont, PlayFairFont, RobotoFont } from '@/shared/fonts'
+import '@sass/config/global.scss'
 import type { Metadata } from 'next'
 import type { JSX, ReactNode } from 'react'
 import { Toaster } from 'react-hot-toast'
 
 import Nav from './components/Nav'
-// import './globals.css'
-// import './index.scss'
 import Providers from './providers'
 
 interface IRootLayout {

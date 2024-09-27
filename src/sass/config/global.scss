@@ -50,7 +50,6 @@ body {
   select,
   p {
     font-size: $fP;
-    font-weight: 400;
   }
 
   p,
@@ -69,28 +68,45 @@ body {
     text-decoration: none;
   }
 
-  small {
-    font-style: italic;
-  }
-
-  span,
-  small {
+  span {
     font-family: $font3;
     font-weight: 400;
     color: $fn2;
   }
+
+  h5 {
+    font-weight: 500;
+  }
+
+  p {
+    font-weight: 400;
+  }
+
+  h5,
+  p,
+  a,
+  input,
+  textarea,
+  button,
+  select {
+    font-family: $font2;
+    color: $fn2;
+
+    &:focus {
+      outline: none;
+    }
+  }
 }
 
 $listOfFontsSize: (
-  '.title': $fXl,
+  '.xl': $fXl,
   'h1': $fH1,
   'h2': $fH2,
   'h3': $fH3,
   'h4': $fH4,
   'h5': $fH5,
   'p': $fP,
-  'span': $fSpan,
-  'small': $fSmall
+  'span': $fSpan
 );
 
 @each $tag, $value in $listOfFontsSize {
@@ -107,21 +123,6 @@ h4 {
   color: $fn1;
 }
 
-h5,
-p,
-a,
-input,
-textarea,
-button,
-select {
-  font-family: $font2;
-  color: $fn2;
-
-  &:focus {
-    outline: none;
-  }
-}
-
 h1 {
   font-weight: 900;
 }
@@ -134,9 +135,8 @@ h3 {
   font-weight: 700;
 }
 
-h4,
-h5 {
-  font-weight: 500;
+h4 {
+  font-weight: 600;
 }
 
 h1,
