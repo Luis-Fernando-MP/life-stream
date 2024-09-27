@@ -3,14 +3,16 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "postinstall": "npx prisma generate",
     "dev": "rimraf .next && pnpm store prune && next dev",
-    "build": "next build",
+    "build": "pnpm lint && next build",
     "start": "next start",
     "lint": "npx stylelint '**/*.{css,scss}' && next lint",
     "format": "pnpx stylelint '**/*.{css,scss}' --fix && prettier --write '**/*.{js,jsx,ts,tsx,json,md,scss,css}'",
     "prisma:init": "pnpx prisma init --datasource-provider mysql",
     "prisma:migrate": "pnpx prisma migrate dev",
-    "prisma:generate": "pnpx prisma generate"
+    "prisma:generate": "pnpx prisma generate",
+    "rok": "ngrok http http://127.0.0.1:3000"
   },
   "dependencies": {
     "@clerk/nextjs": "5.6.3",
