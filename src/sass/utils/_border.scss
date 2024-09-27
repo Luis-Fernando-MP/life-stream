@@ -1,0 +1,8 @@
+@use '@/sass/config/vars' as v;
+
+@mixin gradientBorder($bg: v.$bg1, $gr: v.$gr1, $size: 1px) {
+  background:
+    linear-gradient($bg, $bg) padding-box,
+    $gr border-box;
+  border: $size solid transparent;
+}

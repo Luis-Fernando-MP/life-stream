@@ -1,0 +1,79 @@
+:root {
+  --bg-primary: #e3e2fd;
+  --bg-secondary: #d8d9fd;
+  --bg-tertiary: #d0d0eef5;
+  --fnt-primary: #000;
+  --fnt-secondary: #505050;
+  --tn-primary: #956ff9;
+  --tn-secondary: #f9489d;
+  --tn-tertiary: #7549a22c;
+  --xl-font-size: 5em;
+  --h1-font-size: 2em;
+  --h2-font-size: 1.3em;
+  --h3-font-size: 1.2em;
+  --h4-font-size: 1.1em;
+  --h5-font-size: 1em;
+  --p-font-size: 0.9em;
+  --span-font-size: 0.85em;
+  --small-font-size: 0.8em;
+}
+
+$fXl: var(--xl-font-size);
+$fH1: var(--h1-font-size);
+$fH2: var(--h2-font-size);
+$fH3: var(--h3-font-size);
+$fH4: var(--h4-font-size);
+$fH5: var(--h5-font-size);
+$fP: var(--p-font-size);
+$fSpan: var(--span-font-size);
+$fSmall: var(--small-font-size);
+$bg1: var(--bg-primary);
+$bg2: var(--bg-secondary);
+$bg3: var(--bg-tertiary);
+$fn1: var(--fnt-primary);
+$fn2: var(--fnt-secondary);
+$tn1: var(--tn-primary);
+$tn2: var(--tn-secondary);
+$tn3: var(--tn-tertiary);
+
+// other
+$min-small-screen: 450px;
+$small-screen: 576px;
+$medium-screen: 820px;
+$large-screen: 992px;
+$extra-large-screen: 1200px;
+$big-screen: 1350px;
+$radius: 10px;
+$padding: 15px;
+$icon: 20px;
+$family-size: 12px;
+$fontBase: 'Segoe UI Mono', 'Roboto Mono', 'Ubuntu Monospace', 'Source Code Pro', 'Fira Mono',
+  'Segoe UI Emoji';
+$font1: var(--RobotoFont);
+$font2: var(--MontserratFont);
+$font3: var(--PlayFairFont);
+$gr1: linear-gradient(90deg, $tn1 0%, $tn2 100%);
+$sha1: 6px 5px 20px -5px $bg3;
+
+@mixin dotDark {
+  body.dark & {
+    @content;
+  }
+}
+
+@mixin border($bg: $bg1) {
+  & {
+    background-color: $bg;
+    border: 1px solid $bg3;
+  }
+}
+
+@mixin hoverS($scale: 0.99, $s: 0.2s) {
+  scale: 1;
+  transition: all $s ease-in;
+
+  &:hover {
+    scale: $scale;
+    @content;
+  }
+}

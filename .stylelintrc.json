@@ -1,0 +1,19 @@
+{
+  "extends": [
+    "stylelint-config-standard",
+    "stylelint-config-standard-scss",
+    "stylelint-config-clean-order",
+    "stylelint-config-two-dash-bem"
+  ],
+  "rules": {
+    "scss/at-rule-no-unknown": [
+      true,
+      {
+        "ignoreAtRules": ["tailwind"]
+      }
+    ],
+    "scss/at-mixin-pattern": null,
+    "scss/dollar-variable-pattern": null,
+    "custom-property-pattern": null
+  }
+}
