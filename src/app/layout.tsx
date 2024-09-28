@@ -1,11 +1,13 @@
 import { MontserratFont, PlayFairFont, RobotoFont } from '@/shared/fonts'
-import '@sass/config/global.scss'
 import type { Metadata } from 'next'
 import type { JSX, ReactNode } from 'react'
 import { Toaster } from 'react-hot-toast'
 
+import Header from './components/Header'
 import Nav from './components/Nav'
+import './globals.css'
 import Providers from './providers'
+import './style.scss'
 
 interface IRootLayout {
   children?: Readonly<ReactNode[]> | null | Readonly<ReactNode>
@@ -22,15 +24,20 @@ export const metadata: Metadata = {
   }
 }
 
-const RootLayout = async ({ children }: IRootLayout): Promise<JSX.Element> => {
+const RootLayout = ({ children }: IRootLayout): JSX.Element => {
   return (
     <html lang='es'>
       <body
         className={`${MontserratFont.variable} ${RobotoFont.variable} ${PlayFairFont.variable}`}
       >
         <Providers>
-          <Nav />
-          <main>{children}</main>
+          <main className='layout'>
+            <Nav className='layout-nav' />
+            <section className='layout-main'>
+              <Header className='layout-header' />
+              {children}
+            </section>
+          </main>
         </Providers>
         <Toaster position='top-center' reverseOrder />
       </body>

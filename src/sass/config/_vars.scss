@@ -4,8 +4,8 @@
   --bg-tertiary: #d0d0eef5;
   --fnt-primary: #000;
   --fnt-secondary: #505050;
-  --tn-primary: #956ff9;
-  --tn-secondary: #f9489d;
+  --tn-primary: #4747dc;
+  --tn-secondary: #7878ff;
   --tn-tertiary: #7549a22c;
   --xl-font-size: 3em;
   --h1-font-size: 2em;
@@ -62,7 +62,7 @@ $sha1: 6px 5px 20px -5px $bg3;
 @mixin border($bg: $bg1) {
   & {
     background-color: $bg;
-    border: 1px solid $bg3;
+    border: 1.5px solid $bg3;
   }
 }
 

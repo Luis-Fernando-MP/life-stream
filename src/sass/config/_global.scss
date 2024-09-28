@@ -1,7 +1,7 @@
-@use '@/sass/utils/scrollbar';
-@use '@/sass/config/vars' as *;
-@use '@/sass/utils/media' as m;
-@use '@/sass/utils/text' as t;
+@use '@sass/utils/scrollbar';
+@use '@sass/config/vars' as *;
+@use '@sass/utils/media' as m;
+@use '@sass/utils/text' as t;
 
 *,
 ::before,
@@ -9,6 +9,8 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+
+  border: none;
   outline: none;
 }
 
@@ -39,7 +41,12 @@ body {
 
   button {
     cursor: pointer;
-    border: none;
+
+    width: fit-content;
+    height: fit-content;
+    margin: none;
+
+    background-color: $bg2;
 
     @include hoverS;
   }
@@ -153,12 +160,39 @@ ul {
 
 svg {
   display: block;
-  width: 20px;
-  height: 20px;
+  width: 1.5em;
+  height: 1.5em;
+  font-size: $family-size;
 }
 
 @include m.smallerScreen {
   body {
     font-size: 10px;
+  }
+}
+
+.skeleton {
+  display: block;
+  min-width: 35px;
+  min-height: 35px;
+  background-color: #f6f4ff;
+
+  &.radius {
+    border-radius: $radius;
+  }
+
+  &,
+  &-co {
+    animation: bounce 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  &-co {
+    background-color: #efeaff;
+  }
+
+  @keyframes bounce {
+    50% {
+      opacity: 0.5;
+    }
   }
 }

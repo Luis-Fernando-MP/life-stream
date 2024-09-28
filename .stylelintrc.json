@@ -14,6 +14,7 @@
     ],
     "scss/at-mixin-pattern": null,
     "scss/dollar-variable-pattern": null,
-    "custom-property-pattern": null
+    "custom-property-pattern": null,
+    "selector-class-pattern": null
   }
 }
