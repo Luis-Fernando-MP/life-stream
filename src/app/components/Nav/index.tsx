@@ -2,8 +2,8 @@
 
 import { acl } from '@/shared/activeClass'
 import useNav from '@/shared/hooks/useNav'
-import { firstRoutes, matchRoute } from '@/shared/routes'
-import { MedalIcon, MenuIcon, XIcon } from 'lucide-react'
+import { ROUTES, firstRoutes, matchRoute } from '@/shared/routes'
+import { MenuIcon, XIcon } from 'lucide-react'
 import Link from 'next/link'
 import type { HtmlHTMLAttributes, JSX, ReactNode } from 'react'
 
@@ -42,11 +42,11 @@ const Nav = ({ className, ...props }: INav): JSX.Element => {
         </div>
         <div className='navbar-bottom'>
           <Link
-            className={`navbar-link ${isActive('/')}`}
-            href='/Donantes'
-            title='Lista de donantes'
+            className={`navbar-link ${isActive(ROUTES.authors.path)}`}
+            href={ROUTES.authors.path}
+            title={ROUTES.authors.title}
           >
-            <MedalIcon />
+            <ROUTES.authors.Icon />
           </Link>
           <AuthButtons />
         </div>

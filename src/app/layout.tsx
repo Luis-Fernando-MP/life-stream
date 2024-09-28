@@ -5,6 +5,7 @@ import { Toaster } from 'react-hot-toast'
 
 import Header from './components/Header'
 import Nav from './components/Nav'
+import './globals.css'
 import Providers from './providers'
 import './style.scss'
 
@@ -34,7 +35,7 @@ const RootLayout = ({ children }: IRootLayout): JSX.Element => {
             <Nav className='layout-nav' />
             <section className='layout-main'>
               <Header className='layout-header' />
-              <article className='layout-container'>{children}</article>
+              {children}
             </section>
           </main>
         </Providers>

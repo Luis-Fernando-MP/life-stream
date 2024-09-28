@@ -170,3 +170,29 @@ svg {
     font-size: 10px;
   }
 }
+
+.skeleton {
+  display: block;
+  min-width: 35px;
+  min-height: 35px;
+  background-color: #f6f4ff;
+
+  &.radius {
+    border-radius: $radius;
+  }
+
+  &,
+  &-co {
+    animation: bounce 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  &-co {
+    background-color: #efeaff;
+  }
+
+  @keyframes bounce {
+    50% {
+      opacity: 0.5;
+    }
+  }
+}

@@ -57,14 +57,14 @@ export const ROUTES = {
     subPaths: '/sign-in/[etc]',
     title: 'Iniciar Sesión',
     description: '🔑 Accede a tu cuenta',
-    icon: LogInIcon
+    Icon: LogInIcon
   },
   registerAccount: {
     path: '/sign-up',
     subPaths: '/sign-up/[etc]',
     title: 'Registrar Cuenta',
     description: '🆕 Crear una nueva cuenta',
-    icon: UserPlusIcon
+    Icon: UserPlusIcon
   }
 }
 

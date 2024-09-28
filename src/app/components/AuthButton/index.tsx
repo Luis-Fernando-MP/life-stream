@@ -12,12 +12,14 @@ import { UserIcon } from 'lucide-react'
 import { usePathname } from 'next/navigation'
 import { type JSX } from 'react'
 
+import './style.scss'
+
 const AuthButtons = (): JSX.Element => {
   const currentPath = usePathname()
   return (
-    <aside className='authOptions'>
+    <aside className='authUserButton'>
       <ClerkLoading>
-        <div className='skeleton h-12 w-32' />
+        <div className='skeleton rounded-full' />
       </ClerkLoading>
       <ClerkLoaded>
         <SignedIn>

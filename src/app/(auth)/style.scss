@@ -1,0 +1,120 @@
+@use '@sass/config/vars' as v;
+@use '@sass/utils/defs' as d;
+
+.layout-container.auth {
+  align-items: center;
+  justify-content: center;
+
+  .cl-alert {
+    margin: v.$padding auto;
+  }
+
+  .cl-socialButtons {
+    @include d.flex($dir: row, $ali: center);
+
+    justify-content: center;
+  }
+
+  .cl-socialButtonsIconButton {
+    width: fit-content;
+    height: fit-content;
+    padding: v.$padding;
+    border-radius: 50%;
+  }
+
+  .cl-rootBox {
+    input {
+      padding: v.$padding;
+
+      &:focus-within {
+        box-shadow: none !important;
+      }
+
+      @include v.border(v.$bg2);
+    }
+
+    .cl-cardBox {
+      box-shadow: none;
+    }
+
+    .cl-internal-1pr5xvn,
+    .cl-internal-1dauvpw {
+      display: none;
+    }
+
+    .cl-card {
+      gap: 0;
+    }
+
+    .cl-footer {
+      gap: v.$padding;
+    }
+
+    .cl-card,
+    .cl-footer {
+      background: transparent;
+      border: none;
+    }
+
+    .cl-formButtonPrimary {
+      width: 100%;
+      height: max-content;
+      padding: 10px v.$padding;
+
+      color: v.$fn1;
+
+      box-shadow: none !important;
+
+      &::after {
+        display: none;
+      }
+
+      span {
+        font-family: v.$font1;
+      }
+
+      @include v.border;
+    }
+  }
+
+  .auth {
+    &-logo {
+      position: absolute;
+      z-index: 0;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+
+      svg {
+        width: 30em;
+        height: auto;
+        background-color: transparent;
+
+        path {
+          fill: transparent;
+        }
+      }
+    }
+
+    &-form {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+    }
+
+    &-title,
+    &-message {
+      text-align: center;
+    }
+
+    &-title {
+      font-size: 3.5em;
+      text-transform: uppercase;
+    }
+
+    &-message {
+      font-size: 1em;
+      font-weight: lighter;
+    }
+  }
+}

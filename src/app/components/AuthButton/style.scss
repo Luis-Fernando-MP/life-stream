@@ -1,0 +1,45 @@
+@use '@sass/config/vars' as v;
+@use '@sass/utils/defs' as d;
+
+.authUserButton {
+  cursor: pointer;
+  padding: 5px;
+
+  .cl-avatarBox {
+    outline: 3px solid v.$tn2;
+  }
+}
+
+.cl-userButtonPopoverCard {
+  border: none !important;
+  border-radius: v.$radius;
+  box-shadow: none !important;
+
+  .cl-userButtonPopoverMain {
+    padding: v.$padding;
+    background-color: v.$bg1;
+    border: 3.5px solid v.$bg3;
+
+    .cl-internal-3gh7hq {
+      font-size: v.$fH5;
+    }
+
+    span {
+      font-family: v.$font2;
+    }
+
+    .cl-userButtonPopoverActions {
+      align-items: center;
+      justify-content: center;
+    }
+
+    .cl-userButtonPopoverActionButton {
+      width: 100%;
+      border-radius: v.$radius;
+    }
+  }
+
+  .cl-userButtonPopoverFooter {
+    display: none;
+  }
+}
