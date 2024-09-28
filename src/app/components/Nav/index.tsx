@@ -1,58 +1,54 @@
 'use client'
 
+import { acl } from '@/shared/activeClass'
 import useNav from '@/shared/hooks/useNav'
-import { DnaIcon, HistoryIcon, MedalIcon, MenuIcon, PlusIcon, UserIcon, XIcon } from 'lucide-react'
-import Image from 'next/image'
+import { firstRoutes, matchRoute } from '@/shared/routes'
+import { MedalIcon, MenuIcon, XIcon } from 'lucide-react'
 import Link from 'next/link'
-import { type JSX } from 'react'
+import type { HtmlHTMLAttributes, JSX, ReactNode } from 'react'
 
+import AuthButtons from '../AuthButton'
 import './style.scss'
 
-const Nav = (): JSX.Element => {
+interface INav extends HtmlHTMLAttributes<HTMLElement> {
+  children?: Readonly<ReactNode[]> | null
+}
+
+const Nav = ({ className, ...props }: INav): JSX.Element => {
   const { getClass, pathname, show, toggleShow } = useNav()
-  const isActive = (cls: string) => (pathname === cls ? 'active' : '')
+  const isActive = (cls: string) => acl(matchRoute({ path: cls, route: pathname }))
 
   return (
-    <section className='navbar-container'>
+    <section {...props} className={`navbar-container ${className}`}>
       <button className='navbar-hamburger' onClick={toggleShow}>
         {show ? <XIcon /> : <MenuIcon />}
       </button>
       <nav className={`navbar ${getClass()}`}>
         <div className='navbar-top'>
-          <Image src='/logo.svg' alt='Juli logo' width={20} height={20} />
-          <Link className={`dsNav-item ${isActive('/add')}`} href='/add' title='Agregar donante'>
-            <PlusIcon />
-          </Link>
-          <Link
-            className={`dsNav-item ${isActive('/add')}`}
-            href='/Donantes'
-            title='Lista de donantes'
-          >
-            <HistoryIcon />
-          </Link>
-          <Link
-            className={`dsNav-item ${isActive('/add')}`}
-            href='/Donantes'
-            title='Lista de donantes'
-          >
-            <DnaIcon />
-          </Link>
+          {firstRoutes.map(route => {
+            const [tag, data] = route
+            const { Icon, title, path, subPaths } = data
+            return (
+              <Link
+                key={tag}
+                className={`navbar-link ${isActive(path)} ${isActive(subPaths)} ${tag}`}
+                href={path}
+                title={title}
+              >
+                <Icon />
+              </Link>
+            )
+          })}
         </div>
         <div className='navbar-bottom'>
           <Link
-            className={`dsNav-item ${isActive('/add')}`}
+            className={`navbar-link ${isActive('/')}`}
             href='/Donantes'
             title='Lista de donantes'
           >
             <MedalIcon />
           </Link>
-          <Link
-            className={`dsNav-item ${isActive('/add')}`}
-            href='/Donantes'
-            title='Lista de donantes'
-          >
-            <UserIcon />
-          </Link>
+          <AuthButtons />
         </div>
       </nav>
     </section>

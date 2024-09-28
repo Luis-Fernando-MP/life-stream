@@ -1,3 +1,39 @@
-a {
-  color: black;
+@use '@sass/config/vars' as v;
+@use '@sass/utils/defs' as d;
+
+.navbar {
+  justify-content: space-between;
+  height: 100%;
+  padding: v.$padding 0;
+
+  &-hamburger {
+    display: none;
+  }
+
+  &-top,
+  &-bottom {
+    @include d.flex($ali: center);
+  }
+
+  &-link {
+    padding: 8px;
+    border-radius: 5px;
+
+    &.active {
+      color: v.$bg1;
+      background-color: v.$tn1;
+    }
+
+    &.home {
+      padding: v.$padding 0;
+      background-color: transparent;
+
+      svg {
+        width: 40px;
+        height: 40px;
+      }
+    }
+  }
+
+  @include d.flex;
 }

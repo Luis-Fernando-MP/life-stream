@@ -1,0 +1,52 @@
+@use '@sass/config/global';
+
+@use '@sass/config/vars' as v;
+@use '@sass/utils/defs' as d;
+
+.layout {
+  position: relative;
+
+  flex-direction: row;
+
+  width: 100%;
+  height: 100%;
+
+  @include d.flex($dir: row, $gap: 0);
+
+  background-color: v.$bg2;
+
+  &-main {
+    width: 100%;
+    height: 100%;
+
+    @include d.flex($gap: 0);
+  }
+
+  &-header {
+    width: 100%;
+    height: 50px;
+    min-height: 50px;
+    max-height: 50px;
+  }
+
+  &-container {
+    width: 100%;
+    height: 100%;
+    padding: v.$padding;
+
+    @include v.border;
+
+    border-top-left-radius: v.$radius;
+  }
+
+  &-nav {
+    align-items: center;
+    justify-content: space-between;
+
+    width: max-content;
+    min-width: max-content;
+    max-width: 70px;
+    height: 100%;
+    padding: 0 v.$padding * 0.5;
+  }
+}
