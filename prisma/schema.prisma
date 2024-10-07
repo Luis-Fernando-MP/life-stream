@@ -14,7 +14,7 @@ model Person {
   photo     String?  @db.VarChar(255)
   createdAt DateTime @default(now()) @db.Timestamp(6)
   updatedAt DateTime @updatedAt @db.Timestamp(6)
-  doctor    Doctor? // Puede ser un doctor
+  User      User? // Puede ser un User
   patient   Patient? // Puede ser un paciente
 
   // Índice compuesto para buscar personas por nombre y apellido
@@ -22,7 +22,7 @@ model Person {
   @@map("Personas")
 }
 
-model Doctor {
+model User {
   id            String         @id @db.VarChar(200)
   email         String         @unique @db.VarChar(150)
   username      String         @db.VarChar(50)
@@ -31,12 +31,13 @@ model Doctor {
   bloodDonor    BloodDonor? // Registra a los donadores
   bloodReceiver BloodReceiver? // Registra a los receptores
   bloodRequests BloodRequest[] // Revisa varias solicitudes
+  userRol       UserRol?       @default(MEMBER)
 
-  // Índice para optimizar la búsqueda por nombre de usuario
-  @@index([username], name: "username_index")
+  // Índice para optimizar la búsqueda por nombre de usuario y rol
+  @@index([username, userRol], name: "nameRol_index")
   // Índice para optimizar la búsqueda por email
   @@index([email], name: "email_index")
-  @@map("doctores")
+  @@map("Useres")
 }
 
 model Patient {
@@ -61,8 +62,8 @@ model BloodDonor {
   updatedAt     DateTime       @updatedAt @db.Timestamp(6)
   patientID     String         @unique @db.VarChar(200)
   patient       Patient        @relation(fields: [patientID], references: [id], onDelete: Cascade)
-  doctorID      String         @unique @db.VarChar(200)
-  doctor        Doctor         @relation(fields: [doctorID], references: [id], onDelete: Cascade)
+  UserID        String         @unique @db.VarChar(200)
+  User          User           @relation(fields: [UserID], references: [id], onDelete: Cascade)
   bloodRequests BloodRequest[]
 
   // Índice para optimizar la búsqueda por última donación
@@ -76,8 +77,8 @@ model BloodReceiver {
   updatedAt     DateTime       @updatedAt @db.Timestamp(6)
   patientID     String         @unique @db.VarChar(200)
   patient       Patient        @relation(fields: [patientID], references: [id], onDelete: Cascade)
-  doctorID      String         @unique @db.VarChar(200)
-  doctor        Doctor         @relation(fields: [doctorID], references: [id], onDelete: Cascade)
+  UserID        String         @unique @db.VarChar(200)
+  User          User           @relation(fields: [UserID], references: [id], onDelete: Cascade)
   bloodRequests BloodRequest[] // Puede tener varias solicitudes de sangre
 
   // Índice para búsquedas por fecha de creación
@@ -95,8 +96,8 @@ model BloodRequest {
   bloodReceiver   BloodReceiver? @relation(fields: [bloodReceiverID], references: [id])
   bloodDonorID    String?        @db.VarChar(50)
   bloodDonor      BloodDonor?    @relation(fields: [bloodDonorID], references: [id])
-  doctorID        String?        @db.VarChar(200)
-  doctor          Doctor?        @relation(fields: [doctorID], references: [id])
+  UserID          String?        @db.VarChar(200)
+  User            User?          @relation(fields: [UserID], references: [id])
   bloodDonation   BloodDonation?
 
   // Índice compuesto para optimizar búsquedas por fecha y estado de la solicitud
@@ -137,6 +138,15 @@ enum QueryType {
   GRAPH
   IMAGE
   TEXT
+}
+
+enum UserRol {
+  DONOR
+  RECEIVER
+  MEMBER
+  DOCTOR_ADMIN
+  DOCTOR_MEMBER
+  ADMIN
 }
 
 enum BloodType {
