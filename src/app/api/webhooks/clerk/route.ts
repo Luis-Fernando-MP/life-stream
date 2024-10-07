@@ -1,7 +1,6 @@
-/* eslint-disable @typescript-eslint/naming-convention */
-import { create } from '@/db/actions/user'
-import { WebhookEvent, auth } from '@clerk/nextjs/server'
-import { User } from '@prisma/client'
+import { createPerson, deletePerson, updatePerson } from '@/db/actions/person'
+import { WebhookEvent } from '@clerk/nextjs/server'
+import { Person } from '@prisma/client'
 import { headers } from 'next/headers'
 import { NextResponse } from 'next/server'
 import { Webhook } from 'svix'
@@ -46,41 +45,41 @@ async function handler(req: Request) {
   const eventType = evt.type
   try {
     if (eventType === 'user.created') {
-      console.log(evt.data)
       const { id, email_addresses, image_url, first_name, last_name, username } = evt.data
-      const user: User = {
-        clerkId: id,
-        email: email_addresses[0].email_address,
-        username: username ?? first_name ?? '',
+      const person = {
+        id,
         firstName: first_name ?? '',
         lastName: last_name ?? '',
-        photo: image_url ?? ''
+        photo: image_url ?? '',
+        email: email_addresses[0].email_address,
+        username: username ?? first_name ?? ''
       }
-      const newUser = await create(user)
+      const newUser = await createPerson(person as Person)
       return NextResponse.json({ message: 'OK', user: newUser })
     }
 
     if (eventType === 'user.updated') {
-      const { id, image_url, first_name, last_name, username } = evt.data
-
-      const user = {
-        firstName: first_name,
-        lastName: last_name,
-        username: username!,
-        photo: image_url
+      const { id, email_addresses, image_url, first_name, last_name, username } = evt.data
+      const person = {
+        id,
+        firstName: first_name ?? '',
+        lastName: last_name ?? '',
+        photo: image_url ?? '',
+        email: email_addresses[0].email_address,
+        username: username ?? first_name ?? ''
       }
-      const updatedUser = await updateUser(id, user)
+      const updatedUser = await updatePerson(id, person as Person)
       return NextResponse.json({ message: 'OK', user: updatedUser })
     }
 
     if (eventType === 'user.deleted') {
       const { id } = evt.data
-      const deletedUser = await deleteUser(id!)
+      if (!id) throw new Error('Missing clerk id')
+      const deletedUser = await deletePerson(id)
       return NextResponse.json({ message: 'OK', user: deletedUser })
     }
-
-    return new Response('Some...', { status: 200 })
-  } catch (error) {
+  } catch (error: any) {
+    console.log(error)
     return new Response('Internal Error', { status: 500 })
   }
 }

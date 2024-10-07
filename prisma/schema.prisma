@@ -8,40 +8,62 @@ datasource db {
 }
 
 model Person {
-  id        String   @id @default(cuid()) @db.VarChar(50)
-  firstName String   @db.VarChar(50)
-  lastName  String   @db.VarChar(50)
-  photo     String?  @db.VarChar(255)
-  createdAt DateTime @default(now()) @db.Timestamp(6)
-  updatedAt DateTime @updatedAt @db.Timestamp(6)
-  User      User? // Puede ser un User
-  patient   Patient? // Puede ser un paciente
+  id            String         @id @default(cuid()) @db.VarChar(50)
+  firstName     String         @db.VarChar(50)
+  lastName      String         @db.VarChar(50)
+  photo         String?        @db.VarChar(255)
+  email         String         @unique @db.VarChar(150)
+  username      String         @db.VarChar(50)
+  state         PersonStatus?  @default(ACTIVE)
+  createdAt     DateTime?      @default(now()) @db.Timestamp(6)
+  updatedAt     DateTime?      @updatedAt @db.Timestamp(6)
+  Doctor        Doctor? // Puede ser un Doctor
+  patient       Patient? // Puede ser un paciente
+  bloodDonor    BloodDonor? // usado para el createdBy
+  bloodReceiver BloodReceiver? // usado para el createdBy
+
+  QueryHistory QueryHistory[]
 
   // Índice compuesto para buscar personas por nombre y apellido
   @@index([firstName, lastName], name: "name_index")
+  // Índice para optimizar la búsqueda por email
+  @@index([email], name: "email_index")
   @@map("Personas")
 }
 
-model User {
-  id            String         @id @db.VarChar(200)
-  email         String         @unique @db.VarChar(150)
-  username      String         @db.VarChar(50)
-  personID      String         @unique @db.VarChar(50)
-  person        Person         @relation(fields: [personID], references: [id], onDelete: Cascade)
-  bloodDonor    BloodDonor? // Registra a los donadores
-  bloodReceiver BloodReceiver? // Registra a los receptores
+model QueryHistory {
+  id          String    @id @default(cuid()) @db.VarChar(50)
+  title       String    @db.VarChar(100)
+  description String    @db.VarChar(400)
+  queryType   QueryType @default(TEXT)
+  speedA      Float?    @default(0.0) // La velocidad A, para el gráfico
+  speedB      Float?    @default(0.0) // La velocidad B, para el gráfico
+  imageUrl    String?   @db.VarChar(255) // Si es una imagen
+  phrase      String?   @db.Text // Si es un texto
+  createdAt   DateTime? @default(now()) @db.Timestamp(6)
+  personId    String?   @db.VarChar(50)
+  Person      Person?   @relation(fields: [personId], references: [id])
+
+  // Índice para optimizar búsquedas por tipo de consulta
+  @@index([queryType], name: "queryType_index")
+  @@map("Historial_acciones")
+}
+
+model Doctor {
+  id            String          @id @default(cuid()) @db.VarChar(200)
+  personID      String          @unique @db.VarChar(50)
+  person        Person          @relation(fields: [personID], references: [id], onDelete: Cascade)
+  doctorRol     DoctorRol?      @default(DOCTOR_MEMBER)
   bloodRequests BloodRequest[] // Revisa varias solicitudes
-  userRol       UserRol?       @default(MEMBER)
+  BloodDonation BloodDonation[] // Realiza varias donaciones
 
   // Índice para optimizar la búsqueda por nombre de usuario y rol
-  @@index([username, userRol], name: "nameRol_index")
-  // Índice para optimizar la búsqueda por email
-  @@index([email], name: "email_index")
-  @@map("Useres")
+  @@index([doctorRol], name: "doctorRol_index")
+  @@map("Doctores")
 }
 
 model Patient {
-  id            String         @id @db.VarChar(200)
+  id            String         @id @default(cuid()) @db.VarChar(200)
   age           Int
   weight        Float
   bloodType     BloodType
@@ -56,15 +78,15 @@ model Patient {
 }
 
 model BloodDonor {
-  id            String         @id @default(cuid()) @db.VarChar(50)
-  lastDonation  DateTime       @default(now())
-  createdAt     DateTime       @default(now()) @db.Timestamp(6)
-  updatedAt     DateTime       @updatedAt @db.Timestamp(6)
-  patientID     String         @unique @db.VarChar(200)
-  patient       Patient        @relation(fields: [patientID], references: [id], onDelete: Cascade)
-  UserID        String         @unique @db.VarChar(200)
-  User          User           @relation(fields: [UserID], references: [id], onDelete: Cascade)
-  bloodRequests BloodRequest[]
+  id            String          @id @default(cuid()) @db.VarChar(50)
+  lastDonation  DateTime        @default(now())
+  patientID     String          @unique @db.VarChar(200)
+  patient       Patient         @relation(fields: [patientID], references: [id], onDelete: Cascade)
+  AuthorID      String          @unique @db.VarChar(200)
+  CreatedBy     Person          @relation(fields: [AuthorID], references: [id], onDelete: Cascade)
+  createdAt     DateTime?       @default(now()) @db.Timestamp(6)
+  updatedAt     DateTime?       @updatedAt @db.Timestamp(6)
+  BloodDonation BloodDonation[]
 
   // Índice para optimizar la búsqueda por última donación
   @@index([lastDonation], name: "lastDonation_index")
@@ -73,13 +95,13 @@ model BloodDonor {
 
 model BloodReceiver {
   id            String         @id @default(cuid()) @db.VarChar(50)
-  createdAt     DateTime       @default(now()) @db.Timestamp(6)
-  updatedAt     DateTime       @updatedAt @db.Timestamp(6)
   patientID     String         @unique @db.VarChar(200)
   patient       Patient        @relation(fields: [patientID], references: [id], onDelete: Cascade)
-  UserID        String         @unique @db.VarChar(200)
-  User          User           @relation(fields: [UserID], references: [id], onDelete: Cascade)
-  bloodRequests BloodRequest[] // Puede tener varias solicitudes de sangre
+  AuthorID      String         @unique @db.VarChar(200)
+  CreatedBy     Person         @relation(fields: [AuthorID], references: [id], onDelete: Cascade)
+  createdAt     DateTime?      @default(now()) @db.Timestamp(6)
+  updatedAt     DateTime?      @updatedAt @db.Timestamp(6)
+  bloodRequests BloodRequest[]
 
   // Índice para búsquedas por fecha de creación
   @@index([createdAt], name: "createdAt_receiver_index")
@@ -87,18 +109,18 @@ model BloodReceiver {
 }
 
 model BloodRequest {
-  id              String         @id @default(cuid()) @db.VarChar(50)
-  requestDate     DateTime       @default(now())
-  fulfilled       Boolean        @default(false)
-  createdAt       DateTime       @default(now()) @db.Timestamp(6)
-  updatedAt       DateTime       @updatedAt @db.Timestamp(6)
-  bloodReceiverID String?        @db.VarChar(50)
-  bloodReceiver   BloodReceiver? @relation(fields: [bloodReceiverID], references: [id])
-  bloodDonorID    String?        @db.VarChar(50)
-  bloodDonor      BloodDonor?    @relation(fields: [bloodDonorID], references: [id])
-  UserID          String?        @db.VarChar(200)
-  User            User?          @relation(fields: [UserID], references: [id])
-  bloodDonation   BloodDonation?
+  id          String         @id @default(cuid()) @db.VarChar(50)
+  requestDate DateTime       @default(now())
+  fulfilled   FulfilledType? @default(PROCESS)
+  createdAt   DateTime?      @default(now()) @db.Timestamp(6)
+  updatedAt   DateTime?      @updatedAt @db.Timestamp(6)
+
+  BloodReceiverID String?        @db.VarChar(50)
+  BloodReceiver   BloodReceiver? @relation(fields: [BloodReceiverID], references: [id])
+  supervisorID    String?        @db.VarChar(200)
+  Supervisor      Doctor?        @relation(fields: [supervisorID], references: [id])
+  bloodDonationId String?        @db.VarChar(50)
+  bloodDonation   BloodDonation? @relation(fields: [bloodDonationId], references: [id])
 
   // Índice compuesto para optimizar búsquedas por fecha y estado de la solicitud
   @@index([requestDate, fulfilled], name: "request_status_index")
@@ -106,32 +128,34 @@ model BloodRequest {
 }
 
 model BloodDonation {
-  id             String        @id @default(cuid()) @db.VarChar(50)
-  donationDate   DateTime      @default(now())
-  createdAt      DateTime      @default(now()) @db.Timestamp(6)
-  updatedAt      DateTime      @updatedAt @db.Timestamp(6)
-  bloodRequestID String?       @unique @db.VarChar(50)
-  bloodRequest   BloodRequest? @relation(fields: [bloodRequestID], references: [id])
+  id           String         @id @default(cuid()) @db.VarChar(50)
+  fulfilled    FulfilledType? @default(PROCESS)
+  donationDate DateTime       @default(now())
+  createdAt    DateTime?      @default(now()) @db.Timestamp(6)
+  updatedAt    DateTime?      @updatedAt @db.Timestamp(6)
+
+  bloodDonorId String?        @db.VarChar(50)
+  BloodDonor   BloodDonor?    @relation(fields: [bloodDonorId], references: [id])
+  DoctorID     String?        @db.VarChar(200)
+  Doctor       Doctor?        @relation(fields: [DoctorID], references: [id])
+  BloodRequest BloodRequest[] // Puede tener muchas solicitudes
 
   // Índice para optimizar búsqueda por fecha de donación
   @@index([donationDate], name: "donationDate_index")
   @@map("Donaciones")
 }
 
-model QueryHistory {
-  id          String    @id @default(cuid()) @db.VarChar(50)
-  title       String    @db.VarChar(100)
-  description String    @db.VarChar(400)
-  queryType   QueryType @default(TEXT)
-  speedA      Float?    @default(0.0) // La velocidad A, para el gráfico
-  speedB      Float?    @default(0.0) // La velocidad B, para el gráfico
-  imageUrl    String?   @db.VarChar(255) // Si es una imagen
-  phrase      String?   @db.Text // Si es un texto
-  createdAt   DateTime  @default(now()) @db.Timestamp(6)
+enum FulfilledType {
+  PROCESS
+  COMPLETED
+  PAUSED
+}
 
-  // Índice para optimizar búsquedas por tipo de consulta
-  @@index([queryType], name: "queryType_index")
-  @@map("Historial_acciones")
+enum PersonStatus {
+  ACTIVE
+  INACTIVE
+  SUSPENDED
+  DELETED
 }
 
 enum QueryType {
@@ -140,10 +164,7 @@ enum QueryType {
   TEXT
 }
 
-enum UserRol {
-  DONOR
-  RECEIVER
-  MEMBER
+enum DoctorRol {
   DOCTOR_ADMIN
   DOCTOR_MEMBER
   ADMIN
