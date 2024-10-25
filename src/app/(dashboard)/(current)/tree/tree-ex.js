@@ -1,4 +1,4 @@
-class Node {
+export class TreeNode {
   constructor(data = null, color = 'black', left = null, right = null, parent = null) {
     this.data = data
     this.color = color
@@ -8,14 +8,14 @@ class Node {
   }
 }
 
-class RedBlackTree {
+export class RedBlackTree {
   constructor() {
-    this.nullNode = new Node()
+    this.nullNode = new TreeNode()
     this.root = this.nullNode
   }
 
   insert(data) {
-    const newNode = new Node(data, 'red', this.nullNode, this.nullNode)
+    const newNode = new TreeNode(data, 'red', this.nullNode, this.nullNode)
     let parentNode = null
     let currentNode = this.root
 
@@ -159,5 +159,3 @@ tree.preOrderTraversal(tree.root)
 
 console.log('\nPost Orden:')
 tree.postOrderTraversal(tree.root)
-
-// Hola estimado, quiero que me ayudes a mejorar este código que es de árbol binario rojo y negro, para ello si puedes le haces test

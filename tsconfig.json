@@ -21,6 +21,7 @@
     ],
     "paths": {
       "@/*": ["./src/*"],
+      "@dashboard/*": ["./src/app/(dashboard)/*"],
       "@sass/*": ["./src/sass/*"]
     }
   },

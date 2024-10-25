@@ -20,15 +20,15 @@ const Page = (): JSX.Element => {
 
   return (
     <section className='dHome'>
-      <h1 className='mb-6 text-center text-3xl font-bold'>Visualizador de Datos de Prisma</h1>
+      <h1 className='mb-6 text-center text-3xl font-bold'>Visualizando de Datos de Prisma</h1>
       <div className='mb-4 flex justify-center space-x-4'>
         <button onClick={() => setView('array')}>Ver como Arreglos</button>
         <button onClick={() => setView('tree')}>Ver como Árboles</button>
         <button onClick={() => setView('code')}>Ver como Código</button>
       </div>
-      {view === 'array' && <ArrayView />}
+      {/* {view === 'array' && <ArrayView />}
       {view === 'tree' && <TreeView />}
-      {view === 'code' && <CodeView />}
+      {view === 'code' && <CodeView />} */}
     </section>
   )
 }
