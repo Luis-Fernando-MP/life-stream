@@ -39,7 +39,17 @@ const RootLayout = ({ children }: IRootLayout): JSX.Element => {
             </section>
           </main>
         </Providers>
-        <Toaster position='top-center' reverseOrder />
+        <Toaster
+          position='top-center'
+          toastOptions={{
+            className: 'toast',
+            position: 'bottom-right',
+            style: {
+              background: 'var(--bg-primary)',
+              color: 'var(--fnt-primary)'
+            }
+          }}
+        />
       </body>
     </html>
   )

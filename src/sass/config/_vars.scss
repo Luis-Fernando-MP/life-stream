@@ -3,17 +3,17 @@
   --bg-secondary: #d8d9fd;
   --bg-tertiary: #d0d0eef5;
   --fnt-primary: #000;
-  --fnt-secondary: #505050;
+  --fnt-secondary: #676767;
   --tn-primary: #4747dc;
   --tn-secondary: #7878ff;
   --tn-tertiary: #7549a22c;
   --xl-font-size: 3em;
   --h1-font-size: 2em;
-  --h2-font-size: 1.7em;
-  --h3-font-size: 1.6em;
-  --h4-font-size: 1.5em;
-  --h5-font-size: 1.4em;
-  --p-font-size: 1.3em;
+  --h2-font-size: 1.5em;
+  --h3-font-size: 1.4em;
+  --h4-font-size: 1.3em;
+  --h5-font-size: 1.2em;
+  --p-font-size: 1em;
   --span-font-size: 1em;
 }
 
@@ -44,7 +44,7 @@ $big-screen: 1350px;
 $radius: 10px;
 $padding: 15px;
 $icon: 20px;
-$family-size: 14px;
+$family-size: 12px;
 $fontBase: 'Segoe UI Mono', 'Roboto Mono', 'Ubuntu Monospace', 'Source Code Pro', 'Fira Mono',
   'Segoe UI Emoji';
 $font1: var(--MontserratFont);
@@ -52,6 +52,7 @@ $font2: var(--RobotoFont);
 $font3: var(--PlayFairFont);
 $gr1: linear-gradient(90deg, $tn1 0%, $tn2 100%);
 $sha1: 6px 5px 20px -5px $bg3;
+$error: #e41e38;
 
 @mixin dotDark {
   body.dark & {

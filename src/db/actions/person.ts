@@ -9,7 +9,7 @@ export async function createPerson(personDate: Person) {
     })
     return response
   } catch (error: any) {
-    console.log(error?.message ?? error)
+    console.error(error?.message ?? error)
   }
 }
 
@@ -21,7 +21,7 @@ export async function updatePerson(id: string, personDate: Person) {
     })
     return response
   } catch (error: any) {
-    console.log(error?.message ?? error)
+    console.error(error?.message ?? error)
   }
 }
 
@@ -34,7 +34,7 @@ export async function deletePerson(id: string) {
     })
     return response
   } catch (error: any) {
-    console.log(error?.message ?? error)
+    console.error(error?.message ?? error)
   }
 }
 
@@ -47,6 +47,6 @@ export async function getPerson(id: string) {
 
     return response
   } catch (error: any) {
-    console.log(error?.message ?? error)
+    console.error(error?.message ?? error)
   }
 }

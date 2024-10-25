@@ -67,6 +67,7 @@ body {
   textarea,
   button,
   select {
+    color: $fn2;
     text-wrap: pretty;
   }
 
@@ -86,7 +87,7 @@ body {
   }
 
   p {
-    font-weight: 400;
+    font-weight: normal;
   }
 
   h5,
@@ -165,10 +166,19 @@ svg {
   font-size: $family-size;
 }
 
+.toast {
+  background-color: red;
+}
+
 @include m.smallerScreen {
   body {
     font-size: 10px;
   }
+}
+
+::selection {
+  color: $bg1;
+  background-color: $tn1;
 }
 
 .skeleton {

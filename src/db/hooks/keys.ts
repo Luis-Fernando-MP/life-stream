@@ -1,0 +1,1 @@
+export const HISTORY = 'PERSON_HISTORIES'
