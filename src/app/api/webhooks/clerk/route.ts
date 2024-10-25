@@ -79,7 +79,7 @@ async function handler(req: Request) {
       return NextResponse.json({ message: 'OK', user: deletedUser })
     }
   } catch (error: any) {
-    console.log(error)
+    console.error(error)
     return new Response('Internal Error', { status: 500 })
   }
 }

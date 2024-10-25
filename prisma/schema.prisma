@@ -67,6 +67,7 @@ model Patient {
   age           Int
   weight        Float
   bloodType     BloodType
+  DNI           String         @unique @db.VarChar(8)
   personID      String         @unique @db.VarChar(50)
   person        Person         @relation(fields: [personID], references: [id], onDelete: Cascade)
   bloodDonor    BloodDonor? // Puede ser un donante

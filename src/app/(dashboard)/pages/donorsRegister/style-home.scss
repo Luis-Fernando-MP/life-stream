@@ -2,8 +2,6 @@
 @use '@sass/utils/defs' as d;
 
 .dHome {
-  overflow: auto;
-
   &,
   &-container {
     justify-content: center;
@@ -29,21 +27,4 @@
       font-size: v.$fH1;
     }
   }
-}
-
-.node__root {
-  background-color: rebeccapurple;
-}
-
-.node__root > circle {
-  fill: red;
-}
-
-.node__branch > circle {
-  fill: yellow;
-}
-
-.node__leaf > circle {
-  r: 40;
-  fill: green;
 }
