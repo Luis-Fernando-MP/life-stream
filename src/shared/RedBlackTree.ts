@@ -1,4 +1,4 @@
-interface ITreeNodeData {
+export interface ITreeNodeData {
   id: number
   etc?: string
 }
@@ -19,12 +19,18 @@ export class TreeNode {
 
 export default class RedBlackTree {
   // Representa a los nodos vacíos
-  private readonly nullNode: TreeNode
+  public readonly nullNode: TreeNode
   public root: TreeNode
 
   constructor() {
     this.nullNode = new TreeNode()
     this.root = this.nullNode
+  }
+
+  public static fromArray(data: ITreeNodeData[]): RedBlackTree {
+    const tree = new RedBlackTree()
+    data.forEach(dt => tree.insert(dt))
+    return tree
   }
 
   insert(data: ITreeNodeData) {
@@ -170,7 +176,7 @@ export default class RedBlackTree {
     node.parent = temp
   }
 
-  public inOrder(node: TreeNode, order: ITreeNodeData[] = []) {
+  public inOrder(node: TreeNode = this.root, order: ITreeNodeData[] = []) {
     const startTime = performance.now()
     if (node !== this.nullNode) {
       this.inOrder(node.left as TreeNode, order)
@@ -182,7 +188,7 @@ export default class RedBlackTree {
     return { order, time }
   }
 
-  public preOrder(node: TreeNode, order: ITreeNodeData[] = []) {
+  public preOrder(node: TreeNode = this.root, order: ITreeNodeData[] = []) {
     const startTime = performance.now()
     if (node !== this.nullNode) {
       order?.push(node.data as ITreeNodeData)
@@ -194,7 +200,7 @@ export default class RedBlackTree {
     return { order, time }
   }
 
-  public postOrder(node: TreeNode, order: ITreeNodeData[] = []) {
+  public postOrder(node: TreeNode = this.root, order: ITreeNodeData[] = []) {
     const startTime = performance.now()
     if (node !== this.nullNode) {
       this.postOrder(node.left as TreeNode, order)

@@ -8,7 +8,6 @@ import CodeView from './CodeView'
 import { generateFakeData } from './data'
 import { useDataStore } from './store'
 import './style.scss'
-import { TreeView } from './tree'
 
 const Page = (): JSX.Element => {
   const { data, setData } = useDataStore()
@@ -26,8 +25,8 @@ const Page = (): JSX.Element => {
         <button onClick={() => setView('tree')}>Ver como Árboles</button>
         <button onClick={() => setView('code')}>Ver como Código</button>
       </div>
+      <CodeView />
       {/* {view === 'array' && <ArrayView />}
-      {view === 'tree' && <TreeView />}
       {view === 'code' && <CodeView />} */}
     </section>
   )

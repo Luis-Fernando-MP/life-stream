@@ -1,126 +1,230 @@
-import { ascending, cluster, hierarchy, linkRadial, max, scaleLinear, tree, zoom } from 'd3'
-import { type Selection, select } from 'd3-selection'
-import { type JSX, useEffect, useRef, useState } from 'react'
+import RedBlackTree, { ITreeNodeData, TreeColor, TreeNode } from '@/shared/RedBlackTree'
+import { hierarchy, tree, zoom } from 'd3'
+import { select } from 'd3-selection'
+import { type JSX, memo, useEffect, useRef } from 'react'
 
-import { redBlackTree } from './Tree'
-import { useDataStore } from './store'
+const head = {
+  root: 'life stream',
+  trees: [
+    [
+      { id: 11, etc: 'n1', image: '/1.jpg' },
+      { id: 2, etc: 'n2', image: '/1.jpg' },
+      { id: 14, etc: 'n3', image: '/1.jpg' },
+      { id: 1, etc: 'n4', image: '/1.jpg' },
+      { id: 7, etc: 'n5', image: '/1.jpg' },
+      { id: 15, etc: 'n6', image: '/1.jpg' },
+      { id: 5, etc: 'n7', image: '/1.jpg' },
+      { id: 8, etc: 'n8', image: '/1.jpg' },
+      { id: 4, etc: 'n9', image: '/1.jpg' },
+
+      { id: 11, etc: 'n4', image: '/1.jpg' },
+      { id: 17, etc: 'n5', image: '/1.jpg' },
+      { id: 25, etc: 'n6', image: '/1.jpg' },
+      { id: 6, etc: 'n7', image: '/1.jpg' },
+      { id: 3, etc: 'n8', image: '/1.jpg' },
+
+      { id: 13, etc: 'n4', image: '/1.jpg' },
+      { id: 16, etc: 'n5', image: '/1.jpg' },
+      { id: 20, etc: 'n6', image: '/1.jpg' },
+      { id: 21, etc: 'n7', image: '/1.jpg' },
+      { id: 22, etc: 'n8', image: '/1.jpg' },
+      { id: 5, etc: 'n1', image: '/1.jpg' },
+      { id: 2, etc: 'n2', image: '/1.jpg' },
+      { id: 14, etc: 'n3', image: '/1.jpg' },
+      { id: 1, etc: 'n4', image: '/1.jpg' },
+      { id: 7, etc: 'n5', image: '/1.jpg' },
+      { id: 3, etc: 'n6', image: '/1.jpg' },
+      { id: 5, etc: 'n7', image: '/1.jpg' },
+      { id: 12, etc: 'n8', image: '/1.jpg' },
+      { id: 4, etc: 'n9', image: '/1.jpg' }
+    ],
+    [
+      { id: 5, etc: 'n1', image: '/1.jpg' },
+      { id: 2, etc: 'n2', image: '/1.jpg' },
+      { id: 14, etc: 'n3', image: '/1.jpg' },
+      { id: 1, etc: 'n4', image: '/1.jpg' },
+      { id: 7, etc: 'n5', image: '/1.jpg' },
+      { id: 3, etc: 'n6', image: '/1.jpg' },
+      { id: 5, etc: 'n7', image: '/1.jpg' },
+      { id: 12, etc: 'n8', image: '/1.jpg' },
+      { id: 4, etc: 'n9', image: '/1.jpg' }
+    ],
+    [
+      { id: 11, etc: 'n1', image: '/1.jpg' },
+      { id: 2, etc: 'n2', image: '/1.jpg' },
+      { id: 14, etc: 'n3', image: '/1.jpg' },
+      { id: 1, etc: 'n4', image: '/1.jpg' },
+      { id: 7, etc: 'n5', image: '/1.jpg' },
+      { id: 15, etc: 'n6', image: '/1.jpg' },
+      { id: 5, etc: 'n7', image: '/1.jpg' },
+      { id: 8, etc: 'n8', image: '/1.jpg' },
+      { id: 4, etc: 'n9', image: '/1.jpg' },
+
+      { id: 11, etc: 'n4', image: '/1.jpg' },
+      { id: 17, etc: 'n5', image: '/1.jpg' },
+      { id: 25, etc: 'n6', image: '/1.jpg' },
+      { id: 6, etc: 'n7', image: '/1.jpg' },
+      { id: 3, etc: 'n8', image: '/1.jpg' },
+
+      { id: 13, etc: 'n4', image: '/1.jpg' },
+      { id: 16, etc: 'n5', image: '/1.jpg' },
+      { id: 20, etc: 'n6', image: '/1.jpg' },
+      { id: 21, etc: 'n7', image: '/1.jpg' },
+      { id: 22, etc: 'n8', image: '/1.jpg' },
+      { id: 5, etc: 'n1', image: '/1.jpg' },
+      { id: 2, etc: 'n2', image: '/1.jpg' },
+      { id: 14, etc: 'n3', image: '/1.jpg' },
+      { id: 1, etc: 'n4', image: '/1.jpg' },
+      { id: 7, etc: 'n5', image: '/1.jpg' },
+      { id: 3, etc: 'n6', image: '/1.jpg' },
+      { id: 5, etc: 'n7', image: '/1.jpg' },
+      { id: 12, etc: 'n8', image: '/1.jpg' },
+      { id: 4, etc: 'n9', image: '/1.jpg' }
+    ],
+    [
+      { id: 5, etc: 'n1', image: '/1.jpg' },
+      { id: 2, etc: 'n2', image: '/1.jpg' },
+      { id: 14, etc: 'n3', image: '/1.jpg' },
+      { id: 1, etc: 'n4', image: '/1.jpg' },
+      { id: 7, etc: 'n5', image: '/1.jpg' },
+      { id: 3, etc: 'n6', image: '/1.jpg' },
+      { id: 5, etc: 'n7', image: '/1.jpg' },
+      { id: 12, etc: 'n8', image: '/1.jpg' },
+      { id: 4, etc: 'n9', image: '/1.jpg' }
+    ]
+  ]
+}
 
 const CodeView = (): JSX.Element => {
   const svgRef = useRef<SVGSVGElement>(null)
-  const { data } = useDataStore()
-  const [selection, setSelection] = useState<null | Selection<
-    SVGSVGElement,
-    unknown,
-    null,
-    undefined
-  >>(null)
 
   useEffect(() => {
     if (!svgRef.current) return
-    if (!selection) {
-      return setSelection(select(svgRef.current) as any)
+
+    const width = 1200 // Ampliar el ancho para evitar cortes
+    const height = 1000
+    const margin = 100 // Ampliar márgenes para más espacio en los bordes
+
+    const createTree = (data: ITreeNodeData[]) => {
+      const redBlackTree = RedBlackTree.fromArray(data)
+
+      interface ICreateHistory {
+        id: number
+        color: TreeColor
+        children: ICreateHistory[]
+      }
+      const createHierarchy = (node: TreeNode): ICreateHistory | null => {
+        if (node === redBlackTree.nullNode) return null
+
+        return {
+          id: node.data?.id ?? 0,
+          color: node.color,
+          etc: node.data?.etc,
+          image: node.data?.image,
+          children: [
+            createHierarchy(node.left as TreeNode),
+            createHierarchy(node.right as TreeNode)
+          ].filter(Boolean)
+        }
+      }
+
+      return createHierarchy(redBlackTree.root)
     }
 
-    const width = 928
-    const height = width
-    const cx = width * 0.5 // adjust as needed to fit
-    const cy = height * 0.54 // adjust as needed to fit
-    const radius = Math.min(width, height) / 2 - 80
+    const treesData = head.trees.map(createTree)
 
-    const trees = Object.entries(data).map(([key, items]) => ({
-      name: key,
-      children: [redBlackTree(items as any[])]
-    }))
-
-    const treeData = {
-      name: 'Life Stream',
-      children: trees
-    }
-
-    // Create a radial cluster layout. The layout’s first dimension (x)
-    // is the angle, while the second (y) is the radius.
-    const tree = cluster()
-      .size([2 * Math.PI, radius])
-      .separation((a, b) => (a.parent == b.parent ? 1 : 2) / a.depth)
-
-    // Sort the tree and apply the layout.
-    const root = hierarchy(treeData).sort((a, b) => ascending(a.data.name, b.data.name))
-    tree(root)
-
-    // Creates the SVG container.
-    const svg = selection
+    const svg = select(svgRef.current)
       .attr('width', width)
-      .attr('height', height)
-      .attr('viewBox', [-cx, -cy, width, height])
+      .attr('height', height * treesData.length + 200)
+      .attr('viewBox', [-margin, -margin, width + margin * 2, height * treesData.length + 200])
       .attr('style', 'width: 100%; height: auto; font: 10px sans-serif;')
-    const group = svg.append('g').attr('transform', `translate(${width / 2},${height / 2})`)
+    svg.selectAll('*').remove()
 
-    // Append links.
-    group
+    const g = svg.append('g').attr('class', 'tree-group')
+
+    const mainNode = {
+      id: head.root,
+      color: 'green',
+      children: [...treesData]
+    }
+
+    const treeLayout = tree()
+      .size([height - margin * 2, width - margin * 2]) // Ajusta el alto del árbol
+      .separation((a, b) => (a.parent === b.parent ? 1 : 1.5))
+
+    const hierarchyData = hierarchy(mainNode)
+    treeLayout(hierarchyData)
+
+    // Append links
+    const linkGroup = g
       .append('g')
       .attr('fill', 'none')
       .attr('stroke', '#555')
       .attr('stroke-opacity', 0.4)
-      .attr('stroke-width', 1.5)
-      .selectAll()
-      .data(root.links())
+      .attr('stroke-width', 2)
+    linkGroup
+      .selectAll('path')
+      .data(hierarchyData.links())
       .join('path')
       .attr(
         'd',
-        linkRadial()
-          .angle(d => d.x)
-          .radius(d => d.y)
+        d =>
+          `M${d.source.y},${d.source.x}C${(d.source.y + d.target.y) / 2},${d.source.x} ${(d.source.y + d.target.y) / 2},${d.target.x} ${d.target.y},${d.target.x}`
       )
 
-    // Append nodes.
-    group
-      .append('g')
-      .selectAll()
-      .data(root.descendants())
+    // Append nodes
+    const nodeGroup = g.append('g')
+
+    // Agregar imagen encima de cada nodo
+    nodeGroup
+      .selectAll('image')
+      .data(hierarchyData.descendants())
+      .join('image')
+      .attr('xlink:href', d => d.data.image) // Ruta de la imagen
+      .attr('x', d => d.y - 10) // Centrado en x con un poco de ajuste
+      .attr('y', d => d.x - 35) // 10px encima del nodo
+      .attr('width', 30) // Ancho de la imagen
+      .attr('height', 30) // Alto de la imagen
+      .attr('clip-path', 'circle(30px)') // Hacer la imagen redonda
+
+    // Dibujar nodos con tamaño ajustado y texto centrado
+    nodeGroup
+      .selectAll('circle')
+      .data(hierarchyData.descendants())
       .join('circle')
-      .attr('transform', (d: any) => `rotate(${(d.x * 180) / Math.PI - 90}) translate(${d.y},0)`)
-      .attr('fill', d => (d.children ? '#555' : '#999'))
+      .attr('cx', d => d.y)
+      .attr('cy', d => d.x)
+      .attr('r', 25)
+      .attr('fill', d => d.data.color)
 
-      .attr('fill', (d: any) => d.data.color || (d.children ? '#555' : '#999'))
-      .attr('r', 2.5)
-
-    // Append labels.
-    group
-      .append('g')
-      .attr('stroke-linejoin', 'round')
-      .attr('stroke-width', 3)
-      .selectAll()
-      .data(root.descendants())
+    // Etiquetas centradas en cada nodo
+    nodeGroup
+      .selectAll('text')
+      .data(hierarchyData.descendants())
       .join('text')
-      .attr(
-        'transform',
-        (d: any) =>
-          `rotate(${(d.x * 180) / Math.PI - 90}) translate(${d.y},0) rotate(${d.x >= Math.PI ? 180 : 0})`
-      )
-      .attr('dy', '0.31em')
-      .attr('x', (d: any) => (d.x < Math.PI === !d.children ? 6 : -6))
-      .attr('text-anchor', (d: any) => (d.x < Math.PI === !d.children ? 'start' : 'end'))
-      .attr('paint-order', 'stroke')
-      .attr('stroke', 'white')
-      .attr('fill', 'currentColor')
-      .text(d => d.data.name)
+      .attr('x', d => d.y)
+      .attr('y', d => d.x)
+      .attr('dy', '0.35em')
+      .attr('text-anchor', 'middle')
+      .attr('fill', 'white')
+      .style('font-weight', 'bold')
+      .text(d => d.data.id)
 
     // Añadir funcionalidad de arrastre y zoom
     const cZoom = zoom()
       .scaleExtent([0.5, 5])
       .on('zoom', event => {
-        group.attr('transform', event.transform)
+        svg.attr('transform', event.transform)
       })
 
     svg.call(cZoom as any)
-  }, [data, selection])
+  }, [])
 
   return (
     <div className='overflow-x-auto'>
-      <h3>S CODE</h3>
       <svg ref={svgRef} className='svg'></svg>
     </div>
   )
 }
 
-export default CodeView
+export default memo(CodeView)
