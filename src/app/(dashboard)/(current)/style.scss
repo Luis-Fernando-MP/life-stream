@@ -31,19 +31,32 @@
   }
 }
 
-.node__root {
-  background-color: rebeccapurple;
-}
+// .node__root {
+//   background-color: rebeccapurple;
+// }
 
-.node__root > circle {
-  fill: red;
-}
+// .node__root > circle {
+//   fill: red;
+// }
 
-.node__branch > circle {
-  fill: yellow;
-}
+// .node__branch > circle {
+//   fill: yellow;
+// }
 
-.node__leaf > circle {
-  r: 40;
-  fill: green;
+// .node__leaf > circle {
+//   r: 40;
+//   fill: green;
+// }
+
+.tree-node {
+  image,
+  text {
+    pointer-events: none;
+    user-select: none;
+  }
+
+  :hover {
+    stroke: v.$tn1;
+    stroke-width: 3px;
+  }
 }

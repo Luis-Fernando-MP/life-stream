@@ -1,4 +1,5 @@
 import RedBlackTree, { ITreeNodeData, TreeColor, TreeNode } from '@/shared/tree/RedBlackTree'
+import { parseTreeToD3 } from '@/shared/tree/parse'
 import { hierarchy, tree, zoom } from 'd3'
 import { select } from 'd3-selection'
 import { memo, useEffect, useRef } from 'react'
@@ -7,47 +8,38 @@ const head = {
   root: 'life stream',
   trees: {
     tree1: [
-      { id: 5, etc: 'n1', image: '/1.jpg' },
-      { id: 2, etc: 'n2', image: '/1.jpg' },
-      { id: 14, etc: 'n3', image: '/1.jpg' },
-      { id: 1, etc: 'n4', image: '/1.jpg' },
-      { id: 7, etc: 'n5', image: '/1.jpg' },
-      { id: 3, etc: 'n6', image: '/1.jpg' },
-      { id: 5, etc: 'n7', image: '/1.jpg' },
-      { id: 12, etc: 'n8', image: '/1.jpg' },
-      { id: 4, etc: 'n9', image: '/1.jpg' }
+      { id: 11 },
+      { id: 2 },
+      { id: 14 },
+      { id: 1 },
+      { id: 7 },
+      { id: 15 },
+      { id: 5 },
+      { id: 8 },
+      { id: 4 }
     ],
-    pacientes: [
-      { id: 5, etc: 'n1', image: '/1.jpg' },
-      { id: 2, etc: 'n2', image: '/1.jpg' },
-      { id: 14, etc: 'n3', image: '/1.jpg' },
-      { id: 1, etc: 'n4', image: '/1.jpg' },
-      { id: 7, etc: 'n5', image: '/1.jpg' },
-      { id: 3, etc: 'n6', image: '/1.jpg' },
-      { id: 5, etc: 'n7', image: '/1.jpg' },
-      { id: 2, etc: 'n2', image: '/1.jpg' },
-      { id: 14, etc: 'n3', image: '/1.jpg' },
-      { id: 1, etc: 'n4', image: '/1.jpg' },
-      { id: 7, etc: 'n5', image: '/1.jpg' },
-      { id: 3, etc: 'n6', image: '/1.jpg' },
-      { id: 5, etc: 'n7', image: '/1.jpg' },
-      { id: 2, etc: 'n2', image: '/1.jpg' },
-      { id: 14, etc: 'n3', image: '/1.jpg' },
-      { id: 1, etc: 'n4', image: '/1.jpg' },
-      { id: 7, etc: 'n5', image: '/1.jpg' },
-      { id: 3, etc: 'n6', image: '/1.jpg' },
-      { id: 5, etc: 'n7', image: '/1.jpg' },
-      { id: 12, etc: 'n8', image: '/1.jpg' },
-      { id: 4, etc: 'n9', image: '/1.jpg' }
-    ],
-    tree2: [
-      { id: 4, etc: 'n9', image: '/1.jpg' },
-      { id: 1, etc: 'n4', image: '/1.jpg' },
-      { id: 7, etc: 'n5', image: '/1.jpg' },
-      { id: 3, etc: 'n6', image: '/1.jpg' },
-      { id: 5, etc: 'n7', image: '/1.jpg' },
-      { id: 12, etc: 'n8', image: '/1.jpg' },
-      { id: 4, etc: 'n9', image: '/1.jpg' }
+    tree2: [{ id: 50 }, { id: 30 }, { id: 70 }, { id: 80 }, { id: 60 }, { id: 40 }, { id: 20 }],
+    tree3: [
+      { id: 18 },
+      { id: 42 },
+      { id: 80 },
+      { id: 37 },
+      { id: 22 },
+      { id: 15 },
+      { id: 35 },
+      { id: 39 },
+      { id: 41 },
+      { id: 38 },
+      { id: 36 },
+      { id: 2 },
+      { id: 12 },
+      { id: 6 },
+      { id: 10 },
+      { id: 16 },
+      { id: 17 },
+      { id: 20 },
+      { id: 24 },
+      { id: 21 }
     ]
   }
 }
@@ -58,37 +50,15 @@ const CodeView = () => {
   useEffect(() => {
     if (!svgRef.current) return
 
-    const width = 1200
-    const height = 1000
-    const margin = 100
-
-    const handleClick = node => {
-      console.log(node)
-    }
-
-    const createTree = data => {
-      if (!data || data.length === 0) return null
-
-      const redBlackTree = RedBlackTree.fromArray(data)
-
-      const createHierarchy = node => {
-        if (node === redBlackTree.nullNode) return null
-
-        return {
-          id: node.data?.id ?? 0,
-          color: node.color,
-          etc: node.data?.etc,
-          image: node.data?.image,
-          children: [createHierarchy(node.left), createHierarchy(node.right)].filter(Boolean)
-        }
-      }
-
-      return createHierarchy(redBlackTree.root)
-    }
-
     const treesData = Object.entries(head.trees)
-      .map(([name, data]) => ({ name, data: createTree(data) }))
-      .filter(tree => tree.data)
+      .map(([name, data]) => {
+        return {
+          id: name,
+          color: '#555',
+          children: [parseTreeToD3(data)]
+        }
+      })
+      .filter(tree => !tree.children.includes(null))
 
     if (treesData.length === 0) {
       select(svgRef.current).selectAll('*').remove()
@@ -96,32 +66,35 @@ const CodeView = () => {
     }
 
     const mainNode = {
-      id: head.root,
-      color: 'green',
-      children: treesData.map(tree => ({
-        id: tree.name,
-        color: 'blue',
-        children: [tree.data]
-      }))
+      id: 'Life Stream',
+      color: '#4747dc',
+      children: treesData
     }
 
-    const svg = select(svgRef.current)
-      .attr('width', width)
-      .attr('height', height + 200)
-      .attr('viewBox', [-margin, -margin, width + margin * 2, height + 200])
-      .attr('style', 'width: 100%; height: auto; font: 10px sans-serif;')
+    const hierarchyData = hierarchy(mainNode)
 
-    svg.selectAll('*').remove()
-
-    const g = svg.append('g').attr('class', 'tree-group')
+    const nodeCount = hierarchyData.descendants().length
+    const depthSpacing = 200 // Espaciado entre niveles del árbol
+    const siblingSpacing = 40 // Espaciado entre nodos hermanos
+    const margin = 50
+    const width = Math.max(1200, nodeCount * siblingSpacing)
+    const height = Math.max(800, hierarchyData.height * depthSpacing)
 
     const treeLayout = tree()
       .size([width - margin * 2, height - margin * 2])
       .separation((a, b) => (a.parent === b.parent ? 1 : 2.5))
-
-    const hierarchyData = hierarchy(mainNode)
     treeLayout(hierarchyData)
 
+    const svg = select(svgRef.current)
+      .attr('width', width)
+      .attr('height', height)
+      .attr('viewBox', [-margin, -margin, width + margin * 2, height + margin * 2])
+      .attr('style', 'width: 100%; height: auto; font: 10px sans-serif;')
+
+    svg.selectAll('*').remove()
+
+    // Grupo para los enlaces
+    const g = svg.append('g').attr('class', 'tree-group')
     const linkGroup = g
       .append('g')
       .attr('fill', 'none')
@@ -136,37 +109,27 @@ const CodeView = () => {
       .attr(
         'd',
         d =>
-          `M${d.source.x},${d.source.y}C${d.source.x},${(d.source.y + d.target.y) / 2} ${d.target.x},${(d.source.y + d.target.y) / 2} ${d.target.x},${d.target.y}`
+          ` M${d.source.x},${d.source.y}C${d.source.x},${(d.source.y + d.target.y) / 2} ${d.target.x},${(d.source.y + d.target.y) / 2} ${d.target.x},${d.target.y}`
       )
 
+    // Grupo general de nodos
     const nodeGroup = g.append('g')
 
     nodeGroup
-      .selectAll('circle')
-      .data(hierarchyData.descendants())
-      .join('circle')
-      .attr('cx', d => d.x)
-      .attr('cy', d => d.y)
-      .attr('r', 25)
+      .selectAll('rect')
+      .data(hierarchyData.descendants().filter(d => d.data.color))
+      .join('rect')
+      .attr('x', d => d.x - 50)
+      .attr('y', d => d.y - 25)
+      .attr('width', 100)
+      .attr('height', 50)
+      .attr('rx', 10)
+      // .attr('ry', 10)
       .attr('fill', d => d.data.color)
 
     nodeGroup
-      .selectAll('image')
-      .data(hierarchyData.descendants().filter(d => d.data.image))
-      .join('image')
-      .attr('xlink:href', d => d.data.image)
-      .attr('x', d => d.x - 15)
-      .attr('y', d => d.y - 45)
-      .attr('width', 30)
-      .attr('height', 30)
-      .attr('style', 'object-fit: cover;')
-      .on('click', (...d) => {
-        console.log(d)
-      })
-
-    nodeGroup
       .selectAll('text')
-      .data(hierarchyData.descendants())
+      .data(hierarchyData.descendants().filter(d => d.data.color))
       .join('text')
       .attr('x', d => d.x)
       .attr('y', d => d.y)
@@ -174,10 +137,68 @@ const CodeView = () => {
       .attr('text-anchor', 'middle')
       .attr('fill', 'white')
       .style('font-weight', 'bold')
-      .text(d => d.data.id)
+      .text(d => d.data?.id ?? '')
+
+    // grupo para los nodos
+    const widthNodeImage = 30
+    nodeGroup
+      .selectAll('g')
+      .data(hierarchyData.descendants().filter(d => d.data?.node?.data))
+      .join('g')
+      .attr('transform', d => `translate(${d.x - widthNodeImage / 2}, ${d.y - widthNodeImage / 2})`)
+      .style('cursor', 'pointer')
+      .attr('class', 'tree-node')
+      .on('click', (...d) => {
+        console.log(d)
+      })
+      .each(function (d, i) {
+        const group = select(this)
+        // Cuadrado con border
+        group
+          .append('rect')
+          .attr('x', -1)
+          .attr('y', -1)
+          .attr('width', widthNodeImage)
+          .attr('height', widthNodeImage)
+          .attr('fill', d.data?.node?.color ?? TreeColor.BLACK)
+          .attr('rx', 5)
+
+        group
+          .append('text')
+          .attr('x', widthNodeImage / 2)
+          .attr('y', -5)
+          .attr('text-anchor', 'middle')
+          .attr('font-weight', '900')
+          .style('font-size', '16')
+          .attr('fill', d.data?.node?.color ?? TreeColor.BLACK)
+          .text(d.data?.node?.data?.id ?? '')
+
+        const maxImg = 5
+        const imgSize = widthNodeImage - maxImg
+        const imgCenter = maxImg / 3
+        group
+          .append('clipPath')
+          .attr('id', `clip-${i}`)
+          .append('rect')
+          .attr('width', imgSize)
+          .attr('height', imgSize)
+          .attr('rx', imgSize)
+          .attr('x', imgCenter)
+          .attr('y', imgCenter)
+        // Image
+        group
+          .append('image')
+          .attr('xlink:href', d.data?.node?.data?.image)
+          .attr('x', imgCenter)
+          .attr('y', imgCenter)
+          .attr('width', imgSize)
+          .attr('height', imgSize)
+          .attr('preserveAspectRatio', 'xMidYMid slice')
+          .attr('clip-path', `url(#clip-${i})`)
+      })
 
     const cZoom = zoom()
-      .scaleExtent([0.5, 5])
+      .scaleExtent([0.5, 20])
       .on('zoom', event => {
         g.attr('transform', event.transform)
       })

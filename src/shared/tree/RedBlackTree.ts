@@ -27,7 +27,7 @@ export default class RedBlackTree<T extends ITreeNodeData> {
     this.root = this.nullNode
   }
 
-  public static fromArray<T>(data: T[]): RedBlackTree<T> {
+  public static fromArray<T extends ITreeNodeData>(data: T[]): RedBlackTree<T> {
     const tree = new RedBlackTree<T>()
     data.forEach(dt => tree.insert(dt))
     return tree
