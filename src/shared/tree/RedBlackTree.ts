@@ -1,44 +1,44 @@
 export interface ITreeNodeData {
   id: number
-  etc?: string
 }
 
 export enum TreeColor {
   BLACK = 'black',
   RED = 'red'
 }
-export class TreeNode {
+
+export class TreeNode<T extends ITreeNodeData> {
   constructor(
-    public data: ITreeNodeData | null = null,
+    public data: T | null = null,
     public color: TreeColor = TreeColor.BLACK,
-    public left: TreeNode | null = null,
-    public right: TreeNode | null = null,
-    public parent: TreeNode | null = null
+    public left: TreeNode<T> | null = null,
+    public right: TreeNode<T> | null = null,
+    public parent: TreeNode<T> | null = null
   ) {}
 }
 
-export default class RedBlackTree {
+export default class RedBlackTree<T extends ITreeNodeData> {
   // Representa a los nodos vacíos
-  public readonly nullNode: TreeNode
-  public root: TreeNode
+  public readonly nullNode: TreeNode<T>
+  public root: TreeNode<T>
 
   constructor() {
-    this.nullNode = new TreeNode()
+    this.nullNode = new TreeNode<T>()
     this.root = this.nullNode
   }
 
-  public static fromArray(data: ITreeNodeData[]): RedBlackTree {
-    const tree = new RedBlackTree()
+  public static fromArray<T>(data: T[]): RedBlackTree<T> {
+    const tree = new RedBlackTree<T>()
     data.forEach(dt => tree.insert(dt))
     return tree
   }
 
-  insert(data: ITreeNodeData) {
+  insert(data: T) {
     const startTime = performance.now()
-    const newNode = new TreeNode(data, TreeColor.RED, this.nullNode, this.nullNode)
+    const newNode = new TreeNode<T>(data, TreeColor.RED, this.nullNode, this.nullNode)
 
     let parentNode = null
-    let currentNode: TreeNode | null = this.root
+    let currentNode: TreeNode<T> | null = this.root
 
     while (currentNode !== this.nullNode) {
       // Foto del padre
@@ -65,7 +65,7 @@ export default class RedBlackTree {
     return Number((endTime - startTime).toFixed(4))
   }
 
-  private fixInsert(node: TreeNode) {
+  private fixInsert(node: TreeNode<T>) {
     // balanceo y recoloreo
     // Mientras el padre del nodo sea rojo y no llegamos a la raíz
     while (node.parent && node.parent.color === TreeColor.RED) {
@@ -81,7 +81,7 @@ export default class RedBlackTree {
           node.parent.color = TreeColor.BLACK
           node.parent.parent!.color = TreeColor.RED // abuelo
           // Movemos el nodo hacia el abuelo
-          node = node.parent?.parent as TreeNode
+          node = node.parent?.parent as TreeNode<T>
         } else {
           // Caso 3: hijo izquierdo, padre izquierdo rojos y tio derecho negro
           // Se intercambian los colores del papa y del abuelo, ya que se rotara
@@ -94,7 +94,7 @@ export default class RedBlackTree {
           // Estructura del codo, hijo derecho eje de rotación
           node.parent!.color = TreeColor.BLACK
           node.parent!.parent!.color = TreeColor.RED
-          this.rotateLeft(node.parent?.parent as TreeNode)
+          this.rotateLeft(node.parent?.parent as TreeNode<T>)
         }
       } else {
         // El mismo proceso de los casos anteriores, pero al revés
@@ -104,7 +104,7 @@ export default class RedBlackTree {
           uncle.color = TreeColor.BLACK
           node.parent.color = TreeColor.BLACK
           node.parent.parent!.color = TreeColor.RED
-          node = node.parent.parent as TreeNode
+          node = node.parent.parent as TreeNode<T>
         } else {
           if (node === node.parent.right) {
             node = node.parent
@@ -112,7 +112,7 @@ export default class RedBlackTree {
           }
           node.parent!.color = TreeColor.BLACK
           node.parent!.parent!.color = TreeColor.RED
-          this.rotateRight(node.parent?.parent as TreeNode)
+          this.rotateRight(node.parent?.parent as TreeNode<T>)
         }
       }
       // Si llegamos a la raíz, rompemos el bucle
@@ -122,7 +122,7 @@ export default class RedBlackTree {
     this.root.color = TreeColor.BLACK
   }
 
-  private rotateLeft(node: TreeNode) {
+  private rotateLeft(node: TreeNode<T>) {
     // Se guarda el sub-árbol derecho del nodo
     const temp = node.right // 7
 
@@ -136,7 +136,7 @@ export default class RedBlackTree {
     temp!.parent = node.parent
     if (!node.parent) {
       // Si node era la raíz, ahora temp es la raíz
-      this.root = temp as TreeNode
+      this.root = temp as TreeNode<T>
     } else if (node === node.parent.left) {
       // Si node era el hijo izquierdo, temp lo reemplaza
       node.parent.left = temp
@@ -150,7 +150,7 @@ export default class RedBlackTree {
     node.parent = temp
   }
 
-  private rotateRight(node: TreeNode) {
+  private rotateRight(node: TreeNode<T>) {
     const temp = node.left
     // Se mueve el sub-árbol derecho de temp como sub-árbol izquierdo de node
     node.left = temp?.right ?? null
@@ -162,7 +162,7 @@ export default class RedBlackTree {
     temp!.parent = node.parent
     if (!node.parent) {
       // Si node era la raíz, ahora temp es la raíz
-      this.root = temp as TreeNode
+      this.root = temp as TreeNode<T>
     } else if (node === node.parent.right) {
       // Si node era el hijo derecho, temp lo reemplaza
       node.parent.right = temp
@@ -176,36 +176,36 @@ export default class RedBlackTree {
     node.parent = temp
   }
 
-  public inOrder(node: TreeNode = this.root, order: ITreeNodeData[] = []) {
+  public inOrder(node: TreeNode<T> = this.root, order: T[] = []) {
     const startTime = performance.now()
     if (node !== this.nullNode) {
-      this.inOrder(node.left as TreeNode, order)
-      order?.push(node.data as ITreeNodeData)
-      this.inOrder(node.right as TreeNode, order)
+      this.inOrder(node.left as TreeNode<T>, order)
+      order?.push(node.data as T)
+      this.inOrder(node.right as TreeNode<T>, order)
     }
     const endTime = performance.now()
     const time = Number((endTime - startTime).toFixed(4))
     return { order, time }
   }
 
-  public preOrder(node: TreeNode = this.root, order: ITreeNodeData[] = []) {
+  public preOrder(node: TreeNode<T> = this.root, order: T[] = []) {
     const startTime = performance.now()
     if (node !== this.nullNode) {
-      order?.push(node.data as ITreeNodeData)
-      this.preOrder(node.left as TreeNode, order)
-      this.preOrder(node.right as TreeNode, order)
+      order?.push(node.data as T)
+      this.preOrder(node.left as TreeNode<T>, order)
+      this.preOrder(node.right as TreeNode<T>, order)
     }
     const endTime = performance.now()
     const time = Number((endTime - startTime).toFixed(4))
     return { order, time }
   }
 
-  public postOrder(node: TreeNode = this.root, order: ITreeNodeData[] = []) {
+  public postOrder(node: TreeNode<T> = this.root, order: T[] = []) {
     const startTime = performance.now()
     if (node !== this.nullNode) {
-      this.postOrder(node.left as TreeNode, order)
-      this.postOrder(node.right as TreeNode, order)
-      order?.push(node.data as ITreeNodeData)
+      this.postOrder(node.left as TreeNode<T>, order)
+      this.postOrder(node.right as TreeNode<T>, order)
+      order?.push(node.data as T)
     }
     const endTime = performance.now()
     const time = Number((endTime - startTime).toFixed(4))

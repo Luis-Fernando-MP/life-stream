@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, test } from 'vitest'
 
-import RedBlackTree, { TreeColor } from '../shared/RedBlackTree'
+import RedBlackTree, { TreeColor } from '../shared/tree/RedBlackTree'
 
 describe('RedBlackTree Tests', () => {
   let tree: RedBlackTree
