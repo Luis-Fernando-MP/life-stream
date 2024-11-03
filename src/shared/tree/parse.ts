@@ -4,21 +4,21 @@ export interface D3TreeNodeData {
   children: D3TreeNodeData[] | null[]
 }
 
-export function parseTreeToD3<T extends ITreeNodeData>(data: T[]) {
+export type TCreateHierarchy = {
+  node: TreeNode
+  children: ((TreeNode & D3TreeNodeData[]) | null)[]
+}
+
+export function parseTreeToD3(data: ITreeNodeData[]) {
   if (!data || data.length === 0) return null
 
-  const redBlackTree = RedBlackTree.fromArray<T>(data)
+  const redBlackTree = RedBlackTree.fromArray(data)
 
-  type TCreateHierarchy = {
-    node: TreeNode<T>
-    children: ((TreeNode<T> & D3TreeNodeData[]) | null)[]
-  }
-
-  const createHierarchy = (node: TreeNode<T>): TCreateHierarchy | null => {
+  const createHierarchy = (node: TreeNode): TCreateHierarchy | null => {
     if (node === redBlackTree.nullNode) return null
 
-    const leftChild = createHierarchy(node.left as TreeNode<T>)
-    const rightChild = createHierarchy(node.right as TreeNode<T>)
+    const leftChild = createHierarchy(node.left as TreeNode)
+    const rightChild = createHierarchy(node.right as TreeNode)
 
     const result = {
       node,

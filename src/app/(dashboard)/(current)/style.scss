@@ -1,62 +1,177 @@
+/* stylelint-disable no-descending-specificity */
 @use '@sass/config/vars' as v;
 @use '@sass/utils/defs' as d;
 
-.dHome {
-  overflow: auto;
+.layout-container.home {
+  @include d.flex($dir: row, $gap: 0);
 
-  &,
-  &-container {
-    justify-content: center;
+  height: 100%;
 
-    @include d.flex($ali: center);
-  }
-
-  &-container {
-    width: 400px;
-    height: 100%;
-  }
-
-  &-title {
-    flex-wrap: wrap;
-    justify-content: center;
-    width: 100%;
-    text-align: center;
-
-    @include d.flex($dir: row, $ali: center, $gap: 5px);
-
-    h1,
-    h4 {
-      font-size: v.$fH1;
-    }
-  }
-}
-
-// .node__root {
-//   background-color: rebeccapurple;
-// }
-
-// .node__root > circle {
-//   fill: red;
-// }
-
-// .node__branch > circle {
-//   fill: yellow;
-// }
-
-// .node__leaf > circle {
-//   r: 40;
-//   fill: green;
-// }
-
-.tree-node {
-  image,
-  text {
+  video {
     pointer-events: none;
     user-select: none;
   }
 
-  :hover {
-    stroke: v.$tn1;
-    stroke-width: 3px;
+  .home {
+    &-left {
+      width: 50%;
+      height: max-content;
+      padding: v.$padding * 2 v.$padding;
+
+      @include d.flex($ali: center, $gap: v.$padding * 3);
+    }
+
+    &-right {
+      position: relative;
+
+      overflow: hidden;
+      justify-content: center;
+
+      width: 50%;
+      height: 100%;
+      min-height: 100vh;
+      padding: v.$padding;
+
+      background-color: red;
+      border-radius: v.$radius;
+
+      @include d.flex($ali: center);
+
+      &__background {
+        position: absolute;
+        z-index: 0;
+        top: 0;
+        left: 0;
+
+        width: 100%;
+        height: 100%;
+
+        object-fit: cover;
+        filter: opacity(0.8) brightness(50%) saturate(2);
+      }
+    }
+  }
+}
+
+.home {
+  &-brand {
+    width: 100%;
+    text-align: left;
+
+    @include d.flex($dir: row, $ali: center);
+
+    h5 {
+      font-family: v.$font1;
+      font-weight: 900;
+    }
+
+    p {
+      font-family: v.$font1;
+      font-weight: 100;
+    }
+  }
+
+  &-title {
+    font-size: v.$fXl;
+    font-weight: 200;
+    text-transform: capitalize;
+
+    b {
+      font-weight: 900;
+    }
+  }
+
+  &-description {
+    width: 100%;
+    font-size: v.$fH4;
+  }
+
+  &-more {
+    justify-content: center;
+    width: 100%;
+
+    @include d.flex($dir: row);
+
+    &__card {
+      justify-content: center;
+
+      height: 250px;
+      padding: v.$padding;
+
+      text-align: center;
+
+      background-color: rgb(v.$bg1);
+      border-radius: v.$radius * 2;
+
+      @include d.flex($ali: center);
+
+      &.left {
+        width: 40%;
+        background-color: rgba(v.$tn1, 0.2);
+      }
+
+      &.right {
+        width: 60%;
+        background-color: rgba(v.$tn2, 0.2);
+      }
+    }
+
+    &__svg {
+      width: 100%;
+
+      svg {
+        width: v.$icon * 1.5;
+        height: v.$icon * 1.5;
+      }
+
+      @include d.flex($ali: flex-end);
+    }
+  }
+
+  // right
+  &-process {
+    position: relative;
+    width: 70%;
+
+    @include v.border(rgba(v.$bg1, 0.8));
+    @include d.flex($dir: row);
+
+    padding: v.$padding;
+    border-radius: v.$radius;
+
+    video {
+      width: 70px;
+      height: 70px;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+  }
+
+  &-benefits {
+    position: relative;
+    width: 100%;
+    padding: v.$padding;
+
+    h3 {
+      color: rgb(v.$bg1);
+      text-align: center;
+    }
+
+    @include d.flex;
+
+    &__list {
+      flex-wrap: wrap;
+      width: 80%;
+      margin: auto;
+
+      @include d.flex($dir: row, $ali: center);
+    }
+
+    &__item {
+      padding: v.$padding / 2 v.$padding;
+      border-radius: v.$radius;
+
+      @include v.border(rgba(v.$bg1, 0.8));
+    }
   }
 }

@@ -3,6 +3,7 @@ import {
   DnaIcon,
   HeartHandshakeIcon,
   HeartIcon,
+  HouseIcon,
   LogInIcon,
   MedalIcon,
   PlusIcon,
@@ -18,7 +19,7 @@ export const ROUTES = {
     subPaths: '/',
     title: 'Inicio',
     description: '🏠 Página de inicio',
-    Icon: Logo,
+    Icon: HouseIcon,
     requiredRoles: []
   },
   registerDonor: {

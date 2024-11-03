@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 const Layout = ({ children }: ILayout): JSX.Element => {
   const { userId } = auth()
   if (!userId) redirect('/sign-in')
-  return <article className='layout-container dashboard'>{children}</article>
+  return <>{children}</>
 }
 
 export default Layout

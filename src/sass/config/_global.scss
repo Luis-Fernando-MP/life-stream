@@ -31,7 +31,7 @@ body {
   line-height: 1.25;
   color: $fn1, $fontBase;
 
-  background-color: $bg2;
+  background-color: rgb($bg2);
 
   textarea {
     @extend %scroll-hidden;
@@ -168,6 +168,10 @@ svg {
 
 .toast {
   background-color: red;
+}
+
+.tn1 {
+  color: rgb($tn1);
 }
 
 @include m.smallerScreen {

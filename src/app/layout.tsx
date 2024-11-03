@@ -3,6 +3,7 @@ import type { Metadata } from 'next'
 import type { JSX, ReactNode } from 'react'
 import { Toaster } from 'react-hot-toast'
 
+import Firefly from './components/Firefly'
 import Header from './components/Header'
 import Nav from './components/Nav'
 import './globals.css'
@@ -31,13 +32,12 @@ const RootLayout = ({ children }: IRootLayout): JSX.Element => {
         className={`${MontserratFont.variable} ${RobotoFont.variable} ${PlayFairFont.variable}`}
       >
         <Providers>
-          <main className='layout'>
+          <section className='layout'>
             <Nav className='layout-nav' />
-            <section className='layout-main'>
-              <Header className='layout-header' />
-              {children}
-            </section>
-          </main>
+            <Header className='layout-header' />
+            <main className='layout-main'>{children}</main>
+          </section>
+          <Firefly />
         </Providers>
         <Toaster
           position='top-center'
