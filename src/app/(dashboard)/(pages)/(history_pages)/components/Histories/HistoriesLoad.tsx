@@ -7,7 +7,7 @@ import History from '../History'
 
 const HistoriesLoad = () => {
   const { user } = useUser()
-  const { status, data } = usePersonHistories(user?.id)
+  const { data } = usePersonHistories(user?.id)
   if (!data) return null
 
   return (
