@@ -1,8 +1,6 @@
-import { create } from 'zustand';
-
+import { create } from 'zustand'
 
 type TView = 'array' | 'tree' | 'tails'
-
 
 interface ISelectPerson {
   view: TView
@@ -10,7 +8,7 @@ interface ISelectPerson {
 }
 
 const useChartView = create<ISelectPerson>(set => ({
-  view: "tails",
+  view: 'tails',
   setView: view => set({ view })
 }))
 
