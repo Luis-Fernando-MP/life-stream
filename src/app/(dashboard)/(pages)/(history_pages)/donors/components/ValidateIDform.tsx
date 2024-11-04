@@ -1,6 +1,6 @@
 'use client'
 
-import { checkDniInDatabase, findBloodDonor } from '@/db/services/getBloodDonors'
+import { findBloodDonor } from '@/db/services/getBloodDonors'
 import { type IDniResolver, dniResolver } from '@/resolvers/dniResolver'
 import { acl } from '@/shared/activeClass'
 import { useMutation } from '@tanstack/react-query'
