@@ -1,4 +1,4 @@
-import { createPerson, deletePerson, updatePerson } from '@/db/actions/person'
+import { createPerson, deletePerson, updatePerson } from '@/db/services/person'
 import { WebhookEvent } from '@clerk/nextjs/server'
 import { Person } from '@prisma/client'
 import { headers } from 'next/headers'

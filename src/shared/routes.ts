@@ -1,8 +1,9 @@
-import Logo from '@/shared/ui/Logo'
 import {
+  ChartLineIcon,
   DnaIcon,
   HeartHandshakeIcon,
   HeartIcon,
+  HouseIcon,
   LogInIcon,
   MedalIcon,
   PlusIcon,
@@ -18,7 +19,24 @@ export const ROUTES = {
     subPaths: '/',
     title: 'Inicio',
     description: '🏠 Página de inicio',
-    Icon: Logo,
+    Icon: HouseIcon,
+    requiredRoles: []
+  },
+  chart: {
+    path: '/chart',
+    subPaths: '/chart',
+    title: 'Gráficos',
+    description: 'Analizar registros',
+    Icon: ChartLineIcon,
+    requiredRoles: [ROL.ADMIN, ROL.DOCTOR, ROL.DOCTOR_ADMIN]
+  },
+
+  donors: {
+    path: '/donors',
+    subPaths: '/donors/[donorID]',
+    title: 'Donantes',
+    description: '❤️ Lista de donantes de sangre',
+    Icon: DnaIcon,
     requiredRoles: []
   },
   registerDonor: {
@@ -27,14 +45,6 @@ export const ROUTES = {
     title: 'Registrar Donante',
     description: '📝 Registro de nuevo donante de sangre',
     Icon: PlusIcon,
-    requiredRoles: []
-  },
-  donors: {
-    path: '/donors',
-    subPaths: '/donors/[donorID]',
-    title: 'Donantes',
-    description: '❤️ Lista de donantes de sangre',
-    Icon: DnaIcon,
     requiredRoles: []
   },
   recipients: {
@@ -61,6 +71,7 @@ export const ROUTES = {
     Icon: Wallpaper,
     requiredRoles: [ROL.ADMIN, ROL.DOCTOR, ROL.DOCTOR_ADMIN]
   },
+
   authors: {
     path: '/authors',
     subPaths: '/authors',
@@ -87,8 +98,9 @@ export const ROUTES = {
   }
 }
 
-export const firstRoutes = Object.entries(ROUTES).splice(0, 6)
-export const endRoutes = Object.entries(ROUTES).splice(7, -1)
+const vlipRoute = 7
+export const firstRoutes = Object.entries(ROUTES).splice(0, vlipRoute)
+export const endRoutes = Object.entries(ROUTES).splice(vlipRoute + 1, -1)
 
 interface IMatchRoute {
   path: string

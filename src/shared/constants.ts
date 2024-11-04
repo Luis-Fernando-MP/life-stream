@@ -3,3 +3,5 @@ export enum DEV_MODE {
   DEV = 'development'
 }
 export const DEV_ENV = process.env.NODE_ENV ?? DEV_MODE.DEV
+
+export const URL = process.env.NEXT_PUBLIC_URL ?? 'http://localhost:3000'

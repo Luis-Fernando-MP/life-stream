@@ -1,4 +1,4 @@
-import { ChartLineIcon, GithubIcon } from 'lucide-react'
+import { GithubIcon, SparklesIcon } from 'lucide-react'
 import Link from 'next/link'
 import type { HtmlHTMLAttributes, JSX, ReactNode } from 'react'
 
@@ -15,7 +15,7 @@ const Header = ({ className, ...props }: IHeader): JSX.Element => {
       <LockButton />
       <section className='header-actions'>
         <button className='header-action'>
-          <ChartLineIcon />
+          <SparklesIcon />
         </button>
         <Link
           href='https://github.com/Luis-Fernando-MP/life-stream'

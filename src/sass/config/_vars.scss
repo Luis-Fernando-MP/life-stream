@@ -1,12 +1,12 @@
 :root {
-  --bg-primary: #e3e2fd;
-  --bg-secondary: #d8d9fd;
-  --bg-tertiary: #d0d0eef5;
-  --fnt-primary: #000;
-  --fnt-secondary: #676767;
-  --tn-primary: #4747dc;
-  --tn-secondary: #7878ff;
-  --tn-tertiary: #7549a22c;
+  --bg-primary: 227, 226, 253;
+  --bg-secondary: 209, 210, 255;
+  --bg-tertiary: 208, 208, 238;
+  --fnt-primary: 0, 0, 0;
+  --fnt-secondary: 103, 103, 103;
+  --tn-primary: 71, 71, 220;
+  --tn-secondary: 255, 144, 196;
+  --tn-tertiary: 117, 73, 162;
   --xl-font-size: 3em;
   --h1-font-size: 2em;
   --h2-font-size: 1.5em;
@@ -50,8 +50,8 @@ $fontBase: 'Segoe UI Mono', 'Roboto Mono', 'Ubuntu Monospace', 'Source Code Pro'
 $font1: var(--MontserratFont);
 $font2: var(--RobotoFont);
 $font3: var(--PlayFairFont);
-$gr1: linear-gradient(90deg, $tn1 0%, $tn2 100%);
-$sha1: 6px 5px 20px -5px $bg3;
+$gr1: linear-gradient(90deg, rgb($tn1) 0%, rgb($tn2) 100%);
+$sha1: 6px 5px 20px -5px rgb($bg3);
 $error: #e41e38;
 
 @mixin dotDark {
@@ -60,10 +60,10 @@ $error: #e41e38;
   }
 }
 
-@mixin border($bg: $bg1) {
+@mixin border($bg: rgb($bg1)) {
   & {
     background-color: $bg;
-    border: 1.5px solid $bg3;
+    border: 1.5px solid rgb($bg3);
   }
 }
 

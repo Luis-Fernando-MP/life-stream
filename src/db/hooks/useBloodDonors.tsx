@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
 
-import { findBloodDonor } from '../actions/bloodDonors'
+import { findBloodDonor } from '../services/getBloodDonors'
 import { HISTORY } from './keys'
 
 export function useBloodDonors(dni: string | undefined) {

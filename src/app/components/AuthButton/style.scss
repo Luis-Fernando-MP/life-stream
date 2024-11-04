@@ -6,7 +6,7 @@
   padding: 5px;
 
   .cl-avatarBox {
-    outline: 3px solid v.$tn2;
+    outline: 3px solid rgb(v.$tn2);
   }
 }
 
@@ -17,8 +17,8 @@
 
   .cl-userButtonPopoverMain {
     padding: v.$padding;
-    background-color: v.$bg1;
-    border: 3.5px solid v.$bg3;
+    background-color: rgb(v.$bg1);
+    border: 3.5px solid rgb(v.$bg3);
 
     .cl-internal-3gh7hq {
       font-size: v.$fH5;

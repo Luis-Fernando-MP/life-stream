@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
 
-import { fetchHistories } from '../actions/history'
+import { fetchHistories } from '../services/history'
 import { HISTORY } from './keys'
 
 export function usePersonHistories(userID: string | undefined) {

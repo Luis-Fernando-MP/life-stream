@@ -4,6 +4,9 @@
 .layout-container.auth {
   align-items: center;
   justify-content: center;
+  height: 100%;
+
+  @include d.flex($ali: center);
 
   .cl-alert {
     margin: v.$padding auto;
@@ -30,7 +33,7 @@
         box-shadow: none !important;
       }
 
-      @include v.border(v.$bg2);
+      @include v.border(rgb(v.$bg2));
     }
 
     .cl-cardBox {
@@ -61,9 +64,11 @@
       height: max-content;
       padding: 10px v.$padding;
 
-      color: v.$fn1;
+      color: rgb(v.$fn1);
 
       box-shadow: none !important;
+
+      @include v.border(rgba(v.$bg1, 0.6));
 
       &::after {
         display: none;
@@ -72,8 +77,6 @@
       span {
         font-family: v.$font1;
       }
-
-      @include v.border;
     }
   }
 
