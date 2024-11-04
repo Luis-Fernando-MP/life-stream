@@ -9,7 +9,7 @@ import './userMobile.scss'
 const Page = (): JSX.Element => {
   return (
     <article className='layout-container home'>
-      <div className='home-left'>
+      <div className='home-left animate-blurred-fade-in'>
         <section className='home-brand'>
           <h5>Life Stream</h5>
           <p>
@@ -59,7 +59,7 @@ const Page = (): JSX.Element => {
           </div>
         </section>
       </div>
-      <div className='home-right'>
+      <div className='home-right delay animate-blurred-fade-in'>
         <video src='/adn.mp4' muted autoPlay loop className='home-right__background'></video>
 
         <div className='home-process'>

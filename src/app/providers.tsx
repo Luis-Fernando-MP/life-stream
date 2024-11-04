@@ -1,19 +1,24 @@
 'use client'
 
+import { getQueryClient } from '@/shared/getQueryClient'
 import { ClerkProvider } from '@clerk/nextjs'
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { type JSX, type ReactNode } from 'react'
+import { QueryClientProvider } from '@tanstack/react-query'
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+import { type JSX, type ReactNode, useState } from 'react'
 
 interface IProviders {
   children?: Readonly<ReactNode[]> | null | Readonly<ReactNode>
 }
 
-const queryClient = new QueryClient()
-
 const Providers = ({ children }: IProviders): JSX.Element => {
+  const [queryClient] = useState(getQueryClient())
+
   return (
     <ClerkProvider>
-      <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+      <QueryClientProvider client={queryClient}>
+        {children}
+        <ReactQueryDevtools initialIsOpen={false} />
+      </QueryClientProvider>
     </ClerkProvider>
   )
 }

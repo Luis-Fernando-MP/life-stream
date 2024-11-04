@@ -8,19 +8,19 @@ datasource db {
 }
 
 model Person {
-  id            String         @id @default(cuid()) @db.VarChar(50)
-  firstName     String         @db.VarChar(50)
-  lastName      String         @db.VarChar(50)
-  photo         String?        @db.VarChar(255)
-  email         String         @unique @db.VarChar(150)
-  username      String         @db.VarChar(50)
-  state         PersonStatus?  @default(ACTIVE)
-  createdAt     DateTime?      @default(now()) @db.Timestamp(6)
-  updatedAt     DateTime?      @updatedAt @db.Timestamp(6)
+  id            String          @id @default(cuid()) @db.VarChar(50)
+  firstName     String          @db.VarChar(50)
+  lastName      String          @db.VarChar(50)
+  photo         String?         @db.VarChar(255)
+  email         String          @unique @db.VarChar(150)
+  username      String          @db.VarChar(50)
+  state         PersonStatus?   @default(ACTIVE)
+  createdAt     DateTime?       @default(now()) @db.Timestamp(6)
+  updatedAt     DateTime?       @updatedAt @db.Timestamp(6)
   Doctor        Doctor? // Puede ser un Doctor
   patient       Patient? // Puede ser un paciente
-  bloodDonor    BloodDonor? // usado para el createdBy
-  bloodReceiver BloodReceiver? // usado para el createdBy
+  bloodDonor    BloodDonor[] // usado para el createdBy
+  bloodReceiver BloodReceiver[] // usado para el createdBy
 
   QueryHistory QueryHistory[]
 
@@ -56,6 +56,7 @@ model Doctor {
   doctorRol     DoctorRol?      @default(DOCTOR_MEMBER)
   bloodRequests BloodRequest[] // Revisa varias solicitudes
   BloodDonation BloodDonation[] // Realiza varias donaciones
+  DNI           String          @unique @db.VarChar(8)
 
   // Índice para optimizar la búsqueda por nombre de usuario y rol
   @@index([doctorRol], name: "doctorRol_index")
@@ -83,7 +84,7 @@ model BloodDonor {
   lastDonation  DateTime        @default(now())
   patientID     String          @unique @db.VarChar(200)
   patient       Patient         @relation(fields: [patientID], references: [id], onDelete: Cascade)
-  AuthorID      String          @unique @db.VarChar(200)
+  AuthorID      String          @db.VarChar(200)
   CreatedBy     Person          @relation(fields: [AuthorID], references: [id], onDelete: Cascade)
   createdAt     DateTime?       @default(now()) @db.Timestamp(6)
   updatedAt     DateTime?       @updatedAt @db.Timestamp(6)
@@ -98,7 +99,7 @@ model BloodReceiver {
   id            String         @id @default(cuid()) @db.VarChar(50)
   patientID     String         @unique @db.VarChar(200)
   patient       Patient        @relation(fields: [patientID], references: [id], onDelete: Cascade)
-  AuthorID      String         @unique @db.VarChar(200)
+  AuthorID      String         @db.VarChar(200)
   CreatedBy     Person         @relation(fields: [AuthorID], references: [id], onDelete: Cascade)
   createdAt     DateTime?      @default(now()) @db.Timestamp(6)
   updatedAt     DateTime?      @updatedAt @db.Timestamp(6)

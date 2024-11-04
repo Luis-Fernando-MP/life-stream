@@ -2,11 +2,7 @@ import { type JSX } from 'react'
 
 import useTreeGraph from '../../hooks/useTreeGraph'
 
-interface ITreeGraph {
-  mainNode: NodeData
-}
-
-const TreeGraph = ({ mainNode }: ITreeGraph): JSX.Element => {
+const TreeGraph = (): JSX.Element => {
   const { svgRef } = useTreeGraph({
     onNodeClick(_, data) {
       console.log(data)

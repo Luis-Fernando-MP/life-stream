@@ -1,6 +1,7 @@
 export interface ITreeNodeData {
   id: number
   image?: string
+  [key: string]: any
 }
 
 export enum TreeColor {

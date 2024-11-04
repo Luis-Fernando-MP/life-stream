@@ -4,6 +4,7 @@
 
 .layout-container.home {
   @include d.flex($dir: row, $gap: 0);
+  @include v.border(rgb(v.$bg1, 0.5));
 
   height: 100%;
 

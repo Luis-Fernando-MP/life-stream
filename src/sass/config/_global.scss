@@ -28,7 +28,6 @@ body {
 
   font-family: $font1;
   font-size: $family-size;
-  line-height: 1.25;
   color: $fn1, $fontBase;
 
   background-color: rgb($bg2);
@@ -209,4 +208,8 @@ svg {
       opacity: 0.5;
     }
   }
+}
+
+.delay {
+  animation-delay: 700ms;
 }

@@ -8,11 +8,16 @@
   -webkit-text-fill-color: transparent;
 }
 
-@mixin pointers() {
+@mixin pointers($h: auto, $lines: 2) {
   @extend %scroll-hidden;
 
-  overflow: auto;
-  width: 100%;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: $lines;
+
+  height: $h;
+
   text-overflow: ellipsis;
-  white-space: nowrap;
+  white-space: normal;
 }

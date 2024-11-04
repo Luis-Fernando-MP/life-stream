@@ -45,6 +45,5 @@
     border-top-left-radius: v.$radius;
 
     @include d.flex;
-    @include v.border(rgb(v.$bg1, 0.5));
   }
 }
