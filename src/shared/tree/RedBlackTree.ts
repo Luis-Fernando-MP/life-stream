@@ -29,13 +29,15 @@ export default class RedBlackTree {
     this.root = this.nullNode
   }
 
+  protected diffTime = (end: number, start: number) => Number((end - start).toFixed(4))
+
   public static fromArray(data: ITreeNodeData[]): RedBlackTree {
     const tree = new RedBlackTree()
     data.forEach(dt => tree.insert(dt))
     return tree
   }
 
-  insert(data: ITreeNodeData) {
+  public insert(data: ITreeNodeData) {
     const startTime = performance.now()
     const newNode = new TreeNode(data, TreeColor.RED, this.nullNode, this.nullNode)
 
@@ -64,7 +66,7 @@ export default class RedBlackTree {
     this.fixInsert(newNode)
     const endTime = performance.now()
 
-    return Number((endTime - startTime).toFixed(4))
+    return this.diffTime(endTime, startTime)
   }
 
   private fixInsert(node: TreeNode) {
@@ -178,6 +180,139 @@ export default class RedBlackTree {
     node.parent = temp
   }
 
+  public delete(id: number) {
+    const startTime = performance.now()
+    const { node: z } = this.find(id)
+    if (z === null) return { node: null, time: this.diffTime(performance.now(), startTime) }
+
+    // Guardar el nodo a eliminar y su color original
+    let y = z
+    let yOriginalColor = y.color
+    let x: TreeNode
+
+    // Caso 1: El nodo no tiene hijo izquierdo
+    if (z.left === this.nullNode) {
+      x = z.right!
+      this.transplant(z, z.right!)
+    }
+
+    // Caso 2: El nodo no tiene hijo derecho
+    else if (z.right === this.nullNode) {
+      x = z.left!
+      this.transplant(z, z.left!)
+    }
+
+    // Caso 3: El nodo tiene ambos hijos
+    else {
+      // Encontrar el sucesor mínimo
+      y = this.minimum(z.right!)
+      yOriginalColor = y.color
+      x = y.right!
+      // Si el sucesor es el hijo directo
+      if (y.parent === z) {
+        x.parent = y
+      } else {
+        this.transplant(y, y.right!)
+        y.right = z.right
+        y.right!.parent = y
+      }
+      this.transplant(z, y)
+      y.left = z.left
+      y.left!.parent = y
+      y.color = z.color
+    }
+
+    // Reparar el árbol si se eliminó un nodo negro
+    if (yOriginalColor === TreeColor.BLACK) this.fixDelete(x)
+
+    const endTime = performance.now()
+    return { node: z, time: this.diffTime(endTime, startTime) }
+  }
+
+  private transplant(u: TreeNode, v: TreeNode) {
+    // Reemplazar el sub-árbol en u con el sub-árbol en v
+    if (!u.parent) {
+      this.root = v
+    } else if (u === u.parent.left) {
+      u.parent.left = v
+    } else {
+      u.parent.right = v
+    }
+    v.parent = u.parent
+  }
+
+  private minimum(node: TreeNode): TreeNode {
+    // Encontrar el nodo con el valor mínimo
+    while (node.left !== this.nullNode) {
+      node = node.left as TreeNode
+    }
+    return node
+  }
+
+  private fixDelete(x: TreeNode) {
+    // Reparar el árbol si se rompe alguna propiedad
+    while (x !== this.root && x.color === TreeColor.BLACK) {
+      if (x === x.parent!.left) {
+        let w = x.parent!.right!
+        // Caso 1: Hermano rojo
+        if (w.color === TreeColor.RED) {
+          w.color = TreeColor.BLACK
+          x.parent!.color = TreeColor.RED
+          this.rotateLeft(x.parent!)
+          w = x.parent!.right!
+        }
+        // Caso 2: Hermano negro con hijos negros
+        if (w.left!.color === TreeColor.BLACK && w.right!.color === TreeColor.BLACK) {
+          w.color = TreeColor.RED
+          x = x.parent!
+        } else {
+          // Caso 3: Hermano negro con hijo derecho negro
+          if (w.right!.color === TreeColor.BLACK) {
+            w.left!.color = TreeColor.BLACK
+            w.color = TreeColor.RED
+            this.rotateRight(w)
+            w = x.parent!.right!
+          }
+          // Caso 4: Hermano negro con hijo derecho rojo
+          w.color = x.parent!.color
+          x.parent!.color = TreeColor.BLACK
+          w.right!.color = TreeColor.BLACK
+          this.rotateLeft(x.parent!)
+          x = this.root
+        }
+      } else {
+        let w = x.parent!.left!
+        // Caso 1: Hermano rojo
+        if (w.color === TreeColor.RED) {
+          w.color = TreeColor.BLACK
+          x.parent!.color = TreeColor.RED
+          this.rotateRight(x.parent!)
+          w = x.parent!.left!
+        }
+        // Caso 2: Hermano negro con hijos negros
+        if (w.right!.color === TreeColor.BLACK && w.left!.color === TreeColor.BLACK) {
+          w.color = TreeColor.RED
+          x = x.parent!
+        } else {
+          // Caso 3: Hermano negro con hijo izquierdo negro
+          if (w.left!.color === TreeColor.BLACK) {
+            w.right!.color = TreeColor.BLACK
+            w.color = TreeColor.RED
+            this.rotateLeft(w)
+            w = x.parent!.left!
+          }
+          // Caso 4: Hermano negro con hijo izquierdo rojo
+          w.color = x.parent!.color
+          x.parent!.color = TreeColor.BLACK
+          w.left!.color = TreeColor.BLACK
+          this.rotateRight(x.parent!)
+          x = this.root
+        }
+      }
+    }
+    x.color = TreeColor.BLACK
+  }
+
   public inOrder(node: TreeNode = this.root, order: ITreeNodeData[] = []) {
     const startTime = performance.now()
     if (node !== this.nullNode) {
@@ -186,7 +321,7 @@ export default class RedBlackTree {
       this.inOrder(node.right as TreeNode, order)
     }
     const endTime = performance.now()
-    const time = Number((endTime - startTime).toFixed(4))
+    const time = this.diffTime(endTime, startTime)
     return { order, time }
   }
 
@@ -198,7 +333,7 @@ export default class RedBlackTree {
       this.preOrder(node.right as TreeNode, order)
     }
     const endTime = performance.now()
-    const time = Number((endTime - startTime).toFixed(4))
+    const time = this.diffTime(endTime, startTime)
     return { order, time }
   }
 
@@ -210,7 +345,30 @@ export default class RedBlackTree {
       order?.push(node.data as ITreeNodeData)
     }
     const endTime = performance.now()
-    const time = Number((endTime - startTime).toFixed(4))
+    const time = this.diffTime(endTime, startTime)
     return { order, time }
+  }
+
+  public find(id: number, tree: TreeNode = this.root) {
+    const startTime = performance.now()
+
+    while (tree !== this.nullNode && tree?.data) {
+      if (id === tree.data.id) {
+        const endTime = performance.now()
+        return { node: tree, time: this.diffTime(endTime, startTime) }
+      }
+      tree = id < tree?.data.id ? tree.left! : tree.right!
+    }
+    const endTime = performance.now()
+    return { node: null, time: this.diffTime(endTime, startTime) }
+  }
+
+  public update(id: number, newData: any) {
+    const startTime = performance.now()
+    const { node } = this.find(id)
+    if (node === null) return { node: null, time: this.diffTime(performance.now(), startTime) }
+    node.data = { ...newData, id }
+    const endTime = performance.now()
+    return { node, time: this.diffTime(endTime, startTime) }
   }
 }
