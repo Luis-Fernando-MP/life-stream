@@ -24,7 +24,8 @@ const Layout = async ({ children }: ILayout) => {
   if (!userId) redirect('/sign-in')
 
   const token = await getToken()
-  await queryClient.fetchQuery({
+  // o fetchQuery
+  await queryClient.prefetchQuery({
     queryKey: [ALL_DATA],
     queryFn: () => getAllData(token)
   })

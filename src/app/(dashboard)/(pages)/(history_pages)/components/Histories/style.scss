@@ -1,13 +1,7 @@
 @use '@sass/config/vars' as v;
 @use '@sass/utils/defs' as d;
-@use '@sass/utils/scrollbar' as *;
 
 .histories {
-  @extend %scroll-hidden;
-
-  position: relative;
-  overflow-y: auto;
-
   &-data {
     width: 100%;
     height: max-content;

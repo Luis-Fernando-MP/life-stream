@@ -7,13 +7,14 @@ import History from '../History'
 
 const HistoriesLoad = () => {
   const { user } = useUser()
-  const { data } = usePersonHistories(user?.id)
+  const { data, isLoading } = usePersonHistories(user?.id)
+  if (isLoading) return <p>Loading...</p>
   if (!data) return null
 
   return (
     <>
-      {[...data, ...data, ...data].map(h => (
-        <History key={h.id} history={h} />
+      {[...data, ...data, ...data].map((h, i) => (
+        <History key={h.id} history={h} i={i} />
       ))}
     </>
   )

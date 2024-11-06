@@ -1,3 +1,6 @@
+'use client'
+
+import useChartView from '@/app/(dashboard)/(pages)/chart/hooks/useChartView'
 import { GithubIcon, SparklesIcon } from 'lucide-react'
 import Link from 'next/link'
 import type { HtmlHTMLAttributes, JSX, ReactNode } from 'react'
@@ -10,6 +13,8 @@ interface IHeader extends HtmlHTMLAttributes<HTMLElement> {
 }
 
 const Header = ({ className, ...props }: IHeader): JSX.Element => {
+  const { view } = useChartView()
+
   return (
     <header className={`${className} header`} {...props}>
       <LockButton />

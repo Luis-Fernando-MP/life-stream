@@ -7,11 +7,12 @@ import './style.scss'
 
 interface IHistory {
   history: QueryHistory
+  i: number
 }
 
-const History = ({ history }: IHistory): JSX.Element => {
+const History = ({ history, i }: IHistory): JSX.Element => {
   return (
-    <section className='history animate-fade-in-up'>
+    <section className='history animate-fade-in-up' style={{ animationDelay: `${i * 0.5}s` }}>
       <article className='history-data'>
         <Logo />
         <div className='history-body'>

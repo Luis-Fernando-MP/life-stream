@@ -159,10 +159,6 @@ svg {
   font-size: $family-size;
 }
 
-.toast {
-  background-color: red;
-}
-
 .tn1 {
   color: rgb($tn1);
 }
@@ -174,8 +170,8 @@ svg {
 }
 
 ::selection {
-  color: $bg1;
-  background-color: $tn1;
+  color: rgb($bg1);
+  background-color: rgb($tn1);
 }
 
 .skeleton {

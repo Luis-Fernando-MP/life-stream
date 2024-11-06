@@ -1,6 +1,6 @@
 'use client'
 
-import { LayoutDashboard, NetworkIcon } from 'lucide-react'
+import { LayoutDashboard, NetworkIcon, Rows4Icon } from 'lucide-react'
 import type { JSX } from 'react'
 
 import useChartView from '../../../chart/hooks/useChartView'
@@ -9,19 +9,27 @@ import './style.scss'
 const HistoryButtons = (): JSX.Element => {
   const { setView, view } = useChartView()
   return (
-    <section className={`history-buttons ${view}`}>
+    <section className={`history-buttons cl-${view}`}>
       <button className='history-button' onClick={() => setView('tails')}>
-        <LayoutDashboard className='history-icon' />
+        <div className='history-icon'>
+          <Rows4Icon />
+        </div>
         <div className='history-button__text'>
-          <h5>Traditional con Arreglos</h5>
-          <p>Utiliza un estructura tradicional basada en arreglos • Click para abrir</p>
+          <h5>Traditional con Colas</h5>
+          <p>
+            Empleemos un enfoque tradicional basada en simples colas • <u>Click para abrir</u>
+          </p>
         </div>
       </button>
       <button className='history-button' onClick={() => setView('tree')}>
-        <NetworkIcon className='history-icon' />
+        <div className='history-icon'>
+          <NetworkIcon />
+        </div>
         <div className='history-button__text'>
           <h5>Árboles Binarios Rojo-Negro</h5>
-          <p>Optimizan el proceso de agregar nuevos donantes • Click para abrir</p>
+          <p>
+            Optimizan el proceso de la trata de información de donantes • <u>Click para abrir</u>
+          </p>
         </div>
       </button>
     </section>
