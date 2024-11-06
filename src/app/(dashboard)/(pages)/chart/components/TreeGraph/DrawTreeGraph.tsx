@@ -6,12 +6,13 @@ import useTreeGraph from '../../hooks/useTreeGraph'
 import './style.scss'
 
 interface IDrawTreeGraph {
+  className?: string
   trees: {
     [key: string]: RedBlackTree
   }
 }
 
-const DrawTreeGraph = ({ trees }: IDrawTreeGraph): JSX.Element => {
+const DrawTreeGraph = ({ trees, className }: IDrawTreeGraph): JSX.Element => {
   const setPerson = useSelectPerson(s => s.setPerson)
   const { svgRef } = useTreeGraph({
     trees,
@@ -24,7 +25,7 @@ const DrawTreeGraph = ({ trees }: IDrawTreeGraph): JSX.Element => {
     }
   })
 
-  return <svg ref={svgRef} className='treeGraph-svg delay animate-blurred-fade-in'></svg>
+  return <svg ref={svgRef} className={`treeGraph-svg ${className}`}></svg>
 }
 
 export default memo(DrawTreeGraph)

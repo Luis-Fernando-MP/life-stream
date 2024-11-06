@@ -2,13 +2,13 @@ import { prisma } from '@/db'
 import type { BloodDonor, BloodReceiver, Doctor, Patient, Person } from '@prisma/client'
 import { NextResponse } from 'next/server'
 
-type DoctorWithPerson = Doctor & { person: Person }
-type PatientWithPerson = Patient & { person: Person }
-type BloodDonorWithRel = BloodDonor & {
+export type DoctorWithPerson = Doctor & { person: Person }
+export type PatientWithPerson = Patient & { person: Person }
+export type BloodDonorWithRel = BloodDonor & {
   patient: PatientWithPerson
   CreatedBy: Person
 }
-type BloodReceiverWithRel = BloodReceiver & {
+export type BloodReceiverWithRel = BloodReceiver & {
   patient: PatientWithPerson
   CreatedBy: Person
 }

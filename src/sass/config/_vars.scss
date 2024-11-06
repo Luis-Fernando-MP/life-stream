@@ -53,6 +53,7 @@ $font3: var(--PlayFairFont);
 $gr1: linear-gradient(90deg, rgb($tn1) 0%, rgb($tn2) 100%);
 $sha1: 6px 5px 20px -5px rgb($bg3);
 $error: #e41e38;
+$blood: #cb1c70;
 
 @mixin dotDark {
   body.dark & {

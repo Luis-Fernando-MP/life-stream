@@ -2,23 +2,18 @@
 @use '@sass/utils/defs' as d;
 @use '@sass/utils/scrollbar' as *;
 
-.layout-page.dataDon {
-  display: grid;
-  grid-template-columns: 380px 1fr;
-  gap: v.$padding;
-
-  width: 100%;
-  height: 100%;
+.dataDon-container.DonorsComponent {
+  @include d.flex($gap: v.$padding * 0.8);
 }
 
-.dataDon {
-  &-search {
-  background-color: rgba(v.$bg1, 0.5);
-  }
-
-  &-container {
-    padding: v.$padding;
-  background-color: rgba(v.$bg1, 0.5);
+.DonorsComponent {
+  &-subTitle {
+    justify-content: center;
+    max-width: fit-content;
+    padding: v.$padding / 2 v.$padding;
     border-radius: v.$radius;
+
+    @include v.border;
+    @include d.flex($dir: row, $gap: 5px, $ali: center);
   }
 }

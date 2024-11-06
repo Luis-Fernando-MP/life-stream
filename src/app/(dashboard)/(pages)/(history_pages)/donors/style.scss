@@ -3,6 +3,7 @@
 @use '@sass/utils/scrollbar' as *;
 
 .layout-page.dataDon {
+  overflow: hidden;
   display: grid;
   grid-template-columns: 380px 1fr;
   gap: v.$padding;
@@ -12,13 +13,12 @@
 }
 
 .dataDon {
-  &-search {
-  background-color: rgba(v.$bg1, 0.5);
-  }
-
   &-container {
+    @extend %scroll-hidden;
+
+    overflow-y: scroll;
     padding: v.$padding;
-  background-color: rgba(v.$bg1, 0.5);
+    background-color: rgba(v.$bg1, 0.5);
     border-radius: v.$radius;
   }
 }
