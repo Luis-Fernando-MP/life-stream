@@ -1,5 +1,5 @@
 import RedBlackTree, { ITreeNodeData, TreeColor } from '@/shared/tree/RedBlackTree'
-import { parseTreeToD3 } from '@/shared/tree/parse'
+import { TCreateHierarchy, parseTreeToD3 } from '@/shared/tree/parse'
 import { hierarchy, select, tree, zoom } from 'd3'
 import { MouseEvent, useEffect, useRef, useState } from 'react'
 
@@ -17,12 +17,12 @@ interface TreeNode extends ITreeNodeData {
   [key: string]: any
 }
 
-export interface ITreeGraphData {
-  [key: string]: RedBlackTree
+export interface ILinearTreeData {
+  [key: string]: TreeNode[]
 }
 
 interface TreeGraphParams {
-  trees?: ITreeGraphData
+  trees?: ILinearTreeData
   onNodeClick: (data: INodeResponse, click: MouseEvent) => void
 }
 
@@ -34,8 +34,12 @@ const useTreeGraph = ({ trees = {}, onNodeClick }: TreeGraphParams) => {
     if (!svgRef.current) return
 
     const treesData = Object.entries(treeState)
-      .map(([name, tree]) => {
-        const children = [parseTreeToD3(tree)]
+      .map(([name, values]) => {
+        let children: (TCreateHierarchy | null)[] = []
+        if (values && values.length > 0) {
+          const redBlackTree = RedBlackTree.fromArray(values)
+          children = [parseTreeToD3(redBlackTree)]
+        }
         return {
           id: name,
           color: '#555',

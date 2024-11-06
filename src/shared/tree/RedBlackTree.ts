@@ -29,7 +29,9 @@ export default class RedBlackTree {
     this.root = this.nullNode
   }
 
-  protected diffTime = (end: number, start: number) => Number((end - start).toFixed(4))
+  protected diffTime(end: number, start: number) {
+    return Number((end - start).toFixed(4))
+  }
 
   public static fromArray(data: ITreeNodeData[]): RedBlackTree {
     const tree = new RedBlackTree()
@@ -351,8 +353,7 @@ export default class RedBlackTree {
 
   public find(id: number, tree: TreeNode = this.root) {
     const startTime = performance.now()
-
-    while (tree !== this.nullNode && tree?.data) {
+    while (!!tree && tree?.data) {
       if (id === tree.data.id) {
         const endTime = performance.now()
         return { node: tree, time: this.diffTime(endTime, startTime) }
