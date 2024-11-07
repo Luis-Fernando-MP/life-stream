@@ -15,9 +15,9 @@ const HistoryButtons = (): JSX.Element => {
           <Rows4Icon />
         </div>
         <div className='history-button__text'>
-          <h5>Traditional con Colas</h5>
+          <h5>Traditional con arrayList</h5>
           <p>
-            Empleemos un enfoque tradicional basada en simples colas • <u>Click para abrir</u>
+            Empleemos un enfoque tradicional basada en simples arrayList • <u>Click para abrir</u>
           </p>
         </div>
       </button>

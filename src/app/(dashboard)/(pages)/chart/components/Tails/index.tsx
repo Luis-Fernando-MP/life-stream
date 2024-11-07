@@ -11,7 +11,7 @@ const Tails = (): JSX.Element => {
   if (isLoading) return <h2>Cargando componentes</h2>
   return (
     <section className='tails delay animate-blurred-fade-in'>
-      <h2>Vista Por colas</h2>
+      <h2>Vista Por arrayList</h2>
 
       <article className='tails-box'>
         <h5>{data?.doctors.length} Doctores</h5>

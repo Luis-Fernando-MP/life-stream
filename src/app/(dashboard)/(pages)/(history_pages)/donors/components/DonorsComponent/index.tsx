@@ -24,7 +24,7 @@ const DonorsComponent = ({ className }: IDonorsComponent): JSX.Element => {
     <article className={`${className} DonorsComponent`}>
       {view === 'tails' && (
         <h5 className='DonorsComponent-subTitle'>
-          <Rows4Icon /> Tradicional con colas
+          <Rows4Icon /> Tradicional con arrayList
         </h5>
       )}
       {view === 'tree' && (
