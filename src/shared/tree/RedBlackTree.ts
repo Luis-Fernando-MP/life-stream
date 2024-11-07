@@ -354,9 +354,12 @@ export default class RedBlackTree {
   public find(id: number, tree: TreeNode = this.root) {
     const startTime = performance.now()
     while (!!tree && tree?.data) {
-      if (id === tree.data.id) {
+      if (id == tree.data.id) {
         const endTime = performance.now()
-        return { node: tree, time: this.diffTime(endTime, startTime) }
+        console.log('start ', startTime)
+        console.log('endTime ', endTime)
+
+        return { node: tree, time: Number(endTime - startTime).toString() }
       }
       tree = id < tree?.data.id ? tree.left! : tree.right!
     }

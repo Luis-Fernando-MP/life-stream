@@ -56,9 +56,9 @@ describe('RedBlackTree Tests', () => {
   })
 }).clear()
 
-describe('Pruebas de tiempo y comparación de arbolesRN y colas, con 10000 datos', () => {
+describe('Pruebas de tiempo y comparación de arbolesRN y arrayList, con 10000 datos', () => {
   let tree: RedBlackTree
-  const data = Array(500)
+  const data = Array(1000000)
     .fill(0)
     .map((_, i) => ({ id: i }))
 
@@ -80,7 +80,7 @@ describe('Pruebas de tiempo y comparación de arbolesRN y colas, con 10000 datos
     const tailsTime = linearInsert(data, newData)
     console.log(`Tiempo de inserción en ${data.length - 1} datos en ms:`)
     console.log('En árboles binarios: ', treeTime)
-    console.log('En colas: ', tailsTime.time)
+    console.log('En arrayList: ', tailsTime.time)
 
     expect(treeTime).not.equals(tailsTime.time)
   })
@@ -97,7 +97,7 @@ describe('Pruebas de tiempo y comparación de arbolesRN y colas, con 10000 datos
     const tailsTime = linearSearch(data, data.length - 1)
     console.log(`Tiempo de búsqueda en ${data.length - 1} datos en ms:`)
     console.log('En árboles binarios: ', treeTime.time)
-    console.log('En colas: ', tailsTime.time)
+    console.log('En arrayList: ', tailsTime.time)
 
     expect(treeTime.time, 'se espera menor tiempo en un árbol').toBeLessThan(tailsTime.time)
   })
@@ -116,7 +116,7 @@ describe('Pruebas de tiempo y comparación de arbolesRN y colas, con 10000 datos
 
     console.log(`Tiempo de eliminación en ${data.length - 1} datos en ms:`)
     console.log('En árboles binarios: ', treeTime)
-    console.log('En colas: ', linearTime)
+    console.log('En arrayList: ', linearTime)
 
     expect(treeTime, 'se espera menor tiempo en un árbol').toBeLessThan(linearTime)
   })
@@ -138,7 +138,7 @@ describe('Pruebas de tiempo y comparación de arbolesRN y colas, con 10000 datos
 
     console.log(`Tiempo de actualización en ${data.length - 1} datos en ms:`)
     console.log('En árboles binarios: ', treeTime)
-    console.log('En colas: ', linearTime)
+    console.log('En arrayList: ', linearTime)
 
     expect(treeTime).toBeLessThan(linearTime)
   })

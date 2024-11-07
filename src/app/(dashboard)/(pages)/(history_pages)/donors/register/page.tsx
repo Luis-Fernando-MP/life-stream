@@ -6,14 +6,14 @@ import ValidateIDform from '../components/ValidateIDform'
 import './style.scss'
 
 const Page = (): JSX.Element => {
-  console.log('render')
-
   return (
-    <section className='layout-page dHome'>
-      <article className='dHome-container'>
-        <div className='dHome-title'>
-          <h1>REGISTRO</h1>
-          <h4>DE</h4>
+    <section className='layout-page registerDonor'>
+      <article className='registerDonor-container'>
+        <div className='registerDonor-title'>
+          <div>
+            <h1>REGISTRO</h1>
+            <h4>DE</h4>
+          </div>
           <h4>DONANTES DE SANGRE</h4>
         </div>
         <ValidateIDform onSubmit={() => {}} />

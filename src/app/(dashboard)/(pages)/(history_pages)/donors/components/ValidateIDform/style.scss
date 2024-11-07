@@ -2,11 +2,14 @@
 @use '@sass/utils/defs' as d;
 
 .dniForm {
-  width: 100%;
+  width: fit-content;
   height: max-content;
   padding: v.$padding;
 
+  @include v.border(rgba(v.$bg1, 0.5));
   @include d.flex($gap: 10px);
+
+  border-radius: v.$radius;
 
   &-field {
     width: 100%;
@@ -53,8 +56,22 @@
     width: 100%;
     padding: 10px 0;
 
-    @include v.border;
+    color: rgb(v.$bg1);
 
+    opacity: 1;
+    background-color: rgb(v.$tn1);
     border-radius: 5px;
+
+    &.error {
+      @include v.border;
+
+      pointer-events: none;
+      cursor: no-drop;
+      user-select: none;
+
+      color: rgb(v.$fn1);
+
+      opacity: 0.9
+    }
   }
 }

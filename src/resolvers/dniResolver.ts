@@ -5,7 +5,7 @@ const scheme = z.object(
   {
     dni: z
       .string({
-        message: 'Debe de escoger uno de los precios'
+        message: 'El dni solo debe contener números'
       })
       .length(8, 'Tu dni debe de tener 8 dígitos')
       .regex(/^\d+$/, 'El dni solo debe contener números')

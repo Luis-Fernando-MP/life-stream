@@ -1,9 +1,9 @@
 'use client'
 
-import { findBloodDonor } from '@/db/services/getBloodDonors'
+import useStoreTrees from '@/app/(dashboard)/(pages)/hooks/useStoreTrees'
+import useTress from '@/app/(dashboard)/(pages)/hooks/useTrees'
 import { type IDniResolver, dniResolver } from '@/resolvers/dniResolver'
 import { acl } from '@/shared/activeClass'
-import { useMutation } from '@tanstack/react-query'
 import { UserRoundSearchIcon } from 'lucide-react'
 import type { JSX, ReactNode } from 'react'
 import { useForm } from 'react-hook-form'
@@ -17,28 +17,20 @@ interface IValidateIDform {
 }
 
 const ValidateIDform = ({ onSubmit }: IValidateIDform): JSX.Element => {
+  const { data, status } = useStoreTrees()
   const hookForm = useForm<IDniResolver>({
     resolver: dniResolver,
     mode: 'onChange',
     defaultValues: {}
   })
+  if (status === 'pending') return <p>Loading....</p>
+
   const { register, handleSubmit, formState, watch } = hookForm
   const { errors: e } = formState
   const ThereErrors = !!e.dni && watch('dni').length >= 1
 
-  const mutation = useMutation({
-    mutationFn: findBloodDonor,
-    onError(error) {
-      console.log(error)
-    },
-    onSuccess: (data: any) => {
-      console.log(data)
-    },
-    retry: 5
-  })
-
   const onFormSubmit = async ({ dni }: IDniResolver) => {
-    mutation.mutate(dni)
+    console.log('FIND ID ', data.trees.pacientes.find(Number(dni)))
     onSubmit()
   }
   const onErrors = () => {
@@ -52,7 +44,11 @@ const ValidateIDform = ({ onSubmit }: IValidateIDform): JSX.Element => {
         <input placeholder='DNI: 12345678' autoComplete='off' {...register('dni')} />
       </div>
       {ThereErrors && <p className='dniForm-error'>{e.dni?.message}</p>}
-      <button type='submit' disabled={ThereErrors} className='dniForm-submit'>
+      <button
+        type='submit'
+        disabled={ThereErrors}
+        className={`dniForm-submit ${acl(ThereErrors, 'error')}`}
+      >
         VERIFICAR
       </button>
     </form>
@@ -60,3 +56,14 @@ const ValidateIDform = ({ onSubmit }: IValidateIDform): JSX.Element => {
 }
 
 export default ValidateIDform
+
+// const mutation = useMutation({
+//   mutationFn: findBloodDonor,
+//   onError(error) {
+//     console.log(error)
+//   },
+//   onSuccess: (data: any) => {
+//     console.log(data)
+//   },
+//   retry: 5
+// })
