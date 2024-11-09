@@ -11,17 +11,76 @@
 
   @include d.flex;
 
-  &-data {
-    @include d.flex($dir: row);
+  &-subTitle {
+    width: 100%;
+    text-align: center;
+  }
 
-    svg {
-      min-width: 25px;
-      height: 25px;
+  &.remove {
+    animation: remove-history 1s forwards;
+
+    @keyframes remove-history {
+      to {
+        transform-origin: top center;
+        transform: scale(0.89);
+        filter: blur(10px) opacity(0);
+      }
+    }
+  }
+
+  &-data {
+    @include d.flex($dir: row-reverse, $gap: 10px, $ali: center);
+
+    &-left {
+      @include d.flex($ali: center);
+
+      svg {
+        min-width: 25px;
+        height: 25px;
+      }
+
+      button {
+        padding: 5px;
+
+        svg {
+          min-width: 20px;
+          height: 20px;
+        }
+
+        &.pending {
+          pointer-events: none;
+          user-select: none;
+          animation: rotation 1s infinite;
+
+          @keyframes rotation {
+            to {
+              transform: rotateZ(1turn);
+            }
+          }
+        }
+      }
     }
   }
 
   &-body {
     width: 100%;
     height: max-content;
+    padding: v.$padding;
+
+    background-color: rgba(v.$bg1, 0.8);
+    border-radius: v.$radius;
+
+    .history-section {
+      @include d.flex($dir: row, $ali: center);
+
+      img {
+        width: 30px;
+        height: 30px;
+
+        object-fit: cover;
+        background-color: rgb(v.$tn1);
+        border-radius: 50%;
+      }
+    }
   }
 }

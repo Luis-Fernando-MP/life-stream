@@ -356,15 +356,37 @@ export default class RedBlackTree {
     while (!!tree && tree?.data) {
       if (id == tree.data.id) {
         const endTime = performance.now()
-        console.log('start ', startTime)
-        console.log('endTime ', endTime)
-
         return { node: tree, time: Number(endTime - startTime).toString() }
       }
       tree = id < tree?.data.id ? tree.left! : tree.right!
     }
     const endTime = performance.now()
     return { node: null, time: this.diffTime(endTime, startTime) }
+  }
+
+  public findMany(
+    predicate: (data: ITreeNodeData) => boolean,
+    tree: TreeNode = this.root,
+    results: TreeNode[] = []
+  ) {
+    const startTime = performance.now()
+
+    const searchTree = (node: TreeNode | null) => {
+      if (!node || !node.data) return
+      if (predicate(node.data)) {
+        results.push(node)
+      }
+      searchTree(node.left)
+      searchTree(node.right)
+    }
+
+    searchTree(tree)
+
+    const endTime = performance.now()
+    return {
+      nodes: results,
+      time: this.diffTime(endTime, startTime)
+    }
   }
 
   public update(id: number, newData: any) {

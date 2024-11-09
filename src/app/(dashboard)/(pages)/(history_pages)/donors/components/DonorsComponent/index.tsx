@@ -3,9 +3,10 @@
 import DrawTreeGraph from '@/app/(dashboard)/(pages)/chart/components/TreeGraph/DrawTreeGraph'
 import useChartView from '@/app/(dashboard)/(pages)/chart/hooks/useChartView'
 import useStoreTrees from '@/app/(dashboard)/(pages)/hooks/useStoreTrees'
-import { NetworkIcon, Rows4Icon } from 'lucide-react'
+import { NetworkIcon, Rows4Icon, SearchCheck } from 'lucide-react'
 import type { JSX } from 'react'
 
+import useSearchDonors from '../../hooks/useSearchDonors'
 import TailsDonorComponent from '../TailsDonorComponent'
 import './style.scss'
 
@@ -15,6 +16,7 @@ interface IDonorsComponent {
 
 const DonorsComponent = ({ className }: IDonorsComponent): JSX.Element => {
   const { status, data } = useStoreTrees()
+  const donorsSearch = useSearchDonors(s => s.donors)
   const view = useChartView(s => s.view)
 
   if (status === 'pending') return <p>loading donors...</p>
@@ -32,6 +34,12 @@ const DonorsComponent = ({ className }: IDonorsComponent): JSX.Element => {
           <NetworkIcon /> Arboles binarios Rojo-Negro
         </h5>
       )}
+      {view === 'search' && (
+        <h5 className='DonorsComponent-subTitle'>
+          <SearchCheck /> Búsqueda realizada
+        </h5>
+      )}
+
       {view === 'tree' && (
         <DrawTreeGraph
           className='animate-blurred-fade-in'
@@ -41,6 +49,8 @@ const DonorsComponent = ({ className }: IDonorsComponent): JSX.Element => {
         />
       )}
       {view === 'tails' && <TailsDonorComponent donors={data.query?.bloodDonors ?? []} />}
+
+      {view === 'search' && <p>{JSON.stringify(donorsSearch)}</p>}
     </article>
   )
 }

@@ -1,6 +1,6 @@
 import { BloodType } from '@prisma/client'
 
-const bloodTypeAbbreviations: Record<BloodType, string> = {
+export const bloodTypeAbb: Record<BloodType, string> = {
   [BloodType.A_POSITIVE]: 'A+',
   [BloodType.A_NEGATIVE]: 'A-',
   [BloodType.B_POSITIVE]: 'B+',
@@ -11,9 +11,10 @@ const bloodTypeAbbreviations: Record<BloodType, string> = {
   [BloodType.O_NEGATIVE]: 'O-'
 }
 
+export const bloodTypeArr = Object.values(bloodTypeAbb)
 export function getBloodType(bloodType: BloodType) {
   return {
     value: BloodType[bloodType],
-    abbreviation: bloodTypeAbbreviations[bloodType]
+    abbreviation: bloodTypeAbb[bloodType]
   }
 }

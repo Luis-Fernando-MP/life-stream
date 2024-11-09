@@ -14,6 +14,15 @@
   outline: none;
 }
 
+// html {
+//   filter: invert(1);
+
+//   img,
+//   video {
+//     filter: invert(1);
+//   }
+// }
+
 body {
   @extend %scroll-hidden;
 
@@ -202,4 +211,9 @@ svg {
 
 .delay {
   animation-delay: 700ms;
+}
+
+.box-error {
+  background-color: rgba($error, 0.2) !important;
+  border-color: $error !important;
 }

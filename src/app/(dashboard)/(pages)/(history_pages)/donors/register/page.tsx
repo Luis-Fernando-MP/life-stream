@@ -1,5 +1,6 @@
 'use client'
 
+import BoldText from '@/shared/ui/BoldText'
 import type { JSX } from 'react'
 
 import ValidateIDform from '../components/ValidateIDform'
@@ -9,13 +10,7 @@ const Page = (): JSX.Element => {
   return (
     <section className='layout-page registerDonor'>
       <article className='registerDonor-container'>
-        <div className='registerDonor-title'>
-          <div>
-            <h1>REGISTRO</h1>
-            <h4>DE</h4>
-          </div>
-          <h4>DONANTES DE SANGRE</h4>
-        </div>
+        <BoldText bold='REGISTRO' middle='DE' desc='DONANTES DE SANGRE' />
         <ValidateIDform onSubmit={() => {}} />
       </article>
     </section>

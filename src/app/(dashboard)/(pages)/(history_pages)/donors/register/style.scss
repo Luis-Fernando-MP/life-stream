@@ -21,22 +21,4 @@
 
     @include d.flex($ali: center);
   }
-
-  &-title {
-    div {
-      @include d.flex($dir: row, $ali: center, $gap: 5px);
-
-      justify-content: center;
-    }
-
-    h1,
-    h4 {
-      font-size: v.$fH1;
-      text-align: center;
-    }
-
-    h4 {
-      font-weight: lighter;
-    }
-  }
 }

@@ -1,9 +1,14 @@
 'use client'
 
+import useChartView from '@/app/(dashboard)/(pages)/chart/hooks/useChartView'
 import useStoreTrees from '@/app/(dashboard)/(pages)/hooks/useStoreTrees'
-import useTress from '@/app/(dashboard)/(pages)/hooks/useTrees'
+import { BloodReceiverWithRel } from '@/app/api/all/route'
+import { HISTORY } from '@/db/hooks/keys'
+import { setUserHistory } from '@/db/services/history'
 import { type IDniResolver, dniResolver } from '@/resolvers/dniResolver'
 import { acl } from '@/shared/activeClass'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
+import dayjs from 'dayjs'
 import { UserRoundSearchIcon } from 'lucide-react'
 import type { JSX, ReactNode } from 'react'
 import { useForm } from 'react-hook-form'
@@ -13,10 +18,25 @@ import './style.scss'
 
 interface IValidateIDform {
   children?: Readonly<ReactNode[]> | null | Readonly<ReactNode>
-  onSubmit: () => void
+  onSubmit: (donor: BloodReceiverWithRel) => void
 }
 
 const ValidateIDform = ({ onSubmit }: IValidateIDform): JSX.Element => {
+  const queryClient = useQueryClient()
+
+  const { mutate } = useMutation({
+    mutationFn: setUserHistory,
+    onError() {
+      toast.error('Hemos fallado al actualizar el historial')
+    },
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({ queryKey: [HISTORY] })
+      toast.success('Se actualizo el historial')
+    },
+    retry: 3
+  })
+  const view = useChartView(s => s.view)
+
   const { data, status } = useStoreTrees()
   const hookForm = useForm<IDniResolver>({
     resolver: dniResolver,
@@ -30,8 +50,27 @@ const ValidateIDform = ({ onSubmit }: IValidateIDform): JSX.Element => {
   const ThereErrors = !!e.dni && watch('dni').length >= 1
 
   const onFormSubmit = async ({ dni }: IDniResolver) => {
-    console.log('FIND ID ', data.trees.pacientes.find(Number(dni)))
-    onSubmit()
+    let currentNode = undefined
+    if (view === 'tails') {
+      currentNode = data.query?.bloodDonors.find(d => {
+        return d.patient.DNI == dni
+      })
+    } else currentNode = data.trees.donantes.find(Number(dni)).node?.data
+    if (!currentNode) return toast.error('No se encontraron resultados')
+
+    const nodoData = currentNode as BloodReceiverWithRel
+
+    const bodyData = `<section class='history-section'>
+        <img src="${nodoData.patient.person.photo}" alt='user-search' />
+        <div>
+        <h5>Buscaste al donante ${currentNode.patient.person.firstName} ${currentNode?.patient.person.lastName}
+        </h5>
+        <p>Fecha de donación: ${dayjs(currentNode?.lastDonation).format('YYYY/MM/DD')}</p>
+        </div>
+    </section>`
+
+    mutate({ body: bodyData })
+    onSubmit(currentNode as BloodReceiverWithRel)
   }
   const onErrors = () => {
     toast.error('completa los requerimientos')
@@ -56,14 +95,3 @@ const ValidateIDform = ({ onSubmit }: IValidateIDform): JSX.Element => {
 }
 
 export default ValidateIDform
-
-// const mutation = useMutation({
-//   mutationFn: findBloodDonor,
-//   onError(error) {
-//     console.log(error)
-//   },
-//   onSuccess: (data: any) => {
-//     console.log(data)
-//   },
-//   retry: 5
-// })
