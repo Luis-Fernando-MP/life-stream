@@ -1,6 +1,6 @@
 'use client'
 
-import { LayoutDashboard, NetworkIcon, Rows4Icon } from 'lucide-react'
+import { NetworkIcon, Rows4Icon } from 'lucide-react'
 import type { JSX } from 'react'
 
 import useChartView from '../../../chart/hooks/useChartView'

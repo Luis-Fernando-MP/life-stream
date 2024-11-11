@@ -1,5 +1,5 @@
 import { prisma } from '@/db'
-import { bloodTypeAbb, getBloodTypeFromAbbreviation } from '@/shared/getBloodType'
+import { getBloodTypeFromAbbreviation } from '@/shared/getBloodType'
 import { auth } from '@clerk/nextjs/server'
 import { BloodType } from '@prisma/client'
 import { nanoid } from 'nanoid'

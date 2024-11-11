@@ -1,7 +1,6 @@
 'use client'
 
 import { PatientWithPerson } from '@/app/api/all/route'
-import { useSetHistories } from '@/db/hooks/useHistory'
 import { useSetDonors } from '@/db/hooks/useSetDonors'
 import { IDonorsRegisterRes, donorsRegisterResolver } from '@/resolvers/donorsRegisterResolver'
 import { acl } from '@/shared/activeClass'
@@ -17,11 +16,10 @@ import './style.scss'
 interface IFormRegisterDonor {
   patient: Partial<PatientWithPerson>
   className?: string
-  onSubmit: (data: IDonorsRegisterRes) => void
 }
 
-const FormRegisterDonor = ({ className, patient, onSubmit }: IFormRegisterDonor): JSX.Element => {
-  const { mutate } = useSetHistories()
+const FormRegisterDonor = ({ className, patient }: IFormRegisterDonor): JSX.Element => {
+  // const { mutate } = useSetHistories()
   const { mutate: donorsMutate } = useSetDonors()
   const hookForm = useForm<IDonorsRegisterRes>({
     resolver: donorsRegisterResolver,
