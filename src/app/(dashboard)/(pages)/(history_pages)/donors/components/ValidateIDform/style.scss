@@ -3,6 +3,7 @@
 
 .dniForm {
   width: fit-content;
+  min-width: 312px;
   height: max-content;
   padding: v.$padding;
 
@@ -56,7 +57,8 @@
     width: 100%;
     padding: 10px 0;
 
-    color: rgb(v.$bg1);
+    font-weight: 500;
+    color: rgb(v.$fn1);
 
     opacity: 1;
     background-color: rgb(v.$tn1);
@@ -71,7 +73,7 @@
 
       color: rgb(v.$fn1);
 
-      opacity: 0.9
+      opacity: 0.9;
     }
   }
 }

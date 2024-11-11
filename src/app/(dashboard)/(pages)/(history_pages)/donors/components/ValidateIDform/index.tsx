@@ -23,6 +23,14 @@ interface IValidateIDform {
 
 const ValidateIDform = ({ onSubmit }: IValidateIDform): JSX.Element => {
   const queryClient = useQueryClient()
+  const view = useChartView(s => s.view)
+  const { data, status } = useStoreTrees()
+  const hookForm = useForm<IDniResolver>({
+    resolver: dniResolver,
+    mode: 'onChange',
+    defaultValues: {}
+  })
+  const { register, handleSubmit, formState, watch, getValues } = hookForm
 
   const { mutate } = useMutation({
     mutationFn: setUserHistory,
@@ -35,17 +43,9 @@ const ValidateIDform = ({ onSubmit }: IValidateIDform): JSX.Element => {
     },
     retry: 3
   })
-  const view = useChartView(s => s.view)
 
-  const { data, status } = useStoreTrees()
-  const hookForm = useForm<IDniResolver>({
-    resolver: dniResolver,
-    mode: 'onChange',
-    defaultValues: {}
-  })
   if (status === 'pending') return <p>Loading....</p>
 
-  const { register, handleSubmit, formState, watch } = hookForm
   const { errors: e } = formState
   const ThereErrors = !!e.dni && watch('dni').length >= 1
 
@@ -56,10 +56,11 @@ const ValidateIDform = ({ onSubmit }: IValidateIDform): JSX.Element => {
         return d.patient.DNI == dni
       })
     } else currentNode = data.trees.donantes.find(Number(dni)).node?.data
+
+    onSubmit((currentNode as BloodReceiverWithRel) ?? { patient: { DNI: getValues('dni') } })
     if (!currentNode) return toast.error('No se encontraron resultados')
 
     const nodoData = currentNode as BloodReceiverWithRel
-
     const bodyData = `<section class='history-section'>
         <img src="${nodoData.patient.person.photo}" alt='user-search' />
         <div>
@@ -70,8 +71,8 @@ const ValidateIDform = ({ onSubmit }: IValidateIDform): JSX.Element => {
     </section>`
 
     mutate({ body: bodyData })
-    onSubmit(currentNode as BloodReceiverWithRel)
   }
+
   const onErrors = () => {
     toast.error('completa los requerimientos')
   }
@@ -88,7 +89,7 @@ const ValidateIDform = ({ onSubmit }: IValidateIDform): JSX.Element => {
         disabled={ThereErrors}
         className={`dniForm-submit ${acl(ThereErrors, 'error')}`}
       >
-        VERIFICAR
+        BUSCAR PACIENTE
       </button>
     </form>
   )

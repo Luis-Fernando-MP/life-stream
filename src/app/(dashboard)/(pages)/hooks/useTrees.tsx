@@ -48,7 +48,6 @@ const useTress = () => {
     const patientsTree = RedBlackTree.fromArray(patients)
     const bloodDonorsTree = RedBlackTree.fromArray(bloodDonors)
     const bloodReceiversTree = RedBlackTree.fromArray(bloodReceivers)
-    console.log('building')
 
     setData({
       trees: {

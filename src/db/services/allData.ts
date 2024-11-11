@@ -16,8 +16,6 @@ export async function fetchAllData() {
 
     if (!response.ok) throw new Error(`Error fetching all data: ${response.statusText}`)
     const all = await response.json()
-    console.log('res', all)
-
     return all
   } catch (error) {
     console.error('Fetch error:', error)

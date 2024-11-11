@@ -20,9 +20,13 @@
 
   &-lockButton {
     padding: 5px v.$padding;
-    color: rgb(v.$bg1);
-    background-color: rgb(v.$tn1);
+    font-weight: bold;
+    color: rgb(v.$tn1);
     border-radius: 3px;
+
+    svg {
+      stroke: rgb(v.$fn1);
+    }
   }
 
   &-action {

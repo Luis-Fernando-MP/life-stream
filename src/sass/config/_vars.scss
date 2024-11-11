@@ -1,12 +1,14 @@
 :root {
-  --bg-primary: 255, 255, 255;
-  --bg-secondary: 230, 230, 245;
-  --bg-tertiary: 230, 225, 245;
-  --fnt-primary: 0, 0, 0;
-  --fnt-secondary: 103, 103, 103;
-  --tn-primary: 71, 71, 220;
-  --tn-secondary: 255, 144, 196;
-  --tn-tertiary: 117, 73, 162;
+  --bg-primary: 0, 0, 0;
+  --bg-secondary: 30, 30, 30;
+  --bg-tertiary: 30, 30, 30;
+  --fnt-primary: 255, 255, 255;
+  --fnt-secondary: 170, 170, 170;
+  --tn-primary: 255, 50, 50;
+  --tn-secondary: 255, 100, 100;
+  --tn-tertiary: 255, 200, 200;
+
+  // --
   --xl-font-size: 3em;
   --h1-font-size: 2em;
   --h2-font-size: 1.5em;
