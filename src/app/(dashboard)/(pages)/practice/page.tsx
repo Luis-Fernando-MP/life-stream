@@ -4,8 +4,8 @@ import { type JSX } from 'react'
 
 import useChartView from '../chart/hooks/useChartView'
 import Actions from './components/Actions'
+import PracticeTreeGraph from './components/PracticeTreeGraph'
 import Tails from './components/Tails'
-import TreeGraph from './components/TreeGraph'
 import './style.scss'
 
 const Page = (): JSX.Element => {
@@ -14,7 +14,7 @@ const Page = (): JSX.Element => {
   return (
     <article className='layout-container practice'>
       <section className='practice-draft'>
-        {view === 'tree' && <TreeGraph />}
+        {view === 'tree' && <PracticeTreeGraph />}
         {view === 'tails' && <Tails />}
       </section>
       <Actions />

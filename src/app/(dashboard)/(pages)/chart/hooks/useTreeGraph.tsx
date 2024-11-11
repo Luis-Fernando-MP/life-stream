@@ -32,7 +32,6 @@ const useTreeGraph = ({ trees = {}, onNodeClick }: TreeGraphParams) => {
 
   useEffect(() => {
     if (!svgRef.current) return
-
     const treesData = Object.entries(treeState)
       .map(([name, tree]) => {
         const children = [parseTreeToD3(tree)]

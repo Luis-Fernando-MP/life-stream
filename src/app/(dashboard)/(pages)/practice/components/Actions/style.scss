@@ -14,43 +14,30 @@
     padding-left: v.$padding;
   }
 
-  &-option {
+  &-option,
+  &-handle {
     @include v.border(rgba(v.$bg1, 0.7));
     @include d.flex($dir: row, $gap: 5px);
 
     padding: v.$padding / 2;
     border-radius: v.$radius / 2;
 
+    p {
+      font-weight: 500;
+    }
+
     &.active {
-      color: rgb(v.$fn1);
       background-color: rgba(v.$tn1, 0.7);
+
+      p {
+        color: rgb(v.$fn1);
+      }
     }
   }
 
-  .chartRemember {
-    position: absolute;
-    z-index: 1;
-    bottom: v.$padding * 2;
-    left: 50%;
-    transform: translate(-50%);
+  &-handles {
+    @include d.flex($dir: row, $gap: 5px);
 
-    justify-content: center;
-
-    width: max-content;
-    padding: v.$padding;
-
-    border-radius: v.$radius;
-
-    @include d.flex($dir: row, $ali: center);
-    @include v.border;
-
-    &-spirit {
-      width: 90px;
-      height: 90px;
-
-      object-fit: cover;
-      border: 10px solid rgba(v.$tn1, 0.7);
-      border-radius: 50%;
-    }
+    flex-wrap: wrap;
   }
 }
