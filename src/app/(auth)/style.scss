@@ -59,6 +59,17 @@
       border: none;
     }
 
+    .cl-dividerText,
+    #identifier-field,
+    .cl-formFieldLabel,
+    .cl-footerAction span {
+      color: rgb(v.$fn1);
+    }
+
+    .cl-footerAction a {
+      color: rgb(v.$fn2);
+    }
+
     .cl-formButtonPrimary {
       width: 100%;
       height: max-content;
@@ -102,7 +113,15 @@
     &-form {
       position: relative;
       z-index: 1;
+
+      padding: v.$padding * 2 0;
+
+      color: rgb(v.$fn1);
       text-align: center;
+
+      border-radius: v.$radius;
+
+      @include v.border(rgba(v.$bg2, 0.5));
     }
 
     &-title,

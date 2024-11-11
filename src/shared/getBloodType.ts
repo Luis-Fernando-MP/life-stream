@@ -12,9 +12,15 @@ export const bloodTypeAbb: Record<BloodType, string> = {
 }
 
 export const bloodTypeArr = Object.values(bloodTypeAbb)
-export function getBloodType(bloodType: BloodType) {
+export function getBloodType(bloodType: BloodType | undefined) {
+  if (!bloodType) return
   return {
     value: BloodType[bloodType],
     abbreviation: bloodTypeAbb[bloodType]
   }
+}
+
+export function getBloodTypeFromAbbreviation(abbreviation: string): string | undefined {
+  const entry = Object.entries(bloodTypeAbb).find(([, abbr]) => abbr === abbreviation)
+  return entry ? entry[0] : undefined
 }

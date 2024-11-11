@@ -9,14 +9,14 @@ import ValidateIDform from '../components/ValidateIDform'
 import './style.scss'
 
 const Page = (): JSX.Element => {
-  const [donor, setDonor] = useState<BloodReceiverWithRel | null>(null)
+  const [donor, setDonor] = useState<Partial<BloodReceiverWithRel> | null>(null)
 
   return (
     <section className='layout-page registerDonor'>
       <article className='registerDonor-container'>
         <BoldText bold='REGISTRO' middle='DE' desc='DONANTES DE SANGRE' />
         <ValidateIDform onSubmit={setDonor} />
-        {donor && <FormRegisterDonor donor={donor} />}
+        {donor && <FormRegisterDonor patient={donor} />}
       </article>
     </section>
   )

@@ -2,13 +2,10 @@
 
 import useChartView from '@/app/(dashboard)/(pages)/chart/hooks/useChartView'
 import useStoreTrees from '@/app/(dashboard)/(pages)/hooks/useStoreTrees'
-import { BloodReceiverWithRel } from '@/app/api/all/route'
-import { HISTORY } from '@/db/hooks/keys'
-import { setUserHistory } from '@/db/services/history'
+import { BloodReceiverWithRel, PatientWithPerson } from '@/app/api/all/route'
+import { useSetHistories } from '@/db/hooks/useHistory'
 import { type IDniResolver, dniResolver } from '@/resolvers/dniResolver'
 import { acl } from '@/shared/activeClass'
-import { useMutation, useQueryClient } from '@tanstack/react-query'
-import dayjs from 'dayjs'
 import { UserRoundSearchIcon } from 'lucide-react'
 import type { JSX, ReactNode } from 'react'
 import { useForm } from 'react-hook-form'
@@ -18,11 +15,10 @@ import './style.scss'
 
 interface IValidateIDform {
   children?: Readonly<ReactNode[]> | null | Readonly<ReactNode>
-  onSubmit: (donor: BloodReceiverWithRel) => void
+  onSubmit: (donor: Partial<BloodReceiverWithRel>) => void
 }
 
 const ValidateIDform = ({ onSubmit }: IValidateIDform): JSX.Element => {
-  const queryClient = useQueryClient()
   const view = useChartView(s => s.view)
   const { data, status } = useStoreTrees()
   const hookForm = useForm<IDniResolver>({
@@ -32,17 +28,7 @@ const ValidateIDform = ({ onSubmit }: IValidateIDform): JSX.Element => {
   })
   const { register, handleSubmit, formState, watch, getValues } = hookForm
 
-  const { mutate } = useMutation({
-    mutationFn: setUserHistory,
-    onError() {
-      toast.error('Hemos fallado al actualizar el historial')
-    },
-    onSuccess: async () => {
-      await queryClient.invalidateQueries({ queryKey: [HISTORY] })
-      toast.success('Se actualizo el historial')
-    },
-    retry: 3
-  })
+  const { mutate } = useSetHistories()
 
   if (status === 'pending') return <p>Loading....</p>
 
@@ -52,21 +38,20 @@ const ValidateIDform = ({ onSubmit }: IValidateIDform): JSX.Element => {
   const onFormSubmit = async ({ dni }: IDniResolver) => {
     let currentNode = undefined
     if (view === 'tails') {
-      currentNode = data.query?.bloodDonors.find(d => {
-        return d.patient.DNI == dni
+      currentNode = data.query?.patients.find(d => {
+        return d.DNI == dni
       })
-    } else currentNode = data.trees.donantes.find(Number(dni)).node?.data
-
-    onSubmit((currentNode as BloodReceiverWithRel) ?? { patient: { DNI: getValues('dni') } })
+    } else currentNode = data.trees.pacientes.find(Number(dni)).node?.data
+    onSubmit((currentNode as PatientWithPerson) ?? { DNI: getValues('dni') })
     if (!currentNode) return toast.error('No se encontraron resultados')
 
-    const nodoData = currentNode as BloodReceiverWithRel
+    const nodoData = currentNode as PatientWithPerson
     const bodyData = `<section class='history-section'>
-        <img src="${nodoData.patient.person.photo}" alt='user-search' />
+        <img src='${nodoData.person.photo}' alt='patient search' />
         <div>
-        <h5>Buscaste al donante ${currentNode.patient.person.firstName} ${currentNode?.patient.person.lastName}
+        <h5>Buscaste al paciente <br/> ${currentNode.person.firstName} ${currentNode?.person.lastName}
         </h5>
-        <p>Fecha de donación: ${dayjs(currentNode?.lastDonation).format('YYYY/MM/DD')}</p>
+        <p>DNI: ${nodoData.DNI}</p>
         </div>
     </section>`
 

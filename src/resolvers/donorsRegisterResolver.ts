@@ -27,7 +27,7 @@ const scheme = z.object({
     .length(8, { message: 'DNI de 8 dígitos' })
     .regex(/^\d*$/, 'Solo números'),
   photo: z.string({ message: 'La foto es requerida' }),
-  lastDonationDate: z.any()
+  lastDonationDate: z.any({ message: 'Escoge una fecha' })
 })
 
 export const donorsRegisterResolver = zodResolver(scheme)

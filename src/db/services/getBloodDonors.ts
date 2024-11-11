@@ -9,8 +9,6 @@ export async function findBloodDonor(dni: string) {
         DNI: dni
       }
     })
-    // if (!response.ok) throw new Error(`Error fetching histories: ${response.statusText}`)
-    // const histories = await response.json()
     console.log(response)
   } catch (error) {
     console.error('Fetch error:', error)

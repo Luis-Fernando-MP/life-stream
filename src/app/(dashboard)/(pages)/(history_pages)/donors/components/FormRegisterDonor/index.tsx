@@ -1,6 +1,8 @@
 'use client'
 
-import { BloodDonorWithRel } from '@/app/api/all/route'
+import { PatientWithPerson } from '@/app/api/all/route'
+import { useSetHistories } from '@/db/hooks/useHistory'
+import { useSetDonors } from '@/db/hooks/useSetDonors'
 import { IDonorsRegisterRes, donorsRegisterResolver } from '@/resolvers/donorsRegisterResolver'
 import { acl } from '@/shared/activeClass'
 import { bloodTypeArr, getBloodType } from '@/shared/getBloodType'
@@ -13,11 +15,14 @@ import toast from 'react-hot-toast'
 import './style.scss'
 
 interface IFormRegisterDonor {
-  donor: BloodDonorWithRel
+  patient: Partial<PatientWithPerson>
   className?: string
+  onSubmit: (data: IDonorsRegisterRes) => void
 }
 
-const FormRegisterDonor = ({ className, donor }: IFormRegisterDonor): JSX.Element => {
+const FormRegisterDonor = ({ className, patient, onSubmit }: IFormRegisterDonor): JSX.Element => {
+  const { mutate } = useSetHistories()
+  const { mutate: donorsMutate } = useSetDonors()
   const hookForm = useForm<IDonorsRegisterRes>({
     resolver: donorsRegisterResolver,
     mode: 'onChange',
@@ -28,19 +33,18 @@ const FormRegisterDonor = ({ className, donor }: IFormRegisterDonor): JSX.Elemen
 
   useEffect(() => {
     reset()
-    const lastDonationDate = donor?.lastDonation ? dayjs(donor.lastDonation) : dayjs()
     const defaultValues = {
-      bloodType: getBloodType(donor?.patient?.bloodType).abbreviation,
-      age: donor?.patient?.age,
-      weight: donor?.patient?.weight,
-      dni: donor?.patient?.DNI,
-      firstName: donor?.patient?.person?.firstName,
-      lastName: donor?.patient?.person?.lastName,
-      lastDonationDate: lastDonationDate.format('YYYY-MM-DD'),
-      photo: donor?.patient?.person?.photo
+      bloodType: getBloodType(patient?.bloodType)?.abbreviation,
+      age: patient?.age,
+      weight: patient?.weight,
+      dni: patient?.DNI,
+      firstName: patient?.person?.firstName,
+      lastName: patient?.person?.lastName,
+      lastDonationDate: dayjs().format('YYYY-MM-DD'),
+      photo: patient?.person?.photo
     }
     reset(defaultValues as any)
-  }, [donor, reset])
+  }, [patient, reset])
 
   const {
     register,
@@ -53,11 +57,29 @@ const FormRegisterDonor = ({ className, donor }: IFormRegisterDonor): JSX.Elemen
 
   const { age, bloodType, dni, firstName, lastDonationDate, lastName, weight, photo } = errors
 
-  // Función de envío del formulario
   const onFormSubmit = async (data: IDonorsRegisterRes) => {
-    console.log(data)
-
     toast.success('Formulario enviado con éxito')
+    // onSubmit(data)
+    console.log(patient)
+
+    donorsMutate({
+      body: {
+        ...data,
+        lastDonationDate: dayjs(data.lastDonationDate).toDate(),
+        patientId: patient?.id ?? null,
+        personId: patient?.person?.id ?? null
+      }
+    })
+    // const bodyData = `<section class='history-section'>
+    //     <img src='${nodoData.person.photo}' alt='patient search' />
+    //     <div>
+    //     <h5>Buscaste al paciente <br/> ${currentNode.person.firstName} ${currentNode?.person.lastName}
+    //     </h5>
+    //     <p>DNI: ${nodoData.DNI}</p>
+    //     </div>
+    // </section>`
+
+    // mutate({ body: bodyData })
   }
 
   const onErrors = () => {
@@ -171,7 +193,7 @@ const FormRegisterDonor = ({ className, donor }: IFormRegisterDonor): JSX.Elemen
           <input type='date' {...register('lastDonationDate')} />
         </div>
 
-        {lastDonationDate && <p className='error-message'>{lastDonationDate.message}</p>}
+        {lastDonationDate && <p className='error-message'>{lastDonationDate.message as any}</p>}
       </section>
     </form>
   )

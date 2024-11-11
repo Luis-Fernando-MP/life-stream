@@ -1,4 +1,3 @@
-import LinearLogo from '@/shared/ui/LinearLogo'
 import type { Metadata } from 'next'
 import type { JSX, ReactNode } from 'react'
 
@@ -15,9 +14,6 @@ export const metadata: Metadata = {
 const Layout = ({ children }: ILayout): JSX.Element => {
   return (
     <article className='layout-container auth'>
-      <div className='auth-logo'>
-        <LinearLogo />
-      </div>
       <div className='auth-form'>
         <p>L I F E &nbsp; S T R E A M</p>
         {children}
