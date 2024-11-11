@@ -1,0 +1,82 @@
+@use '@sass/config/vars' as v;
+@use '@sass/utils/defs' as d;
+@use '@sass/utils/scrollbar' as *;
+@use '@sass/utils/text' as t;
+
+.compTailsDonors {
+  &-list {
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+    height: max-content;
+
+    @include d.flex($dir: row, $gap: v.$padding, $ali: initial);
+  }
+
+  &-item {
+    overflow: hidden;
+
+    width: 155px;
+    height: min-content;
+    padding: v.$padding / 2;
+
+    border-radius: v.$radius;
+
+    @include v.border(rgba(v.$bg2, 0.5));
+
+    button {
+      width: 100%;
+      height: 100%;
+
+      @include d.flex($gap: 5px, $ali: flex-start);
+
+      text-align: left;
+    }
+
+    img {
+      width: 40px;
+      height: 40px;
+
+      object-fit: cover;
+      background-color: rgb(v.$tn1);
+      border-radius: 5px;
+    }
+
+    &__name {
+      min-height: 20px;
+      font-size: 0.8em;
+
+      @include t.pointers($lines: 1);
+    }
+
+    &__info {
+      font-size: 0.6em;
+    }
+
+    &__blood {
+      @include d.flex($gap: 5px, $dir: row, $ali: center);
+
+      justify-content: center;
+
+      svg {
+        stroke: v.$blood;
+      }
+
+      p {
+        padding: 3px 10px;
+        font-size: 0.5em;
+        background-color: rgba(v.$bg1, 0.5);
+        border-radius: 7px;
+      }
+    }
+
+    &__lastDonation {
+      @include d.flex($gap: 5px);
+
+      h4,
+      p {
+        font-size: 0.5em;
+      }
+    }
+  }
+}

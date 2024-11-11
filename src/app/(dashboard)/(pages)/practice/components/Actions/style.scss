@@ -1,0 +1,43 @@
+@use '@sass/config/vars' as v;
+@use '@sass/utils/defs' as d;
+
+.practiceActions {
+  @include d.flex();
+
+  position: relative;
+
+  &-options {
+    @include d.flex($dir: row);
+
+    flex-wrap: wrap;
+    width: 100%;
+    padding-left: v.$padding;
+  }
+
+  &-option,
+  &-handle {
+    @include v.border(rgba(v.$bg1, 0.7));
+    @include d.flex($dir: row, $gap: 5px);
+
+    padding: v.$padding / 2;
+    border-radius: v.$radius / 2;
+
+    p {
+      font-weight: 500;
+    }
+
+    &.active {
+      background-color: rgba(v.$tn1, 0.7);
+
+      p {
+        color: rgb(v.$fn1);
+      }
+    }
+  }
+
+  &-handles {
+    @include d.flex($dir: row, $gap: 5px);
+
+    flex-wrap: wrap;
+  }
+}

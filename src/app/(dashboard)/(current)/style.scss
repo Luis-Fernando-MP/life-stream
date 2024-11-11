@@ -6,6 +6,7 @@
   @include d.flex($dir: row, $gap: 0);
   @include v.border(rgb(v.$bg1, 0.5));
 
+  justify-content: space-evenly;
   height: 100%;
 
   video {
@@ -28,12 +29,11 @@
       overflow: hidden;
       justify-content: center;
 
-      width: 50%;
+      width: 35%;
       height: 100%;
       min-height: 100vh;
       padding: v.$padding;
 
-      background-color: red;
       border-radius: v.$radius;
 
       @include d.flex($ali: center);
@@ -48,7 +48,7 @@
         height: 100%;
 
         object-fit: cover;
-        filter: opacity(0.8) brightness(50%) saturate(2);
+        filter: opacity(0.3) brightness(50%) saturate(2);
       }
     }
   }

@@ -20,12 +20,16 @@
   padding: v.$padding;
   padding-top: 0;
 
-  background-color: rgba(v.$bg1, 0.5);
+  background-color: rgba(v.$bg2, 0.3);
   border-radius: v.$radius;
 
   @include d.flex($ali: center, $gap: 0);
 }
 
 .layout-page {
+  @extend %scroll-hidden;
+
+  overflow-y: auto;
+
   // nothing
 }

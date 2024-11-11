@@ -11,7 +11,9 @@ export default function Page() {
       <p className='auth-message'>
         Bienvenido de nuevo 👋, ingresemos y<br /> trabajemos duro
       </p>
-      <SignIn />
+      <div className='delay animate-blurred-fade-in'>
+        <SignIn />
+      </div>
     </>
   )
 }

@@ -4,23 +4,13 @@ import dayjs from 'dayjs'
 import * as z from 'zod'
 
 const scheme = z.object({
-  bloodType: z.enum(bloodTypeArr as any),
+  bloodType: z.enum(['ALL', ...bloodTypeArr]),
   ageRange: z
     .tuple([])
-    .rest(
-      z
-        .number({ message: 'La edad debería de estar en un rango de números' })
-        .min(18, { message: 'El valor mínimo de la edad es de 18' })
-        .max(65, { message: 'La edad maxima para el donante es 65 años' })
-    ),
+    .rest(z.number({ message: 'La edad debería de estar en un rango de números' })),
   weightRange: z
     .tuple([])
-    .rest(
-      z
-        .number({ message: 'El peso debería de estar en un rango de números' })
-        .min(50, { message: 'El valor mínimo del peso es de 50 kg' })
-        .max(150, { message: 'El peso máximo del donante es de 150 kg' })
-    ),
+    .rest(z.number({ message: 'El peso debería de estar en un rango de números' })),
   firstName: z
     .string()
     .max(100, { message: 'Tu nombre no puede tener mas de 100 caracteres' })

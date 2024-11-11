@@ -6,7 +6,7 @@ import useStoreTrees from '@/app/(dashboard)/(pages)/hooks/useStoreTrees'
 import { NetworkIcon, Rows4Icon, SearchCheck } from 'lucide-react'
 import type { JSX } from 'react'
 
-import useSearchDonors from '../../hooks/useSearchDonors'
+import SearchDonorsComponent from '../SearchDonorsComponent'
 import TailsDonorComponent from '../TailsDonorComponent'
 import './style.scss'
 
@@ -16,7 +16,6 @@ interface IDonorsComponent {
 
 const DonorsComponent = ({ className }: IDonorsComponent): JSX.Element => {
   const { status, data } = useStoreTrees()
-  const donorsSearch = useSearchDonors(s => s.donors)
   const view = useChartView(s => s.view)
 
   if (status === 'pending') return <p>loading donors...</p>
@@ -50,7 +49,7 @@ const DonorsComponent = ({ className }: IDonorsComponent): JSX.Element => {
       )}
       {view === 'tails' && <TailsDonorComponent donors={data.query?.bloodDonors ?? []} />}
 
-      {view === 'search' && <p>{JSON.stringify(donorsSearch)}</p>}
+      {view === 'search' && <SearchDonorsComponent />}
     </article>
   )
 }

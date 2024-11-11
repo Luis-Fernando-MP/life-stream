@@ -8,7 +8,7 @@ interface ISelectPerson {
 }
 
 const useChartView = create<ISelectPerson>(set => ({
-  view: 'tails',
+  view: 'tree',
   setView: view => set({ view })
 }))
 

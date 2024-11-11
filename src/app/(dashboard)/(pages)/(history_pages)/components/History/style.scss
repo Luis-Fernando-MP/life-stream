@@ -83,4 +83,34 @@
       }
     }
   }
+
+  // Custom styles
+  &-search {
+    width: 100%;
+
+    @include d.flex($gap: v.$padding * 0.5);
+
+    &__users {
+      @include d.flex($gap: v.$padding * 0.5, $dir: row);
+
+      flex-wrap: wrap;
+
+      div {
+        overflow: hidden;
+
+        width: 30px;
+        height: 30px;
+        padding: 2px;
+
+        border-radius: 50%;
+
+        /* stylelint-disable-next-line no-descending-specificity */
+        img {
+          width: 100%;
+          height: 100%;
+          border-radius: 50%;
+        }
+      }
+    }
+  }
 }

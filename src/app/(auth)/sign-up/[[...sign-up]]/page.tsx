@@ -13,7 +13,9 @@ export default function Page() {
         Hay que registrarnos y comenzar
         <br /> con nuestro deber 👩‍🏭
       </p>
-      <SignUp />
+      <div className='delay animate-blurred-fade-in'>
+        <SignUp />
+      </div>
     </>
   )
 }

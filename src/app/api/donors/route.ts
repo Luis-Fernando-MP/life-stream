@@ -53,48 +53,44 @@ export async function POST(req: NextRequest) {
     const patientData: any = {
       age: Number(data.age),
       weight: Number(data.weight),
-      bloodType: getBloodTypeFromAbbreviation(data.bloodType) ?? BloodType.A_POSITIVE,
-      DNI: String(data.dni)
+      bloodType: getBloodTypeFromAbbreviation(data.bloodType) ?? BloodType.A_POSITIVE
     }
 
     let patient
     if (data.patientId) {
       patient = await prisma.patient.update({
-        data: patientData as any,
-        where: { id: data.patientId }
+        data: patientData,
+        where: { DNI: data.patientId }
       })
     } else {
       patient = await prisma.patient.create({
         data: {
           ...patientData,
+          DNI: String(data.dni),
           personID: person.id
         }
       })
     }
 
-    const donor = await prisma.bloodDonor.create({
-      data: {
+    const donor = await prisma.bloodDonor.upsert({
+      create: {
         AuthorID: userId,
         patientID: patient.id,
         lastDonation: data.lastDonationDate
+      },
+      update: {
+        AuthorID: userId,
+        lastDonation: data.lastDonationDate
+      },
+      where: { patientID: patient.id },
+      include: {
+        patient: {
+          include: { person: true }
+        }
       }
     })
 
-    console.log('patientData', donor)
-
-    /*
-    donantes: x lastDonation
-    x patientID: paciente
-    x autor: AuthorID
-
-    x age: paciente
-    x weight, x bloodType, x DNI
-
-    personID:
-    x firstName, x lastName, x photo, x username, x email, 
-    */
-
-    return NextResponse.json({ donor: true }, { status: 200 })
+    return NextResponse.json({ donor }, { status: 200 })
   } catch (error: any) {
     console.log(' - - - -- - error')
     console.log(error)

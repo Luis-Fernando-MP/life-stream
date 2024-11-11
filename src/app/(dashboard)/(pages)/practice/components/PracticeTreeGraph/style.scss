@@ -1,0 +1,24 @@
+@use '@sass/config/vars' as v;
+
+.treeGraph {
+  position: relative;
+  display: block;
+
+  &::after {
+    content: '';
+    width: 30px;
+    height: 30px;
+    background-color: green;
+  }
+
+  image,
+  text {
+    pointer-events: none;
+    user-select: none;
+  }
+
+  :hover {
+    stroke: rgb(v.$tn1);
+    stroke-width: 3px;
+  }
+}

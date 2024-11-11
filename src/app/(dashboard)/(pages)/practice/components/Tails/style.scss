@@ -1,0 +1,37 @@
+@use '@sass/config/vars' as v;
+@use '@sass/utils/defs' as d;
+@use '@sass/utils/scrollbar' as *;
+
+.tails {
+  width: 100%;
+  height: fit-content;
+
+  @include d.flex();
+
+  &-box {
+    width: 100%;
+    height: fit-content;
+
+    @include d.flex($ali: flex-start);
+
+    > h5 {
+      padding: v.$padding / 2 v.$padding * 2;
+      border-radius: v.$radius;
+
+      @include v.border;
+    }
+
+    &__list {
+      @include d.flex($dir: row);
+
+      flex-wrap: wrap;
+
+      width: 100%;
+      padding: v.$padding;
+
+      background-color: rgb(v.$bg2);
+      border: 2px solid rgb(v.$bg3);
+      border-radius: v.$radius;
+    }
+  }
+}

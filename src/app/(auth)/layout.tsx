@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 const Layout = ({ children }: ILayout): JSX.Element => {
   return (
     <article className='layout-container auth'>
-      <div className='auth-form'>
+      <div className='auth-form delay animate-blurred-fade-in'>
         <p>L I F E &nbsp; S T R E A M</p>
         {children}
       </div>

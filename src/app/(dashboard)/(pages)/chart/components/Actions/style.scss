@@ -22,7 +22,7 @@
     border-radius: v.$radius / 2;
 
     &.active {
-      color: rgb(v.$bg1);
+      color: rgb(v.$fn1);
       background-color: rgba(v.$tn1, 0.7);
     }
   }

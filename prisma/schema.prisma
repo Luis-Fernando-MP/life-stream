@@ -31,7 +31,7 @@ model Person {
 model QueryHistory {
   id          String    @id @default(cuid()) @db.VarChar(50)
   title       String    @db.VarChar(100)
-  description String    @db.VarChar(400)
+  description String    @db.Text
   queryType   QueryType @default(TEXT)
   speedA      Float?    @default(0.0)
   speedB      Float?    @default(0.0)

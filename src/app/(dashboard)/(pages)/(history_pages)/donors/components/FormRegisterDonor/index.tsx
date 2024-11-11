@@ -16,10 +16,10 @@ import './style.scss'
 interface IFormRegisterDonor {
   patient: Partial<PatientWithPerson>
   className?: string
+  setDonor: () => void
 }
 
-const FormRegisterDonor = ({ className, patient }: IFormRegisterDonor): JSX.Element => {
-  // const { mutate } = useSetHistories()
+const FormRegisterDonor = ({ className, patient, setDonor }: IFormRegisterDonor): JSX.Element => {
   const { mutate: donorsMutate } = useSetDonors()
   const hookForm = useForm<IDonorsRegisterRes>({
     resolver: donorsRegisterResolver,
@@ -57,9 +57,6 @@ const FormRegisterDonor = ({ className, patient }: IFormRegisterDonor): JSX.Elem
 
   const onFormSubmit = async (data: IDonorsRegisterRes) => {
     toast.success('Formulario enviado con éxito')
-    // onSubmit(data)
-    console.log(patient)
-
     donorsMutate({
       body: {
         ...data,
@@ -68,16 +65,7 @@ const FormRegisterDonor = ({ className, patient }: IFormRegisterDonor): JSX.Elem
         personId: patient?.person?.id ?? null
       }
     })
-    // const bodyData = `<section class='history-section'>
-    //     <img src='${nodoData.person.photo}' alt='patient search' />
-    //     <div>
-    //     <h5>Buscaste al paciente <br/> ${currentNode.person.firstName} ${currentNode?.person.lastName}
-    //     </h5>
-    //     <p>DNI: ${nodoData.DNI}</p>
-    //     </div>
-    // </section>`
-
-    // mutate({ body: bodyData })
+    setDonor()
   }
 
   const onErrors = () => {

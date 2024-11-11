@@ -22,6 +22,14 @@ export const ROUTES = {
     Icon: HouseIcon,
     requiredRoles: []
   },
+  practice: {
+    path: '/practice',
+    subPaths: '/practice',
+    title: 'Listar los Doctores',
+    description: '👨‍🎓 Practica los arboles binarios',
+    Icon: Wallpaper,
+    requiredRoles: []
+  },
   chart: {
     path: '/chart',
     subPaths: '/chart',
@@ -45,7 +53,7 @@ export const ROUTES = {
     title: 'Registrar Donante',
     description: '📝 Registro de nuevo donante de sangre',
     Icon: HeartIcon,
-    requiredRoles: []
+    requiredRoles: [ROL.ADMIN, ROL.DOCTOR, ROL.DOCTOR_ADMIN]
   },
   recipients: {
     path: '/recipients',
@@ -61,14 +69,6 @@ export const ROUTES = {
     title: 'Registrar Receptor',
     description: '📝 Registro de nuevo receptor',
     Icon: PlusIcon,
-    requiredRoles: []
-  },
-  doctors: {
-    path: '/doctors',
-    subPaths: '/doctors',
-    title: 'Listar los Doctores',
-    description: '👨‍🎓 Ver a los doctores',
-    Icon: Wallpaper,
     requiredRoles: [ROL.ADMIN, ROL.DOCTOR, ROL.DOCTOR_ADMIN]
   },
 
