@@ -1,21 +1,18 @@
-import { prisma } from '@/db';
-import { bloodTypeAbb, getBloodTypeFromAbbreviation } from '@/shared/getBloodType';
-import { auth } from '@clerk/nextjs/server';
-import { BloodType } from '@prisma/client';
-import { nanoid } from 'nanoid';
-import { NextRequest, NextResponse } from 'next/server';
+import { prisma } from '@/db'
+import { bloodTypeAbb, getBloodTypeFromAbbreviation } from '@/shared/getBloodType'
+import { auth } from '@clerk/nextjs/server'
+import { BloodType } from '@prisma/client'
+import { nanoid } from 'nanoid'
+import { NextRequest, NextResponse } from 'next/server'
 
-
-
-import cloudinary from '../cloudinary/cloud';
-
+import cloudinary from '../cloudinary/cloud'
 
 export async function POST(req: NextRequest) {
   const data = await req.json()
   const { userId } = auth()
 
   try {
-    if(!userId)throw new Error('Are you registered?')
+    if (!userId) throw new Error('Are you registered?')
 
     const matches = data.photo.match(/^data:(.+);base64,(.+)$/)
     let photo = data.photo
@@ -75,7 +72,6 @@ export async function POST(req: NextRequest) {
       })
     }
 
-
     const donor = await prisma.bloodDonor.create({
       data: {
         AuthorID: userId,
@@ -83,7 +79,6 @@ export async function POST(req: NextRequest) {
         lastDonation: data.lastDonationDate
       }
     })
-    
 
     console.log('patientData', donor)
 
