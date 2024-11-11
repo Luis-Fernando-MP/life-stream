@@ -36,7 +36,7 @@ export const ROUTES = {
     subPaths: '/donors/[donorID]',
     title: 'Donantes',
     description: '❤️ Lista de donantes de sangre',
-    Icon: DnaIcon,
+    Icon: HeartHandshakeIcon,
     requiredRoles: []
   },
   registerDonor: {
@@ -44,7 +44,7 @@ export const ROUTES = {
     subPaths: '/donors/register',
     title: 'Registrar Donante',
     description: '📝 Registro de nuevo donante de sangre',
-    Icon: PlusIcon,
+    Icon: HeartIcon,
     requiredRoles: []
   },
   recipients: {
@@ -52,7 +52,7 @@ export const ROUTES = {
     subPaths: '/recipients/[donorID]',
     title: 'Receptores',
     description: '🧑‍🤝‍🧑 Lista de receptores',
-    Icon: HeartIcon,
+    Icon: DnaIcon,
     requiredRoles: []
   },
   registerRecipient: {
@@ -60,7 +60,7 @@ export const ROUTES = {
     subPaths: '/recipients/register',
     title: 'Registrar Receptor',
     description: '📝 Registro de nuevo receptor',
-    Icon: HeartHandshakeIcon,
+    Icon: PlusIcon,
     requiredRoles: []
   },
   doctors: {

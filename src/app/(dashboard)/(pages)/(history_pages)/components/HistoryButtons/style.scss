@@ -2,45 +2,54 @@
 @use '@sass/utils/defs' as d;
 
 .history {
-  &-buttons {
-    width: 100%;
-    padding-left: v.$padding;
-
-    @include d.flex($gap: 10px);
-
-    &.three {
-      button:last-child {
-        border: 2px solid v.$tn1;
-      }
-    }
-
-    &.array {
-      button:first-child {
-        border: 2px solid v.$tn1;
-      }
-    }
-  }
-
   &-button {
     width: 100%;
-    height: 70px;
-    padding: 5px;
+    height: max-content;
+    padding: v.$padding * 0.8;
 
     text-align: left;
 
-    border-radius: 5px;
+    border-radius: v.$radius;
 
-    @include d.flex($dir: row, $ali: center);
+    @include d.flex($dir: row, $ali: center, $gap: 5px);
 
     @include v.border;
   }
 
   &-icon {
-    width: 70px;
-    height: 100%;
-    padding: v.$padding;
+    width: 40px;
+    min-width: 40px;
+    height: 40px;
+    padding: 10px;
 
-    background-color: v.$bg2;
-    border-radius: 5px;
+    background-color: rgb(v.$bg1);
+    border-radius: 50%;
+
+    svg {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  &-buttons {
+    scale: 1;
+    width: 100%;
+    padding-left: v.$padding;
+    transition: all 0.5s ease-in-out;
+
+    @include d.flex($gap: 5px);
+
+    &.cl-tree button:last-child,
+    &.cl-tails button:first-child {
+      scale: 0.93;
+
+      .history-icon {
+        background-color: rgb(v.$tn1);
+
+        svg {
+          stroke: rgb(v.$fn1);
+        }
+      }
+    }
   }
 }

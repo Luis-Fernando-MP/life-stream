@@ -28,7 +28,7 @@ const Tail = ({ type, name, etc, id, image, createdAt }: ITail): JSX.Element => 
   }
 
   return (
-    <li className='tail'>
+    <li className='comTails'>
       <button onClick={handleClick}>
         <img src={image} alt={name} />
         <h5>{name}</h5>

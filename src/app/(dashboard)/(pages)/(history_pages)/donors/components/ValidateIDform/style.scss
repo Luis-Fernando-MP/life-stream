@@ -1,0 +1,79 @@
+@use '@sass/config/vars' as v;
+@use '@sass/utils/defs' as d;
+
+.dniForm {
+  width: fit-content;
+  min-width: 312px;
+  height: max-content;
+  padding: v.$padding;
+
+  @include v.border(rgba(v.$bg1, 0.5));
+  @include d.flex($gap: 10px);
+
+  border-radius: v.$radius;
+
+  &-field {
+    width: 100%;
+
+    @include d.flex($dir: row, $gap: 10px);
+
+    input,
+    svg {
+      border-radius: 5px;
+    }
+
+    input {
+      width: 100%;
+      padding-left: v.$padding;
+      font-size: v.$fH3;
+      background-color: v.$bg3;
+    }
+
+    &.error {
+      input,
+      svg {
+        color: v.$error;
+        border-color: v.$error;
+        stroke: v.$error;
+      }
+    }
+  }
+
+  &-icon {
+    @include v.border;
+
+    width: 50px;
+    height: 50px;
+    padding: v.$padding;
+  }
+
+  &-error {
+    width: 100%;
+    color: v.$error;
+    text-align: center;
+  }
+
+  &-submit {
+    width: 100%;
+    padding: 10px 0;
+
+    font-weight: 500;
+    color: rgb(v.$fn1);
+
+    opacity: 1;
+    background-color: rgb(v.$tn1);
+    border-radius: 5px;
+
+    &.error {
+      @include v.border;
+
+      pointer-events: none;
+      cursor: no-drop;
+      user-select: none;
+
+      color: rgb(v.$fn1);
+
+      opacity: 0.9;
+    }
+  }
+}

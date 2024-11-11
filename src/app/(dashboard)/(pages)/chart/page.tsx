@@ -10,6 +10,7 @@ import './style.scss'
 
 const Page = (): JSX.Element => {
   const view = useChartView(s => s.view)
+
   return (
     <article className='layout-container chart'>
       <section className='chart-draft'>

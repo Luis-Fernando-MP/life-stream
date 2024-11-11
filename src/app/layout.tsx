@@ -43,10 +43,10 @@ const RootLayout = ({ children }: IRootLayout): JSX.Element => {
           position='top-center'
           toastOptions={{
             className: 'toast',
-            position: 'bottom-right',
+            position: 'top-center',
             style: {
-              background: 'var(--bg-primary)',
-              color: 'var(--fnt-primary)'
+              background: 'rgba(var(--bg-primary), 0.9)',
+              color: 'rgb(var(--fnt-primary))'
             }
           }}
         />

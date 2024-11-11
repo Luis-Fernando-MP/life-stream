@@ -1,4 +1,4 @@
-import { ITreeNodeData, TreeColor } from '@/shared/tree/RedBlackTree'
+import RedBlackTree, { ITreeNodeData } from '@/shared/tree/RedBlackTree'
 import { parseTreeToD3 } from '@/shared/tree/parse'
 import { hierarchy, select, tree, zoom } from 'd3'
 import { MouseEvent, useEffect, useRef, useState } from 'react'
@@ -17,12 +17,12 @@ interface TreeNode extends ITreeNodeData {
   [key: string]: any
 }
 
-export interface ILinearTreeData {
-  [key: string]: TreeNode[]
+export interface ITreeGraphData {
+  [key: string]: RedBlackTree
 }
 
 interface TreeGraphParams {
-  trees?: ILinearTreeData
+  trees?: ITreeGraphData
   onNodeClick: (data: INodeResponse, click: MouseEvent) => void
 }
 
@@ -34,11 +34,12 @@ const useTreeGraph = ({ trees = {}, onNodeClick }: TreeGraphParams) => {
     if (!svgRef.current) return
 
     const treesData = Object.entries(treeState)
-      .map(([name, values]) => {
+      .map(([name, tree]) => {
+        const children = [parseTreeToD3(tree)]
         return {
           id: name,
-          color: '#555',
-          children: [parseTreeToD3(values)]
+          color: 'rgb(70, 70, 70)',
+          children
         }
       })
       .filter(tree => !tree.children.includes(null))
@@ -50,7 +51,7 @@ const useTreeGraph = ({ trees = {}, onNodeClick }: TreeGraphParams) => {
 
     const head = {
       id: 'Life Stream',
-      color: '#4747dc',
+      color: 'rgb(248, 51, 51)',
       children: treesData
     }
 
@@ -83,7 +84,7 @@ const useTreeGraph = ({ trees = {}, onNodeClick }: TreeGraphParams) => {
     const linkGroup = g
       .append('g')
       .attr('fill', 'none')
-      .attr('stroke', '#555')
+      .attr('stroke', 'rgb(100, 51, 51)')
       .attr('stroke-opacity', 0.4)
       .attr('stroke-width', 2)
 
@@ -150,6 +151,7 @@ const useTreeGraph = ({ trees = {}, onNodeClick }: TreeGraphParams) => {
       })
       .each(function (d: any, i: number) {
         const group = select(this)
+        const color = d.data?.node?.color == 'red' ? '#f44' : '#ddd'
         // Círculo para la onda expansiva
         group
           .append('circle')
@@ -157,7 +159,7 @@ const useTreeGraph = ({ trees = {}, onNodeClick }: TreeGraphParams) => {
           .attr('cx', widthNodeImage / 2)
           .attr('cy', widthNodeImage / 2)
           .attr('r', 0)
-          .attr('fill', d.data?.node?.color ?? TreeColor.BLACK)
+          .attr('fill', color)
 
         // Cuadrado con border
         group
@@ -166,17 +168,17 @@ const useTreeGraph = ({ trees = {}, onNodeClick }: TreeGraphParams) => {
           .attr('y', -1)
           .attr('width', widthNodeImage)
           .attr('height', widthNodeImage)
-          .attr('fill', d.data?.node?.color ?? TreeColor.BLACK)
+          .attr('fill', d.data?.node?.color == 'red' ? '#f44' : '#666')
           .attr('rx', 5)
 
         group
           .append('text')
           .attr('x', widthNodeImage / 2)
-          .attr('y', -5)
+          .attr('y', -10)
           .attr('text-anchor', 'middle')
           .attr('font-weight', '900')
           .style('font-size', '16')
-          .attr('fill', d.data?.node?.color ?? TreeColor.BLACK)
+          .attr('fill', color)
           .text(d.data?.node?.data?.id ?? '')
 
         const maxImg = 5

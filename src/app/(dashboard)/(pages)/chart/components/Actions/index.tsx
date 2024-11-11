@@ -29,7 +29,7 @@ const Actions = (): JSX.Element => {
           className={`chartActions-option ${acl(view === 'tails')}`}
         >
           <Rows4Icon />
-          <p>Estructura de Colas</p>
+          <p>Estructura de arrayList</p>
         </button>
         <button
           onClick={() => setView('array')}

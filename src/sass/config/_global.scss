@@ -14,6 +14,15 @@
   outline: none;
 }
 
+// html {
+//   filter: invert(1);
+
+//   img,
+//   video {
+//     filter: invert(1);
+//   }
+// }
+
 body {
   @extend %scroll-hidden;
 
@@ -28,9 +37,9 @@ body {
 
   font-family: $font1;
   font-size: $family-size;
-  color: $fn1, $fontBase;
+  color: rgb($fn1);
 
-  background-color: rgb($bg2);
+  background-color: rgb($bg1);
 
   textarea {
     @extend %scroll-hidden;
@@ -66,7 +75,7 @@ body {
   textarea,
   button,
   select {
-    color: $fn2;
+    color: rgb($fn2);
     text-wrap: pretty;
   }
 
@@ -78,11 +87,12 @@ body {
   span {
     font-family: $font3;
     font-weight: 400;
-    color: $fn2;
+    color: rgb($fn2);
   }
 
   h5 {
     font-weight: 500;
+    color: rgb($fn1);
     text-wrap: balance;
   }
 
@@ -98,7 +108,6 @@ body {
   button,
   select {
     font-family: $font2;
-    color: $fn2;
 
     &:focus {
       outline: none;
@@ -128,7 +137,7 @@ h2,
 h3,
 h4 {
   font-family: $font1;
-  color: $fn1;
+  color: rgb($fn1);
   text-wrap: balance;
 }
 
@@ -159,10 +168,6 @@ svg {
   font-size: $family-size;
 }
 
-.toast {
-  background-color: red;
-}
-
 .tn1 {
   color: rgb($tn1);
 }
@@ -174,8 +179,8 @@ svg {
 }
 
 ::selection {
-  color: $bg1;
-  background-color: $tn1;
+  color: rgb($fn1);
+  background-color: rgb($tn1);
 }
 
 .skeleton {
@@ -206,4 +211,13 @@ svg {
 
 .delay {
   animation-delay: 700ms;
+}
+
+.box-error {
+  background-color: rgba($error, 0.2) !important;
+  border-color: $error !important;
+}
+
+.logo {
+  fill: rgb($tn1);
 }

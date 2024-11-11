@@ -1,3 +1,5 @@
+'use client'
+
 import { GithubIcon, SparklesIcon } from 'lucide-react'
 import Link from 'next/link'
 import type { HtmlHTMLAttributes, JSX, ReactNode } from 'react'

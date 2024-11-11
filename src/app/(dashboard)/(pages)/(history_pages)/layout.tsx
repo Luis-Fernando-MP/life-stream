@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 const Layout = ({ children }: ILayout): JSX.Element => {
   return (
     <article className='layout-container historyPages'>
-      <Histories className='layout-histories' />
+      <Histories className='layout-histories animate-blurred-fade-in' />
       {children}
     </article>
   )

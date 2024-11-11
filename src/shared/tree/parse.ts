@@ -1,4 +1,4 @@
-import RedBlackTree, { ITreeNodeData, TreeNode } from './RedBlackTree'
+import RedBlackTree, { TreeNode } from './RedBlackTree'
 
 export interface D3TreeNodeData {
   children: D3TreeNodeData[] | null[]
@@ -9,11 +9,7 @@ export type TCreateHierarchy = {
   children: ((TreeNode & D3TreeNodeData[]) | null)[]
 }
 
-export function parseTreeToD3(data: ITreeNodeData[]) {
-  if (!data || data.length === 0) return null
-
-  const redBlackTree = RedBlackTree.fromArray(data)
-
+export function parseTreeToD3(redBlackTree: RedBlackTree) {
   const createHierarchy = (node: TreeNode): TCreateHierarchy | null => {
     if (node === redBlackTree.nullNode) return null
 
