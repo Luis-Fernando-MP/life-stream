@@ -16,7 +16,7 @@ const Page = (): JSX.Element => {
       <article className='registerDonor-container'>
         <BoldText bold='REGISTRO' middle='DE' desc='DONANTES DE SANGRE' />
         <ValidateIDform onSubmit={setDonor} />
-        {donor && <FormRegisterDonor patient={donor} />}
+        {donor && <FormRegisterDonor patient={donor} setDonor={() => setDonor(null)} />}
       </article>
     </section>
   )

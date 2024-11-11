@@ -1,0 +1,24 @@
+@use '@sass/config/vars' as v;
+@use '@sass/utils/defs' as d;
+
+.layout-page.registerDonor {
+  justify-content: center;
+
+  padding: v.$padding;
+
+  text-align: center;
+
+  background-color: rgba(v.$bg1, 0.5);
+  border-radius: v.$radius;
+
+  @include d.flex($ali: center);
+}
+
+.registerDonor {
+  &-container {
+    width: 100%;
+    height: max-content;
+
+    @include d.flex($ali: center);
+  }
+}

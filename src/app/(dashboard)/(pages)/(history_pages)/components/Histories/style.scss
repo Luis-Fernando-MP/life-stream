@@ -7,6 +7,7 @@
   &-data {
     width: 100%;
     height: max-content;
+    margin-top: v.$padding * 1.5;
 
     @include d.flex;
   }
@@ -14,7 +15,7 @@
   &-actions {
     position: sticky;
     z-index: 1;
-    top: 0;
+    top: v.$padding;
 
     justify-content: center;
 
@@ -23,6 +24,7 @@
     padding: v.$padding * 2 0 v.$padding 0;
 
     background-color: rgba(v.$bg1, 0.7);
+    border-radius: v.$radius;
 
     @include d.flex($dir: row, $ali: center);
   }

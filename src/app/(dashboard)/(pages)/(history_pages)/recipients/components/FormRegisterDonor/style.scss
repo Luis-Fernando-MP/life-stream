@@ -1,0 +1,75 @@
+@use '@sass/config/vars' as v;
+@use '@sass/utils/defs' as d;
+
+.RDForm {
+  width: fit-content;
+  min-width: 312px;
+  height: max-content;
+  padding: v.$padding;
+
+  @include v.border(rgba(v.$bg1, 0.5));
+  @include d.flex();
+
+  border-radius: v.$radius;
+
+  &-submit {
+    width: 100%;
+    padding: v.$radius * 0.8 0;
+
+    font-weight: 900;
+    color: rgb(v.$fn1);
+
+    background-color: rgb(v.$tn1);
+    border-radius: v.$radius * 0.5;
+  }
+
+  &-section {
+    padding: v.$padding / 2;
+    border-radius: v.$radius / 2;
+
+    @include v.border(rgba(v.$bg2, 0.6));
+
+    @include d.flex();
+
+    &.error {
+      background-color: rgb(v.$error, 0.1);
+      border-color: v.$error;
+
+      .error-message {
+        font-weight: 500;
+        color: rgb(v.$error, 0.8);
+      }
+    }
+
+    &__field {
+      justify-content: space-between;
+
+      @include d.flex($dir: row, $ali: center);
+    }
+
+    h5 {
+      font-weight: lighter;
+
+      b {
+        font-weight: 900;
+      }
+    }
+
+    select {
+      width: 50px;
+      padding: v.$padding * 0.4 v.$padding * 0.8;
+      background-color: rgba(v.$bg2, 0.6);
+      border-radius: 5px;
+    }
+
+    input {
+      width: min-content;
+      padding: 7px 5px;
+
+      text-align: right;
+
+      background-color: rgba(v.$bg1, 0.3);
+      border-radius: 5px;
+    }
+  }
+}
