@@ -34,7 +34,7 @@ const TailsDonorComponent = ({ donors }: ITailsDonorComponent): JSX.Element => {
               </h4>
               <div className='compTailsDonors-item__blood'>
                 <DropletIcon />
-                <p>{getBloodType(bloodType).abbreviation}</p>
+                <p>{getBloodType(bloodType)?.abbreviation}</p>
               </div>
               <div className='compTailsDonors-item__lastDonation'>
                 <p>Ultima Donación</p>

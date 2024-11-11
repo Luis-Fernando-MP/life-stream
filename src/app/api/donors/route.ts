@@ -50,7 +50,7 @@ export async function POST(req: NextRequest) {
       })
     }
 
-    const patientData = {
+    const patientData: any = {
       age: Number(data.age),
       weight: Number(data.weight),
       bloodType: getBloodTypeFromAbbreviation(data.bloodType) ?? BloodType.A_POSITIVE,
