@@ -1,11 +1,11 @@
 'use client'
 
+import useChartView from '@/app/(dashboard)/(pages)/chart/hooks/useChartView'
 import { type JSX } from 'react'
 
-import useChartView from '../chart/hooks/useChartView'
 import Actions from './components/Actions'
+import PracticeTails from './components/PracticeTails'
 import PracticeTreeGraph from './components/PracticeTreeGraph'
-import Tails from './components/Tails'
 import './style.scss'
 
 const Page = (): JSX.Element => {
@@ -15,7 +15,7 @@ const Page = (): JSX.Element => {
     <article className='layout-container practice'>
       <section className='practice-draft'>
         {view === 'tree' && <PracticeTreeGraph />}
-        {view === 'tails' && <Tails />}
+        {view === 'array' && <PracticeTails />}
       </section>
       <Actions />
     </article>

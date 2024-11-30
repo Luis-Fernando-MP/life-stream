@@ -111,3 +111,10 @@ export const matchRoute = ({ path, route }: IMatchRoute) => {
   const regex = new RegExp(`^${path.replace(/\[.*?\]/g, '\\d+')}$`)
   return route === path || regex.test(route)
 }
+
+export const PUBLIC_ROUTES = [
+  ROUTES.home.path,
+  ROUTES.practice.path,
+  ROUTES.login.path,
+  ROUTES.registerAccount.path
+]

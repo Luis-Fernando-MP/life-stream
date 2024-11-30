@@ -2,7 +2,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import * as z from 'zod'
 
 const scheme = z.object({
-  tree: z.string({ message: 'escoge un árbol o tabla' }),
+  key: z.string({ message: 'escoge un árbol o tabla' }),
   quantity: z
     .number({ message: 'Agrega una cantidad de nodos' })
     .min(1, { message: 'Mínimo agrega 1 nodo' })

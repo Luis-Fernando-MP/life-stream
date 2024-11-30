@@ -1,5 +1,3 @@
-'use client'
-
 import { DnaIcon, Stethoscope } from 'lucide-react'
 import type { JSX } from 'react'
 

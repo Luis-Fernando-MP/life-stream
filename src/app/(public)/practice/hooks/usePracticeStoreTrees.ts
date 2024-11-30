@@ -12,11 +12,17 @@ interface TUseStoreTrees {
 }
 
 const usePracticeStoreTrees = create<TUseStoreTrees>(set => ({
-  trees: {},
+  trees: {
+    ejemplo1: RedBlackTree.fromArray([]),
+    ejemplo2: RedBlackTree.fromArray([]),
+    ejemplo3: RedBlackTree.fromArray([]),
+    ejemplo4: RedBlackTree.fromArray([])
+  },
   tails: {
-    ejemploA: [{ id: 5 }, { id: 6 }, { id: 1 }],
-    ejemploB: [{ id: 20 }],
-    ejemploC: [{ id: 100 }, { id: 50 }]
+    ejemplo1: [],
+    ejemplo2: [],
+    ejemplo3: [],
+    ejemplo4: []
   },
   setTails: tails => set({ tails }),
   setTrees: trees => set({ trees })

@@ -1,6 +1,7 @@
 import { MontserratFont, PlayFairFont, RobotoFont } from '@/shared/fonts'
 import type { Metadata } from 'next'
 import type { JSX, ReactNode } from 'react'
+import React from 'react'
 import { Toaster } from 'react-hot-toast'
 
 import Firefly from './components/Firefly'

@@ -8,7 +8,7 @@ interface INodeDataResponse {
   children: INodeDataResponse[]
 }
 
-interface INodeResponse {
+export interface INodeResponse {
   data: INodeDataResponse
   parent: INodeDataResponse
 }
@@ -41,7 +41,12 @@ const useTreeGraph = ({ trees = {}, onNodeClick }: TreeGraphParams) => {
           children
         }
       })
-      .filter(tree => !tree.children.includes(null))
+      .map(tree => {
+        if (!tree.children.includes(null)) return tree
+        return { ...tree, children: [] }
+      })
+
+    console.log(treesData)
 
     if (treesData.length === 0) {
       select(svgRef.current).selectAll('*').remove()
