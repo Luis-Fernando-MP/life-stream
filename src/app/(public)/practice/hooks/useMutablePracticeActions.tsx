@@ -6,53 +6,81 @@ import { validateName } from '@/shared/validateName'
 import { useState } from 'react'
 import toast from 'react-hot-toast'
 
-import { promptWithNodesToast, promptWithToast } from '../components/PromptWithToast'
+import {
+  promptOnlyNodesToast,
+  promptWithNodesToast,
+  promptWithToast
+} from '../components/PromptWithToast'
 import usePracticeStoreTrees from './usePracticeStoreTrees'
 
-const useMutablePracticeActions = (viewx: string) => {
+const useMutablePracticeActions = () => {
   const view = useChartView(s => s.view)
-  const paragraphView = view === 'tree' ? 'Árbol' : 'Lista'
-
   const { trees, setTrees, tails, setTails } = usePracticeStoreTrees()
   const [headName, setHeadName] = useState('')
 
   const addHead = () => {
-    // if (!headName || !validateName(headName)) {
-    //   return toast.error('Nombre inválido. Usa solo letras, números, guiones "-" o "_"')
-    // }
-    const newTree = new RedBlackTree()
+    if (view === 'tree') return addTreeHead()
+    addListHead()
+  }
 
-    promptWithToast(`¿Cual sera el nombre del nuevo ${paragraphView}?`, val => {
+  const addTreeHead = () => {
+    const newTree = new RedBlackTree()
+    promptWithToast(<h5>🌳 ¡Hora de plantar un nuevo Árbol! ¿Cuál será su nombre?</h5>, val => {
       if (!trees[val.toLowerCase()]) {
         setTrees({ ...trees, [val.toLowerCase()]: newTree })
-        return toast.success('Árbol agregado correctamente')
+        return toast.success('🎉 ¡Árbol agregado exitosamente!')
       }
       const newTrees = { ...trees }
-      const prevTreeNodes = newTrees[val.toLocaleLowerCase()]
-      delete newTrees[val.toLocaleLowerCase()]
+      const prevTreeNodes = newTrees[val.toLowerCase()]
+      delete newTrees[val.toLowerCase()]
 
       promptWithToast(
         <div>
-          <h5>✏️ El nombre del árbol ya existe, ¿Deseas modificarlo?</h5>
-          <p>Agrega su nuevo nombre</p>
+          <h5>⚠️ El nombre del árbol ya existe. ¿Deseas renombrarlo?</h5>
+          <p>🌱 Por favor, escribe su nuevo nombre:</p>
         </div>,
         val => {
           newTrees[val.toLowerCase()] = prevTreeNodes
-          console.log(val, newTrees)
           setTrees(newTrees)
+          return toast.success('✅ ¡Árbol renombrado correctamente!')
+        }
+      )
+    })
+  }
 
-          return toast.success('Árbol modificado correctamente')
-          // newTrees[val.toLowerCase()] = newTree
-          // // delete
+  const addListHead = () => {
+    promptWithToast(<h5>🪢 ¡Vamos a crear una nueva lista! ¿Cómo la llamaremos?</h5>, val => {
+      const newTail: never[] = []
+      if (!tails[val.toLowerCase()]) {
+        setTails({ ...tails, [val.toLowerCase()]: newTail })
+        return toast.success('🎉 ¡Lista creada exitosamente!')
+      }
+
+      const newTails = { ...tails }
+      const prevNodes = newTails[val.toLowerCase()]
+      delete newTails[val.toLowerCase()]
+
+      promptWithToast(
+        <div>
+          <h5>⚠️ El nombre de la lista ya existe. ¿Deseas cambiarlo?</h5>
+          <p>📝 Escribe su nuevo nombre:</p>
+        </div>,
+        val => {
+          newTails[val.toLowerCase()] = prevNodes
+          setTails(newTails)
+          return toast.success('✅ ¡Lista renombrada correctamente!')
         }
       )
     })
   }
 
   const updateHead = () => {
-    const newTree = new RedBlackTree()
+    if (view === 'tree') return updateTreeHead()
+    updateListHead()
+  }
 
-    promptWithNodesToast(<h5>Escojamos una opción para actualizar</h5>, ({ val, select }) => {
+  const updateTreeHead = () => {
+    promptWithNodesToast(<h5>🌲 Elige el árbol que quieres actualizar</h5>, ({ val, select }) => {
       const newTrees = { ...trees }
       const prevTreeNodes = newTrees[select]
       delete newTrees[select]
@@ -60,36 +88,47 @@ const useMutablePracticeActions = (viewx: string) => {
       newTrees[val] = prevTreeNodes
       setTrees(newTrees)
 
-      return toast.success('Árbol modificado correctamente')
+      return toast.success('🌟 ¡Árbol actualizado exitosamente!')
     })
   }
 
-  const removeHead = () => {
-    if (!headName || !validateName(headName)) {
-      return toast.error('Nombre inválido.')
-    }
+  const updateListHead = () => {
+    promptWithNodesToast(
+      <h5>🪢 Selecciona la lista que deseas actualizar</h5>,
+      ({ val, select }) => {
+        const newTails = { ...tails }
+        const prevTailsNodes = newTails[select]
+        delete newTails[select]
 
-    if (view === 'tree') {
-      if (!trees[headName.toLowerCase()]) {
-        return toast.error('El árbol no existe.')
+        newTails[val] = prevTailsNodes
+        setTails(newTails)
+
+        return toast.success('🌟 ¡Lista actualizada exitosamente!')
       }
-      setTrees(prev => {
-        const updated = { ...prev }
-        delete updated[headName.toLowerCase()]
-        return updated
-      })
-      toast.success('Árbol eliminado correctamente')
-    } else {
-      if (!tails[headName.toLowerCase()]) {
-        return toast.error('La lista no existe.')
-      }
-      setTails(prev => {
-        const updated = { ...prev }
-        delete updated[headName.toLowerCase()]
-        return updated
-      })
-      toast.success('Lista eliminada correctamente')
-    }
+    )
+  }
+
+  const removeHead = () => {
+    if (view === 'tree') return removeTreeHead()
+    removeListHead()
+  }
+
+  const removeTreeHead = () => {
+    promptOnlyNodesToast(<h5>✂️ ¿Qué árbol talaremos hoy?</h5>, select => {
+      const newTrees = { ...trees }
+      delete newTrees[select]
+      setTrees(newTrees)
+      return toast.success('❌ ¡Árbol eliminado exitosamente!')
+    })
+  }
+
+  const removeListHead = () => {
+    promptOnlyNodesToast(<h5>🗑️ ¿Qué lista borraremos hoy?</h5>, select => {
+      const newTails = { ...tails }
+      delete newTails[select]
+      setTails(newTails)
+      return toast.success('❌ ¡Lista eliminada exitosamente!')
+    })
   }
 
   return {

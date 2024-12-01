@@ -4,7 +4,7 @@ import useChartView from '@/app/(dashboard)/(pages)/chart/hooks/useChartView'
 import { acl } from '@/shared/activeClass'
 import { validateName } from '@/shared/validateName'
 import { CheckIcon, XIcon } from 'lucide-react'
-import { type JSX, ReactNode, memo, useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { type JSX, ReactNode, memo, useCallback, useMemo, useRef, useState } from 'react'
 import toast from 'react-hot-toast'
 
 import usePracticeStoreTrees from '../../hooks/usePracticeStoreTrees'
@@ -48,7 +48,6 @@ export const WithNodesPromptToast = ({
           duration: 500
         })
       }
-
       toast.dismiss(toastId)
       setTimeout(() => onConfirm({ val: value.trim(), select: selectTree }), 1000)
     },
@@ -66,8 +65,6 @@ export const WithNodesPromptToast = ({
     ),
     [selectTree]
   )
-
-  console.log('render')
 
   return (
     <div className='promptToast'>

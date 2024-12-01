@@ -11,7 +11,7 @@ export type prViews = 'Agregar' | 'Remover' | 'Actualizar' | 'ActualizarNodo'
 const StructureActions = ({ view }: { view: string }): JSX.Element => {
   const [prView, setPrView] = useState<prViews>('Agregar')
 
-  const { addHead, updateHead } = useMutablePracticeActions(prView)
+  const { addHead, updateHead, removeHead } = useMutablePracticeActions(prView)
   const paragraphFromView = view === 'tree' ? 'Árbol' : 'Lista'
   return (
     <>
@@ -28,7 +28,10 @@ const StructureActions = ({ view }: { view: string }): JSX.Element => {
           <p>Agregar {paragraphFromView}</p>
         </button>
         <button
-          onClick={() => setPrView('Remover')}
+          onClick={() => {
+            removeHead()
+            setPrView('Remover')
+          }}
           className={`practiceActions-handle ${acl(prView === 'Remover')}`}
         >
           <Eraser />

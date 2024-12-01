@@ -4,6 +4,7 @@ import { ReactNode } from 'react'
 import toast from 'react-hot-toast'
 
 import { NormalPromptToast } from './NormalPromptToast'
+import OnlyNodesPromptToast from './OnlyNodesPromptToast'
 import WithNodesPromptToast, { IPromptWithNodesToast } from './WithNodesPromptToast'
 import './style.scss'
 
@@ -15,8 +16,8 @@ const promptWithToast = (message: ReactNode, onConfirm: (value: string) => void)
           {message}
         </NormalPromptToast>
       )
-    }
-    // { duration: 2000 }
+    },
+    { duration: 800 }
   )
 }
 
@@ -32,8 +33,21 @@ const promptWithNodesToast = (
         </WithNodesPromptToast>
       )
     },
-    { duration: 1000 }
+    { duration: 800 }
   )
 }
 
-export { promptWithToast, promptWithNodesToast }
+const promptOnlyNodesToast = (message: ReactNode, onConfirm: (select: string) => void) => {
+  toast.custom(
+    t => {
+      return (
+        <OnlyNodesPromptToast toastId={t.id} onConfirm={onConfirm}>
+          {message}
+        </OnlyNodesPromptToast>
+      )
+    },
+    { duration: 800 }
+  )
+}
+
+export { promptWithToast, promptWithNodesToast, promptOnlyNodesToast }
