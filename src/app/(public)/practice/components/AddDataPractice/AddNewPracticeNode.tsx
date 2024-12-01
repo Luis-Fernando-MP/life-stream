@@ -67,12 +67,12 @@ const AddNewPracticeNode = (): JSX.Element => {
   return (
     <form onSubmit={handleSubmit(handleAddNewNode, onError)} className='addDataPractice-form'>
       <button type='submit' className='addDataPractice-submit'>
-        AGREGAR {watch('quantity')} NODOS
+        AGREGAR {watch('quantity') || 0} NODOS
       </button>
 
       <section className={`addDataPractice-form__field ${acl(!!quantity, 'error')}`}>
         <div className={`addDataPractice-form__field ${acl(!!quantity, 'error')}`}>
-          <p>Cantidad de nodos:</p>
+          <h5>Cantidad de nodos:</h5>
           <input autoComplete='off' {...register('quantity', { valueAsNumber: true })} />
           {quantity && <p className='error-message'>{quantity.message}</p>}
         </div>
