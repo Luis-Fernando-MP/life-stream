@@ -14,24 +14,38 @@
 
     @include d.flex($ali: flex-start);
 
-    > h5 {
-      padding: v.$padding / 2 v.$padding * 2;
+    &__container {
+      @include d.flex();
+
+      width: 100%;
+      padding: v.$padding;
+      background-color: rgba(v.$bg2, 0.4);
+      border-radius: v.$radius;
+
+      > h3 {
+        text-transform: capitalize;
+      }
+    }
+
+    &__item {
+      width: 80px;
+      height: 100px;
+      padding: 10px 0;
       border-radius: v.$radius;
 
       @include v.border;
+      @include d.flex;
+
+      h3 {
+        font-weight: lighter;
+      }
     }
 
     &__list {
       @include d.flex($dir: row);
 
       flex-wrap: wrap;
-
       width: 100%;
-      padding: v.$padding;
-
-      background-color: rgb(v.$bg2);
-      border: 2px solid rgb(v.$bg3);
-      border-radius: v.$radius;
     }
   }
 }

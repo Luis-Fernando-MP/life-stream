@@ -27,7 +27,7 @@ const AddNewPracticeNode = (): JSX.Element => {
 
   const handleAddTreeNewNode = (key: string, quantity: number) => {
     const selectTree = trees[key]
-    if (!selectTree) toast.error('El árbol no existe')
+    if (!selectTree) return toast.error('El árbol no existe')
     Array(quantity)
       .fill(0)
       .forEach(() => {
@@ -42,7 +42,7 @@ const AddNewPracticeNode = (): JSX.Element => {
 
   const handleAddListNewNode = (key: string, quantity: number) => {
     const selectList = tails[key]
-    if (!selectList) toast.error('La lista no existe')
+    if (!selectList) return toast.error('La lista no existe')
     Array(quantity)
       .fill(0)
       .forEach(() => {
