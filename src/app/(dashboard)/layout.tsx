@@ -20,18 +20,20 @@ export const metadata: Metadata = {
 }
 
 const Layout = async ({ children }: ILayout) => {
+  const headerList = headers()
   const queryClient = getQueryClient()
-  const headersList = headers()
-  const { pathname } = new URL(headersList.get('referer') ?? '')
+  const pathname = headerList.get('x-current-path') ?? '/'
   const isPublic = PUBLIC_ROUTES.includes(pathname)
-  const { userId, getToken } = auth()
-  if (!userId || !isPublic) redirect('/sign-in')
+  const { userId } = auth()
+  if (!userId || isPublic) redirect('/sign-in')
+  // console.log('--------', headersList)
 
-  const token = await getToken()
-  await queryClient.prefetchQuery({
-    queryKey: [ALL_DATA],
-    queryFn: () => getAllData(token)
-  })
+  // const token = await getToken()
+
+  // await queryClient.prefetchQuery({
+  //   queryKey: [ALL_DATA],
+  //   queryFn: () => getAllData(token)
+  // })
 
   return (
     <Suspense fallback={<div>Loading data...</div>}>
