@@ -2,21 +2,26 @@ import { acl } from '@/shared/activeClass'
 import { Eraser, FilePenLine, PlusSquareIcon } from 'lucide-react'
 import { useState } from 'react'
 
+import useMutablePracticeActions from '../../hooks/useMutablePracticeActions'
 import AddDataPractice from '../AddDataPractice'
-import AddNewPracticeHead from '../AddDataPractice/AddNewPracticeHead'
+import MutablePracticeHead from '../AddDataPractice/MutablePracticeHead'
 
 export type prViews = 'Agregar' | 'Remover' | 'Actualizar' | 'ActualizarNodo'
 
 const StructureActions = ({ view }: { view: string }): JSX.Element => {
   const [prView, setPrView] = useState<prViews>('Agregar')
 
+  const { addHead, updateHead } = useMutablePracticeActions(prView)
   const paragraphFromView = view === 'tree' ? 'Árbol' : 'Lista'
   return (
     <>
       <h4>ACCIONES:</h4>
       <div className='practiceActions-handles'>
         <button
-          onClick={() => setPrView('Agregar')}
+          onClick={() => {
+            addHead()
+            setPrView('Agregar')
+          }}
           className={`practiceActions-handle ${acl(prView === 'Agregar')}`}
         >
           <PlusSquareIcon />
@@ -30,7 +35,10 @@ const StructureActions = ({ view }: { view: string }): JSX.Element => {
           <p>Remover {paragraphFromView}</p>
         </button>
         <button
-          onClick={() => setPrView('Actualizar')}
+          onClick={() => {
+            updateHead()
+            setPrView('Actualizar')
+          }}
           className={`practiceActions-handle ${acl(prView === 'Actualizar')}`}
         >
           <FilePenLine />
@@ -42,7 +50,7 @@ const StructureActions = ({ view }: { view: string }): JSX.Element => {
         <h4>
           {prView} {paragraphFromView}
         </h4>
-        <AddNewPracticeHead type={prView} />
+        <MutablePracticeHead type={prView} />
       </section>
 
       <section className='practiceActions-view'>

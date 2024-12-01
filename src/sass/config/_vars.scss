@@ -1,6 +1,6 @@
 :root {
   --bg-primary: 10, 10, 10;
-  --bg-secondary: 20, 20, 20;
+  --bg-secondary: 30, 30, 30;
   --bg-tertiary: 25, 25, 25;
   --fnt-primary: 255, 255, 255;
   --fnt-secondary: 200, 200, 200;
@@ -62,8 +62,13 @@ $font2: var(--RobotoFont);
 $font3: var(--PlayFairFont);
 $gr1: linear-gradient(90deg, rgb($tn1) 0%, rgb($tn2) 100%);
 $sha1: 6px 5px 20px -5px rgb($bg3);
-$error: #e41e38;
-$blood: #cb1c70;
+
+// Basic colors
+$error: rgb(228 30 56);
+$success: rgb(40 167 69);
+$warning: rgb(255 193 7);
+$info: rgb(23 162 184);
+$blood: rgb(203 28 112);
 
 @mixin dotDark {
   body.dark & {

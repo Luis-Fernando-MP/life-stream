@@ -1,0 +1,66 @@
+@use '@sass/config/vars' as v;
+@use '@sass/utils/defs' as d;
+@use 'sass:color';
+
+.promptToast {
+  padding: v.$padding v.$padding * 2;
+  border-radius: v.$radius;
+
+  @include v.border;
+  @include d.flex($ali: center);
+
+  h5 {
+    text-align: center;
+    text-transform: capitalize;
+  }
+
+  &-field {
+    width: 100%;
+    padding: 5px 10px;
+
+    font-size: v.$fH5;
+
+    background-color: rgb(v.$bg2);
+    border-radius: 5px;
+  }
+
+  &-options,
+  &-nodes {
+    @include d.flex($dir: row, $ali: center);
+  }
+
+  &-nodes {
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: 300px;
+
+    &__btn {
+      padding: 10px;
+      background-color: rgb(v.$bg2);
+      border-radius: 5px;
+
+      @include v.hoverS(0.95);
+
+      &.active {
+        border: 2px solid rgb(v.$tn1);
+      }
+    }
+  }
+
+  &-btn {
+    padding: 5px;
+    border-radius: 50%;
+
+    @include v.hoverS($scale: 0.9);
+
+    &:first-child {
+      color: color.adjust(v.$success, $lightness: 75%);
+      background-color: v.$success;
+    }
+
+    &:last-child {
+      color: color.adjust(v.$error, $lightness: 55%);
+      background-color: v.$error;
+    }
+  }
+}
