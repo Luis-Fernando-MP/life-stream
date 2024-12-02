@@ -27,38 +27,40 @@ export const dynamic = 'force-dynamic'
 export async function POST() {
   return NextResponse.json({ image: Date.now() })
 }
+
 export async function GET() {
   try {
-    // Fetching datos desde Prisma
-    const [doctors, patients, bloodDonors, bloodReceivers] = await Promise.all([
-      prisma.doctor.findMany({ include: { person: true } }),
-      prisma.patient.findMany({ include: { person: true } }),
-      prisma.bloodDonor.findMany({
-        include: { patient: { include: { person: true } }, CreatedBy: true }
-      }),
-      prisma.bloodReceiver.findMany({
-        include: { patient: { include: { person: true } }, CreatedBy: true }
-      })
-    ])
+    const doctors = await prisma.doctor.findMany({
+      include: { person: true }
+    })
 
-    // Configuración de headers
+    const patients = await prisma.patient.findMany({
+      include: { person: true }
+    })
+
+    const bloodDonors = await prisma.bloodDonor.findMany({
+      include: { patient: { include: { person: true } }, CreatedBy: true }
+    })
+
+    const bloodReceivers = await prisma.bloodReceiver.findMany({
+      include: { patient: { include: { person: true } }, CreatedBy: true }
+    })
+
     const headers = new Headers({
       'Access-Control-Allow-Origin': '*',
       'Access-Control-Allow-Headers': 'Authorization, Content-Type'
     })
 
-    // Respuesta exitosa
     return NextResponse.json<ApiAllData>(
-      { doctors, patients, bloodDonors, bloodReceivers },
+      {
+        doctors,
+        patients,
+        bloodDonors,
+        bloodReceivers
+      },
       { status: 200, headers }
     )
-  } catch (error: unknown) {
-    console.error('Error fetching data:', error)
-
-    // Manejo de errores genéricos
-    return NextResponse.json(
-      { error: error instanceof Error ? error.message : 'Unknown error occurred' },
-      { status: 500 }
-    )
+  } catch (error: any) {
+    return NextResponse.json({ error: error.message }, { status: 500 })
   }
 }
