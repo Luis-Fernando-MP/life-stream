@@ -1,4 +1,4 @@
-import { ApiAllData } from '@/app/api/all/route'
+import { ApiAllData } from '@/app/api/allData/route'
 import RedBlackTree from '@/shared/tree/RedBlackTree'
 import { create } from 'zustand'
 

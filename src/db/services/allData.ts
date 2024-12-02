@@ -8,7 +8,7 @@ export async function fetchAllData() {
     const { getToken } = auth()
     const token = await getToken()
 
-    const response = await fetch(`${baseUrl}/api/all`, {
+    const response = await fetch(`${baseUrl}/api/allData`, {
       headers: {
         Authorization: `Bearer ${token}`
       }

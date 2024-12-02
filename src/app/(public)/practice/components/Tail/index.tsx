@@ -4,7 +4,7 @@
 import useSelectPerson, {
   ESelectPerson
 } from '@/app/(dashboard)/(pages)/chart/hooks/useSelectPerson'
-import { ApiAllItemData } from '@/app/api/all/route'
+import { ApiAllData } from '@/app/api/allData/route'
 import { fromDate } from '@/shared/time'
 import type { JSX } from 'react'
 
@@ -15,7 +15,7 @@ interface ITail {
   image: string
   id: string
   name: string
-  etc: ApiAllItemData
+  etc: ApiAllData
   createdAt: string
 }
 

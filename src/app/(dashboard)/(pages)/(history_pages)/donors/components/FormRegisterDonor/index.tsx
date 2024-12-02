@@ -1,6 +1,6 @@
 'use client'
 
-import { PatientWithPerson } from '@/app/api/all/route'
+import { PatientWithPerson } from '@/app/api/allData/route'
 import { useSetDonors } from '@/db/hooks/useSetDonors'
 import { IDonorsRegisterRes, donorsRegisterResolver } from '@/resolvers/donorsRegisterResolver'
 import { acl } from '@/shared/activeClass'

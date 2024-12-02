@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import { BloodDonorWithRel } from '@/app/api/all/route'
+import { BloodDonorWithRel } from '@/app/api/allData/route'
 import { getBloodType } from '@/shared/getBloodType'
 import dayjs from 'dayjs'
 import { DropletIcon } from 'lucide-react'
