@@ -1,0 +1,11 @@
+{
+  "rewrites": [
+    {
+      "source": "/api/allData",
+      "destination": "/api/allData",
+      "headers": {
+        "cache-control": "no-store"
+      }
+    }
+  ]
+}

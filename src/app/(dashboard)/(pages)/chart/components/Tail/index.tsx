@@ -1,7 +1,6 @@
 'use client'
 
 /* eslint-disable @next/next/no-img-element */
-import { ApiAllItemData } from '@/app/api/all/route'
 import { fromDate } from '@/shared/time'
 import type { JSX } from 'react'
 
@@ -14,7 +13,7 @@ interface ITail {
   id: string
   dbId: string
   name: string
-  etc: ApiAllItemData
+  etc: any
   createdAt: string
 }
 

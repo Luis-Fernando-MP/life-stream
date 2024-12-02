@@ -1,6 +1,6 @@
 'use client'
 
-import { BloodReceiverWithRel } from '@/app/api/all/route'
+import { BloodReceiverWithRel } from '@/app/api/allData/route'
 import BoldText from '@/shared/ui/BoldText'
 import { type JSX, useState } from 'react'
 

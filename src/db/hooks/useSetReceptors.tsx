@@ -21,9 +21,6 @@ export function useSetReceptors(toastId: string) {
       toast.error('Error al crear el receptor de sangre', { id: toastId })
     },
     onSuccess(data) {
-      useQuery.invalidateQueries({
-        queryKey: [ALL_DATA]
-      })
       const body = `<section class='history-section'>
         <img src='${data?.receptor.patient.person.photo}' alt='patient search' />
         <div>
@@ -33,6 +30,7 @@ export function useSetReceptors(toastId: string) {
         </div>
         </section>`
       historyMutate({ body })
+      useQuery.invalidateQueries({ queryKey: [ALL_DATA] })
       toast.success('Receptor creado', { id: toastId, duration: 2000 })
     }
   })

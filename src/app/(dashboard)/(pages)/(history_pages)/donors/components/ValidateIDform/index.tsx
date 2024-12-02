@@ -2,7 +2,7 @@
 
 import useChartView from '@/app/(dashboard)/(pages)/chart/hooks/useChartView'
 import useStoreTrees from '@/app/(dashboard)/(pages)/hooks/useStoreTrees'
-import { BloodReceiverWithRel, PatientWithPerson } from '@/app/api/all/route'
+import { BloodReceiverWithRel, PatientWithPerson } from '@/app/api/allData/route'
 import { useSetHistories } from '@/db/hooks/useHistory'
 import { type IDniResolver, dniResolver } from '@/resolvers/dniResolver'
 import { acl } from '@/shared/activeClass'

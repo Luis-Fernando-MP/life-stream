@@ -1,4 +1,4 @@
-import { DoctorWithPerson } from '@/app/api/all/route'
+import { DoctorWithPerson } from '@/app/api/allData/route'
 import { fromDate } from '@/shared/time'
 import { SaveIcon, Trash2Icon } from 'lucide-react'
 import type { JSX } from 'react'

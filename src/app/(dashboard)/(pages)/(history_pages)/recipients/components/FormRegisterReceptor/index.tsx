@@ -1,6 +1,6 @@
 'use client'
 
-import { PatientWithPerson } from '@/app/api/all/route'
+import { PatientWithPerson } from '@/app/api/allData/route'
 import { useSetReceptors } from '@/db/hooks/useSetReceptors'
 import { IDonorsRegisterRes } from '@/resolvers/donorsRegisterResolver'
 import {
@@ -65,7 +65,7 @@ const FormRegisterReceptor = ({
   const { age, bloodType, dni, firstName, lastName, weight, photo } = errors
 
   const onFormSubmit = async (data: IDonorsRegisterRes) => {
-    toast.loading('Guardando recptor de sangre...', { id: toastReceptorId, duration: Infinity })
+    toast.loading('Guardando receptor de sangre...', { id: toastReceptorId, duration: Infinity })
     receptorsMutate({
       body: {
         ...data,

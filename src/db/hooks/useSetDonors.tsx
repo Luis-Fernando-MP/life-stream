@@ -18,9 +18,6 @@ export function useSetDonors(toastId: string) {
       toast.error('error al crear el donante', { id: toastId })
     },
     onSuccess(data) {
-      useQuery.invalidateQueries({
-        queryKey: [ALL_DATA]
-      })
       const body = `<section class='history-section'>
         <img src='${data?.donor.patient.person.photo}' alt='patient search' />
         <div>
@@ -30,6 +27,7 @@ export function useSetDonors(toastId: string) {
         </div>
         </section>`
       historyMutate({ body })
+      useQuery.invalidateQueries({ queryKey: [ALL_DATA] })
       toast.success('Donante creado', { id: toastId, duration: 2000 })
     }
   })
