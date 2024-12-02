@@ -11,7 +11,7 @@ export function usePersonHistories(userID: string | undefined) {
       const [, id] = queryKey
       return await fetchHistories(String(id))
     },
-    staleTime: 2000,
+    staleTime: 10000,
     retry: 5,
     enabled: !!userID
   })
