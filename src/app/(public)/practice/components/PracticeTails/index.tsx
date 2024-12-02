@@ -5,7 +5,6 @@ import './style.scss'
 
 const PracticeTails = (): JSX.Element => {
   const { tails } = usePracticeStoreTrees()
-  console.log('tails', tails)
 
   return (
     <section className='tails delay animate-blurred-fade-in'>

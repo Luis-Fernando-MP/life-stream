@@ -17,7 +17,7 @@ export function useSetReceptors(toastId: string) {
       toast.loading('Creando receptor de sangre', { id: toastId })
     },
     onError(error) {
-      console.log('error', error)
+      console.error('error', error)
       toast.error('Error al crear el receptor de sangre', { id: toastId })
     },
     onSuccess(data) {

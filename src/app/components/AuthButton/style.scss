@@ -24,10 +24,6 @@
       font-size: v.$fH5;
     }
 
-    .cl-userButtonPopoverActionButton {
-      color: rgb(v.$fn2);
-    }
-
     span {
       font-family: v.$font2;
     }
@@ -39,6 +35,7 @@
 
     .cl-userButtonPopoverActionButton {
       width: 100%;
+      color: rgb(v.$fn2);
       border-radius: v.$radius;
     }
   }

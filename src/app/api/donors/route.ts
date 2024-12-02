@@ -92,8 +92,7 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json({ donor }, { status: 200 })
   } catch (error: any) {
-    console.log(' - - - -- - error')
-    console.log(error)
+    console.error(error)
 
     return NextResponse.json({ error: error.message }, { status: 500 })
   }

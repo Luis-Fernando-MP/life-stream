@@ -42,8 +42,6 @@ export async function DELETE(req: NextRequest) {
     const history = await prisma.queryHistory.delete({
       where: { id: data.id, personId: userId }
     })
-    console.log(history)
-
     return NextResponse.json({ history }, { status: 200 })
   } catch (error: any) {
     return NextResponse.json({ error: error.message }, { status: 500 })

@@ -14,7 +14,7 @@ export function useSetDonors(toastId: string) {
     mutationFn: setUseDonors,
     retry: 3,
     onError(error) {
-      console.log('error', error)
+      console.error('error', error)
       toast.error('error al crear el donante', { id: toastId })
     },
     onSuccess(data) {

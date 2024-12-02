@@ -8,7 +8,6 @@ import './style.scss'
 
 const HistoryButtons = (): JSX.Element => {
   const { setView, view } = useChartView()
-  console.log('-----', view)
 
   return (
     <section className={`history-buttons cl-${view}`}>

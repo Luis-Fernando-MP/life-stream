@@ -89,7 +89,7 @@ export async function POST(req: NextRequest) {
     })
     return NextResponse.json({ receptor }, { status: 200 })
   } catch (error: any) {
-    console.log(error)
+    console.error(error)
     return NextResponse.json({ error: error.message }, { status: 500 })
   }
 }
