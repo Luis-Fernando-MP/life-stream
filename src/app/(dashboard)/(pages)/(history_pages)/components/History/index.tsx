@@ -7,7 +7,6 @@ import { Check, LoaderCircle, Trash2 } from 'lucide-react'
 import { type JSX, useRef } from 'react'
 import toast from 'react-hot-toast'
 
-import HistoryButtons from '../HistoryButtons'
 import './style.scss'
 
 interface IHistory {
@@ -18,7 +17,7 @@ interface IHistory {
 const History = ({ history, i }: IHistory): JSX.Element => {
   const query = useQueryClient()
   const historyRef = useRef<HTMLElement>(null)
-
+  const deleteToastID = 'deleteToastID'
   const { mutate, status } = useMutation({
     mutationFn: deleteUserHistory,
     onError() {
@@ -39,11 +38,12 @@ const History = ({ history, i }: IHistory): JSX.Element => {
         })
       }
 
-      toast.success('Historia borrada')
+      toast.success('Historia borrada', { id: deleteToastID })
     }
   })
 
   const handleDelete = (): void => {
+    toast.loading('Borrando historia...', { id: deleteToastID })
     if (status === 'pending') return
     historyRef.current?.classList.add('remove')
     mutate({
@@ -72,8 +72,6 @@ const History = ({ history, i }: IHistory): JSX.Element => {
           <div dangerouslySetInnerHTML={{ __html: history.description }} />
         </div>
       </article>
-      <h5 className='history-subTitle'>Escoge una estructura de Datos</h5>
-      <HistoryButtons />
     </section>
   )
 }

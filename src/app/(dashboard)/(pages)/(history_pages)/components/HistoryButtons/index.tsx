@@ -8,29 +8,14 @@ import './style.scss'
 
 const HistoryButtons = (): JSX.Element => {
   const { setView, view } = useChartView()
+
   return (
     <section className={`history-buttons cl-${view}`}>
-      <button className='history-button' onClick={() => setView('tails')}>
-        <div className='history-icon'>
-          <Rows4Icon />
-        </div>
-        <div className='history-button__text'>
-          <h5>Traditional con arrayList</h5>
-          <p>
-            Empleemos un enfoque tradicional basada en simples arrayList • <u>Click para abrir</u>
-          </p>
-        </div>
+      <button className='history-button' onClick={() => setView('array')}>
+        <Rows4Icon />
       </button>
       <button className='history-button' onClick={() => setView('tree')}>
-        <div className='history-icon'>
-          <NetworkIcon />
-        </div>
-        <div className='history-button__text'>
-          <h5>Árboles Binarios Rojo-Negro</h5>
-          <p>
-            Optimizan el proceso de la trata de información de donantes • <u>Click para abrir</u>
-          </p>
-        </div>
+        <NetworkIcon />
       </button>
     </section>
   )

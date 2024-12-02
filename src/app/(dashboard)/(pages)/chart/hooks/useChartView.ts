@@ -1,6 +1,6 @@
 import { create } from 'zustand'
 
-type TView = 'array' | 'tree' | 'tails' | 'search'
+type TView = 'array' | 'tree' | 'search'
 
 interface ISelectPerson {
   view: TView

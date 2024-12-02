@@ -20,7 +20,7 @@
   padding: v.$padding;
   padding-top: 0;
 
-  background-color: rgba(v.$bg2, 0.3);
+  background-color: rgba(v.$bg2, 0.4);
   border-radius: v.$radius;
 
   @include d.flex($ali: center, $gap: 0);

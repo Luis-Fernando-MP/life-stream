@@ -20,7 +20,8 @@ interface IFormRegisterDonor {
 }
 
 const FormRegisterDonor = ({ className, patient, setDonor }: IFormRegisterDonor): JSX.Element => {
-  const { mutate: donorsMutate } = useSetDonors()
+  const toastDonorId = 'id-donors-modal'
+  const { mutate: donorsMutate } = useSetDonors(toastDonorId)
   const hookForm = useForm<IDonorsRegisterRes>({
     resolver: donorsRegisterResolver,
     mode: 'onChange',
@@ -56,7 +57,7 @@ const FormRegisterDonor = ({ className, patient, setDonor }: IFormRegisterDonor)
   const { age, bloodType, dni, firstName, lastDonationDate, lastName, weight, photo } = errors
 
   const onFormSubmit = async (data: IDonorsRegisterRes) => {
-    toast.success('Formulario enviado con éxito')
+    toast.loading('Guardando donante de sangre...', { id: toastDonorId, duration: Infinity })
     donorsMutate({
       body: {
         ...data,
@@ -65,6 +66,7 @@ const FormRegisterDonor = ({ className, patient, setDonor }: IFormRegisterDonor)
         personId: patient?.person?.id ?? null
       }
     })
+
     setDonor()
   }
 

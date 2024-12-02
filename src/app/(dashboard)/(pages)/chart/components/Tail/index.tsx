@@ -12,23 +12,21 @@ interface ITail {
   type: ESelectPerson
   image: string
   id: string
+  dbId: string
   name: string
   etc: ApiAllItemData
   createdAt: string
 }
 
-const Tail = ({ type, name, etc, id, image, createdAt }: ITail): JSX.Element => {
+const Tail = ({ type, name, etc, id, dbId, image, createdAt }: ITail): JSX.Element => {
   const { setPerson } = useSelectPerson()
 
   const handleClick = (): void => {
-    setPerson({
-      type,
-      ...etc
-    })
+    setPerson({ type, ...etc, dbId })
   }
 
   return (
-    <li className='comTails'>
+    <li className='comTails' data-modal>
       <button onClick={handleClick}>
         <img src={image} alt={name} />
         <h5>{name}</h5>

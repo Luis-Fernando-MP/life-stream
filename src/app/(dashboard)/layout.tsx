@@ -1,9 +1,9 @@
-import { ALL_DATA } from '@/db/hooks/keys'
-import { getAllData } from '@/db/services/getAllData'
 import { getQueryClient } from '@/shared/getQueryClient'
+import { PUBLIC_ROUTES } from '@/shared/routes'
 import { auth } from '@clerk/nextjs/server'
 import { HydrationBoundary, dehydrate } from '@tanstack/react-query'
 import type { Metadata } from 'next'
+import { headers } from 'next/headers'
 import { redirect } from 'next/navigation'
 import { type ReactNode, Suspense } from 'react'
 
@@ -18,18 +18,12 @@ export const metadata: Metadata = {
 }
 
 const Layout = async ({ children }: ILayout) => {
+  const headerList = headers()
   const queryClient = getQueryClient()
-
-  const { userId, getToken } = auth()
-  if (!userId) redirect('/sign-in')
-
-  const token = await getToken()
-  // o fetchQuery
-  await queryClient.prefetchQuery({
-    queryKey: [ALL_DATA],
-    queryFn: () => getAllData(token)
-  })
-
+  const pathname = headerList.get('x-current-path') ?? '/'
+  const isPublic = PUBLIC_ROUTES.includes(pathname)
+  const { userId } = auth()
+  if (!userId || isPublic) redirect('/sign-in')
   return (
     <Suspense fallback={<div>Loading data...</div>}>
       <HydrationBoundary state={dehydrate(queryClient)}>{children}</HydrationBoundary>

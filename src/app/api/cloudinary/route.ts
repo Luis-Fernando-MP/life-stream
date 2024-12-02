@@ -34,7 +34,7 @@ export async function POST(req: Request) {
 
     return NextResponse.json({ image: uploadResponse.secure_url })
   } catch (error) {
-    console.log(error)
+    console.error(error)
     return new Response('Internal Error', { status: 500 })
   }
 }

@@ -4,7 +4,7 @@ import { BloodReceiverWithRel } from '@/app/api/all/route'
 import BoldText from '@/shared/ui/BoldText'
 import { type JSX, useState } from 'react'
 
-import FormRegisterDonor from '../components/FormRegisterDonor'
+import FormRegisterReceptor from '../components/FormRegisterReceptor'
 import ValidateIDform from '../components/ValidateIDform'
 import './style.scss'
 
@@ -16,7 +16,7 @@ const Page = (): JSX.Element => {
       <article className='registerDonor-container'>
         <BoldText bold='REGISTRO' middle='DE' desc='RECEPTORES DE SANGRE' />
         <ValidateIDform onSubmit={setDonor} />
-        {donor && <FormRegisterDonor patient={donor} setDonor={() => setDonor(null)} />}
+        {donor && <FormRegisterReceptor patient={donor} setDonor={() => setDonor(null)} />}
       </article>
     </section>
   )

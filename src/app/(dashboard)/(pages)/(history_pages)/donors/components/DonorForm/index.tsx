@@ -68,10 +68,10 @@ function DonorForm() {
         if (!includeFirstName || !includeLastName) return false
         return true
       })
-      if (results.nodes.length < 1) toast.error('Sin resultados', { id: toastId })
       setDonors(results.nodes.map(n => n.data))
       setView('search')
-      console.log(results.nodes)
+
+      if (results.nodes.length < 1) return toast.error('Sin resultados', { id: toastId })
 
       const bodyData = `<section class='history-search'>
         <h5>Filtraste a ${results.nodes.length} donante(s)</h5>
@@ -85,7 +85,6 @@ function DonorForm() {
           .join(' ')}
         </div>
       </section>`
-      console.log(bodyData)
 
       mutate({ body: bodyData })
     },

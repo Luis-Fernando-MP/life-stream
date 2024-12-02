@@ -37,7 +37,7 @@ const ValidateIDform = ({ onSubmit }: IValidateIDform): JSX.Element => {
 
   const onFormSubmit = async ({ dni }: IDniResolver) => {
     let currentNode = undefined
-    if (view === 'tails') {
+    if (view === 'array') {
       currentNode = data.query?.patients.find(d => {
         return d.DNI == dni
       })

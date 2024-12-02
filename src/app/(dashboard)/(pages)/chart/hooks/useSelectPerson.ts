@@ -7,7 +7,7 @@ export enum ESelectPerson {
   REC = 'bloodReceiver'
 }
 
-interface ISelectPersonTreeNode {
+export interface ISelectPersonTreeNode {
   type: ESelectPerson
   [key: string]: any
 }
