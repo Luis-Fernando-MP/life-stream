@@ -1,8 +1,12 @@
 'use client'
 
 import { PatientWithPerson } from '@/app/api/all/route'
-import { useSetDonors } from '@/db/hooks/useSetDonors'
-import { IDonorsRegisterRes, donorsRegisterResolver } from '@/resolvers/donorsRegisterResolver'
+import { useSetReceptors } from '@/db/hooks/useSetReceptors'
+import { IDonorsRegisterRes } from '@/resolvers/donorsRegisterResolver'
+import {
+  IReceptorRegisterResolver,
+  receptorRegisterResolver
+} from '@/resolvers/receptorRegisterResolver'
 import { acl } from '@/shared/activeClass'
 import { bloodTypeArr, getBloodType } from '@/shared/getBloodType'
 import ImageUploader from '@/shared/ui/ImageUploader'
@@ -19,10 +23,15 @@ interface IFormRegisterDonor {
   setDonor: () => void
 }
 
-const FormRegisterDonor = ({ className, patient, setDonor }: IFormRegisterDonor): JSX.Element => {
-  const { mutate: donorsMutate } = useSetDonors()
-  const hookForm = useForm<IDonorsRegisterRes>({
-    resolver: donorsRegisterResolver,
+const FormRegisterReceptor = ({
+  className,
+  patient,
+  setDonor
+}: IFormRegisterDonor): JSX.Element => {
+  const toastReceptorId = 'id-receptor-modal'
+  const { mutate: receptorsMutate } = useSetReceptors(toastReceptorId)
+  const hookForm = useForm<IReceptorRegisterResolver>({
+    resolver: receptorRegisterResolver,
     mode: 'onChange',
     reValidateMode: 'onChange'
   })
@@ -53,11 +62,11 @@ const FormRegisterDonor = ({ className, patient, setDonor }: IFormRegisterDonor)
     watch
   } = hookForm
 
-  const { age, bloodType, dni, firstName, lastDonationDate, lastName, weight, photo } = errors
+  const { age, bloodType, dni, firstName, lastName, weight, photo } = errors
 
   const onFormSubmit = async (data: IDonorsRegisterRes) => {
-    toast.success('Formulario enviado con éxito')
-    donorsMutate({
+    toast.loading('Guardando recptor de sangre...', { id: toastReceptorId, duration: Infinity })
+    receptorsMutate({
       body: {
         ...data,
         lastDonationDate: dayjs(data.lastDonationDate).toDate(),
@@ -170,19 +179,8 @@ const FormRegisterDonor = ({ className, patient, setDonor }: IFormRegisterDonor)
 
         {dni && <p className='error-message'>{dni.message}</p>}
       </section>
-
-      <section className={`RDForm-section ${acl(!!lastDonationDate, 'error')}`}>
-        <div className='RDForm-section__field'>
-          <h5>
-            <b>Fecha</b> de la última <b>recepción</b>
-          </h5>
-          <input type='date' {...register('lastDonationDate')} />
-        </div>
-
-        {lastDonationDate && <p className='error-message'>{lastDonationDate.message as any}</p>}
-      </section>
     </form>
   )
 }
 
-export default FormRegisterDonor
+export default FormRegisterReceptor

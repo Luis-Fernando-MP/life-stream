@@ -46,8 +46,6 @@ const useTreeGraph = ({ trees = {}, onNodeClick }: TreeGraphParams) => {
         return { ...tree, children: [] }
       })
 
-    console.log(treesData)
-
     if (treesData.length === 0) {
       select(svgRef.current).selectAll('*').remove()
       return
@@ -138,6 +136,7 @@ const useTreeGraph = ({ trees = {}, onNodeClick }: TreeGraphParams) => {
       )
       .style('cursor', 'pointer')
       .attr('class', 'treeGraph')
+      .attr('data-modal', 'true')
       .on('click', function (e, d) {
         onNodeClick(d as any, e)
         const node = select(this)

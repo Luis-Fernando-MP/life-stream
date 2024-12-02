@@ -23,7 +23,7 @@ const DonorsComponent = ({ className }: IDonorsComponent): JSX.Element => {
 
   return (
     <article className={`${className} DonorsComponent`}>
-      {view === 'tails' && (
+      {view === 'array' && (
         <h5 className='DonorsComponent-subTitle'>
           <Rows4Icon /> Tradicional con arrayList
         </h5>
@@ -47,7 +47,7 @@ const DonorsComponent = ({ className }: IDonorsComponent): JSX.Element => {
           }}
         />
       )}
-      {view === 'tails' && <TailsDonorComponent donors={data.query?.bloodDonors ?? []} />}
+      {view === 'array' && <TailsDonorComponent donors={data.query?.bloodDonors ?? []} />}
 
       {view === 'search' && <SearchDonorsComponent />}
     </article>

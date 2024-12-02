@@ -2,13 +2,26 @@
 @use '@sass/utils/defs' as d;
 
 .history {
+  &-buttons {
+    scale: 1;
+    width: fit-content;
+    transition: all 0.5s ease-in-out;
+
+    @include d.flex($gap: 5px, $dir: row);
+
+    &.cl-tree button:last-child,
+    &.cl-array button:first-child {
+      scale: 0.93;
+      background-color: rgb(v.$tn1);
+
+      svg {
+        stroke: rgb(v.$fn1);
+      }
+    }
+  }
+
   &-button {
-    width: 100%;
-    height: max-content;
     padding: v.$padding * 0.8;
-
-    text-align: left;
-
     border-radius: v.$radius;
 
     @include d.flex($dir: row, $ali: center, $gap: 5px);
@@ -28,28 +41,6 @@
     svg {
       width: 100%;
       height: 100%;
-    }
-  }
-
-  &-buttons {
-    scale: 1;
-    width: 100%;
-    padding-left: v.$padding;
-    transition: all 0.5s ease-in-out;
-
-    @include d.flex($gap: 5px);
-
-    &.cl-tree button:last-child,
-    &.cl-tails button:first-child {
-      scale: 0.93;
-
-      .history-icon {
-        background-color: rgb(v.$tn1);
-
-        svg {
-          stroke: rgb(v.$fn1);
-        }
-      }
     }
   }
 }

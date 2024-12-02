@@ -23,6 +23,7 @@ const Layout = ({ children }: ILayout) => {
       ...d,
       type: ESelectPerson.DOC,
       id: d.DNI,
+      dbId: d.id,
       image: d.person.photo
     }))
 
@@ -30,6 +31,7 @@ const Layout = ({ children }: ILayout) => {
       ...p,
       type: ESelectPerson.PAT,
       id: p.DNI,
+      dbId: p.id,
       image: p.person.photo
     }))
 
@@ -37,6 +39,7 @@ const Layout = ({ children }: ILayout) => {
       ...bd,
       type: ESelectPerson.DON,
       id: bd.patient.DNI,
+      dbId: bd.id,
       image: bd.patient.person.photo
     }))
 
@@ -44,6 +47,7 @@ const Layout = ({ children }: ILayout) => {
       ...br,
       type: ESelectPerson.REC,
       id: br.patient.DNI,
+      dbId: br.id,
       image: br.patient.person.photo
     }))
 

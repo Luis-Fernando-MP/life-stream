@@ -37,11 +37,12 @@ const ValidateIDform = ({ onSubmit }: IValidateIDform): JSX.Element => {
 
   const onFormSubmit = async ({ dni }: IDniResolver) => {
     let currentNode = undefined
-    if (view === 'tails') {
+    if (view === 'array') {
       currentNode = data.query?.patients.find(d => {
         return d.DNI == dni
       })
     } else currentNode = data.trees.pacientes.find(Number(dni)).node?.data
+
     onSubmit((currentNode as PatientWithPerson) ?? { DNI: getValues('dni') })
     if (!currentNode) return toast.error('No se encontraron resultados')
 
@@ -59,7 +60,7 @@ const ValidateIDform = ({ onSubmit }: IValidateIDform): JSX.Element => {
   }
 
   const onErrors = () => {
-    toast.error('completa los requerimientos')
+    toast.error('⚠️ Por favor, ingresa un DNI válido')
   }
 
   return (
@@ -74,7 +75,7 @@ const ValidateIDform = ({ onSubmit }: IValidateIDform): JSX.Element => {
         disabled={ThereErrors}
         className={`dniForm-submit ${acl(ThereErrors, 'error')}`}
       >
-        BUSCAR PACIENTE
+        BUSCAR RECEPTOR
       </button>
     </form>
   )

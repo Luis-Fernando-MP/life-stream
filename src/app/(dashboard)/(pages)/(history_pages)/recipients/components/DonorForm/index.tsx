@@ -52,8 +52,8 @@ function DonorForm() {
   const onSubmit = useCallback(
     (f: IDonorsSearchRes) => {
       const toastId = toast.success('Filtro aplicados')
-      const donorsTree = trees.donantes
-      const results = donorsTree.findMany(data => {
+      const receptorsTree = trees.receptores
+      const results = receptorsTree.findMany(data => {
         const { DNI, bloodType, age, person, weight } = data.patient
         const isValidDni = String(DNI).startsWith(String(f.dni))
         if (!isValidDni) return false
@@ -68,10 +68,10 @@ function DonorForm() {
         if (!includeFirstName || !includeLastName) return false
         return true
       })
-      if (results.nodes.length < 1) toast.error('Sin resultados', { id: toastId })
       setDonors(results.nodes.map(n => n.data))
       setView('search')
-      console.log(results.nodes)
+
+      if (results.nodes.length < 1) return toast.error('Sin resultados', { id: toastId })
 
       const bodyData = `<section class='history-search'>
         <h5>Filtraste a ${results.nodes.length} donante(s)</h5>
@@ -85,11 +85,10 @@ function DonorForm() {
           .join(' ')}
         </div>
       </section>`
-      console.log(bodyData)
 
       mutate({ body: bodyData })
     },
-    [mutate, setDonors, setView, trees.donantes]
+    [mutate, setDonors, setView, trees.receptores]
   )
 
   const selectedAge = watch('ageRange')

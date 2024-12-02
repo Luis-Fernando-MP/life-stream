@@ -18,6 +18,8 @@ const DrawTreeGraph = ({ trees, className }: IDrawTreeGraph): JSX.Element => {
     trees,
     onNodeClick(data) {
       const dataNode = data.data.node as any as TreeNode
+      console.log('....... tree ', data.data)
+
       setPerson({
         type: dataNode?.data?.type as ESelectPerson,
         ...dataNode.data

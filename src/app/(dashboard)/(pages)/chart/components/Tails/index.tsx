@@ -21,6 +21,7 @@ const Tails = (): JSX.Element => {
               type: ESelectPerson.DOC,
               image: d.person.photo ?? '',
               id: d.DNI,
+              dbId: d.id,
               name: d.person.firstName ?? d.person.lastName,
               etc: d,
               createdAt: d.person.createdAt?.toString() ?? ''
@@ -38,6 +39,7 @@ const Tails = (): JSX.Element => {
               type: ESelectPerson.DON,
               image: d.patient.person.photo ?? '',
               id: d.patient.DNI,
+              dbId: d.id,
               name: d.patient.person.firstName ?? d.patient.person.lastName,
               etc: d,
               createdAt: d.patient.person.createdAt?.toString() ?? ''
@@ -57,6 +59,7 @@ const Tails = (): JSX.Element => {
               id: br.patient.DNI,
               name: br.patient.person.firstName ?? br.patient.person.lastName,
               etc: br,
+              dbId: br.id,
               createdAt: br.patient.person.createdAt?.toString() ?? ''
             }
             return <Tail key={br.id} {...dataTail} />
@@ -74,6 +77,7 @@ const Tails = (): JSX.Element => {
               id: p.DNI,
               name: p.person.firstName ?? p.person.lastName,
               etc: p,
+              dbId: p.id,
               createdAt: p.person.createdAt?.toString() ?? ''
             }
             return <Tail key={p.id} {...dataTail} />

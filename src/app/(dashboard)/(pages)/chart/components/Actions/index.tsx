@@ -25,8 +25,8 @@ const Actions = (): JSX.Element => {
           <p>Estructura de Árbol</p>
         </button>
         <button
-          onClick={() => setView('tails')}
-          className={`chartActions-option ${acl(view === 'tails')}`}
+          onClick={() => setView('array')}
+          className={`chartActions-option ${acl(view === 'array')}`}
         >
           <Rows4Icon />
           <p>Estructura de arrayList</p>

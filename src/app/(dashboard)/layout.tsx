@@ -1,5 +1,3 @@
-import { ALL_DATA } from '@/db/hooks/keys'
-import { getAllData } from '@/db/services/getAllData'
 import { getQueryClient } from '@/shared/getQueryClient'
 import { PUBLIC_ROUTES } from '@/shared/routes'
 import { auth } from '@clerk/nextjs/server'
@@ -26,15 +24,6 @@ const Layout = async ({ children }: ILayout) => {
   const isPublic = PUBLIC_ROUTES.includes(pathname)
   const { userId } = auth()
   if (!userId || isPublic) redirect('/sign-in')
-  // console.log('--------', headersList)
-
-  // const token = await getToken()
-
-  // await queryClient.prefetchQuery({
-  //   queryKey: [ALL_DATA],
-  //   queryFn: () => getAllData(token)
-  // })
-
   return (
     <Suspense fallback={<div>Loading data...</div>}>
       <HydrationBoundary state={dehydrate(queryClient)}>{children}</HydrationBoundary>

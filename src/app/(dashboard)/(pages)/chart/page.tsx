@@ -15,7 +15,7 @@ const Page = (): JSX.Element => {
     <article className='layout-container chart'>
       <section className='chart-draft'>
         {view === 'tree' && <TreeGraph />}
-        {view === 'tails' && <Tails />}
+        {view === 'array' && <Tails />}
       </section>
       <Actions />
     </article>

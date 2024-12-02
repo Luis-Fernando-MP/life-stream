@@ -1,5 +1,6 @@
 'use client'
 
+import ShowModalPersonData from '@/shared/ShowModalPersonData'
 import { getQueryClient } from '@/shared/getQueryClient'
 import { ClerkProvider } from '@clerk/nextjs'
 import { QueryClientProvider } from '@tanstack/react-query'
@@ -17,6 +18,7 @@ const Providers = ({ children }: IProviders): JSX.Element => {
     <ClerkProvider>
       <QueryClientProvider client={queryClient}>
         {children}
+        <ShowModalPersonData />
         <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
     </ClerkProvider>

@@ -1,0 +1,85 @@
+@use '@sass/config/vars' as v;
+@use '@sass/utils/defs' as d;
+
+.doctorModalInfo {
+  width: min-content;
+  height: max-content;
+  padding: v.$padding;
+
+  background-color: rgb(v.$bg2);
+  border-radius: v.$radius;
+
+  @include d.flex($ali: center);
+
+  &-header {
+    justify-content: space-between;
+    width: 100%;
+    height: fit-content;
+    padding: v.$padding;
+
+    @include d.flex($ali: center, $gap: v.$padding * 2);
+
+    img {
+      transform: rotateZ(-10deg);
+
+      width: 100px;
+      height: 150px;
+
+      border-radius: v.$radius;
+      box-shadow: -15px 15px 20px 10px rgb(0 0 0 / 24%);
+    }
+  }
+
+  &-user {
+    @include d.flex($dir: row, $ali: center, $gap: v.$padding * 2);
+  }
+
+  &-actions,
+  &-action {
+    @include d.flex($dir: row, $ali: center);
+  }
+
+  &-action {
+    padding: 15px 10px;
+    background-color: rgba(v.$bg2, 0.5);
+    border-radius: 10px;
+    box-shadow:
+      -5px 10px 5px 0 rgb(0 0 0 / 30%),
+      5px -10px 10px 0 rgb(98 98 98 / 12%);
+  }
+
+  &-content {
+    width: 100%;
+    padding: v.$padding * 4 v.$padding;
+    border-top: 4px solid rgb(v.$bg3);
+    border-bottom: 4px solid rgb(v.$bg3);
+
+    @include d.flex($ali: center);
+
+    > h4 {
+      color: rgba(v.$fn2, 0.7);
+      text-transform: uppercase;
+    }
+  }
+
+  &-form {
+    min-width: 400px;
+
+    input {
+      padding: 10px 15px;
+      color: rgba(v.$fn1, 0.7);
+      background-color: rgba(v.$bg3, 0.5);
+      border-radius: 5px;
+
+      &::placeholder {
+        color: rgba(v.$fn2, 0.7);
+      }
+    }
+
+    @include d.flex();
+  }
+
+  &-field {
+    @include d.flex($dir: row, $ali: center);
+  }
+}

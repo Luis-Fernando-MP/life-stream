@@ -49,7 +49,7 @@ const RootLayout = ({ children }: IRootLayout): JSX.Element => {
               background: 'rgba(var(--bg-primary), 0.9)',
               color: 'rgb(var(--fnt-primary))'
             },
-            duration: 1000
+            duration: 2000
           }}
         />
       </body>
