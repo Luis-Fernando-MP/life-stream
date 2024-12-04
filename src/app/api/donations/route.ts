@@ -11,6 +11,12 @@ export type PersonWithBloodDonor = Prisma.PersonGetPayload<{
   }
 }>
 
+export const dynamic = 'force-dynamic'
+
+export async function POST() {
+  return NextResponse.json({ image: Date.now() })
+}
+
 export async function GET() {
   try {
     const { userId } = auth()
@@ -25,8 +31,8 @@ export async function GET() {
       }
     })
     return NextResponse.json({ ...person }, { status: 200 })
-  } catch (error) {
+  } catch (error: any) {
     console.error('Fetch error:', error)
-    return null
+    return NextResponse.json({ error: error?.message }, { status: 500 })
   }
 }
