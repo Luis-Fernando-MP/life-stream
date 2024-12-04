@@ -1,4 +1,5 @@
 import { fromDate } from '@/shared/time'
+import { useUser } from '@clerk/nextjs'
 import { SaveIcon, Trash2Icon } from 'lucide-react'
 import type { JSX } from 'react'
 
@@ -6,6 +7,8 @@ import './style.scss'
 
 /* eslint-disable @next/next/no-img-element */
 const AnyModalInfo = ({ data, type }: any): JSX.Element => {
+  const { user } = useUser()
+  const userRol = user?.organizationMemberships[0]?.role
   const { person, DNI } = data
   const { photo, firstName, email, lastName, createdAt, updatedAt, username } = person
 
@@ -19,16 +22,18 @@ const AnyModalInfo = ({ data, type }: any): JSX.Element => {
             <p>{email}</p>
           </div>
         </div>
-        <div className='doctorModalInfo-actions'>
-          <button className='doctorModalInfo-action'>
-            <Trash2Icon />
-            <p>Eliminar {type}</p>
-          </button>
-          <button className='doctorModalInfo-action'>
-            <SaveIcon />
-            <p>Actualizar {type}</p>
-          </button>
-        </div>
+        {userRol && (
+          <div className='doctorModalInfo-actions'>
+            <button className='doctorModalInfo-action'>
+              <Trash2Icon />
+              <p>Eliminar {type}</p>
+            </button>
+            <button className='doctorModalInfo-action'>
+              <SaveIcon />
+              <p>Actualizar {type}</p>
+            </button>
+          </div>
+        )}
       </header>
 
       <section className='doctorModalInfo-content'>

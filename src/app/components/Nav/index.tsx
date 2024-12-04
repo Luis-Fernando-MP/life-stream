@@ -18,11 +18,12 @@ interface INav extends HtmlHTMLAttributes<HTMLElement> {
 }
 
 const Nav = ({ className, ...props }: INav): JSX.Element => {
-  const user = useUser()
+  const { user } = useUser()
   const { getClass, pathname, show, toggleShow } = useNav()
   const isActive = (cls: string) => acl(matchRoute({ path: cls, route: pathname }))
 
-  const userRol = user.user?.organizationMemberships[0]?.role
+  let userRol = user?.organizationMemberships[0]?.role
+  if (!userRol && user) userRol = 'org:user'
 
   return (
     <section {...props} className={className}>
@@ -38,7 +39,6 @@ const Nav = ({ className, ...props }: INav): JSX.Element => {
             const [tag, data] = route
             const { Icon, title, path, subPaths, requiredRoles } = data
             const haveRoles = validateRoutes(requiredRoles, userRol as ROL)
-
             if (!haveRoles) return
             return (
               <Link

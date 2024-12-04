@@ -1,0 +1,8 @@
+@use '@sass/config/vars' as v;
+@use '@sass/utils/defs' as d;
+
+.WantDonate {
+  justify-content: center;
+
+  @include d.flex($ali: center);
+}

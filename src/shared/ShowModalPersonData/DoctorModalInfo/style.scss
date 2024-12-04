@@ -13,18 +13,24 @@
 
   &-header {
     justify-content: space-between;
+
     width: 100%;
     height: fit-content;
     padding: v.$padding;
 
     @include d.flex($ali: center, $gap: v.$padding * 2);
 
+    perspective: 1000px;
+
     img {
-      transform: rotateZ(-10deg);
+      transform-style: preserve-3d;
+      transform: rotateZ(-10deg) rotateY(30deg);
 
       width: 100px;
       height: 150px;
+      margin-right: 20px;
 
+      object-fit: cover;
       border-radius: v.$radius;
       box-shadow: -15px 15px 20px 10px rgb(0 0 0 / 24%);
     }

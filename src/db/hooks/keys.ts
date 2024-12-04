@@ -1,2 +1,3 @@
 export const HISTORY = 'PERSON_HISTORIES'
 export const ALL_DATA = 'ALL_DATA_BD'
+export const BLOOD_DONATIONS = 'BLOOD_DONATIONS'

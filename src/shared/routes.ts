@@ -72,6 +72,23 @@ export const ROUTES = {
     requiredRoles: [ROL.ADMIN, ROL.DOCTOR, ROL.DOCTOR_ADMIN]
   },
 
+  wantDonate: {
+    path: '/want-donate/',
+    subPaths: '/want-donate/',
+    title: 'Donar Sangre',
+    description: '🩸 Estoy dispuesto a donar sangre y ayudar a salvar vidas',
+    Icon: HeartIcon,
+    requiredRoles: [ROL.USER]
+  },
+  wantReceptor: {
+    path: '/want-receptor/',
+    subPaths: '/want-receptor/details',
+    title: 'Registrar Receptor de Sangre',
+    description: '📝 Registrar nuevo receptor para recibir sangre',
+    Icon: UserPlusIcon,
+    requiredRoles: [ROL.USER]
+  },
+
   authors: {
     path: '/authors',
     subPaths: '/authors',
@@ -98,7 +115,7 @@ export const ROUTES = {
   }
 }
 
-const vlipRoute = 7
+const vlipRoute = 9
 export const firstRoutes = Object.entries(ROUTES).splice(0, vlipRoute)
 export const endRoutes = Object.entries(ROUTES).splice(vlipRoute + 1, -1)
 

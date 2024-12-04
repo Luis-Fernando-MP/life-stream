@@ -1,0 +1,145 @@
+@use '@sass/config/vars' as v;
+@use '@sass/utils/defs' as d;
+@use 'sass:map';
+
+.WDDetails {
+  width: 100%;
+
+  &-link {
+    width: 100%;
+    padding: v.$radius * 0.8 0;
+
+    font-size: v.$fP;
+    font-weight: 900;
+    color: rgb(v.$fn1);
+    text-align: center;
+
+    background-color: rgb(v.$bg2);
+    border-radius: v.$radius * 0.5;
+  }
+
+  &-container {
+    width: 100%;
+    height: max-content;
+
+    @include d.flex($dir: row);
+  }
+
+  @include d.flex;
+}
+
+.WDDetails-card {
+  width: 350px;
+  min-width: 350px;
+  height: max-content;
+  padding: v.$padding;
+
+  background-color: rgb(v.$tn1, 0.8);
+  border-radius: v.$radius;
+
+  @include d.flex;
+
+  &__header {
+    width: 100%;
+
+    svg {
+      width: 50px;
+      height: 50px;
+      stroke: rgb(v.$fn1);
+    }
+  }
+
+  p {
+    font-size: v.$fH4;
+    font-weight: 500;
+  }
+
+  span {
+    font-size: v.$fH3;
+  }
+
+  &__body {
+    @include d.flex($gap: v.$padding / 2);
+
+    padding: v.$padding 0;
+    border-bottom: 2px solid rgb(v.$fn2);
+
+    h2.days {
+      text-transform: uppercase;
+    }
+
+    h2.sub {
+      font-size: 3em;
+    }
+
+    div {
+      @include d.flex($gap: v.$padding / 2, $dir: row);
+    }
+  }
+
+  &__image {
+    position: relative;
+    width: fit-content;
+    height: fit-content;
+
+    img {
+      position: relative;
+      display: block;
+      filter: drop-shadow(0 20px 25px rgb(0 0 0 / 30%));
+    }
+  }
+}
+
+.WDDetails-donations {
+  width: 100%;
+
+  @include d.flex($ali: center);
+
+  &__table {
+    $statuses: (
+      'PROCESS': (
+        background: #dea751,
+        color: #10100e
+      ),
+      'COMPLETED': (
+        background: #28a745,
+        color: #fff
+      ),
+      'PAUSED': (
+        background: #6c757d,
+        color: #fff
+      )
+    );
+
+    width: 100%;
+    background-color: rgb(v.$bg2);
+
+    thead,
+    tbody {
+      border-radius: v.$radius;
+    }
+
+    th,
+    td {
+      padding: v.$padding;
+      text-align: center;
+    }
+
+    h5.fulfilled {
+      display: block;
+
+      width: fit-content;
+      margin: auto;
+      padding: 5px 10px;
+
+      border-radius: 10px;
+
+      @each $status, $colors in $statuses {
+        &.#{$status} {
+          color: map.get($colors, color);
+          background-color: map.get($colors, background);
+        }
+      }
+    }
+  }
+}
