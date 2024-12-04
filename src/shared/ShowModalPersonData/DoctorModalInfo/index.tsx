@@ -1,5 +1,6 @@
 import { DoctorWithPerson } from '@/app/api/allData/route'
 import { fromDate } from '@/shared/time'
+import { useUser } from '@clerk/nextjs'
 import { SaveIcon, Trash2Icon } from 'lucide-react'
 import type { JSX } from 'react'
 
@@ -11,6 +12,8 @@ interface IDoctorModalInfo {
 
 /* eslint-disable @next/next/no-img-element */
 const DoctorModalInfo = ({ doctorData }: IDoctorModalInfo): JSX.Element => {
+  const { user } = useUser()
+  const userRol = user?.organizationMemberships[0]?.role
   const { person, DNI } = doctorData as DoctorWithPerson
   const { photo, firstName, email, lastName, createdAt, updatedAt, username } = person
 
@@ -24,16 +27,18 @@ const DoctorModalInfo = ({ doctorData }: IDoctorModalInfo): JSX.Element => {
             <p>{email}</p>
           </div>
         </div>
-        <div className='doctorModalInfo-actions'>
-          <button className='doctorModalInfo-action'>
-            <Trash2Icon />
-            <p>Eliminar Doctor</p>
-          </button>
-          <button className='doctorModalInfo-action'>
-            <SaveIcon />
-            <p>Actualizar Doctor</p>
-          </button>
-        </div>
+        {userRol && (
+          <div className='doctorModalInfo-actions'>
+            <button className='doctorModalInfo-action'>
+              <Trash2Icon />
+              <p>Eliminar Doctor</p>
+            </button>
+            <button className='doctorModalInfo-action'>
+              <SaveIcon />
+              <p>Actualizar Doctor</p>
+            </button>
+          </div>
+        )}
       </header>
 
       <section className='doctorModalInfo-content'>

@@ -4,7 +4,7 @@
 
 .layout-container.home {
   @include d.flex($dir: row, $gap: 0);
-  @include v.border(rgb(v.$bg1, 0.5));
+  @include v.border(rgb(v.$bg2, 0.5));
 
   justify-content: space-evenly;
   height: 100%;
@@ -16,11 +16,11 @@
 
   .home {
     &-left {
-      width: 50%;
+      width: fit-content;
       height: max-content;
       padding: v.$padding * 2 v.$padding;
 
-      @include d.flex($ali: center, $gap: v.$padding * 3);
+      @include d.flex($gap: v.$padding * 3);
     }
 
     &-right {
@@ -88,91 +88,23 @@
   }
 
   &-more {
-    justify-content: center;
-    width: 100%;
+    width: fit-content;
 
-    @include d.flex($dir: row);
+    @include d.flex();
 
     &__card {
-      justify-content: center;
-
-      height: 250px;
       padding: v.$padding;
-
-      text-align: center;
-
       background-color: rgb(v.$bg1);
       border-radius: v.$radius * 2;
 
-      @include d.flex($ali: center);
-
-      &.left {
-        width: 40%;
-        background-color: rgba(v.$tn1, 0.2);
-      }
-
-      &.right {
-        width: 60%;
-        background-color: rgba(v.$tn2, 0.2);
-      }
+      @include d.flex();
     }
 
     &__svg {
-      width: 100%;
-
       svg {
         width: v.$icon * 1.5;
         height: v.$icon * 1.5;
       }
-
-      @include d.flex($ali: flex-end);
-    }
-  }
-
-  // right
-  &-process {
-    position: relative;
-    width: 70%;
-
-    @include v.border(rgba(v.$bg1, 0.8));
-    @include d.flex($dir: row);
-
-    padding: v.$padding;
-    border-radius: v.$radius;
-
-    video {
-      width: 70px;
-      height: 70px;
-      object-fit: cover;
-      border-radius: 50%;
-    }
-  }
-
-  &-benefits {
-    position: relative;
-    width: 100%;
-    padding: v.$padding;
-
-    h3 {
-      color: rgb(v.$bg1);
-      text-align: center;
-    }
-
-    @include d.flex;
-
-    &__list {
-      flex-wrap: wrap;
-      width: 80%;
-      margin: auto;
-
-      @include d.flex($dir: row, $ali: center);
-    }
-
-    &__item {
-      padding: v.$padding / 2 v.$padding;
-      border-radius: v.$radius;
-
-      @include v.border(rgba(v.$bg1, 0.8));
     }
   }
 }

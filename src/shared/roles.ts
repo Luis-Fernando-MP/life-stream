@@ -1,5 +1,6 @@
 export enum ROL {
   ADMIN = 'org:admin',
+  USER = 'org:user',
   DOCTOR = 'org:doctor',
   DOCTOR_ADMIN = 'org:doctor_admin'
 }

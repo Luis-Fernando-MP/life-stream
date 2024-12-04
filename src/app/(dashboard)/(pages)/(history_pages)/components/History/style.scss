@@ -115,4 +115,52 @@
       }
     }
   }
+
+  &-hero {
+    justify-content: center;
+    width: 100%;
+
+    @include d.flex($ali: center);
+
+    text-align: center;
+
+    &__description {
+      h3 {
+        margin: 10px;
+
+        u {
+          color: rgb(v.$tn1);
+        }
+      }
+
+      h4 {
+        margin: 10px;
+        text-transform: capitalize;
+      }
+    }
+
+    &__images {
+      pointer-events: none;
+      user-select: none;
+
+      position: relative;
+
+      width: 80px;
+      height: 80px;
+
+      img:first-child {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateY(-10px) translateX(-90%) rotateZ(-25deg);
+      }
+
+      img:last-child {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 50%;
+      }
+    }
+  }
 }

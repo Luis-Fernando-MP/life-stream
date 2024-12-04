@@ -1,4 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
+import useSelectPerson from '@/app/(dashboard)/(pages)/chart/hooks/useSelectPerson'
 import { BloodDonorWithRel } from '@/app/api/allData/route'
 import { getBloodType } from '@/shared/getBloodType'
 import dayjs from 'dayjs'
@@ -12,6 +13,11 @@ interface ITailsDonorComponent {
 }
 
 const TailsDonorComponent = ({ donors }: ITailsDonorComponent): JSX.Element => {
+  const setPerson = useSelectPerson(s => s.setPerson)
+
+  const handleClick = (data: any): void => {
+    setPerson({ ...data, type: 'bloodReceiver' })
+  }
   return (
     <ul className='compTailsDonors-list animate-blurred-fade-in'>
       {donors.map((donor, i) => {
@@ -24,7 +30,7 @@ const TailsDonorComponent = ({ donors }: ITailsDonorComponent): JSX.Element => {
             className='compTailsDonors-item animate-fade-in-up'
             style={{ animationDelay: `${i * 0.1}s` }}
           >
-            <button>
+            <button onClick={() => handleClick(donor)} data-modal>
               <img src={photo ?? '/user-default-bg.webp'} alt={firstName} loading='lazy' />
               <h3 className='compTailsDonors-item__name'>
                 {firstName} {lastName}
