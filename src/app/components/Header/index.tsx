@@ -1,6 +1,8 @@
 'use client'
 
-import { GithubIcon, SparklesIcon } from 'lucide-react'
+import { GITHUB_REPOSITORY } from '@/shared/constants'
+import { GithubIcon, LoaderCircleIcon, SparklesIcon } from 'lucide-react'
+import dynamic from 'next/dynamic'
 import Link from 'next/link'
 import type { HtmlHTMLAttributes, JSX, ReactNode } from 'react'
 
@@ -11,20 +13,23 @@ interface IHeader extends HtmlHTMLAttributes<HTMLElement> {
   children?: Readonly<ReactNode[]> | null
 }
 
+const ThemeController = dynamic(() => import('@/shared/components/Theme'), {
+  ssr: false,
+  loading() {
+    return <LoaderCircleIcon className='animate-spin' />
+  }
+})
+
 const Header = ({ className, ...props }: IHeader): JSX.Element => {
   return (
     <header className={`${className} header`} {...props}>
       <LockButton />
       <section className='header-actions'>
+        <ThemeController />
         <button className='header-action'>
           <SparklesIcon />
         </button>
-        <Link
-          href='https://github.com/Luis-Fernando-MP/life-stream'
-          target='_blank'
-          className='header-action'
-          rel='noopener referer'
-        >
+        <Link href={GITHUB_REPOSITORY} target='_blank' className='header-action' rel='noopener referer'>
           <GithubIcon />
         </Link>
       </section>

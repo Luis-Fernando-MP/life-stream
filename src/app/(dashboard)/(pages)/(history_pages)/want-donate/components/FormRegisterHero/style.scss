@@ -8,7 +8,7 @@
   padding: v.$padding;
 
   @include v.border(rgba(v.$bg1, 0.5));
-  @include d.flex();
+  @include d.flex;
 
   border-radius: v.$radius;
 
@@ -27,11 +27,10 @@
   &-submit {
     width: 100%;
     padding: v.$radius * 0.8 0;
+    border-radius: v.$radius * 0.5;
 
     font-weight: 900;
     text-align: center;
-
-    border-radius: v.$radius * 0.5;
   }
 
   &-section {
@@ -40,11 +39,11 @@
 
     @include v.border(rgba(v.$bg2, 0.6));
 
-    @include d.flex();
+    @include d.flex;
 
     &.error {
-      background-color: rgb(v.$error, 0.1);
       border-color: v.$error;
+      background-color: rgb(v.$error, 0.1);
 
       .error-message {
         font-weight: 500;
@@ -69,18 +68,18 @@
     select {
       width: 50px;
       padding: v.$padding * 0.4 v.$padding * 0.8;
-      background-color: rgba(v.$bg2, 0.6);
       border-radius: 5px;
+      background-color: rgba(v.$bg2, 0.6);
     }
 
     input {
       width: min-content;
       padding: 7px 5px;
+      border-radius: 5px;
 
       text-align: right;
 
       background-color: rgba(v.$bg1, 0.3);
-      border-radius: 5px;
     }
   }
 }

@@ -2,7 +2,7 @@
 @use '@sass/utils/defs' as d;
 
 .chartActions {
-  @include d.flex();
+  @include d.flex;
 
   position: relative;
 
@@ -38,7 +38,6 @@
 
     width: max-content;
     padding: v.$padding;
-
     border-radius: v.$radius;
 
     @include d.flex($dir: row, $ali: center);
@@ -47,10 +46,10 @@
     &-spirit {
       width: 90px;
       height: 90px;
-
-      object-fit: cover;
       border: 10px solid rgba(v.$tn1, 0.7);
       border-radius: 50%;
+
+      object-fit: cover;
     }
   }
 }

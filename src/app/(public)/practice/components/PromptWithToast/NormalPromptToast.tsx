@@ -13,11 +13,7 @@ interface IPromptWithToast {
   onConfirm: (value: string) => void
 }
 
-export const NormalPromptToast = ({
-  children,
-  onConfirm,
-  toastId
-}: IPromptWithToast): JSX.Element => {
+export const NormalPromptToast = ({ children, onConfirm, toastId }: IPromptWithToast): JSX.Element => {
   const simpleToastId = 'NormalPromptToastValidate'
 
   const $modalInput = useRef<HTMLInputElement>(null)

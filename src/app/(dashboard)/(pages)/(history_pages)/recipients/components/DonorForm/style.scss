@@ -2,16 +2,16 @@
 @use '@sass/utils/defs' as d;
 
 .searchDonorsForm {
-  @include d.flex();
+  @include d.flex;
 
   &-submit {
     width: 100%;
     padding: v.$padding * 0.7 0;
+    border-radius: v.$radius;
 
     color: rgb(v.$fn1);
 
     background-color: rgb(v.$tn1);
-    border-radius: v.$radius;
   }
 
   &-container {
@@ -51,9 +51,9 @@
 
     button {
       padding: 5px;
+      border-radius: v.$padding * 0.7;
       font-weight: 900;
       background-color: rgba(v.$bg1, 0.9);
-      border-radius: v.$padding * 0.7;
 
       &.active {
         color: rgb(v.$fn1);

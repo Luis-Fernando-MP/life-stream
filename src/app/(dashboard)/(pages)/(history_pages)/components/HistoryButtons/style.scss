@@ -34,9 +34,9 @@
     min-width: 40px;
     height: 40px;
     padding: 10px;
+    border-radius: 50%;
 
     background-color: rgb(v.$bg1);
-    border-radius: 50%;
 
     /* stylelint-disable-next-line no-descending-specificity */
     svg {

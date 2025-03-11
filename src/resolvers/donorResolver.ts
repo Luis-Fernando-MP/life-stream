@@ -5,12 +5,8 @@ import * as z from 'zod'
 
 const scheme = z.object({
   bloodType: z.enum(['ALL', ...bloodTypeArr]),
-  ageRange: z
-    .tuple([])
-    .rest(z.number({ message: 'La edad debería de estar en un rango de números' })),
-  weightRange: z
-    .tuple([])
-    .rest(z.number({ message: 'El peso debería de estar en un rango de números' })),
+  ageRange: z.tuple([]).rest(z.number({ message: 'La edad debería de estar en un rango de números' })),
+  weightRange: z.tuple([]).rest(z.number({ message: 'El peso debería de estar en un rango de números' })),
   firstName: z
     .string()
     .max(100, { message: 'Tu nombre no puede tener mas de 100 caracteres' })

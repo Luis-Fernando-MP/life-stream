@@ -9,19 +9,10 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-
   border: none;
+
   outline: none;
 }
-
-// html {
-//   filter: invert(1);
-
-//   img,
-//   video {
-//     filter: invert(1);
-//   }
-// }
 
 body {
   @extend %scroll-hidden;
@@ -214,10 +205,17 @@ svg {
 }
 
 .box-error {
-  background-color: rgba($error, 0.2) !important;
   border-color: $error !important;
+  background-color: rgba($error, 0.2) !important;
 }
 
 .logo {
   fill: rgb($tn1);
+}
+
+.lucide {
+  width: $icon;
+  height: $icon;
+  stroke: rgb($fn2);
+  stroke-width: 1.5;
 }

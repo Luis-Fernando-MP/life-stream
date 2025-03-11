@@ -1,4 +1,25 @@
 :root {
+  --bg-primary: 255, 255, 255;
+  --bg-secondary: 240, 240, 240;
+  --bg-tertiary: 220, 220, 220;
+  --fnt-primary: 0, 0, 0;
+  --fnt-secondary: 50, 50, 50;
+  --tn-primary: 200, 100, 100;
+  --tn-secondary: 255, 150, 150;
+
+  // --
+
+  --xl-font-size: 3em;
+  --h1-font-size: 2em;
+  --h2-font-size: 1.4em;
+  --h3-font-size: 1.3em;
+  --h4-font-size: 1.2em;
+  --h5-font-size: 1.1em;
+  --p-font-size: 1em;
+  --span-font-size: 1em;
+}
+
+[data-theme='dark'] {
   --bg-primary: 0, 0, 0;
   --bg-secondary: 20, 20, 20;
   --bg-tertiary: 40, 40, 40;
@@ -6,17 +27,6 @@
   --fnt-secondary: 200, 200, 200;
   --tn-primary: 250, 50, 50;
   --tn-secondary: 255, 70, 70;
-
-  // --
-
-  --xl-font-size: 3em;
-  --h1-font-size: 2em;
-  --h2-font-size: 1.5em;
-  --h3-font-size: 1.4em;
-  --h4-font-size: 1.3em;
-  --h5-font-size: 1.2em;
-  --p-font-size: 1em;
-  --span-font-size: 1em;
 }
 
 $fXl: var(--xl-font-size);
@@ -43,9 +53,9 @@ $medium-screen: 820px;
 $large-screen: 992px;
 $extra-large-screen: 1200px;
 $big-screen: 1350px;
-$radius: 10px;
+$radius: 7px;
 $padding: 15px;
-$icon: 20px;
+$icon: 15px;
 $family-size: 12px;
 $fontBase: 'Segoe UI Mono', 'Roboto Mono', 'Ubuntu Monospace', 'Source Code Pro', 'Fira Mono', 'Segoe UI Emoji';
 $font1: var(--font1);

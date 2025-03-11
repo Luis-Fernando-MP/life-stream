@@ -18,14 +18,7 @@ const LinearLogo = (): JSX.Element => {
         </g>
       </g>
       <defs>
-        <linearGradient
-          id='paint0_linear_3_20'
-          x1='174'
-          y1='538.52'
-          x2='174'
-          y2='0'
-          gradientUnits='userSpaceOnUse'
-        >
+        <linearGradient id='paint0_linear_3_20' x1='174' y1='538.52' x2='174' y2='0' gradientUnits='userSpaceOnUse'>
           <stop stopColor='#E5EFFD' />
           <stop offset='0.435' stopColor='#A39EDA' />
           <stop offset='1' stopColor='#DBDAE7' />

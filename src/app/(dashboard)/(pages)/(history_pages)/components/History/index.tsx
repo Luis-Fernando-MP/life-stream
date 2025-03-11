@@ -54,11 +54,7 @@ const History = ({ history, i }: IHistory): JSX.Element => {
   }
 
   return (
-    <section
-      className='history animate-fade-in-up'
-      style={{ animationDelay: `${0.5 / i}s` }}
-      ref={historyRef}
-    >
+    <section className='history animate-fade-in-up' style={{ animationDelay: `${0.5 / i}s` }} ref={historyRef}>
       <article className='history-data'>
         <div className='history-data-left'>
           <Logo />

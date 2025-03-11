@@ -18,19 +18,17 @@
     justify-content: center;
   }
 
-  &-lockButton {
-    padding: 5px v.$padding;
-    font-weight: bold;
-    color: rgb(v.$tn1);
-    border-radius: 3px;
+  &-lock {
+    @include d.flex($dir: row, $ali: center, $gap: v.$padding * 0.2);
 
-    svg {
-      stroke: rgb(v.$fn1);
+    &__link {
+      font-size: v.$fH5;
+      color: rgb(v.$tn1);
     }
   }
 
   &-action {
     padding: 5px;
-    border-radius: 3px;
+    border-radius: v.$radius;
   }
 }

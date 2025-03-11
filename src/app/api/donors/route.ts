@@ -17,13 +17,10 @@ export async function POST(req: NextRequest) {
     const matches = data.photo.match(/^data:(.+);base64,(.+)$/)
     let photo = data.photo
     if (matches) {
-      const uploadResponse = await cloudinary.uploader.upload(
-        `data:${matches[1]};base64,${matches[2]}`,
-        {
-          upload_preset: process.env.CLOUDINARY_PRESET,
-          folder: process.env.CLOUDINARY_PRESET
-        }
-      )
+      const uploadResponse = await cloudinary.uploader.upload(`data:${matches[1]};base64,${matches[2]}`, {
+        upload_preset: process.env.CLOUDINARY_PRESET,
+        folder: process.env.CLOUDINARY_PRESET
+      })
       if (!uploadResponse) throw new Error('Fail to save user image')
       photo = uploadResponse.secure_url
     }

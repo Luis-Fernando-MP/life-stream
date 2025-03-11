@@ -17,11 +17,11 @@
   &-field {
     width: 100%;
     padding: 5px 10px;
+    border-radius: 5px;
 
     font-size: v.$fH5;
 
     background-color: rgb(v.$bg2);
-    border-radius: 5px;
   }
 
   &-options,
@@ -36,8 +36,8 @@
 
     &__btn {
       padding: 10px;
-      background-color: rgb(v.$bg2);
       border-radius: 5px;
+      background-color: rgb(v.$bg2);
 
       @include v.hoverS(0.95);
 

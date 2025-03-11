@@ -36,9 +36,7 @@ const Details = (): JSX.Element => {
               <Logo />
             </header>
             <section className='WDDetails-card__body'>
-              <h2 className={`days ${RobotoFont.className}`}>
-                {fromDate(lastDonation.donationDate.toString())}
-              </h2>
+              <h2 className={`days ${RobotoFont.className}`}>{fromDate(lastDonation.donationDate.toString())}</h2>
               <h2 className='sub'>VOLUNTARIA DE SANGRE</h2>
               <div>
                 <Calendar />

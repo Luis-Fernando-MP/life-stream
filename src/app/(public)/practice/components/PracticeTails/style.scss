@@ -6,7 +6,7 @@
   width: 100%;
   height: fit-content;
 
-  @include d.flex();
+  @include d.flex;
 
   &-box {
     width: 100%;
@@ -15,12 +15,12 @@
     @include d.flex($ali: flex-start);
 
     &__container {
-      @include d.flex();
+      @include d.flex;
 
       width: 100%;
       padding: v.$padding;
-      background-color: rgba(v.$bg2, 0.4);
       border-radius: v.$radius;
+      background-color: rgba(v.$bg2, 0.4);
 
       > h3 {
         text-transform: capitalize;

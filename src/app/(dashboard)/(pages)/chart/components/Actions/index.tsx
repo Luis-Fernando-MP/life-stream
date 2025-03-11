@@ -17,24 +17,15 @@ const Actions = (): JSX.Element => {
       <h1>Visualizador de Datos</h1>
       <h3>Tipo de estructura de Datos:</h3>
       <div className='chartActions-options'>
-        <button
-          onClick={() => setView('tree')}
-          className={`chartActions-option ${acl(view === 'tree')}`}
-        >
+        <button onClick={() => setView('tree')} className={`chartActions-option ${acl(view === 'tree')}`}>
           <NetworkIcon />
           <p>Estructura de Árbol</p>
         </button>
-        <button
-          onClick={() => setView('array')}
-          className={`chartActions-option ${acl(view === 'array')}`}
-        >
+        <button onClick={() => setView('array')} className={`chartActions-option ${acl(view === 'array')}`}>
           <Rows4Icon />
           <p>Estructura de arrayList</p>
         </button>
-        <button
-          onClick={() => setView('array')}
-          className={`chartActions-option ${acl(view === 'array')}`}
-        >
+        <button onClick={() => setView('array')} className={`chartActions-option ${acl(view === 'array')}`}>
           <SheetIcon />
           <p>Relación de Tablas</p>
         </button>

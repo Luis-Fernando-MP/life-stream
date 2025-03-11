@@ -6,11 +6,7 @@ import { validateName } from '@/shared/validateName'
 import { useState } from 'react'
 import toast from 'react-hot-toast'
 
-import {
-  promptOnlyNodesToast,
-  promptWithNodesToast,
-  promptWithToast
-} from '../components/PromptWithToast'
+import { promptOnlyNodesToast, promptWithNodesToast, promptWithToast } from '../components/PromptWithToast'
 import usePracticeStoreTrees from './usePracticeStoreTrees'
 
 const useMutablePracticeActions = () => {
@@ -93,19 +89,16 @@ const useMutablePracticeActions = () => {
   }
 
   const updateListHead = () => {
-    promptWithNodesToast(
-      <h5>🪢 Selecciona la lista que deseas actualizar</h5>,
-      ({ val, select }) => {
-        const newTails = { ...tails }
-        const prevTailsNodes = newTails[select]
-        delete newTails[select]
+    promptWithNodesToast(<h5>🪢 Selecciona la lista que deseas actualizar</h5>, ({ val, select }) => {
+      const newTails = { ...tails }
+      const prevTailsNodes = newTails[select]
+      delete newTails[select]
 
-        newTails[val] = prevTailsNodes
-        setTails(newTails)
+      newTails[val] = prevTailsNodes
+      setTails(newTails)
 
-        return toast.success('🌟 ¡Lista actualizada exitosamente!')
-      }
-    )
+      return toast.success('🌟 ¡Lista actualizada exitosamente!')
+    })
   }
 
   const removeHead = () => {

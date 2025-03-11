@@ -22,9 +22,9 @@
     width: 100%;
     height: max-content;
     padding: v.$padding * 2 0 v.$padding 0;
+    border-radius: v.$radius;
 
     background-color: rgba(v.$bg1, 0.7);
-    border-radius: v.$radius;
 
     @include d.flex($dir: row, $ali: center);
   }

@@ -26,11 +26,7 @@ const TailsDonorComponent = ({ donors }: ITailsDonorComponent): JSX.Element => {
         const { age, weight, bloodType } = donor.patient
         const { photo, firstName, lastName } = donor.patient.person
         return (
-          <li
-            key={donor.id}
-            className='compTailsDonors-item animate-fade-in-up'
-            style={{ animationDelay: `${i * 0.1}s` }}
-          >
+          <li key={donor.id} className='compTailsDonors-item animate-fade-in-up' style={{ animationDelay: `${i * 0.1}s` }}>
             <button onClick={() => handleClick(donor)} data-modal>
               <img src={photo ?? '/user-default-bg.webp'} alt={firstName} loading='lazy' />
               <h3 className='compTailsDonors-item__name'>

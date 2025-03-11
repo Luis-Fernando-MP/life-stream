@@ -1,8 +1,6 @@
 'use client'
 
-import useSelectPerson, {
-  type ISelectPersonTreeNode
-} from '@/app/(dashboard)/(pages)/chart/hooks/useSelectPerson'
+import useSelectPerson, { type ISelectPersonTreeNode } from '@/app/(dashboard)/(pages)/chart/hooks/useSelectPerson'
 import { type JSX, memo, useEffect, useState } from 'react'
 
 import Modal from '../Modal'

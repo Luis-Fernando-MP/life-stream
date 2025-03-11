@@ -16,17 +16,11 @@ const Actions = (): JSX.Element => {
       <h1>Practiquemos 🤓</h1>
       <h5>Escoge una estructura de Datos:</h5>
       <div className='practiceActions-options'>
-        <button
-          onClick={() => setView('tree')}
-          className={`practiceActions-option ${acl(view === 'tree')}`}
-        >
+        <button onClick={() => setView('tree')} className={`practiceActions-option ${acl(view === 'tree')}`}>
           <NetworkIcon />
           <p>Como Árbol</p>
         </button>
-        <button
-          onClick={() => setView('array')}
-          className={`practiceActions-option ${acl(view === 'array')}`}
-        >
+        <button onClick={() => setView('array')} className={`practiceActions-option ${acl(view === 'array')}`}>
           <Rows4Icon />
           <p>Como arrayList</p>
         </button>

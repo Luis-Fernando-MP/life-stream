@@ -1,9 +1,7 @@
 'use client'
 
 /* eslint-disable @next/next/no-img-element */
-import useSelectPerson, {
-  ESelectPerson
-} from '@/app/(dashboard)/(pages)/chart/hooks/useSelectPerson'
+import useSelectPerson, { ESelectPerson } from '@/app/(dashboard)/(pages)/chart/hooks/useSelectPerson'
 import { ApiAllData } from '@/app/api/allData/route'
 import { fromDate } from '@/shared/time'
 import type { JSX } from 'react'

@@ -132,10 +132,7 @@ const useTreeGraph = ({ trees = {}, onNodeClick }: TreeGraphParams) => {
       .selectAll('g')
       .data(hierarchyData.descendants().filter((d: any) => d.data?.node?.data))
       .join('g')
-      .attr(
-        'transform',
-        (d: any) => `translate(${d.x - widthNodeImage / 2}, ${d.y - widthNodeImage / 2})`
-      )
+      .attr('transform', (d: any) => `translate(${d.x - widthNodeImage / 2}, ${d.y - widthNodeImage / 2})`)
       .style('cursor', 'pointer')
       .attr('class', 'treeGraph')
       .on('click', function (e, d) {

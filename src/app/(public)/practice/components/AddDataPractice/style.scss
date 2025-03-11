@@ -6,7 +6,7 @@
   &,
   &-form,
   &-form__field {
-    @include d.flex();
+    @include d.flex;
   }
 
   &-form {
@@ -24,18 +24,18 @@
       input {
         width: 100%;
         padding: v.$padding * 0.5;
+        border: 2px solid transparent;
+        border-radius: v.$radius * 0.5;
 
         font-size: v.$fH5;
         color: rgb(v.$fn1);
 
         background-color: rgb(v.$bg2);
-        border: 2px solid transparent;
-        border-radius: v.$radius * 0.5;
       }
 
       &.error input {
-        color: v.$error;
         border-color: v.$error;
+        color: v.$error;
       }
     }
 
@@ -53,7 +53,6 @@
         min-width: 70px;
         height: 100px;
         padding: 0 5px;
-
         border-radius: v.$radius * 0.5;
 
         @include v.border(rgba(v.$bg2, 0.5));
@@ -68,11 +67,11 @@
   &-submit {
     width: 100%;
     padding: v.$padding * 0.5 0;
+    border-radius: v.$radius * 0.5;
 
     color: rgb(v.$fn1);
     text-align: center;
 
     background-color: rgb(v.$tn1);
-    border-radius: v.$radius * 0.5;
   }
 }

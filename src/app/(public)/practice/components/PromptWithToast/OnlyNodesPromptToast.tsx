@@ -15,20 +15,13 @@ export interface IPromptWithNodesToast {
   onConfirm: (select: string) => void
 }
 
-export const OnlyNodesPromptToast = ({
-  children,
-  onConfirm,
-  toastId
-}: IPromptWithNodesToast): JSX.Element => {
+export const OnlyNodesPromptToast = ({ children, onConfirm, toastId }: IPromptWithNodesToast): JSX.Element => {
   const { trees, tails } = usePracticeStoreTrees()
   const view = useChartView(s => s.view)
   const paragraphView = useMemo(() => (view === 'tree' ? 'Árbol' : 'Lista'), [view])
   const [selectTree, setSelectTree] = useState('')
 
-  const listNodes = useMemo(
-    () => (view === 'tree' ? Object.keys(trees) : Object.keys(tails)),
-    [view, trees, tails]
-  )
+  const listNodes = useMemo(() => (view === 'tree' ? Object.keys(trees) : Object.keys(tails)), [view, trees, tails])
 
   const handleConfirm = useCallback(() => {
     const simpleToastId = 'WithNodesPromptToastValidate'
@@ -44,10 +37,7 @@ export const OnlyNodesPromptToast = ({
 
   const PromptNode = useCallback(
     ({ name }: { name: string }) => (
-      <button
-        className={`promptToast-nodes__btn ${acl(selectTree === name)}`}
-        onClick={() => setSelectTree(name)}
-      >
+      <button className={`promptToast-nodes__btn ${acl(selectTree === name)}`} onClick={() => setSelectTree(name)}>
         {name}
       </button>
     ),

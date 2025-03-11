@@ -70,11 +70,7 @@ const ValidateIDform = ({ onSubmit }: IValidateIDform): JSX.Element => {
         <input placeholder='DNI: 12345678' autoComplete='off' {...register('dni')} />
       </div>
       {ThereErrors && <p className='dniForm-error'>{e.dni?.message}</p>}
-      <button
-        type='submit'
-        disabled={ThereErrors}
-        className={`dniForm-submit ${acl(ThereErrors, 'error')}`}
-      >
+      <button type='submit' disabled={ThereErrors} className={`dniForm-submit ${acl(ThereErrors, 'error')}`}>
         BUSCAR RECEPTOR
       </button>
     </form>

@@ -33,8 +33,7 @@ const FormRegisterHero = ({ className }: IFormRegisterHero): JSX.Element => {
     formState: { errors, isSubmitting }
   } = hookForm
 
-  const { age, bloodType, dni, firstName, donationDate, lastName, weight, lastDonationDate } =
-    errors
+  const { age, bloodType, dni, firstName, donationDate, lastName, weight, lastDonationDate } = errors
 
   const onFormSubmit = async ({ donationDate, lastDonationDate, ...data }: IHeroRegisterRes) => {
     toast.loading('Te estamos registrando :D', { id: toastHeroId, duration: Infinity })
@@ -43,9 +42,7 @@ const FormRegisterHero = ({ className }: IFormRegisterHero): JSX.Element => {
         body: {
           ...data,
           donationDate: dayjs(donationDate).toDate(),
-          lastDonationDate: !lastDonationDate
-            ? dayjs(donationDate).toDate()
-            : dayjs(lastDonationDate).toDate()
+          lastDonationDate: !lastDonationDate ? dayjs(donationDate).toDate() : dayjs(lastDonationDate).toDate()
         }
       },
       {
@@ -61,10 +58,7 @@ const FormRegisterHero = ({ className }: IFormRegisterHero): JSX.Element => {
   }
 
   return (
-    <form
-      className={`${className} RDForm animate-fade-in-up`}
-      onSubmit={handleSubmit(onFormSubmit, onErrors)}
-    >
+    <form className={`${className} RDForm animate-fade-in-up`} onSubmit={handleSubmit(onFormSubmit, onErrors)}>
       <Link href='/want-donate/details' className='RDForm-link'>
         Quiero ver mis fechas de donación
       </Link>
@@ -127,11 +121,7 @@ const FormRegisterHero = ({ className }: IFormRegisterHero): JSX.Element => {
             ¿Cuanto estas <b>Pesando</b>?
           </h5>
           <div className='RDForm-section__linear'>
-            <input
-              autoComplete='off'
-              id='RDFSec-linear'
-              {...register('weight', { valueAsNumber: true })}
-            />
+            <input autoComplete='off' id='RDFSec-linear' {...register('weight', { valueAsNumber: true })} />
             <label htmlFor='RDFSec-linear'>kg</label>
           </div>
         </div>

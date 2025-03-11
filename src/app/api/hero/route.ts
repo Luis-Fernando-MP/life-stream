@@ -9,10 +9,7 @@ export async function POST(req: NextRequest) {
   const { userId } = auth()
 
   if (!userId) {
-    return NextResponse.json(
-      { error: 'No estás registrado. Por favor, inicia sesión.' },
-      { status: 401 }
-    )
+    return NextResponse.json({ error: 'No estás registrado. Por favor, inicia sesión.' }, { status: 401 })
   }
 
   try {
@@ -49,9 +46,7 @@ export async function POST(req: NextRequest) {
       }
 
       if (!patient) {
-        throw new Error(
-          'No se pudo crear o actualizar el paciente. Revisa los datos proporcionados.'
-        )
+        throw new Error('No se pudo crear o actualizar el paciente. Revisa los datos proporcionados.')
       }
 
       const donor = await tx.bloodDonor.upsert({
@@ -95,8 +90,7 @@ export async function POST(req: NextRequest) {
   } catch (error: any) {
     console.error('Error en la operación:', error)
 
-    const errorMessage =
-      error.message || 'Ocurrió un error inesperado al procesar la solicitud. Inténtalo más tarde.'
+    const errorMessage = error.message || 'Ocurrió un error inesperado al procesar la solicitud. Inténtalo más tarde.'
     return NextResponse.json({ error: errorMessage }, { status: 500 })
   }
 }

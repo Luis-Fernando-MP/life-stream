@@ -25,6 +25,8 @@ const Nav = ({ className, ...props }: INav): JSX.Element => {
   let userRol = user?.organizationMemberships[0]?.role
   if (!userRol && user) userRol = 'org:user'
 
+  const { Icon } = ROUTES.authors
+
   return (
     <section {...props} className={className}>
       <button className='navbar-hamburger' onClick={toggleShow}>
@@ -41,12 +43,7 @@ const Nav = ({ className, ...props }: INav): JSX.Element => {
             const haveRoles = validateRoutes(requiredRoles, userRol as ROL)
             if (!haveRoles) return
             return (
-              <Link
-                key={tag}
-                className={`navbar-link ${isActive(path)} ${isActive(subPaths)}`}
-                href={path}
-                title={title}
-              >
+              <Link key={tag} className={`navbar-link ${isActive(path)} ${isActive(subPaths)}`} href={path} title={title}>
                 <Icon />
               </Link>
             )
@@ -58,7 +55,7 @@ const Nav = ({ className, ...props }: INav): JSX.Element => {
             href={ROUTES.authors.path}
             title={ROUTES.authors.title}
           >
-            <ROUTES.authors.Icon />
+            <Icon />
           </Link>
           <AuthButtons />
         </div>

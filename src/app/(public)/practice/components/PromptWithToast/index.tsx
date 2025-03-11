@@ -21,10 +21,7 @@ const promptWithToast = (message: ReactNode, onConfirm: (value: string) => void)
   )
 }
 
-const promptWithNodesToast = (
-  message: ReactNode,
-  onConfirm: IPromptWithNodesToast['onConfirm']
-) => {
+const promptWithNodesToast = (message: ReactNode, onConfirm: IPromptWithNodesToast['onConfirm']) => {
   toast.custom(
     t => {
       return (

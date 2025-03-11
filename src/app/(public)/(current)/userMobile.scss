@@ -1,7 +1,7 @@
 @use '@sass/config/vars' as v;
 @use '@sass/utils/media' as m;
 
-@include m.largeScreen() {
+@include m.largeScreen {
   .layout-container.home {
     flex-direction: column;
     align-items: center;
@@ -18,7 +18,7 @@
   }
 }
 
-@include m.mediumScreen() {
+@include m.mediumScreen {
   .layout-container.home {
     text-align: center;
 
@@ -41,7 +41,7 @@
   }
 }
 
-@include m.smallScreen() {
+@include m.smallScreen {
   .layout-container.home {
     .home {
       &-process {
@@ -51,7 +51,7 @@
   }
 }
 
-@include m.smallerScreen() {
+@include m.smallerScreen {
   .layout-container.home {
     .home {
       &-more &__card {

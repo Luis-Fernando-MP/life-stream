@@ -19,7 +19,6 @@
     width: 155px;
     height: min-content;
     padding: v.$padding / 2;
-
     border-radius: v.$radius;
 
     @include v.border(rgba(v.$bg2, 0.5));
@@ -36,10 +35,10 @@
     img {
       width: 40px;
       height: 40px;
+      border-radius: 5px;
 
       object-fit: cover;
       background-color: rgb(v.$tn1);
-      border-radius: 5px;
     }
 
     &__name {
@@ -64,9 +63,9 @@
 
       p {
         padding: 3px 10px;
+        border-radius: 7px;
         font-size: 0.5em;
         background-color: rgba(v.$bg1, 0.5);
-        border-radius: 7px;
       }
     }
 

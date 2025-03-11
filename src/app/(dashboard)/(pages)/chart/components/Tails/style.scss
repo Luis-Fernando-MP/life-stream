@@ -6,7 +6,7 @@
   width: 100%;
   height: fit-content;
 
-  @include d.flex();
+  @include d.flex;
 
   &-box {
     width: 100%;
@@ -28,10 +28,10 @@
 
       width: 100%;
       padding: v.$padding;
-
-      background-color: rgb(v.$bg2);
       border: 2px solid rgb(v.$bg3);
       border-radius: v.$radius;
+
+      background-color: rgb(v.$bg2);
     }
   }
 }

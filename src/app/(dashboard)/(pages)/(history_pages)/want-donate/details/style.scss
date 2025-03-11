@@ -8,6 +8,7 @@
   &-link {
     width: 100%;
     padding: v.$radius * 0.8 0;
+    border-radius: v.$radius * 0.5;
 
     font-size: v.$fP;
     font-weight: 900;
@@ -15,7 +16,6 @@
     text-align: center;
 
     background-color: rgb(v.$bg2);
-    border-radius: v.$radius * 0.5;
   }
 
   &-container {
@@ -33,9 +33,9 @@
   min-width: 350px;
   height: max-content;
   padding: v.$padding;
+  border-radius: v.$radius;
 
   background-color: rgb(v.$tn1, 0.8);
-  border-radius: v.$radius;
 
   @include d.flex;
 
@@ -131,7 +131,6 @@
       width: fit-content;
       margin: auto;
       padding: 5px 10px;
-
       border-radius: 10px;
 
       @each $status, $colors in $statuses {

@@ -28,7 +28,7 @@
   h5 {
     width: 100%;
 
-    @include t.pointers();
+    @include t.pointers;
 
     max-height: 30px;
     line-height: 1;
@@ -43,9 +43,9 @@
     width: 30px;
     height: 40px;
     margin: auto;
+    border-radius: v.$radius / 2;
 
     object-fit: cover;
     background-color: rgb(var(--tn-primary));
-    border-radius: v.$radius / 2;
   }
 }

@@ -32,8 +32,8 @@
     &.error {
       input,
       svg {
-        color: v.$error;
         border-color: v.$error;
+        color: v.$error;
         stroke: v.$error;
       }
     }
@@ -56,13 +56,13 @@
   &-submit {
     width: 100%;
     padding: 10px 0;
+    border-radius: 5px;
 
     font-weight: 500;
     color: rgb(v.$fn1);
 
     opacity: 1;
     background-color: rgb(v.$tn1);
-    border-radius: 5px;
 
     &.error {
       @include v.border;

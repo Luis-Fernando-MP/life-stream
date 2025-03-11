@@ -35,9 +35,8 @@ const Page = (): JSX.Element => {
             </div>
             <h3>Chequeo Médico Integral</h3>
             <p>
-              (V) Nuestro equipo médico realiza una evaluación integral, asegurando que <u>tú</u> y
-              el receptor <br /> estén protegidos. Este chequeo garantiza una experiencia de
-              donación <i>segura y confiable</i>.
+              (V) Nuestro equipo médico realiza una evaluación integral, asegurando que <u>tú</u> y el receptor <br /> estén
+              protegidos. Este chequeo garantiza una experiencia de donación <i>segura y confiable</i>.
             </p>
           </div>
 
@@ -47,9 +46,8 @@ const Page = (): JSX.Element => {
             </div>
             <h3>Seguridad y Compatibilidad Aseguradas</h3>
             <p>
-              (I) Cada donación es verificada minuciosamente, garantizando{' '}
-              <b>compatibilidad total</b> para los <br /> pacientes. Nos comprometemos a que cada
-              unidad de sangre llegue de forma <u>segura</u> y sea
+              (I) Cada donación es verificada minuciosamente, garantizando <b>compatibilidad total</b> para los <br /> pacientes.
+              Nos comprometemos a que cada unidad de sangre llegue de forma <u>segura</u> y sea
               <br /> compatible, salvando vidas en el momento más crucial.
             </p>
           </div>
