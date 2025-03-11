@@ -7,11 +7,10 @@ import {
   LogInIcon,
   MedalIcon,
   PlusIcon,
-  UserPlusIcon,
-  Wallpaper
+  UserPlusIcon
 } from 'lucide-react'
 
-import { ROL } from './roles'
+import { USER_ROLES } from './roles'
 
 export const ROUTES = {
   home: {
@@ -28,7 +27,7 @@ export const ROUTES = {
     title: 'Gráficos',
     description: 'Analizar registros',
     Icon: ChartLineIcon,
-    requiredRoles: [ROL.ADMIN, ROL.DOCTOR, ROL.DOCTOR_ADMIN]
+    requiredRoles: [USER_ROLES.ADMIN, USER_ROLES.DOCTOR, USER_ROLES.DOCTOR_ADMIN]
   },
 
   donors: {
@@ -45,7 +44,7 @@ export const ROUTES = {
     title: 'Registrar Donante',
     description: '📝 Registro de nuevo donante de sangre',
     Icon: HeartIcon,
-    requiredRoles: [ROL.ADMIN, ROL.DOCTOR, ROL.DOCTOR_ADMIN]
+    requiredRoles: [USER_ROLES.ADMIN, USER_ROLES.DOCTOR, USER_ROLES.DOCTOR_ADMIN]
   },
   recipients: {
     path: '/recipients',
@@ -61,7 +60,7 @@ export const ROUTES = {
     title: 'Registrar Receptor',
     description: '📝 Registro de nuevo receptor',
     Icon: PlusIcon,
-    requiredRoles: [ROL.ADMIN, ROL.DOCTOR, ROL.DOCTOR_ADMIN]
+    requiredRoles: [USER_ROLES.ADMIN, USER_ROLES.DOCTOR, USER_ROLES.DOCTOR_ADMIN]
   },
 
   wantDonate: {
@@ -70,7 +69,7 @@ export const ROUTES = {
     title: 'Donar Sangre',
     description: '🩸 Estoy dispuesto a donar sangre y ayudar a salvar vidas',
     Icon: HeartIcon,
-    requiredRoles: [ROL.USER]
+    requiredRoles: [USER_ROLES.USER]
   },
   wantReceptor: {
     path: '/want-receptor/',
@@ -78,7 +77,7 @@ export const ROUTES = {
     title: 'Registrar Receptor de Sangre',
     description: '📝 Registrar nuevo receptor para recibir sangre',
     Icon: UserPlusIcon,
-    requiredRoles: [ROL.USER]
+    requiredRoles: [USER_ROLES.USER]
   },
 
   authors: {

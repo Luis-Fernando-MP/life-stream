@@ -7,15 +7,13 @@ import Modal from '../Modal'
 import DoctorModalInfo from './DoctorModalInfo'
 import AnyModalInfo from './temporal'
 
-const ShowModalPersonData = (): JSX.Element | null => {
+const ShowModalPersonData = () => {
   const person = useSelectPerson(s => s.person)
-
   if (!person) return null
-
   return <ShowModal person={person} />
 }
 
-const ShowModal = ({ person }: { person: ISelectPersonTreeNode }): JSX.Element | null => {
+const ShowModal = ({ person }: { person: ISelectPersonTreeNode }) => {
   const [modal, setModal] = useState(false)
 
   useEffect(() => {
@@ -26,8 +24,8 @@ const ShowModal = ({ person }: { person: ISelectPersonTreeNode }): JSX.Element |
       if (!modalElement) return
       setModal(true)
     }
-    document.body.addEventListener('click', handleClick)
 
+    document.body.addEventListener('click', handleClick)
     return () => {
       document.body.removeEventListener('click', handleClick)
     }
@@ -38,9 +36,9 @@ const ShowModal = ({ person }: { person: ISelectPersonTreeNode }): JSX.Element |
   return (
     <Modal isOpen={modal} onClose={setModal}>
       {type === 'Doctor' && <DoctorModalInfo doctorData={person} />}
-      {type === 'Patient' && <AnyModalInfo data={person} type='Paciente' />}
+      {/* {type === 'Patient' && <AnyModalInfo data={person} type='Paciente' />}
       {type === 'bloodReceiver' && <AnyModalInfo data={person.patient} type='Receptor' />}
-      {type === 'BloodDonor' && <AnyModalInfo data={person.patient} type='Donante' />}
+      {type === 'BloodDonor' && <AnyModalInfo data={person.patient} type='Donante' />} */}
     </Modal>
   )
 }

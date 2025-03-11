@@ -39,8 +39,8 @@ const Nav = ({ className, ...props }: INav): JSX.Element => {
           </Link>
           {firstRoutes.map(route => {
             const [tag, data] = route
-            const { Icon, title, path, subPaths, requiredRoles } = data
-            const haveRoles = validateRoutes(requiredRoles, userRol as ROL)
+            const { Icon, title, path, subPaths } = data
+            const haveRoles = validateRoutes(data?.requiredRoles, userRol as ROL)
             if (!haveRoles) return
             return (
               <Link key={tag} className={`navbar-link ${isActive(path)} ${isActive(subPaths)}`} href={path} title={title}>
