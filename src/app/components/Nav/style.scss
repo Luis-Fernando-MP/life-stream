@@ -22,7 +22,11 @@
     border-radius: 5px;
 
     &.active {
-      color: rgb(v.$tn1);
+      background-color: rgb(v.$tn1);
+
+      svg {
+        stroke: rgb(v.$fnA);
+      }
     }
   }
 

@@ -7,9 +7,17 @@ import { NextRequest, NextResponse } from 'next/server'
 
 import cloudinary from '../cloudinary/cloud'
 
+export async function GET(req: NextRequest) {
+  const { userId } = await auth()
+  const data = await prisma.bloodDonor.findMany({
+    where: { AuthorID: userId ?? '' }
+  })
+  return NextResponse.json(data, { status: 200 })
+}
+
 export async function POST(req: NextRequest) {
   const data = await req.json()
-  const { userId } = auth()
+  const { userId } = await auth()
 
   try {
     if (!userId) throw new Error('Are you registered?')

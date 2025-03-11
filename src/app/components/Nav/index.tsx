@@ -43,7 +43,12 @@ const Nav = ({ className, ...props }: INav): JSX.Element => {
             const haveRoles = validateRoutes(data?.requiredRoles, userRol as ROL)
             if (!haveRoles) return
             return (
-              <Link key={tag} className={`navbar-link ${isActive(path)} ${isActive(subPaths)}`} href={path} title={title}>
+              <Link
+                key={tag}
+                className={`navbar-link ${isActive(path)} ${pathname === path ? 'active' : ''} ${isActive(subPaths)}`}
+                href={path}
+                title={title}
+              >
                 <Icon />
               </Link>
             )
@@ -51,7 +56,7 @@ const Nav = ({ className, ...props }: INav): JSX.Element => {
         </div>
         <div className='navbar-bottom'>
           <Link
-            className={`navbar-link ${isActive(ROUTES.authors.path)}`}
+            className={`navbar-link ${isActive(ROUTES.authors.path)} ${pathname === ROUTES.authors.path ? 'active' : ''}`}
             href={ROUTES.authors.path}
             title={ROUTES.authors.title}
           >

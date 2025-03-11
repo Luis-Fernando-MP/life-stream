@@ -9,7 +9,7 @@ import cloudinary from '../cloudinary/cloud'
 
 export async function POST(req: NextRequest) {
   const data = await req.json()
-  const { userId } = auth()
+  const { userId } = await auth()
 
   try {
     if (!userId) throw new Error('Are you registered?')

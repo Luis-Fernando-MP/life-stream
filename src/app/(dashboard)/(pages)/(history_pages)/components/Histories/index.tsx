@@ -32,7 +32,7 @@ const Histories = ({ className }: IHistories) => {
   return (
     <article className={`${className} histories`}>
       <header className='histories-actions'>
-        <button className='histories-action' onClick={clearHistory}>
+        <button className='histories-action' onClick={clearHistory} title='Limpiar historial' aria-label='Limpiar historial'>
           <EraserIcon />
           <p>Limpiar historial</p>
         </button>

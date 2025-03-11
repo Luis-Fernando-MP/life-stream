@@ -5,7 +5,7 @@ import { auth } from '@clerk/nextjs/server'
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'
 export async function fetchAllData() {
   try {
-    const { getToken } = auth()
+    const { getToken } = await auth()
     const token = await getToken()
 
     const response = await fetch(`${baseUrl}/api/allData`, {

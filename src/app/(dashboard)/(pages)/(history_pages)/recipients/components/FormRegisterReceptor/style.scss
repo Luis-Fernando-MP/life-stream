@@ -7,10 +7,11 @@
   height: max-content;
   padding: v.$padding;
 
-  @include v.border(rgba(v.$bg1, 0.5));
   @include d.flex;
 
   border-radius: v.$radius;
+
+  @include v.border(rgba(v.$bg1, 0.5));
 
   &-submit {
     width: 100%;
@@ -27,9 +28,8 @@
     padding: v.$padding * 0.5;
     border-radius: v.$radius * 0.5;
 
-    @include v.border(rgba(v.$bg2, 0.6));
-
     @include d.flex;
+    @include v.border(rgba(v.$bg2, 0.6));
 
     &.error {
       border-color: v.$error;

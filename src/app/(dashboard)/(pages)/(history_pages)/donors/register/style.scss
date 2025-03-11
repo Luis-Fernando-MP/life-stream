@@ -21,4 +21,9 @@
 
     @include d.flex($ali: center);
   }
+
+  &-title {
+    max-width: 300px;
+    text-align: center;
+  }
 }

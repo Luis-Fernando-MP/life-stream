@@ -18,7 +18,7 @@ export async function GET(req: NextRequest) {
 
 export async function POST(req: NextRequest) {
   const data = await req.json()
-  const { userId } = auth()
+  const { userId } = await auth()
 
   try {
     const history = await prisma.queryHistory.create({
@@ -36,7 +36,7 @@ export async function POST(req: NextRequest) {
 
 export async function DELETE(req: NextRequest) {
   const data = await req.json()
-  const { userId } = auth()
+  const { userId } = await auth()
 
   try {
     const history = await prisma.queryHistory.delete({

@@ -7,10 +7,11 @@
   height: max-content;
   padding: v.$padding;
 
-  @include v.border(rgba(v.$bg1, 0.5));
   @include d.flex($gap: 10px);
 
   border-radius: v.$radius;
+
+  @include v.border(rgba(v.$bg1, 0.5));
 
   &-field {
     width: 100%;
@@ -40,11 +41,11 @@
   }
 
   &-icon {
-    @include v.border;
-
     width: 50px;
     height: 50px;
     padding: v.$padding;
+
+    @include v.border;
   }
 
   &-error {
@@ -65,8 +66,6 @@
     background-color: rgb(v.$tn1);
 
     &.error {
-      @include v.border;
-
       pointer-events: none;
       cursor: no-drop;
       user-select: none;
@@ -74,6 +73,8 @@
       color: rgb(v.$fn1);
 
       opacity: 0.9;
+
+      @include v.border;
     }
   }
 }

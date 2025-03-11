@@ -14,14 +14,14 @@ const scheme = z.object({
     .max(150, { message: 'Peso máximo: 150 kg' }),
   firstName: z
     .string({ message: 'los nombres son requeridos' })
-    .min(5, { message: 'Mínimo 5 caracteres' })
+    .min(2, { message: 'Mínimo 2 caracteres' })
     .max(100, { message: 'Máximo 100 caracteres' })
-    .regex(/^[a-zA-Z\s]*$/, 'Sin números o caracteres especiales'),
+    .regex(/^[a-zA-ZáéíóúÁÉÍÓÚ\s]*$/, 'Sin números o caracteres especiales'),
   lastName: z
     .string({ message: 'los apellidos son requeridos' })
-    .min(5, { message: 'Mínimo 5 caracteres' })
+    .min(2, { message: 'Mínimo 2 caracteres' })
     .max(100, { message: 'Máximo 100 caracteres' })
-    .regex(/^[a-zA-Z\s]*$/, 'Sin números o caracteres especiales'),
+    .regex(/^[a-zA-ZáéíóúÁÉÍÓÚ\s]*$/, 'Sin números o caracteres especiales'),
   dni: z.string({ message: 'El DNI requerido' }).length(8, { message: 'DNI de 8 dígitos' }).regex(/^\d*$/, 'Solo números'),
   photo: z.string({ message: 'La foto es requerida' }),
   lastDonationDate: z.any({ message: 'Escoge una fecha' })

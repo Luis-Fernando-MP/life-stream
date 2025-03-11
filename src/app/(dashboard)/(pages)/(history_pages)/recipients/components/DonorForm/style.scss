@@ -15,12 +15,11 @@
   }
 
   &-container {
-    @include v.border(rgba(v.$bg2, 0.5));
-
     padding: v.$padding;
     border-radius: v.$radius;
 
     @include d.flex($gap: v.$padding * 0.5);
+    @include v.border(rgba(v.$bg2, 0.5));
   }
 
   &-error {

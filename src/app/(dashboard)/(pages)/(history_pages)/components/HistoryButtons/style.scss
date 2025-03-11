@@ -4,22 +4,13 @@
 .history {
   &-buttons {
     scale: 1;
+    justify-content: center;
     width: fit-content;
     transition:
       scale 0.5s ease-in-out,
       background-color 0.5s ease-in-out;
 
-    @include d.flex($gap: 5px, $dir: row);
-
-    &.cl-tree button:last-child,
-    &.cl-array button:first-child {
-      scale: 0.93;
-      background-color: rgb(v.$tn1);
-
-      svg {
-        stroke: rgb(v.$fn1);
-      }
-    }
+    @include d.flex($gap: 5px, $dir: row, $ali: center);
   }
 
   &-button {
@@ -27,8 +18,16 @@
     border-radius: v.$radius;
 
     @include d.flex($dir: row, $ali: center, $gap: 5px);
-
     @include v.border;
+
+    &.active {
+      scale: 0.93;
+      background-color: rgb(v.$tn1);
+
+      svg {
+        stroke: rgb(v.$fn1);
+      }
+    }
   }
 
   &-icon {
