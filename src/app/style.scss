@@ -1,4 +1,3 @@
-/* stylelint-disable declaration-block-no-redundant-longhand-properties */
 @use '@sass/config/global';
 
 @use '@sass/config/vars' as v;
@@ -40,7 +39,7 @@
 
     width: 100%;
     height: 100%;
-    padding: v.$padding / 2;
+    padding: v.$padding * 0.5;
     border-top-left-radius: v.$radius;
 
     @include d.flex;

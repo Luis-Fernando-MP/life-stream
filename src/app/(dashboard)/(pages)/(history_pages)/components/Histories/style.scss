@@ -32,7 +32,7 @@
   &-action {
     @include d.flex($dir: row, $gap: 5px);
 
-    padding: v.$padding / 2;
+    padding: v.$padding * 0.5;
     border-radius: 5px;
 
     @include v.border(rgb(v.$bg2));

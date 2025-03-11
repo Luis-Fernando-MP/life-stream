@@ -59,7 +59,7 @@
   }
 
   &__body {
-    @include d.flex($gap: v.$padding / 2);
+    @include d.flex($gap: v.$padding * 0.5);
 
     padding: v.$padding 0;
     border-bottom: 2px solid rgb(v.$fn2);
@@ -73,7 +73,7 @@
     }
 
     div {
-      @include d.flex($gap: v.$padding / 2, $dir: row);
+      @include d.flex($gap: v.$padding * 0.5, $dir: row);
     }
   }
 

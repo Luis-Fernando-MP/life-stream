@@ -18,8 +18,8 @@
     @include v.border(rgba(v.$bg1, 0.7));
     @include d.flex($dir: row, $gap: 5px);
 
-    padding: v.$padding / 2;
-    border-radius: v.$radius / 2;
+    padding: v.$padding * 0.5;
+    border-radius: v.$radius * 0.5;
 
     &.active {
       color: rgb(v.$fn1);

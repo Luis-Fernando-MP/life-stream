@@ -26,6 +26,11 @@
   }
 
   .cl-rootBox {
+    input,
+    button {
+      transition: none;
+    }
+
     input {
       padding: v.$padding;
 
@@ -122,7 +127,7 @@
       color: rgb(v.$fn1);
       text-align: center;
 
-      transition: all 0.5s ease-in-out;
+      transition: none;
 
       @include v.border(rgba(v.$bg2, 0.5));
     }

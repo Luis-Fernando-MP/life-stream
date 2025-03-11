@@ -15,7 +15,7 @@
     @include d.flex($ali: flex-start);
 
     > h5 {
-      padding: v.$padding / 2 v.$padding * 2;
+      padding: v.$padding * 0.5 v.$padding * 2;
       border-radius: v.$radius;
 
       @include v.border;

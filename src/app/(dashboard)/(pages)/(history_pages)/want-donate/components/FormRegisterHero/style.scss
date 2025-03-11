@@ -34,8 +34,8 @@
   }
 
   &-section {
-    padding: v.$padding / 2;
-    border-radius: v.$radius / 2;
+    padding: v.$padding * 0.5;
+    border-radius: v.$radius * 0.5;
 
     @include v.border(rgba(v.$bg2, 0.6));
 

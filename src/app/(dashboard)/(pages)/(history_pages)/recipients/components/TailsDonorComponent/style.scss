@@ -18,7 +18,7 @@
 
     width: 155px;
     height: min-content;
-    padding: v.$padding / 2;
+    padding: v.$padding * 0.5;
     border-radius: v.$radius;
 
     @include v.border(rgba(v.$bg2, 0.5));

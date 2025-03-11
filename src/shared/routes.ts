@@ -22,14 +22,6 @@ export const ROUTES = {
     Icon: HouseIcon,
     requiredRoles: []
   },
-  practice: {
-    path: '/practice',
-    subPaths: '/practice',
-    title: 'Listar los Doctores',
-    description: '👨‍🎓 Practica los arboles binarios',
-    Icon: Wallpaper,
-    requiredRoles: []
-  },
   chart: {
     path: '/chart',
     subPaths: '/chart',
@@ -115,7 +107,7 @@ export const ROUTES = {
   }
 }
 
-const clipRoute = 9
+const clipRoute = 8
 export const firstRoutes = Object.entries(ROUTES).splice(0, clipRoute)
 export const endRoutes = Object.entries(ROUTES).splice(clipRoute + 1, -1)
 
@@ -129,4 +121,4 @@ export const matchRoute = ({ path, route }: IMatchRoute) => {
   return route === path || regex.test(route)
 }
 
-export const PUBLIC_ROUTES = [ROUTES.home.path, ROUTES.practice.path, ROUTES.login.path, ROUTES.registerAccount.path]
+export const PUBLIC_ROUTES = [ROUTES.home.path, ROUTES.login.path, ROUTES.registerAccount.path]

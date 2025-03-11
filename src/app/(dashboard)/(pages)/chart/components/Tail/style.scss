@@ -43,7 +43,7 @@
     width: 30px;
     height: 40px;
     margin: auto;
-    border-radius: v.$radius / 2;
+    border-radius: v.$radius * 0.5;
 
     object-fit: cover;
     background-color: rgb(var(--tn-primary));

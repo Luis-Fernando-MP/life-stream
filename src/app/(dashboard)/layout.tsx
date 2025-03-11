@@ -17,9 +17,10 @@ export const metadata: Metadata = {
 
 const Layout = async ({ children }: ILayout) => {
   const headerList = headers()
-  const pathname = headerList.get('x-current-path') ?? '/'
+  const pathname = (await headerList).get('x-current-path') ?? '/'
   const isPublic = PUBLIC_ROUTES.includes(pathname)
-  const { userId } = auth()
+  console.log('pathname', pathname)
+  const { userId } = await auth()
   if (!userId || isPublic) redirect('/sign-in')
   return <>{children} </>
 }

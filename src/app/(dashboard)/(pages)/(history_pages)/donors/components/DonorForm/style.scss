@@ -20,7 +20,7 @@
     padding: v.$padding;
     border-radius: v.$radius;
 
-    @include d.flex($gap: v.$padding / 2);
+    @include d.flex($gap: v.$padding * 0.5);
   }
 
   &-error {
@@ -45,7 +45,7 @@
   }
 
   &-range {
-    @include d.flex($dir: row, $gap: v.$padding / 2);
+    @include d.flex($dir: row, $gap: v.$padding * 0.5);
 
     flex-wrap: wrap;
 
