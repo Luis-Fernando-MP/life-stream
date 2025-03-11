@@ -22,17 +22,17 @@ export interface ITreeGraphData {
 }
 
 interface TreeGraphParams {
-  trees?: ITreeGraphData
+  dataTrees?: ITreeGraphData
   onNodeClick: (data: INodeResponse, click: MouseEvent) => void
 }
 
-const useTreeGraph = ({ trees = {}, onNodeClick }: TreeGraphParams) => {
+const useTreeGraph = ({ dataTrees = {}, onNodeClick }: TreeGraphParams) => {
   const svgRef = useRef<SVGSVGElement>(null)
-  const [treeState, setTrees] = useState(trees)
+  const [trees, setTrees] = useState(dataTrees)
 
   useEffect(() => {
     if (!svgRef.current) return
-    const treesData = Object.entries(treeState)
+    const treesData = Object.entries(trees)
       .map(([name, tree]) => {
         const children = [parseTreeToD3(tree)]
         return {
@@ -71,7 +71,7 @@ const useTreeGraph = ({ trees = {}, onNodeClick }: TreeGraphParams) => {
       .size([width - margin * 2, height - margin * 2])
       .separation((a, b) => (a.parent === b.parent ? 1 : 2.5))
 
-    treeLayout(hierarchyData)
+    treeLayout(hierarchyData as any)
 
     const svg = select(svgRef.current)
       .attr('width', width)
@@ -211,7 +211,7 @@ const useTreeGraph = ({ trees = {}, onNodeClick }: TreeGraphParams) => {
         g.attr('transform', event.transform)
       })
     svg.call(cZoom as any)
-  }, [onNodeClick, treeState])
+  }, [onNodeClick, trees])
 
   return { svgRef, setTrees }
 }

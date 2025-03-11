@@ -2,7 +2,7 @@
 
 import { useAllData } from '@/db/hooks/useAllData'
 import RedBlackTree from '@/shared/tree/RedBlackTree'
-import { type ReactNode, useEffect } from 'react'
+import { type ReactNode, useEffect, useLayoutEffect } from 'react'
 
 import { ESelectPerson } from './chart/hooks/useSelectPerson'
 import useStoreTrees from './hooks/useStoreTrees'
@@ -16,7 +16,7 @@ const Layout = ({ children }: ILayout) => {
   const setData = useStoreTrees(s => s.setData)
   const setStatus = useStoreTrees(s => s.setStatus)
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (!data) return
 
     const doctors = data?.doctors?.map((d: any) => ({

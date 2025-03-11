@@ -5,7 +5,9 @@
   &-buttons {
     scale: 1;
     width: fit-content;
-    transition: all 0.5s ease-in-out;
+    transition:
+      scale 0.5s ease-in-out,
+      background-color 0.5s ease-in-out;
 
     @include d.flex($gap: 5px, $dir: row);
 

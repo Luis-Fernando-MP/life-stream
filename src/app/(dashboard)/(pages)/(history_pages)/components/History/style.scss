@@ -4,12 +4,10 @@
 .history {
   width: 100%;
   padding: v.$padding * 0.7;
-
-  @include v.border(rgba(v.$bg2, 0.5));
-
   border-radius: 10px;
 
   @include d.flex;
+  @include v.border(rgba(v.$bg2, 0.5));
 
   &-subTitle {
     width: 100%;

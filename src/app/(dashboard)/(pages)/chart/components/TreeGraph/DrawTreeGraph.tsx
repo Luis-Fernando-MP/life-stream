@@ -15,7 +15,7 @@ interface IDrawTreeGraph {
 const DrawTreeGraph = ({ trees, className }: IDrawTreeGraph): JSX.Element => {
   const setPerson = useSelectPerson(s => s.setPerson)
   const { svgRef } = useTreeGraph({
-    trees,
+    dataTrees: trees,
     onNodeClick(data) {
       const dataNode = data.data.node as any as TreeNode
       setPerson({

@@ -132,6 +132,12 @@ h4 {
   text-wrap: balance;
 }
 
+h1,
+h2,
+h3 {
+  color: rgb($fn1);
+}
+
 h1 {
   font-weight: 900;
 }
@@ -146,6 +152,7 @@ h3 {
 
 h4 {
   font-weight: 600;
+  color: rgb($fn2);
 }
 
 ul {
@@ -217,5 +224,5 @@ svg {
   width: $icon;
   height: $icon;
   stroke: rgb($fn2);
-  stroke-width: 1.5;
+  stroke-width: 1.7;
 }

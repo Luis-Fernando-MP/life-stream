@@ -1,11 +1,12 @@
 :root {
-  --bg-primary: 255, 255, 255;
-  --bg-secondary: 240, 240, 240;
-  --bg-tertiary: 220, 220, 220;
-  --fnt-primary: 0, 0, 0;
-  --fnt-secondary: 50, 50, 50;
-  --tn-primary: 200, 100, 100;
-  --tn-secondary: 255, 150, 150;
+  --bg-primary: 10, 10, 10;
+  --bg-secondary: 30, 30, 30;
+  --bg-tertiary: 50, 50, 50;
+  --fnt-primary: 255, 255, 255;
+  --fnt-secondary: 220, 220, 220;
+  --fnt-active: 255, 255, 255;
+  --tn-primary: 255, 0, 0;
+  --tn-secondary: 255, 100, 100;
 
   // --
 
@@ -19,14 +20,15 @@
   --span-font-size: 1em;
 }
 
-[data-theme='dark'] {
-  --bg-primary: 0, 0, 0;
-  --bg-secondary: 20, 20, 20;
-  --bg-tertiary: 40, 40, 40;
-  --fnt-primary: 255, 255, 255;
-  --fnt-secondary: 200, 200, 200;
-  --tn-primary: 250, 50, 50;
-  --tn-secondary: 255, 70, 70;
+[data-theme='light'] {
+  --bg-primary: 255, 255, 255;
+  --bg-secondary: 240, 240, 240;
+  --bg-tertiary: 230, 230, 230;
+  --fnt-primary: 0, 0, 0;
+  --fnt-secondary: 60, 60, 60;
+  --fnt-active: 255, 255, 255;
+  --tn-primary: 200, 0, 0;
+  --tn-secondary: 255, 150, 150;
 }
 
 $fXl: var(--xl-font-size);
@@ -42,6 +44,7 @@ $bg2: var(--bg-secondary);
 $bg3: var(--bg-tertiary);
 $fn1: var(--fnt-primary);
 $fn2: var(--fnt-secondary);
+$fnA: var(--fnt-active);
 $tn1: var(--tn-primary);
 $tn2: var(--tn-secondary);
 $tn3: var(--tn-tertiary);
@@ -86,7 +89,7 @@ $blood: rgb(203 28 112);
 
 @mixin hoverS($scale: 0.99, $s: 0.2s) {
   scale: 1;
-  transition: all $s ease-in;
+  transition: scale $s ease-in;
 
   &:hover {
     scale: $scale;
