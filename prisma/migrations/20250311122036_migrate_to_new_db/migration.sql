@@ -19,7 +19,7 @@ CREATE TABLE `Personas` (
 CREATE TABLE `Historial_acciones` (
     `id` VARCHAR(50) NOT NULL,
     `title` VARCHAR(100) NOT NULL,
-    `description` VARCHAR(400) NOT NULL,
+    `description` TEXT NOT NULL,
     `queryType` ENUM('GRAPH', 'IMAGE', 'TEXT') NOT NULL DEFAULT 'TEXT',
     `speedA` DOUBLE NULL DEFAULT 0.0,
     `speedB` DOUBLE NULL DEFAULT 0.0,
