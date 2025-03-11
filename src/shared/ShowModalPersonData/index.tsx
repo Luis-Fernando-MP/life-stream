@@ -36,9 +36,9 @@ const ShowModal = ({ person }: { person: ISelectPersonTreeNode }) => {
   return (
     <Modal isOpen={modal} onClose={setModal}>
       {type === 'Doctor' && <DoctorModalInfo doctorData={person} />}
-      {/* {type === 'Patient' && <AnyModalInfo data={person} type='Paciente' />}
+      {type === 'Patient' && <AnyModalInfo data={person} type='Paciente' />}
       {type === 'bloodReceiver' && <AnyModalInfo data={person.patient} type='Receptor' />}
-      {type === 'BloodDonor' && <AnyModalInfo data={person.patient} type='Donante' />} */}
+      {type === 'BloodDonor' && <AnyModalInfo data={person.patient} type='Donante' />}
     </Modal>
   )
 }

@@ -3,6 +3,7 @@ import type { JSX } from 'react'
 
 import { ESelectPerson } from '../../hooks/useSelectPerson'
 import Tail from '../Tail'
+import TailDoctor from '../TailDoctor'
 import './style.scss'
 
 const Tails = (): JSX.Element => {
@@ -11,11 +12,11 @@ const Tails = (): JSX.Element => {
   if (isLoading) return <h2>Cargando componentes</h2>
   return (
     <section className='tails delay animate-blurred-fade-in'>
-      <h2>Vista Por arrayList</h2>
+      <h2>Lista de miembros</h2>
 
       <article className='tails-box'>
         <h5>{data?.doctors.length} Doctores</h5>
-        <ul className='tails-box__list'>
+        <ul className='tails-box__list tails-doctors'>
           {data?.doctors.map(d => {
             const dataTail = {
               type: ESelectPerson.DOC,
@@ -26,7 +27,7 @@ const Tails = (): JSX.Element => {
               etc: d,
               createdAt: d.person.createdAt?.toString() ?? ''
             }
-            return <Tail key={d.id} {...dataTail} />
+            return <TailDoctor key={d.id} {...dataTail} />
           })}
         </ul>
       </article>

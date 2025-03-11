@@ -25,13 +25,8 @@
       @include d.flex($dir: row);
 
       flex-wrap: wrap;
-
       width: 100%;
-      padding: v.$padding;
-      border: 2px solid rgb(v.$bg3);
       border-radius: v.$radius;
-
-      background-color: rgb(v.$bg2);
     }
   }
 }

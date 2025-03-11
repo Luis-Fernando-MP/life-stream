@@ -18,24 +18,23 @@ const DoctorModalInfo = ({ doctorData }: IDoctorModalInfo): JSX.Element => {
   const { photo, firstName, email, lastName, createdAt, updatedAt, username } = person
 
   const haveRole = Object.values(ROLES_DOCTOR_ACCESS).includes(userRol as ROL)
-
   return (
-    <article className='doctorModalInfo'>
-      <header className='doctorModalInfo-header'>
-        <div className='doctorModalInfo-user'>
+    <article className='docModal'>
+      <header className='docModal-header'>
+        <div className='docModal-user'>
           <img src={photo ?? ''} alt={firstName} />
-          <div className='doctorModalInfo-user__name'>
+          <div className='docModal-user__name'>
             <h2>{firstName}</h2>
             <p>{email}</p>
           </div>
         </div>
         {haveRole && (
-          <div className='doctorModalInfo-actions'>
-            <button className='doctorModalInfo-action'>
+          <div className='docModal-actions'>
+            <button className='docModal-action'>
               <Trash2Icon />
               <p>Eliminar Doctor</p>
             </button>
-            <button className='doctorModalInfo-action'>
+            <button className='docModal-action'>
               <SaveIcon />
               <p>Actualizar Doctor</p>
             </button>
@@ -43,30 +42,30 @@ const DoctorModalInfo = ({ doctorData }: IDoctorModalInfo): JSX.Element => {
         )}
       </header>
 
-      <section className='doctorModalInfo-content'>
+      <section className='docModal-content'>
         <h4>Información del doctor</h4>
 
-        <form className='doctorModalInfo-form'>
-          <div className='doctorModalInfo-field'>
+        <form className='docModal-form'>
+          <div className='docModal-field'>
             <h5>Doctor:</h5>
             <input type='text' autoComplete='off' placeholder='nombres' defaultValue={firstName} />
             <input type='text' autoComplete='off' placeholder='apellidos' defaultValue={lastName} />
           </div>
-          <div className='doctorModalInfo-field'>
+          <div className='docModal-field'>
             <h5>Correo:</h5>
             <input type='text' autoComplete='off' placeholder='correo' defaultValue={email} />
           </div>
-          <div className='doctorModalInfo-field'>
+          <div className='docModal-field'>
             <h5>Usuario:</h5>
             <input type='text' autoComplete='off' placeholder='usuario' defaultValue={username} />
           </div>
-          <div className='doctorModalInfo-field'>
+          <div className='docModal-field'>
             <h5>DNI:</h5>
             <input type='text' autoComplete='off' placeholder='01xxxxxx' defaultValue={DNI} />
           </div>
         </form>
       </section>
-      <footer className='doctorModalInfo-footer'>
+      <footer className='docModal-footer'>
         <p>Creado: {fromDate(String(createdAt))}</p>
         <p>Actualizado: {fromDate(String(updatedAt))}</p>
       </footer>

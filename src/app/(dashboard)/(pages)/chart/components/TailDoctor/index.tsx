@@ -17,7 +17,7 @@ interface Props {
   createdAt: string
 }
 
-const Tail = ({ type, name, etc, id, dbId, image, createdAt }: Props): JSX.Element => {
+const TailDoctor = ({ type, name, etc, id, dbId, image, createdAt }: Props): JSX.Element => {
   const { setPerson } = useSelectPerson()
 
   const handleClick = (): void => {
@@ -25,10 +25,10 @@ const Tail = ({ type, name, etc, id, dbId, image, createdAt }: Props): JSX.Eleme
   }
 
   return (
-    <li className='defaultTail' data-modal>
-      <button className='defaultTail-button' onClick={handleClick}>
-        <Image className='defaultTail-image' src={image} alt={name} layout='constrained' width={40} height={40} />
-        <div className='defaultTail-info'>
+    <li className='tailDoctor' data-modal>
+      <button className='tailDoctor-button' onClick={handleClick}>
+        <Image className='tailDoctor-image' src={image} alt={name} layout='fullWidth' />
+        <div className='tailDoctor-info'>
           <h5>{name}</h5>
           <p>{id}</p>
           <small>{fromDate(createdAt)}</small>
@@ -38,4 +38,4 @@ const Tail = ({ type, name, etc, id, dbId, image, createdAt }: Props): JSX.Eleme
   )
 }
 
-export default Tail
+export default TailDoctor
