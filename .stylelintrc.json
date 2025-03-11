@@ -15,7 +15,9 @@
     "scss/at-mixin-pattern": null,
     "scss/dollar-variable-pattern": null,
     "custom-property-pattern": null,
-    "selector-class-pattern": null,
-    "scss/at-mixin-argumentless-call-parentheses": null
+    "declaration-block-no-redundant-longhand-properties": null,
+    "scss/no-global-function-names": null,
+    "declaration-property-value-no-unknown": null,
+    "selector-class-pattern": null
   }
 }
