@@ -3,7 +3,6 @@
  .husky
  coverage
  .prettierignore
- .stylelintignore
  .eslintignore
  *.log
  playwright-report

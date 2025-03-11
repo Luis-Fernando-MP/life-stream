@@ -29,9 +29,7 @@ export const metadata: Metadata = {
 const RootLayout = ({ children }: IRootLayout): JSX.Element => {
   return (
     <html lang='es'>
-      <body
-        className={`${MontserratFont.variable} ${RobotoFont.variable} ${PlayFairFont.variable}`}
-      >
+      <body className={`${MontserratFont.variable} ${RobotoFont.variable} ${PlayFairFont.variable}`}>
         <Providers>
           <section className='layout'>
             <Nav className='layout-nav' />
