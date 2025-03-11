@@ -47,11 +47,10 @@ $radius: 10px;
 $padding: 15px;
 $icon: 20px;
 $family-size: 12px;
-$fontBase: 'Segoe UI Mono', 'Roboto Mono', 'Ubuntu Monospace', 'Source Code Pro', 'Fira Mono',
-  'Segoe UI Emoji';
-$font1: var(--MontserratFont);
-$font2: var(--RobotoFont);
-$font3: var(--PlayFairFont);
+$fontBase: 'Segoe UI Mono', 'Roboto Mono', 'Ubuntu Monospace', 'Source Code Pro', 'Fira Mono', 'Segoe UI Emoji';
+$font1: var(--font1);
+$font2: var(--font2);
+$font3: var(--font3);
 $gr1: linear-gradient(90deg, rgb($tn1) 0%, rgb($tn2) 100%);
 $sha1: 6px 5px 20px -5px rgb($bg3);
 
@@ -70,8 +69,8 @@ $blood: rgb(203 28 112);
 
 @mixin border($bg: rgb($bg1)) {
   & {
-    background-color: $bg;
     border: 1.5px solid rgb($bg3);
+    background-color: $bg;
   }
 }
 

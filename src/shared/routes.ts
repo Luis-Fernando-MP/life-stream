@@ -115,9 +115,9 @@ export const ROUTES = {
   }
 }
 
-const vlipRoute = 9
-export const firstRoutes = Object.entries(ROUTES).splice(0, vlipRoute)
-export const endRoutes = Object.entries(ROUTES).splice(vlipRoute + 1, -1)
+const clipRoute = 9
+export const firstRoutes = Object.entries(ROUTES).splice(0, clipRoute)
+export const endRoutes = Object.entries(ROUTES).splice(clipRoute + 1, -1)
 
 interface IMatchRoute {
   path: string
@@ -129,9 +129,4 @@ export const matchRoute = ({ path, route }: IMatchRoute) => {
   return route === path || regex.test(route)
 }
 
-export const PUBLIC_ROUTES = [
-  ROUTES.home.path,
-  ROUTES.practice.path,
-  ROUTES.login.path,
-  ROUTES.registerAccount.path
-]
+export const PUBLIC_ROUTES = [ROUTES.home.path, ROUTES.practice.path, ROUTES.login.path, ROUTES.registerAccount.path]
