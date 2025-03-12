@@ -1,7 +1,7 @@
 # 🌟 Life-Stream
 
 [![Website](https://img.shields.io/badge/Website-life--stream.vercel.app-blue?style=for-the-badge&logo=vercel)](https://life-stream.vercel.app)
-[![Figma](https://img.shields.io/badge/Figma-Design-F24E1E?style=for-the-badge&logo=figma)](https://www.figma.com/design/Qe9Z000000000000000000000000000000000000/Life-Stream?node-id=0-1&t=0-0)
+[![Figma](https://img.shields.io/badge/Figma-Design-F24E1E?style=for-the-badge&logo=figma)](https://www.figma.com/design/M6clGXGFX5vB9G2Mdfp7XY/life-stream?node-id=1-25&t=78tx6BiTvqWERla6-1)
 [![License](https://img.shields.io/badge/License-MIT-green.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
 [![Aiven](https://img.shields.io/badge/Aiven-Cloud-FF6F00?style=for-the-badge&logo=aiven&logoColor=white)](https://aiven.io)
 
