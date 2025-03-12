@@ -23,10 +23,6 @@
 
     &.active {
       background-color: rgb(v.$tn1);
-
-      svg {
-        stroke: rgb(v.$fnA);
-      }
     }
   }
 
@@ -38,5 +34,9 @@
       width: 30px;
       height: 30px;
     }
+  }
+
+  &-link.active svg {
+    stroke: rgb(v.$fnA);
   }
 }

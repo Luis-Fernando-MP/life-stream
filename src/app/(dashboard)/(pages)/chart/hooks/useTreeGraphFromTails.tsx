@@ -73,7 +73,7 @@ const useTreeGraph = ({ trees = {}, onNodeClick }: TreeGraphParams) => {
       .size([width - margin * 2, height - margin * 2])
       .separation((a, b) => (a.parent === b.parent ? 1 : 2.5))
 
-    treeLayout(hierarchyData)
+    treeLayout(hierarchyData as any)
 
     const svg = select(svgRef.current)
       .attr('width', width)

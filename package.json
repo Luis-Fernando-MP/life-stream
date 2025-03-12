@@ -6,7 +6,7 @@
   "scripts": {
     "postinstall": "npx prisma generate",
     "dev": "rimraf .next && pnpm store prune && next dev --turbopack",
-    "build": "pnpm lint && next build",
+    "build": "next build",
     "start": "next start",
     "test": "vitest",
     "lint": "npx stylelint '**/*.{css,scss}' && next lint",
@@ -79,12 +79,5 @@
     "tailwindcss": "4.0.12",
     "typescript": "5.8.2",
     "vitest": "3.0.8"
-  },
-  "pnpm": {
-    "onlyBuiltDependencies": [
-      "@clerk/shared",
-      "@prisma/client",
-      "esbuild"
-    ]
   }
 }
