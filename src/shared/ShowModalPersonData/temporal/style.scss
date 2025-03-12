@@ -24,14 +24,13 @@
 
     img {
       transform-style: preserve-3d;
-      transform: rotateZ(-10deg) rotateY(30deg);
 
       width: 100px;
       height: 150px;
       margin-right: 20px;
       border-radius: v.$radius;
 
-      box-shadow: -15px 15px 20px 10px rgb(0 0 0 * 0.54%);
+      object-fit: cover;
     }
   }
 

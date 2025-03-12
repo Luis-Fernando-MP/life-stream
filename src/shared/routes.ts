@@ -63,20 +63,12 @@ export const USER_ROUTES = {
     requiredRoles: [USER_ROLES.ADMIN, USER_ROLES.DOCTOR, USER_ROLES.DOCTOR_ADMIN]
   },
 
-  wantDonate: {
-    path: '/want-donate/',
+  'want-donate': {
+    path: '/want-donate',
     subPaths: '/want-donate/',
     title: 'Donar Sangre',
     description: '🩸 Estoy dispuesto a donar sangre y ayudar a salvar vidas',
     Icon: HeartIcon,
-    requiredRoles: [USER_ROLES.USER]
-  },
-  wantReceptor: {
-    path: '/want-receptor/',
-    subPaths: '/want-receptor/details',
-    title: 'Registrar Receptor de Sangre',
-    description: '📝 Registrar nuevo receptor para recibir sangre',
-    Icon: UserPlusIcon,
     requiredRoles: [USER_ROLES.USER]
   }
 }

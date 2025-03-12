@@ -3,7 +3,6 @@
 
 .docModal {
   width: fit-content;
-  min-width: 900px;
   height: max-content;
   padding: v.$padding;
   border-radius: v.$radius;
@@ -25,7 +24,6 @@
 
     img {
       transform-style: preserve-3d;
-      transform: rotateZ(-10deg) rotateY(30deg);
 
       width: 100px;
       height: 150px;
@@ -33,7 +31,6 @@
       border-radius: v.$radius;
 
       object-fit: cover;
-      box-shadow: -15px 15px 20px 10px rgb(0 0 0 * 0.54%);
     }
   }
 

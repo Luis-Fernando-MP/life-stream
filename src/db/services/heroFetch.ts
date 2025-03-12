@@ -26,3 +26,14 @@ export async function getHeroDonations(id: string) {
     console.error('Fetch error:', error)
   }
 }
+
+export async function deleteHero(id: string) {
+  try {
+    const response = await fetch(`/api/hero`, { method: 'DELETE', body: JSON.stringify({ heroId: id }) })
+    if (!response.ok) throw new Error(`Error deleting hero: ${response.statusText}`)
+    const body = await response.json()
+    return body
+  } catch (error) {
+    console.error('Fetch error:', error)
+  }
+}

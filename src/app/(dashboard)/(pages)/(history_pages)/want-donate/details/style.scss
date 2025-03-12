@@ -32,6 +32,7 @@
   width: 350px;
   min-width: 350px;
   height: max-content;
+  min-height: 90vh;
   padding: v.$padding;
   border-radius: v.$radius;
 
@@ -79,12 +80,12 @@
 
   &__image {
     position: relative;
-    width: fit-content;
     height: fit-content;
 
     img {
       position: relative;
-      display: block;
+      width: 300px;
+      object-fit: contain;
       filter: drop-shadow(0 20px 25px rgb(0 0 0 / 30%));
     }
   }
@@ -121,6 +122,7 @@
 
     th,
     td {
+      width: min-content;
       padding: v.$padding;
       text-align: center;
     }
@@ -140,5 +142,9 @@
         }
       }
     }
+  }
+
+  &__id {
+    width: 80px;
   }
 }

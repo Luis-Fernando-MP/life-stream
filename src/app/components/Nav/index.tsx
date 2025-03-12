@@ -54,13 +54,6 @@ const Nav = ({ className, ...props }: INav): JSX.Element => {
           })}
         </div>
         <div className='navbar-bottom'>
-          <Link
-            className={`navbar-link ${isActive(ROUTES.authors.path)} ${pathname === ROUTES.authors.path ? 'active' : ''}`}
-            href={ROUTES.authors.path}
-            title={ROUTES.authors.title}
-          >
-            <Icon />
-          </Link>
           <AuthButtons />
         </div>
       </nav>

@@ -99,3 +99,18 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: error.message }, { status: 500 })
   }
 }
+
+export async function DELETE(req: NextRequest) {
+  const { heroId } = await req.json()
+
+  try {
+    const donation = await prisma.bloodDonation.findUnique({ where: { id: heroId } })
+    if (!donation) throw new Error('No se encontró una donación asociada a tu cuenta.')
+    await prisma.bloodDonation.delete({ where: { id: heroId } })
+
+    return NextResponse.json({ message: 'Donación eliminada' }, { status: 200 })
+  } catch (error: any) {
+    console.error('Error en la operación:', error)
+    return NextResponse.json({ error: error.message }, { status: 500 })
+  }
+}

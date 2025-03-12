@@ -1,7 +1,7 @@
 'use client'
 
-import { GITHUB_REPOSITORY } from '@/shared/constants'
-import { GithubIcon, LoaderCircleIcon, SparklesIcon } from 'lucide-react'
+import { FIGMA_URL, GITHUB_REPOSITORY } from '@/shared/constants'
+import { FigmaIcon, GithubIcon, LoaderCircleIcon, SparklesIcon } from 'lucide-react'
 import dynamic from 'next/dynamic'
 import Link from 'next/link'
 import type { HtmlHTMLAttributes, JSX, ReactNode } from 'react'
@@ -26,9 +26,9 @@ const Header = ({ className, ...props }: IHeader): JSX.Element => {
       <LockButton />
       <section className='header-actions'>
         <ThemeController />
-        <button className='header-action'>
-          <SparklesIcon />
-        </button>
+        <Link href={FIGMA_URL} target='_blank' className='header-action' rel='noopener referer'>
+          <FigmaIcon />
+        </Link>
         <Link href={GITHUB_REPOSITORY} target='_blank' className='header-action' rel='noopener referer'>
           <GithubIcon />
         </Link>

@@ -5,8 +5,8 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import dayjs from 'dayjs'
 import toast from 'react-hot-toast'
 
-import { getHeroDonations, setHero } from '../services/heroFetch'
-import { ALL_DATA } from './keys'
+import { deleteHero, getHeroDonations, setHero } from '../services/heroFetch'
+import { ALL_DATA, BLOOD_DONATIONS } from './keys'
 import { useSetHistories } from './useHistory'
 
 export const HERO_DONATIONS = 'hero-donations'
@@ -57,6 +57,27 @@ export function useHeroDonations(userID: string | undefined) {
     staleTime: 1000,
     retry: 5,
     enabled: !!userID
+  })
+  return { ...query }
+}
+
+export function useDeleteHero(toastId: string) {
+  const queryClient = useQueryClient()
+  const query = useMutation({
+    mutationFn: deleteHero,
+    retry: 3,
+    onError(error) {
+      console.error('error', error)
+      toast.error('Algo salió mal, por favor intenta nuevamente', { id: toastId })
+    },
+    onSuccess() {
+      queryClient.invalidateQueries({ queryKey: [ALL_DATA, HERO_DONATIONS] })
+      toast.success('Donación eliminada', { id: toastId })
+    },
+    onSettled() {
+      queryClient.invalidateQueries({ queryKey: [BLOOD_DONATIONS] })
+      toast.dismiss(toastId)
+    }
   })
   return { ...query }
 }
