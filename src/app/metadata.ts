@@ -26,7 +26,7 @@ export const metadata: Metadata = {
   creator: 'Luis MP',
   publisher: 'SHUN',
   icons: {
-    icon: '/logo.svg'
+    icon: '/logo.png'
   },
   openGraph: {
     title: 'Key Flare - Mejora tu velocidad de escritura',
