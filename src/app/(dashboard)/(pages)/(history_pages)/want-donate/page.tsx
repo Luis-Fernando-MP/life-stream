@@ -9,7 +9,7 @@ import './style.scss'
 const WantDonate = (): JSX.Element => {
   return (
     <section className='layout-page WantDonate animate-fade-in-up'>
-      <BoldText bold='QUIERO' middle='SER' desc='UN DONANTE COMO TÚ' />
+      <BoldText bold='QUIERO' middle='SER' desc='UN HEROE DE LA VIDA' />
       <FormRegisterHero />
     </section>
   )

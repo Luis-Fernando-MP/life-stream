@@ -10,11 +10,11 @@ const scheme = z.object({
   firstName: z
     .string()
     .max(100, { message: 'Tu nombre no puede tener mas de 100 caracteres' })
-    .regex(/^[a-zA-Z\s]*$/, 'Tu nombre no puede contener números ni caracteres especiales'),
+    .regex(/^[a-zA-ZáéíóúÁÉÍÓÚ\s]*$/, 'Tu nombre no puede contener números ni caracteres especiales'),
   lastName: z
     .string()
     .max(100, { message: 'Tu apellido no puede tener mas de 100 caracteres' })
-    .regex(/^[a-zA-Z\s]*$/, 'Tu apellido no puede contener números ni caracteres especiales'),
+    .regex(/^[a-zA-ZáéíóúÁÉÍÓÚ\s]*$/, 'Tu apellido no puede contener números ni caracteres especiales'),
   dni: z
     .string()
     .regex(/^\d*$/, 'El DNI debe contener solo números')

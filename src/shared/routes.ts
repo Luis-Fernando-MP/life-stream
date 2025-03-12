@@ -12,7 +12,7 @@ import {
 
 import { USER_ROLES } from './roles'
 
-export const ROUTES = {
+export const USER_ROUTES = {
   home: {
     path: '/',
     subPaths: '/',
@@ -27,7 +27,7 @@ export const ROUTES = {
     title: 'Gráficos',
     description: 'Analizar registros',
     Icon: ChartLineIcon,
-    requiredRoles: [USER_ROLES.ADMIN, USER_ROLES.DOCTOR, USER_ROLES.DOCTOR_ADMIN]
+    requiredRoles: [USER_ROLES.ADMIN, USER_ROLES.DOCTOR, USER_ROLES.DOCTOR_ADMIN, USER_ROLES.USER]
   },
 
   donors: {
@@ -36,7 +36,7 @@ export const ROUTES = {
     title: 'Donantes',
     description: '❤️ Lista de donantes de sangre',
     Icon: HeartHandshakeIcon,
-    requiredRoles: []
+    requiredRoles: [USER_ROLES.ADMIN, USER_ROLES.DOCTOR, USER_ROLES.DOCTOR_ADMIN, USER_ROLES.USER]
   },
   registerDonor: {
     path: '/donors/register',
@@ -52,7 +52,7 @@ export const ROUTES = {
     title: 'Receptores',
     description: '🧑‍🤝‍🧑 Lista de receptores',
     Icon: DnaIcon,
-    requiredRoles: []
+    requiredRoles: [USER_ROLES.ADMIN, USER_ROLES.DOCTOR, USER_ROLES.DOCTOR_ADMIN, USER_ROLES.USER]
   },
   registerRecipient: {
     path: '/recipients/register',
@@ -78,8 +78,10 @@ export const ROUTES = {
     description: '📝 Registrar nuevo receptor para recibir sangre',
     Icon: UserPlusIcon,
     requiredRoles: [USER_ROLES.USER]
-  },
-
+  }
+}
+export const ROUTES = {
+  ...USER_ROUTES,
   authors: {
     path: '/authors',
     subPaths: '/authors',
@@ -105,10 +107,6 @@ export const ROUTES = {
     requiredRoles: []
   }
 }
-
-const clipRoute = 8
-export const firstRoutes = Object.entries(ROUTES).splice(0, clipRoute)
-export const endRoutes = Object.entries(ROUTES).splice(clipRoute + 1, -1)
 
 interface IMatchRoute {
   path: string

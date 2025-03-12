@@ -3,14 +3,16 @@
 
 .RDForm {
   width: fit-content;
-  min-width: 312px;
+  width: 400px;
+  max-width: 400px;
   height: max-content;
   padding: v.$padding;
 
-  @include v.border(rgba(v.$bg1, 0.5));
   @include d.flex;
 
   border-radius: v.$radius;
+
+  @include v.border(rgba(v.$bg1, 0.5));
 
   &-link {
     font-size: v.$fP;
@@ -37,9 +39,8 @@
     padding: v.$padding * 0.5;
     border-radius: v.$radius * 0.5;
 
-    @include v.border(rgba(v.$bg2, 0.6));
-
     @include d.flex;
+    @include v.border(rgba(v.$bg2, 0.6));
 
     &.error {
       border-color: v.$error;
@@ -74,12 +75,32 @@
 
     input {
       width: min-content;
-      padding: 7px 5px;
-      border-radius: 5px;
+      padding: v.$padding * 0.5;
+      border-radius: v.$radius;
 
       text-align: right;
 
       background-color: rgba(v.$bg1, 0.3);
+    }
+
+    input[type='date'] {
+      cursor: pointer;
+      position: relative;
+      appearance: none;
+
+      &[type='date']::-webkit-calendar-picker-indicator {
+        cursor: pointer;
+
+        position: absolute;
+        inset: 0;
+
+        width: auto;
+        height: auto;
+
+        color: transparent;
+
+        background: transparent;
+      }
     }
   }
 }

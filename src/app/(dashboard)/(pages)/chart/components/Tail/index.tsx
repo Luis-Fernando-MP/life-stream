@@ -25,8 +25,8 @@ const Tail = ({ type, name, etc, id, dbId, image, createdAt }: Props): JSX.Eleme
   }
 
   return (
-    <li className='defaultTail' data-modal>
-      <button className='defaultTail-button' onClick={handleClick}>
+    <li tabIndex={0} role='button' title={name} aria-label={name} className='defaultTail' data-modal onClick={handleClick}>
+      <button className='defaultTail-button'>
         <Image className='defaultTail-image' src={image} alt={name} layout='constrained' width={40} height={40} />
         <div className='defaultTail-info'>
           <h5>{name}</h5>

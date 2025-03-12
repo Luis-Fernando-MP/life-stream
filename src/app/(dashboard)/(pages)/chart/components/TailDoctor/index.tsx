@@ -25,8 +25,8 @@ const TailDoctor = ({ type, name, etc, id, dbId, image, createdAt }: Props): JSX
   }
 
   return (
-    <li className='tailDoctor' data-modal>
-      <button className='tailDoctor-button' onClick={handleClick}>
+    <li tabIndex={0} role='button' title={name} aria-label={name} className='tailDoctor' data-modal onClick={handleClick}>
+      <button className='tailDoctor-button'>
         <Image className='tailDoctor-image' src={image} alt={name} layout='fullWidth' />
         <div className='tailDoctor-info'>
           <h5>{name}</h5>

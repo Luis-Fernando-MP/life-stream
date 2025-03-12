@@ -3,20 +3,18 @@
 import useSelectPerson from '@/app/(dashboard)/(pages)/chart/hooks/useSelectPerson'
 import { getBloodType } from '@/shared/getBloodType'
 import { fromDate } from '@/shared/time'
+import { Image } from '@unpic/react'
 import { DropletIcon } from 'lucide-react'
 import { type JSX, memo } from 'react'
 
 import useSearchDonors from '../../hooks/useSearchDonors'
 import './style.scss'
 
-/* eslint-disable @next/next/no-img-element */
-
 const SearchDonorsComponent = (): JSX.Element => {
   const donorsSearch = useSearchDonors(s => s.donors)
   const setPerson = useSelectPerson(s => s.setPerson)
 
   const handleClick = (data: any): void => {
-    console.log(data)
     setPerson({ ...data })
   }
 
@@ -36,7 +34,7 @@ const SearchDonorsComponent = (): JSX.Element => {
             data-modal
             style={{ animationDelay: `${i * 0.1}s` }}
           >
-            <img src={photo} alt={person.firstName} className='seDC-bgPatient' />
+            <Image src={photo} alt={person.firstName} className='seDC-bgPatient' layout='constrained' width={70} height={70} />
             <div className='seDC-item__info'>
               <p>Paciente: {person.firstName}</p>
               <h4>DNI: {DNI}</h4>
@@ -49,7 +47,7 @@ const SearchDonorsComponent = (): JSX.Element => {
               </div>
             </div>
             <div className='seDC-item__doctor'>
-              <img src={doc.photo} alt={doc.firstName} className='seDC-bgDoctor' />
+              <Image src={doc.photo} alt={doc.firstName} className='seDC-bgDoctor' layout='constrained' width={35} height={35} />
               <p>Atendido por:</p>
               <h5>{doc.firstName}</h5>
               <span>{fromDate(donor.lastDonation)}</span>

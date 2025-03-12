@@ -41,12 +41,12 @@ const scheme = z.object({
     .optional()
     .refine(
       value => {
-        if (!value) return true // Si no se proporciona, es válido.
-        const inputDate = dayjs(value, 'YYYY-MM-DD', true) // Valida formato y fecha.
-        const today = dayjs().startOf('day')
-        return inputDate.isValid() && inputDate.isSameOrBefore(today)
+        if (!value) return true
+        const inputDate = dayjs(value, 'YYYY-MM-DD', true)
+        const endOfDay = dayjs().endOf('day')
+        return inputDate.isValid() && inputDate.isSameOrBefore(endOfDay) && inputDate.isAfter(endOfDay.subtract(2, 'month'))
       },
-      { message: 'La fecha no debe ser posterior a hoy' }
+      { message: 'La fecha debe ser al menos 2 meses antes de la fecha actual' }
     )
 })
 

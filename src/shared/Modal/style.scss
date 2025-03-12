@@ -18,8 +18,8 @@
   min-height: 100vh;
 
   opacity: 1;
-  background-color: rgba(v.$bg1, 0.5);
-  backdrop-filter: blur(10px);
+  background-color: rgba(v.$bg1, 0.94);
+  backdrop-filter: blur(5px);
 
   transition: opacity 0.2s ease-in-out;
   animation: open-clip 0.2s ease-in-out forwards;

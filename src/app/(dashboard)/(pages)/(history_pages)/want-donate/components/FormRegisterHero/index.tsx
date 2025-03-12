@@ -1,13 +1,15 @@
 'use client'
 
-import { useSetHero } from '@/db/hooks/useSetHero'
+import { useHeroDonations, useSetHero } from '@/db/hooks/useSetHero'
 import { IHeroRegisterRes, heroRegisterResolver } from '@/resolvers/heroRegisterResolver'
 import { acl } from '@/shared/activeClass'
-import { bloodTypeArr } from '@/shared/getBloodType'
+import { bloodTypeAbb, bloodTypeArr, getBloodTypeFromAbbreviation } from '@/shared/getBloodType'
+import { useUser } from '@clerk/nextjs'
+import { BloodType } from '@prisma/client'
 import dayjs from 'dayjs'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { type JSX } from 'react'
+import { type JSX, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
 
@@ -21,6 +23,8 @@ const FormRegisterHero = ({ className }: IFormRegisterHero): JSX.Element => {
   const toastHeroId = 'id-donors-modal'
   const { mutate: heroMutate } = useSetHero(toastHeroId)
   const { push } = useRouter()
+  const { user } = useUser()
+  const { data: heroDonations, isError } = useHeroDonations(user?.id)
   const hookForm = useForm<IHeroRegisterRes>({
     resolver: heroRegisterResolver,
     mode: 'onChange',
@@ -35,22 +39,56 @@ const FormRegisterHero = ({ className }: IFormRegisterHero): JSX.Element => {
 
   const { age, bloodType, dni, firstName, donationDate, lastName, weight, lastDonationDate } = errors
 
+  useEffect(() => {
+    if (!heroDonations) return
+    const { person, patient } = heroDonations
+    if (!person || !patient) return
+
+    const lastDonation = dayjs(heroDonations.donations[0]?.donationDate).format('YYYY-MM-DD').toString()
+
+    const formData = {
+      firstName: person.firstName,
+      lastName: person.lastName,
+      age: patient.age,
+      bloodType: bloodTypeAbb[patient.bloodType as BloodType],
+      weight: patient.weight,
+      dni: patient.DNI,
+      lastDonationDate: lastDonation
+    }
+    hookForm.reset(formData)
+  }, [heroDonations])
+
   const onFormSubmit = async ({ donationDate, lastDonationDate, ...data }: IHeroRegisterRes) => {
-    toast.loading('Te estamos registrando :D', { id: toastHeroId, duration: Infinity })
-    heroMutate(
-      {
-        body: {
-          ...data,
-          donationDate: dayjs(donationDate).toDate(),
-          lastDonationDate: !lastDonationDate ? dayjs(donationDate).toDate() : dayjs(lastDonationDate).toDate()
-        }
-      },
-      {
-        onSuccess() {
-          push('/want-donate/details')
-        }
-      }
-    )
+    toast.loading('Te estamos registrando :D', { id: toastHeroId })
+
+    const donDate = dayjs(donationDate)
+    const lastDonDate = lastDonationDate ? dayjs(lastDonationDate) : donDate
+
+    let validLastDonation = true
+    if (!isError) {
+      validLastDonation = false
+    }
+
+    // const validLastDonation = lastDonDate.isBefore(donDate.subtract(2, 'month'))
+
+    console.log('donationDatqe', donDate)
+    console.log('lastDonationDate', lastDonDate)
+    // heroMutate(
+    //   {
+    //     body: {
+    //       ...data,
+    //       donationDate: donDate.toDate(),
+    //       lastDonationDate: lastDonDate.toDate()
+    //     }
+    //   },
+    //   {
+    //     onSuccess() {
+    //       push('/want-donate/details')
+    //     }
+    //   }
+    // )
+
+    setTimeout(() => toast.dismiss(toastHeroId), 5000)
   }
 
   const onErrors = () => {
@@ -71,7 +109,7 @@ const FormRegisterHero = ({ className }: IFormRegisterHero): JSX.Element => {
           <h5>
             <b>Fecha</b> de <b>donación</b>
           </h5>
-          <input type='date' {...register('donationDate')} />
+          <input min={dayjs().add(1, 'day').format('YYYY-MM-DD')} type='date' {...register('donationDate')} />
         </div>
 
         {donationDate && <p className='error-message'>{donationDate.message as any}</p>}
@@ -82,7 +120,7 @@ const FormRegisterHero = ({ className }: IFormRegisterHero): JSX.Element => {
           <h5>
             <b>Última Fecha</b> de <b>donación</b>
           </h5>
-          <input type='date' {...register('lastDonationDate')} />
+          <input max={dayjs().format('YYYY-MM-DD')} type='date' {...register('lastDonationDate')} />
         </div>
 
         {lastDonationDate && <p className='error-message'>{lastDonationDate.message as any}</p>}

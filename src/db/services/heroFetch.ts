@@ -13,3 +13,16 @@ export async function setHero({ body }: ISetUserHistory) {
     return []
   }
 }
+
+export async function getHeroDonations(id: string) {
+  try {
+    const response = await fetch(`/api/hero?id=${id}`)
+    const body = await response.json()
+    if (!response.ok) {
+      throw new Error(`Error getting hero donations: ${body?.error || response.statusText}`)
+    }
+    return body
+  } catch (error) {
+    console.error('Fetch error:', error)
+  }
+}

@@ -1,11 +1,11 @@
 'use client'
 
 import { fromDate } from '@/shared/time'
-import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import dayjs from 'dayjs'
 import toast from 'react-hot-toast'
 
-import { setHero } from '../services/heroFetch'
+import { getHeroDonations, setHero } from '../services/heroFetch'
 import { ALL_DATA } from './keys'
 import { useSetHistories } from './useHistory'
 
@@ -38,8 +38,22 @@ export function useSetHero(toastId: string) {
       </section>`
       historyMutate({ body })
       useQuery.invalidateQueries({ queryKey: [ALL_DATA] })
-      toast.success('Gracias por tu apoyo', { id: toastId, duration: 2000 })
+      toast.success('Gracias por tu apoyo', { id: toastId })
     }
+  })
+  return { ...query }
+}
+
+export function useHeroDonations(userID: string | undefined) {
+  const query = useQuery({
+    queryKey: ['hero-donations', userID],
+    queryFn: async ({ queryKey }) => {
+      const [, id] = queryKey
+      return await getHeroDonations(String(id))
+    },
+    staleTime: 1000,
+    retry: 5,
+    enabled: !!userID
   })
   return { ...query }
 }

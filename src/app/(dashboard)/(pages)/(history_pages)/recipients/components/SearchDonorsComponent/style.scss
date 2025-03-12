@@ -13,6 +13,8 @@
   &-item {
     @include d.flex($gap: v.$padding * 0.5, $ali: center);
 
+    user-select: none;
+
     width: fit-content;
     min-width: 140px;
     padding: v.$padding * 0.5;
@@ -48,14 +50,12 @@
   }
 
   &-bgPatient {
-    width: 50px;
-    height: 50px;
     border-radius: 10px;
+    object-fit: cover;
   }
 
   &-bgDoctor {
-    width: 25px;
-    height: 25px;
-    border-radius: 50%;
+    border-radius: v.$radius;
+    object-fit: cover;
   }
 }

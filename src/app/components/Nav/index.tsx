@@ -3,7 +3,7 @@
 import { acl } from '@/shared/activeClass'
 import useNav from '@/shared/hooks/useNav'
 import { ROL, validateRoutes } from '@/shared/roles'
-import { ROUTES, firstRoutes, matchRoute } from '@/shared/routes'
+import { ROUTES, USER_ROUTES, matchRoute } from '@/shared/routes'
 import Logo from '@/shared/ui/Logo'
 import { useUser } from '@clerk/nextjs'
 import { MenuIcon, XIcon } from 'lucide-react'
@@ -18,7 +18,7 @@ interface INav extends HtmlHTMLAttributes<HTMLElement> {
 }
 
 const Nav = ({ className, ...props }: INav): JSX.Element => {
-  const { user } = useUser()
+  const { user, isSignedIn } = useUser()
   const { getClass, pathname, show, toggleShow } = useNav()
   const isActive = (cls: string) => acl(matchRoute({ path: cls, route: pathname }))
 
@@ -37,11 +37,10 @@ const Nav = ({ className, ...props }: INav): JSX.Element => {
           <Link className={`navbar-link navbar-logo`} href={'/'}>
             <Logo />
           </Link>
-          {firstRoutes.map(route => {
-            const [tag, data] = route
+          {Object.entries(USER_ROUTES).map(([tag, data]) => {
             const { Icon, title, path, subPaths } = data
             const haveRoles = validateRoutes(data?.requiredRoles, userRol as ROL)
-            if (!haveRoles) return
+            if (!haveRoles || !isSignedIn) return
             return (
               <Link
                 key={tag}
