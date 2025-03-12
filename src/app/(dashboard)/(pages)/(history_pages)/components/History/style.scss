@@ -3,10 +3,6 @@
 
 .history {
   width: 100%;
-  padding: v.$padding * 0.7;
-
-  @include v.border(rgba(v.$bg2, 0.5));
-
   border-radius: 10px;
 
   @include d.flex;
@@ -29,33 +25,32 @@
   }
 
   &-data {
-    @include d.flex($dir: row-reverse, $gap: 10px, $ali: center);
+    @include d.flex;
 
-    &-left {
-      @include d.flex($ali: center);
+    padding: v.$padding;
+    border-radius: v.$radius;
+    background-color: rgba(v.$bg2);
+  }
 
-      svg {
-        min-width: 25px;
-        height: 25px;
-      }
+  &-actions {
+    @include d.flex($ali: center, $dir: row, $gap: v.$padding * 0.5);
 
-      button {
-        padding: 5px;
+    > svg {
+      min-width: v.$icon * 1.3;
+      height: v.$icon * 1.3;
+    }
 
-        svg {
-          min-width: 20px;
-          height: 20px;
-        }
+    button {
+      padding: 5px;
 
-        &.pending {
-          pointer-events: none;
-          user-select: none;
-          animation: rotation 1s infinite;
+      &.pending {
+        pointer-events: none;
+        user-select: none;
+        animation: rotation 1s infinite;
 
-          @keyframes rotation {
-            to {
-              transform: rotateZ(1turn);
-            }
+        @keyframes rotation {
+          to {
+            transform: rotateZ(1turn);
           }
         }
       }
@@ -65,10 +60,6 @@
   &-body {
     width: 100%;
     height: max-content;
-    padding: v.$padding;
-
-    background-color: rgba(v.$bg1, 0.8);
-    border-radius: v.$radius;
 
     .history-section {
       @include d.flex($dir: row, $ali: center);
@@ -78,10 +69,10 @@
 
         width: 30px;
         height: 30px;
+        border-radius: 50%;
 
         object-fit: cover;
         background-color: rgb(v.$tn1);
-        border-radius: 50%;
       }
     }
   }
@@ -103,7 +94,6 @@
         width: 30px;
         height: 30px;
         padding: 2px;
-
         border-radius: 50%;
 
         /* stylelint-disable-next-line no-descending-specificity */
@@ -118,26 +108,15 @@
 
   &-hero {
     justify-content: center;
-    width: 100%;
 
-    @include d.flex($ali: center);
+    width: 100%;
+    padding: v.$padding * 0.5;
 
     text-align: center;
 
-    &__description {
-      h3 {
-        margin: 10px;
+    background-color: rgba(v.$bg2, 0.8);
 
-        u {
-          color: rgb(v.$tn1);
-        }
-      }
-
-      h4 {
-        margin: 10px;
-        text-transform: capitalize;
-      }
-    }
+    @include d.flex($ali: center);
 
     &__images {
       pointer-events: none;
@@ -152,14 +131,34 @@
         position: absolute;
         top: 0;
         left: 50%;
-        transform: translateY(-10px) translateX(-90%) rotateZ(-25deg);
+        transform: translateY(-20px) translateX(-90%) rotateZ(-25deg);
+
+        width: 80px;
+        height: 80px;
+
+        object-fit: contain;
       }
 
       img:last-child {
         width: 100%;
         height: 100%;
-        object-fit: cover;
         border-radius: 50%;
+        object-fit: cover;
+      }
+    }
+
+    &__description {
+      h3 {
+        margin: 10px;
+
+        u {
+          color: rgb(v.$tn1);
+        }
+      }
+
+      h4 {
+        margin: 10px;
+        text-transform: capitalize;
       }
     }
   }

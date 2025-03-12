@@ -10,10 +10,10 @@
   &-subTitle {
     justify-content: center;
     max-width: fit-content;
-    padding: v.$padding / 2 v.$padding;
+    padding: v.$padding * 0.5 v.$padding;
     border-radius: v.$radius;
 
-    @include v.border;
     @include d.flex($dir: row, $gap: 5px, $ali: center);
+    @include v.border;
   }
 }

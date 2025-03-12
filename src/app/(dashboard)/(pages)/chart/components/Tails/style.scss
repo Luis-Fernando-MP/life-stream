@@ -6,7 +6,7 @@
   width: 100%;
   height: fit-content;
 
-  @include d.flex();
+  @include d.flex;
 
   &-box {
     width: 100%;
@@ -15,7 +15,7 @@
     @include d.flex($ali: flex-start);
 
     > h5 {
-      padding: v.$padding / 2 v.$padding * 2;
+      padding: v.$padding * 0.5 v.$padding * 2;
       border-radius: v.$radius;
 
       @include v.border;
@@ -25,12 +25,7 @@
       @include d.flex($dir: row);
 
       flex-wrap: wrap;
-
       width: 100%;
-      padding: v.$padding;
-
-      background-color: rgb(v.$bg2);
-      border: 2px solid rgb(v.$bg3);
       border-radius: v.$radius;
     }
   }

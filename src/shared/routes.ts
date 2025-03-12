@@ -7,13 +7,12 @@ import {
   LogInIcon,
   MedalIcon,
   PlusIcon,
-  UserPlusIcon,
-  Wallpaper
+  UserPlusIcon
 } from 'lucide-react'
 
-import { ROL } from './roles'
+import { USER_ROLES } from './roles'
 
-export const ROUTES = {
+export const USER_ROUTES = {
   home: {
     path: '/',
     subPaths: '/',
@@ -22,21 +21,13 @@ export const ROUTES = {
     Icon: HouseIcon,
     requiredRoles: []
   },
-  practice: {
-    path: '/practice',
-    subPaths: '/practice',
-    title: 'Listar los Doctores',
-    description: '👨‍🎓 Practica los arboles binarios',
-    Icon: Wallpaper,
-    requiredRoles: []
-  },
   chart: {
     path: '/chart',
     subPaths: '/chart',
     title: 'Gráficos',
     description: 'Analizar registros',
     Icon: ChartLineIcon,
-    requiredRoles: [ROL.ADMIN, ROL.DOCTOR, ROL.DOCTOR_ADMIN]
+    requiredRoles: [USER_ROLES.ADMIN, USER_ROLES.DOCTOR, USER_ROLES.DOCTOR_ADMIN, USER_ROLES.USER]
   },
 
   donors: {
@@ -45,7 +36,7 @@ export const ROUTES = {
     title: 'Donantes',
     description: '❤️ Lista de donantes de sangre',
     Icon: HeartHandshakeIcon,
-    requiredRoles: []
+    requiredRoles: [USER_ROLES.ADMIN, USER_ROLES.DOCTOR, USER_ROLES.DOCTOR_ADMIN, USER_ROLES.USER]
   },
   registerDonor: {
     path: '/donors/register',
@@ -53,7 +44,7 @@ export const ROUTES = {
     title: 'Registrar Donante',
     description: '📝 Registro de nuevo donante de sangre',
     Icon: HeartIcon,
-    requiredRoles: [ROL.ADMIN, ROL.DOCTOR, ROL.DOCTOR_ADMIN]
+    requiredRoles: [USER_ROLES.ADMIN, USER_ROLES.DOCTOR, USER_ROLES.DOCTOR_ADMIN]
   },
   recipients: {
     path: '/recipients',
@@ -61,7 +52,7 @@ export const ROUTES = {
     title: 'Receptores',
     description: '🧑‍🤝‍🧑 Lista de receptores',
     Icon: DnaIcon,
-    requiredRoles: []
+    requiredRoles: [USER_ROLES.ADMIN, USER_ROLES.DOCTOR, USER_ROLES.DOCTOR_ADMIN, USER_ROLES.USER]
   },
   registerRecipient: {
     path: '/recipients/register',
@@ -69,26 +60,20 @@ export const ROUTES = {
     title: 'Registrar Receptor',
     description: '📝 Registro de nuevo receptor',
     Icon: PlusIcon,
-    requiredRoles: [ROL.ADMIN, ROL.DOCTOR, ROL.DOCTOR_ADMIN]
+    requiredRoles: [USER_ROLES.ADMIN, USER_ROLES.DOCTOR, USER_ROLES.DOCTOR_ADMIN]
   },
 
-  wantDonate: {
-    path: '/want-donate/',
+  'want-donate': {
+    path: '/want-donate',
     subPaths: '/want-donate/',
     title: 'Donar Sangre',
     description: '🩸 Estoy dispuesto a donar sangre y ayudar a salvar vidas',
     Icon: HeartIcon,
-    requiredRoles: [ROL.USER]
-  },
-  wantReceptor: {
-    path: '/want-receptor/',
-    subPaths: '/want-receptor/details',
-    title: 'Registrar Receptor de Sangre',
-    description: '📝 Registrar nuevo receptor para recibir sangre',
-    Icon: UserPlusIcon,
-    requiredRoles: [ROL.USER]
-  },
-
+    requiredRoles: [USER_ROLES.USER]
+  }
+}
+export const ROUTES = {
+  ...USER_ROUTES,
   authors: {
     path: '/authors',
     subPaths: '/authors',
@@ -115,10 +100,6 @@ export const ROUTES = {
   }
 }
 
-const vlipRoute = 9
-export const firstRoutes = Object.entries(ROUTES).splice(0, vlipRoute)
-export const endRoutes = Object.entries(ROUTES).splice(vlipRoute + 1, -1)
-
 interface IMatchRoute {
   path: string
   route: string
@@ -129,9 +110,4 @@ export const matchRoute = ({ path, route }: IMatchRoute) => {
   return route === path || regex.test(route)
 }
 
-export const PUBLIC_ROUTES = [
-  ROUTES.home.path,
-  ROUTES.practice.path,
-  ROUTES.login.path,
-  ROUTES.registerAccount.path
-]
+export const PUBLIC_ROUTES = [ROUTES.home.path, ROUTES.login.path, ROUTES.registerAccount.path]

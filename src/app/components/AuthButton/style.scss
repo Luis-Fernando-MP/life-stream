@@ -17,8 +17,8 @@
 
   .cl-userButtonPopoverMain {
     padding: v.$padding;
-    background-color: rgb(v.$bg1);
     border: 3.5px solid rgb(v.$bg3);
+    background-color: rgb(v.$bg1);
 
     .cl-internal-3gh7hq {
       font-size: v.$fH5;
@@ -35,8 +35,8 @@
 
     .cl-userButtonPopoverActionButton {
       width: 100%;
-      color: rgb(v.$fn2);
       border-radius: v.$radius;
+      color: rgb(v.$fn2);
     }
   }
 

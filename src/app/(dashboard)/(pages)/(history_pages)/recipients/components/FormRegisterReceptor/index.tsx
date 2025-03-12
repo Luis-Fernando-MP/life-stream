@@ -3,10 +3,7 @@
 import { PatientWithPerson } from '@/app/api/allData/route'
 import { useSetReceptors } from '@/db/hooks/useSetReceptors'
 import { IDonorsRegisterRes } from '@/resolvers/donorsRegisterResolver'
-import {
-  IReceptorRegisterResolver,
-  receptorRegisterResolver
-} from '@/resolvers/receptorRegisterResolver'
+import { IReceptorRegisterResolver, receptorRegisterResolver } from '@/resolvers/receptorRegisterResolver'
 import { acl } from '@/shared/activeClass'
 import { bloodTypeArr, getBloodType } from '@/shared/getBloodType'
 import ImageUploader from '@/shared/ui/ImageUploader'
@@ -23,11 +20,7 @@ interface IFormRegisterDonor {
   setDonor: () => void
 }
 
-const FormRegisterReceptor = ({
-  className,
-  patient,
-  setDonor
-}: IFormRegisterDonor): JSX.Element => {
+const FormRegisterReceptor = ({ className, patient, setDonor }: IFormRegisterDonor): JSX.Element => {
   const toastReceptorId = 'id-receptor-modal'
   const { mutate: receptorsMutate } = useSetReceptors(toastReceptorId)
   const hookForm = useForm<IReceptorRegisterResolver>({
@@ -120,11 +113,7 @@ const FormRegisterReceptor = ({
             <b>Peso</b> del receptor
           </h5>
           <div className='RDForm-section__linear'>
-            <input
-              autoComplete='off'
-              id='RDFSec-linear'
-              {...register('weight', { valueAsNumber: true })}
-            />
+            <input autoComplete='off' id='RDFSec-linear' {...register('weight', { valueAsNumber: true })} />
             <label htmlFor='RDFSec-linear'>kg</label>
           </div>
         </div>

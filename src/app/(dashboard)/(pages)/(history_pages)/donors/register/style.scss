@@ -5,11 +5,11 @@
   justify-content: center;
 
   padding: v.$padding;
+  border-radius: v.$radius;
 
   text-align: center;
 
   background-color: rgba(v.$bg1, 0.5);
-  border-radius: v.$radius;
 
   @include d.flex($ali: center);
 }
@@ -20,5 +20,10 @@
     height: max-content;
 
     @include d.flex($ali: center);
+  }
+
+  &-title {
+    max-width: 300px;
+    text-align: center;
   }
 }

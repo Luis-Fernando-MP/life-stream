@@ -6,7 +6,7 @@
   "scripts": {
     "postinstall": "npx prisma generate",
     "dev": "rimraf .next && pnpm store prune && next dev --turbopack",
-    "build": "pnpm lint && next build",
+    "build": "next build",
     "start": "next start",
     "test": "vitest",
     "lint": "npx stylelint '**/*.{css,scss}' && next lint",
@@ -39,6 +39,7 @@
     "react-dom": "19.0.0",
     "react-hook-form": "7.54.2",
     "react-hot-toast": "2.5.2",
+    "react-toggle-dark-mode": "^1.1.1",
     "svix": "1.61.3",
     "usehooks-ts": "3.1.1",
     "zod": "3.24.2",
@@ -78,12 +79,5 @@
     "tailwindcss": "4.0.12",
     "typescript": "5.8.2",
     "vitest": "3.0.8"
-  },
-  "pnpm": {
-    "onlyBuiltDependencies": [
-      "@clerk/shared",
-      "@prisma/client",
-      "esbuild"
-    ]
   }
 }

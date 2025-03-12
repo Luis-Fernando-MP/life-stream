@@ -1,0 +1,48 @@
+@use '@sass/config/vars' as v;
+@use '@sass/utils/defs' as d;
+@use '@sass/utils/text' as t;
+
+.tailDoctor {
+  position: relative;
+  width: fit-content;
+  height: 100px;
+  border-radius: v.$radius * 0.8;
+
+  @include v.hoverS(0.93);
+  @include v.border;
+
+  &-button {
+    pointer-events: none;
+    user-select: none;
+
+    justify-content: center;
+
+    width: 100%;
+    height: 100%;
+    padding: v.$padding;
+
+    @include d.flex($dir: row, $ali: center, $gap: v.$padding * 0.5);
+  }
+
+  &-info {
+    @include d.flex($gap: v.$padding * 0.5);
+
+    h5 {
+      width: 100%;
+      max-height: 30px;
+      line-height: 1;
+      text-transform: uppercase;
+
+      @include t.pointers;
+    }
+  }
+
+  &-image {
+    width: 80px;
+    max-width: 80px;
+    height: 80px;
+    border-radius: v.$radius;
+
+    object-fit: cover;
+  }
+}

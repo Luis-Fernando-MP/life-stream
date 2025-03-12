@@ -15,6 +15,9 @@ const Page = (): JSX.Element => {
     <section className='layout-page registerDonor'>
       <article className='registerDonor-container'>
         <BoldText bold='REGISTRO' middle='DE' desc='DONANTES DE SANGRE' />
+        <p className='registerDonor-title'>
+          Busca un paciente ya registrado por su DNI, si no existe, puedes crear uno nuevo de forma inmediata
+        </p>
         <ValidateIDform onSubmit={setDonor} />
         {donor && <FormRegisterDonor patient={donor} setDonor={() => setDonor(null)} />}
       </article>

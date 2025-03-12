@@ -4,31 +4,110 @@
 @use '@sass/utils/scrollbar' as *;
 
 .layout-container.chart {
-  display: grid;
-  grid-template-columns: 1fr 500px;
+  position: relative;
+  width: 100%;
   height: 100%;
 }
 
 .chart {
-  &-draft,
-  &-actions {
-    height: 100%;
-    padding: v.$padding;
-    background-color: rgb(v.$bg1, 0.5);
-    border-radius: v.$radius;
-  }
-
   &-draft {
     @extend %scroll-hidden;
 
     position: relative;
+
     overflow: auto;
+
+    height: 100%;
+    padding: v.$padding;
+    border-radius: v.$radius;
+
+    background-color: rgb(v.$bg1, 0.5);
   }
 
   &-actions {
+    position: absolute;
+    top: 0;
+    right: 0;
+
     height: 100%;
     padding: v.$padding;
-    background-color: rgb(v.$bg1, 0.5);
+  }
+}
+
+// Actions
+
+.chartActions {
+  &-header {
+    position: absolute;
+    top: v.$padding;
+    right: v.$padding;
+
+    padding: v.$padding;
+    border: 1.5px solid rgb(v.$bg3, 0.5);
     border-radius: v.$radius;
+
+    background-color: rgba(v.$bg1, 0.2);
+    backdrop-filter: blur(10px);
+
+    @include d.flex;
+  }
+
+  &-options {
+    @include d.flex($dir: row);
+
+    flex-wrap: wrap;
+    width: 100%;
+    padding-left: v.$padding;
+  }
+
+  &-option {
+    @include d.flex($dir: row, $gap: 5px);
+
+    padding: v.$padding * 0.5;
+    border-radius: v.$radius * 0.5;
+
+    @include v.border(rgba(v.$bg1, 0.7));
+
+    &.active {
+      border-color: rgb(v.$tn1);
+      background-color: rgba(v.$tn1, 0.7);
+
+      svg {
+        stroke: rgb(v.$fnA);
+      }
+
+      p {
+        font-weight: bold;
+        color: rgb(v.$fnA);
+      }
+    }
+  }
+}
+
+.chartRemember {
+  position: absolute;
+  z-index: 1;
+  right: v.$padding;
+  bottom: v.$padding;
+
+  justify-content: center;
+
+  width: fit-content;
+  padding: v.$padding;
+  border: 1.5px solid rgb(v.$bg3, 0.5);
+  border-radius: v.$radius;
+
+  background-color: rgba(v.$bg1, 0.2);
+  backdrop-filter: blur(10px);
+
+  @include d.flex($dir: row, $ali: center);
+
+  &-spirit {
+    width: 50px;
+    height: 50px;
+    border: 1.5px solid rgba(v.$tn1, 0.7);
+    border-radius: 50%;
+
+    object-fit: cover;
   }
 }

@@ -13,7 +13,7 @@ async function handler(req: Request) {
     throw new Error('Hey you!! WEBHOOK KEY NOTFOUND 🤓')
   }
 
-  const headerPayload = headers()
+  const headerPayload = await headers()
   const svixId = headerPayload.get('svix-id')
   const svixTimestamp = headerPayload.get('svix-timestamp')
   const svixSignature = headerPayload.get('svix-signature')

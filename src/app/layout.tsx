@@ -1,13 +1,13 @@
-import { MontserratFont, PlayFairFont, RobotoFont } from '@/shared/fonts'
-import type { Metadata } from 'next'
+import { bodyFonts } from '@/shared/fonts'
+import dynamic from 'next/dynamic'
+import NextTopLoader from 'nextjs-toploader'
 import type { JSX, ReactNode } from 'react'
 import React from 'react'
 import { Toaster } from 'react-hot-toast'
 
-import Firefly from './components/Firefly'
 import Header from './components/Header'
-import Nav from './components/Nav'
 import './globals.css'
+import { metadata, viewport } from './metadata'
 import Providers from './providers'
 import './style.scss'
 
@@ -15,39 +15,28 @@ interface IRootLayout {
   children?: Readonly<ReactNode[]> | null | Readonly<ReactNode>
 }
 
-export const metadata: Metadata = {
-  title: 'Life Stream',
-  description: 'Aplicación gestión de donantes de sangre',
-  icons: {
-    icon: [
-      { url: '/favicon.ico', media: '(prefers-color-scheme: light)' },
-      { url: '/favicon-dark.ico', media: '(prefers-color-scheme: dark)' }
-    ]
-  }
-}
-
+const Nav = dynamic(() => import('./components/Nav'), {})
 const RootLayout = ({ children }: IRootLayout): JSX.Element => {
   return (
     <html lang='es'>
-      <body className={`${MontserratFont.variable} ${RobotoFont.variable} ${PlayFairFont.variable}`}>
+      <body className={`${bodyFonts} antialiased`}>
+        <NextTopLoader color='rgb(var(--tn-primary))' showSpinner={false} />
         <Providers>
           <section className='layout'>
             <Nav className='layout-nav' />
             <Header className='layout-header' />
             <main className='layout-main'>{children}</main>
           </section>
-          <Firefly />
         </Providers>
         <Toaster
           position='top-center'
           toastOptions={{
             className: 'toast',
-            position: 'top-center',
+            position: 'top-right',
             style: {
-              background: 'rgba(var(--bg-primary), 0.9)',
+              background: 'rgb(var(--bg-primary))',
               color: 'rgb(var(--fnt-primary))'
-            },
-            duration: 2000
+            }
           }}
         />
       </body>
@@ -56,3 +45,4 @@ const RootLayout = ({ children }: IRootLayout): JSX.Element => {
 }
 
 export default RootLayout
+export { metadata, viewport }

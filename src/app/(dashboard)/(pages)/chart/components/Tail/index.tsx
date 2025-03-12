@@ -1,13 +1,13 @@
 'use client'
 
-/* eslint-disable @next/next/no-img-element */
 import { fromDate } from '@/shared/time'
+import { Image } from '@unpic/react'
 import type { JSX } from 'react'
 
 import useSelectPerson, { ESelectPerson } from '../../hooks/useSelectPerson'
 import './style.scss'
 
-interface ITail {
+interface Props {
   type: ESelectPerson
   image: string
   id: string
@@ -17,7 +17,7 @@ interface ITail {
   createdAt: string
 }
 
-const Tail = ({ type, name, etc, id, dbId, image, createdAt }: ITail): JSX.Element => {
+const Tail = ({ type, name, etc, id, dbId, image, createdAt }: Props): JSX.Element => {
   const { setPerson } = useSelectPerson()
 
   const handleClick = (): void => {
@@ -25,12 +25,14 @@ const Tail = ({ type, name, etc, id, dbId, image, createdAt }: ITail): JSX.Eleme
   }
 
   return (
-    <li className='comTails' data-modal>
-      <button onClick={handleClick}>
-        <img src={image} alt={name} />
-        <h5>{name}</h5>
-        <p>{id}</p>
-        <small>{fromDate(createdAt)}</small>
+    <li tabIndex={0} role='button' title={name} aria-label={name} className='defaultTail' data-modal onClick={handleClick}>
+      <button className='defaultTail-button'>
+        <Image className='defaultTail-image' src={image} alt={name} layout='constrained' width={40} height={40} />
+        <div className='defaultTail-info'>
+          <h5>{name}</h5>
+          <p>{id}</p>
+          <small>{fromDate(createdAt)}</small>
+        </div>
       </button>
     </li>
   )

@@ -19,7 +19,7 @@ export async function POST() {
 
 export async function GET() {
   try {
-    const { userId } = auth()
+    const { userId } = await auth()
     if (!userId) throw new Error('No estás registrado. Por favor, inicia sesión')
 
     const person = await prisma.person.findUnique({

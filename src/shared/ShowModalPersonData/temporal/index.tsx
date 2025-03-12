@@ -42,20 +42,20 @@ const AnyModalInfo = ({ data, type }: any): JSX.Element => {
         <form className='doctorModalInfo-form'>
           <div className='doctorModalInfo-field'>
             <h5>Doctor:</h5>
-            <input type='text' autoComplete='off' placeholder='nombres' value={firstName} />
-            <input type='text' autoComplete='off' placeholder='apellidos' value={lastName} />
+            <input type='text' autoComplete='off' placeholder='nombres' defaultValue={firstName} />
+            <input type='text' autoComplete='off' placeholder='apellidos' defaultValue={lastName} />
           </div>
           <div className='doctorModalInfo-field'>
             <h5>Correo:</h5>
-            <input type='text' autoComplete='off' placeholder='correo' value={email} />
+            <input type='text' autoComplete='off' placeholder='correo' defaultValue={email} />
           </div>
           <div className='doctorModalInfo-field'>
             <h5>Usuario:</h5>
-            <input type='text' autoComplete='off' placeholder='usuario' value={username} />
+            <input type='text' autoComplete='off' placeholder='usuario' defaultValue={username} />
           </div>
           <div className='doctorModalInfo-field'>
             <h5>DNI:</h5>
-            <input type='text' autoComplete='off' placeholder='01xxxxxx' value={DNI} />
+            <input type='text' autoComplete='off' placeholder='01xxxxxx' defaultValue={DNI} />
           </div>
         </form>
       </section>

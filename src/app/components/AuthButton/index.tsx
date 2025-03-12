@@ -1,13 +1,6 @@
 'use client'
 
-import {
-  ClerkLoaded,
-  ClerkLoading,
-  SignInButton,
-  SignedIn,
-  SignedOut,
-  UserButton
-} from '@clerk/nextjs'
+import { ClerkLoaded, ClerkLoading, SignInButton, SignedIn, SignedOut, UserButton } from '@clerk/nextjs'
 import { UserIcon } from 'lucide-react'
 import { usePathname } from 'next/navigation'
 import { type JSX } from 'react'

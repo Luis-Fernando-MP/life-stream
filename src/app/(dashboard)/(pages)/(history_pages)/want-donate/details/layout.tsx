@@ -8,7 +8,7 @@ interface ILayout {
 }
 
 const Layout = async ({ children }: ILayout) => {
-  const { userId } = auth()
+  const { userId } = await auth()
   if (!userId) redirect('/')
   const person = await prisma.person.findUnique({
     where: { id: userId },

@@ -1,22 +1,34 @@
 :root {
-  --bg-primary: 0, 0, 0;
-  --bg-secondary: 20, 20, 20;
-  --bg-tertiary: 40, 40, 40;
+  --bg-primary: 10, 10, 10;
+  --bg-secondary: 30, 30, 30;
+  --bg-tertiary: 50, 50, 50;
   --fnt-primary: 255, 255, 255;
-  --fnt-secondary: 200, 200, 200;
-  --tn-primary: 250, 50, 50;
-  --tn-secondary: 255, 70, 70;
+  --fnt-secondary: 220, 220, 220;
+  --fnt-active: 255, 255, 255;
+  --tn-primary: 255, 0, 0;
+  --tn-secondary: 255, 100, 100;
 
   // --
 
   --xl-font-size: 3em;
-  --h1-font-size: 2em;
+  --h1-font-size: 1.6em;
   --h2-font-size: 1.5em;
   --h3-font-size: 1.4em;
   --h4-font-size: 1.3em;
   --h5-font-size: 1.2em;
   --p-font-size: 1em;
   --span-font-size: 1em;
+}
+
+[data-theme='light'] {
+  --bg-primary: 255, 255, 255;
+  --bg-secondary: 240, 240, 240;
+  --bg-tertiary: 230, 230, 230;
+  --fnt-primary: 0, 0, 0;
+  --fnt-secondary: 60, 60, 60;
+  --fnt-active: 255, 255, 255;
+  --tn-primary: 200, 0, 0;
+  --tn-secondary: 255, 150, 150;
 }
 
 $fXl: var(--xl-font-size);
@@ -32,6 +44,7 @@ $bg2: var(--bg-secondary);
 $bg3: var(--bg-tertiary);
 $fn1: var(--fnt-primary);
 $fn2: var(--fnt-secondary);
+$fnA: var(--fnt-active);
 $tn1: var(--tn-primary);
 $tn2: var(--tn-secondary);
 $tn3: var(--tn-tertiary);
@@ -43,15 +56,14 @@ $medium-screen: 820px;
 $large-screen: 992px;
 $extra-large-screen: 1200px;
 $big-screen: 1350px;
-$radius: 10px;
+$radius: 7px;
 $padding: 15px;
-$icon: 20px;
+$icon: 15px;
 $family-size: 12px;
-$fontBase: 'Segoe UI Mono', 'Roboto Mono', 'Ubuntu Monospace', 'Source Code Pro', 'Fira Mono',
-  'Segoe UI Emoji';
-$font1: var(--MontserratFont);
-$font2: var(--RobotoFont);
-$font3: var(--PlayFairFont);
+$fontBase: 'Segoe UI Mono', 'Roboto Mono', 'Ubuntu Monospace', 'Source Code Pro', 'Fira Mono', 'Segoe UI Emoji';
+$font1: var(--font1);
+$font2: var(--font2);
+$font3: var(--font3);
 $gr1: linear-gradient(90deg, rgb($tn1) 0%, rgb($tn2) 100%);
 $sha1: 6px 5px 20px -5px rgb($bg3);
 
@@ -70,14 +82,14 @@ $blood: rgb(203 28 112);
 
 @mixin border($bg: rgb($bg1)) {
   & {
-    background-color: $bg;
     border: 1.5px solid rgb($bg3);
+    background-color: $bg;
   }
 }
 
 @mixin hoverS($scale: 0.99, $s: 0.2s) {
   scale: 1;
-  transition: all $s ease-in;
+  transition: scale $s ease-in;
 
   &:hover {
     scale: $scale;

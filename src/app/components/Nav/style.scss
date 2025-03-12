@@ -22,7 +22,7 @@
     border-radius: 5px;
 
     &.active {
-      color: rgb(v.$tn1);
+      background-color: rgb(v.$tn1);
     }
   }
 
@@ -34,5 +34,9 @@
       width: 30px;
       height: 30px;
     }
+  }
+
+  &-link.active svg {
+    stroke: rgb(v.$fnA);
   }
 }

@@ -3,7 +3,7 @@
 import { acl } from '@/shared/activeClass'
 import useNav from '@/shared/hooks/useNav'
 import { ROL, validateRoutes } from '@/shared/roles'
-import { ROUTES, firstRoutes, matchRoute } from '@/shared/routes'
+import { ROUTES, USER_ROUTES, matchRoute } from '@/shared/routes'
 import Logo from '@/shared/ui/Logo'
 import { useUser } from '@clerk/nextjs'
 import { MenuIcon, XIcon } from 'lucide-react'
@@ -18,12 +18,14 @@ interface INav extends HtmlHTMLAttributes<HTMLElement> {
 }
 
 const Nav = ({ className, ...props }: INav): JSX.Element => {
-  const { user } = useUser()
+  const { user, isSignedIn } = useUser()
   const { getClass, pathname, show, toggleShow } = useNav()
   const isActive = (cls: string) => acl(matchRoute({ path: cls, route: pathname }))
 
   let userRol = user?.organizationMemberships[0]?.role
   if (!userRol && user) userRol = 'org:user'
+
+  const { Icon } = ROUTES.authors
 
   return (
     <section {...props} className={className}>
@@ -35,15 +37,14 @@ const Nav = ({ className, ...props }: INav): JSX.Element => {
           <Link className={`navbar-link navbar-logo`} href={'/'}>
             <Logo />
           </Link>
-          {firstRoutes.map(route => {
-            const [tag, data] = route
-            const { Icon, title, path, subPaths, requiredRoles } = data
-            const haveRoles = validateRoutes(requiredRoles, userRol as ROL)
-            if (!haveRoles) return
+          {Object.entries(USER_ROUTES).map(([tag, data]) => {
+            const { Icon, title, path, subPaths } = data
+            const haveRoles = validateRoutes(data?.requiredRoles, userRol as ROL)
+            if (!haveRoles || !isSignedIn) return
             return (
               <Link
                 key={tag}
-                className={`navbar-link ${isActive(path)} ${isActive(subPaths)}`}
+                className={`navbar-link ${isActive(path)} ${pathname === path ? 'active' : ''} ${isActive(subPaths)}`}
                 href={path}
                 title={title}
               >
@@ -53,13 +54,6 @@ const Nav = ({ className, ...props }: INav): JSX.Element => {
           })}
         </div>
         <div className='navbar-bottom'>
-          <Link
-            className={`navbar-link ${isActive(ROUTES.authors.path)}`}
-            href={ROUTES.authors.path}
-            title={ROUTES.authors.title}
-          >
-            <ROUTES.authors.Icon />
-          </Link>
           <AuthButtons />
         </div>
       </nav>

@@ -4,6 +4,7 @@
 
 .modal {
   position: fixed;
+  z-index: 10;
   top: 0;
   left: 0;
 
@@ -17,32 +18,31 @@
   min-height: 100vh;
 
   opacity: 1;
-  background-color: rgba(v.$bg1, 0.5);
-  clip-path: circle(200% at 50% 100%);
-  backdrop-filter: blur(10px);
+  background-color: rgba(v.$bg1, 0.94);
+  backdrop-filter: blur(5px);
 
   transition: opacity 0.2s ease-in-out;
-  animation: open-clip 0.8s ease-in-out forwards;
-
-  &.closing {
-    opacity: 0;
-  }
+  animation: open-clip 0.2s ease-in-out forwards;
 
   &-closeButton {
     position: absolute;
-    bottom: 20px;
+    top: v.$padding * 2;
     left: 50%;
     transform: translateX(-50%);
 
     padding: 10px;
+    border-radius: v.$radius;
 
     color: rgb(v.$fn1);
 
     background-color: rgb(v.$tn1);
-    border-radius: 50%;
 
-    svg {
-      stroke-width: 2;
+    transition:
+      opacity 0.2s ease-in-out,
+      top 0.2s ease-in-out;
+
+    .lucide {
+      stroke-width: 3;
     }
   }
 
@@ -65,17 +65,28 @@
     @include d.flex($ali: center);
   }
 
-  &.closing &-container {
-    top: 200px;
+  &.closing {
+    opacity: 0;
+
+    .modal-closeButton {
+      top: 20px;
+      opacity: 0;
+    }
+
+    .modal-container {
+      top: 200px;
+    }
   }
 
   @keyframes open-clip {
     0% {
-      clip-path: circle(0% at 50% 100%);
+      top: 10%;
+      opacity: 0;
     }
 
     100% {
-      clip-path: circle(200% at 50% 100%);
+      top: 0;
+      opacity: 1;
     }
   }
 }

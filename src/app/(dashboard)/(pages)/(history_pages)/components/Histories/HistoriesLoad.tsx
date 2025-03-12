@@ -9,6 +9,9 @@ import History from '../History'
 const HistoriesLoad = () => {
   const { user } = useUser()
   const { data, isLoading } = usePersonHistories(user?.id)
+
+  console.log('data', data)
+
   useEffect(() => {
     const historiesRef = document.querySelector('article.layout-histories.histories')
     if (historiesRef) historiesRef.scrollTop = historiesRef.scrollHeight

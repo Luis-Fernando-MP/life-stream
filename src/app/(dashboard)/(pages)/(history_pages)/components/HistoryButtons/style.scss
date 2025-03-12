@@ -4,13 +4,23 @@
 .history {
   &-buttons {
     scale: 1;
+    justify-content: center;
     width: fit-content;
-    transition: all 0.5s ease-in-out;
+    transition:
+      scale 0.5s ease-in-out,
+      background-color 0.5s ease-in-out;
 
-    @include d.flex($gap: 5px, $dir: row);
+    @include d.flex($gap: 5px, $dir: row, $ali: center);
+  }
 
-    &.cl-tree button:last-child,
-    &.cl-array button:first-child {
+  &-button {
+    padding: v.$padding * 0.8;
+    border-radius: v.$radius;
+
+    @include d.flex($dir: row, $ali: center, $gap: 5px);
+    @include v.border;
+
+    &.active {
       scale: 0.93;
       background-color: rgb(v.$tn1);
 
@@ -20,23 +30,14 @@
     }
   }
 
-  &-button {
-    padding: v.$padding * 0.8;
-    border-radius: v.$radius;
-
-    @include d.flex($dir: row, $ali: center, $gap: 5px);
-
-    @include v.border;
-  }
-
   &-icon {
     width: 40px;
     min-width: 40px;
     height: 40px;
     padding: 10px;
+    border-radius: 50%;
 
     background-color: rgb(v.$bg1);
-    border-radius: 50%;
 
     /* stylelint-disable-next-line no-descending-specificity */
     svg {

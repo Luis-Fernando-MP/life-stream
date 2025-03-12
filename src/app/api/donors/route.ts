@@ -7,9 +7,17 @@ import { NextRequest, NextResponse } from 'next/server'
 
 import cloudinary from '../cloudinary/cloud'
 
+export async function GET(req: NextRequest) {
+  const { userId } = await auth()
+  const data = await prisma.bloodDonor.findMany({
+    where: { AuthorID: userId ?? '' }
+  })
+  return NextResponse.json(data, { status: 200 })
+}
+
 export async function POST(req: NextRequest) {
   const data = await req.json()
-  const { userId } = auth()
+  const { userId } = await auth()
 
   try {
     if (!userId) throw new Error('Are you registered?')
@@ -17,13 +25,10 @@ export async function POST(req: NextRequest) {
     const matches = data.photo.match(/^data:(.+);base64,(.+)$/)
     let photo = data.photo
     if (matches) {
-      const uploadResponse = await cloudinary.uploader.upload(
-        `data:${matches[1]};base64,${matches[2]}`,
-        {
-          upload_preset: process.env.CLOUDINARY_PRESET,
-          folder: process.env.CLOUDINARY_PRESET
-        }
-      )
+      const uploadResponse = await cloudinary.uploader.upload(`data:${matches[1]};base64,${matches[2]}`, {
+        upload_preset: process.env.CLOUDINARY_PRESET,
+        folder: process.env.CLOUDINARY_PRESET
+      })
       if (!uploadResponse) throw new Error('Fail to save user image')
       photo = uploadResponse.secure_url
     }

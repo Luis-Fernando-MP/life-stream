@@ -2,6 +2,7 @@
 @use '@sass/config/vars' as *;
 @use '@sass/utils/media' as m;
 @use '@sass/utils/text' as t;
+@use '@sass/utils/loader' as loader;
 
 *,
 ::before,
@@ -9,19 +10,10 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-
   border: none;
+
   outline: none;
 }
-
-// html {
-//   filter: invert(1);
-
-//   img,
-//   video {
-//     filter: invert(1);
-//   }
-// }
 
 body {
   @extend %scroll-hidden;
@@ -141,6 +133,12 @@ h4 {
   text-wrap: balance;
 }
 
+h1,
+h2,
+h3 {
+  color: rgb($fn1);
+}
+
 h1 {
   font-weight: 900;
 }
@@ -155,6 +153,7 @@ h3 {
 
 h4 {
   font-weight: 600;
+  color: rgb($fn2);
 }
 
 ul {
@@ -214,10 +213,21 @@ svg {
 }
 
 .box-error {
-  background-color: rgba($error, 0.2) !important;
   border-color: $error !important;
+  background-color: rgba($error, 0.2) !important;
 }
 
 .logo {
   fill: rgb($tn1);
+}
+
+.lucide {
+  width: $icon;
+  height: $icon;
+  stroke: rgb($fn2);
+  stroke-width: 1.7;
+}
+
+.loading {
+  @include loader.loader;
 }

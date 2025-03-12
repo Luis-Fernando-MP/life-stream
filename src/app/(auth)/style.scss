@@ -26,6 +26,11 @@
   }
 
   .cl-rootBox {
+    input,
+    button {
+      transition: none;
+    }
+
     input {
       padding: v.$padding;
 
@@ -55,8 +60,8 @@
 
     .cl-card,
     .cl-footer {
-      background: transparent;
       border: none;
+      background: transparent;
     }
 
     .cl-dividerText,
@@ -117,13 +122,12 @@
       min-width: 400px;
       min-height: 600px;
       padding: v.$padding * 2 0;
+      border-radius: v.$radius;
 
       color: rgb(v.$fn1);
       text-align: center;
 
-      border-radius: v.$radius;
-
-      transition: all 0.5s ease-in-out;
+      transition: none;
 
       @include v.border(rgba(v.$bg2, 0.5));
     }

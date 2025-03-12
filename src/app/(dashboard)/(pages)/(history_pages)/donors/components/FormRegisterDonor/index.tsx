@@ -113,11 +113,7 @@ const FormRegisterDonor = ({ className, patient, setDonor }: IFormRegisterDonor)
             <b>Peso</b> del donante
           </h5>
           <div className='RDForm-section__linear'>
-            <input
-              autoComplete='off'
-              id='RDFSec-linear'
-              {...register('weight', { valueAsNumber: true })}
-            />
+            <input autoComplete='off' id='RDFSec-linear' {...register('weight', { valueAsNumber: true })} />
             <label htmlFor='RDFSec-linear'>kg</label>
           </div>
         </div>

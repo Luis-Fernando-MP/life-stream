@@ -8,6 +8,7 @@
   &-link {
     width: 100%;
     padding: v.$radius * 0.8 0;
+    border-radius: v.$radius * 0.5;
 
     font-size: v.$fP;
     font-weight: 900;
@@ -15,7 +16,6 @@
     text-align: center;
 
     background-color: rgb(v.$bg2);
-    border-radius: v.$radius * 0.5;
   }
 
   &-container {
@@ -32,10 +32,11 @@
   width: 350px;
   min-width: 350px;
   height: max-content;
+  min-height: 90vh;
   padding: v.$padding;
+  border-radius: v.$radius;
 
   background-color: rgb(v.$tn1, 0.8);
-  border-radius: v.$radius;
 
   @include d.flex;
 
@@ -59,7 +60,7 @@
   }
 
   &__body {
-    @include d.flex($gap: v.$padding / 2);
+    @include d.flex($gap: v.$padding * 0.5);
 
     padding: v.$padding 0;
     border-bottom: 2px solid rgb(v.$fn2);
@@ -73,18 +74,18 @@
     }
 
     div {
-      @include d.flex($gap: v.$padding / 2, $dir: row);
+      @include d.flex($gap: v.$padding * 0.5, $dir: row);
     }
   }
 
   &__image {
     position: relative;
-    width: fit-content;
     height: fit-content;
 
     img {
       position: relative;
-      display: block;
+      width: 300px;
+      object-fit: contain;
       filter: drop-shadow(0 20px 25px rgb(0 0 0 / 30%));
     }
   }
@@ -121,6 +122,7 @@
 
     th,
     td {
+      width: min-content;
       padding: v.$padding;
       text-align: center;
     }
@@ -131,7 +133,6 @@
       width: fit-content;
       margin: auto;
       padding: 5px 10px;
-
       border-radius: 10px;
 
       @each $status, $colors in $statuses {
@@ -141,5 +142,9 @@
         }
       }
     }
+  }
+
+  &__id {
+    width: 80px;
   }
 }

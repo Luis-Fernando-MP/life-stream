@@ -22,17 +22,17 @@ export interface ITreeGraphData {
 }
 
 interface TreeGraphParams {
-  trees?: ITreeGraphData
+  dataTrees?: ITreeGraphData
   onNodeClick: (data: INodeResponse, click: MouseEvent) => void
 }
 
-const useTreeGraph = ({ trees = {}, onNodeClick }: TreeGraphParams) => {
+const useTreeGraph = ({ dataTrees = {}, onNodeClick }: TreeGraphParams) => {
   const svgRef = useRef<SVGSVGElement>(null)
-  const [treeState, setTrees] = useState(trees)
+  const [trees, setTrees] = useState(dataTrees)
 
   useEffect(() => {
     if (!svgRef.current) return
-    const treesData = Object.entries(treeState)
+    const treesData = Object.entries(trees)
       .map(([name, tree]) => {
         const children = [parseTreeToD3(tree)]
         return {
@@ -71,7 +71,7 @@ const useTreeGraph = ({ trees = {}, onNodeClick }: TreeGraphParams) => {
       .size([width - margin * 2, height - margin * 2])
       .separation((a, b) => (a.parent === b.parent ? 1 : 2.5))
 
-    treeLayout(hierarchyData)
+    treeLayout(hierarchyData as any)
 
     const svg = select(svgRef.current)
       .attr('width', width)
@@ -95,7 +95,7 @@ const useTreeGraph = ({ trees = {}, onNodeClick }: TreeGraphParams) => {
       .data(hierarchyData.links())
       .join('path')
       .attr('d', (d: any) => {
-        return ` M${d.source.x},${d.source.y}C${d.source.x},${(d.source.y + d.target.y) / 2} ${d.target.x},${(d.source.y + d.target.y) / 2} ${d.target.x},${d.target.y}`
+        return ` M${d.source.x},${d.source.y}C${d.source.x},${(d.source.y + d.target.y) * 0.5} ${d.target.x},${(d.source.y + d.target.y) * 0.5} ${d.target.x},${d.target.y}`
       })
 
     // Grupo general de nodos
@@ -130,10 +130,7 @@ const useTreeGraph = ({ trees = {}, onNodeClick }: TreeGraphParams) => {
       .selectAll('g')
       .data(hierarchyData.descendants().filter((d: any) => d.data?.node?.data))
       .join('g')
-      .attr(
-        'transform',
-        (d: any) => `translate(${d.x - widthNodeImage / 2}, ${d.y - widthNodeImage / 2})`
-      )
+      .attr('transform', (d: any) => `translate(${d.x - widthNodeImage * 0.5}, ${d.y - widthNodeImage * 0.5})`)
       .style('cursor', 'pointer')
       .attr('class', 'treeGraph')
       .attr('data-modal', 'true')
@@ -159,8 +156,8 @@ const useTreeGraph = ({ trees = {}, onNodeClick }: TreeGraphParams) => {
         group
           .append('circle')
           .attr('class', 'ripple-effect')
-          .attr('cx', widthNodeImage / 2)
-          .attr('cy', widthNodeImage / 2)
+          .attr('cx', widthNodeImage * 0.5)
+          .attr('cy', widthNodeImage * 0.5)
           .attr('r', 0)
           .attr('fill', color)
 
@@ -176,7 +173,7 @@ const useTreeGraph = ({ trees = {}, onNodeClick }: TreeGraphParams) => {
 
         group
           .append('text')
-          .attr('x', widthNodeImage / 2)
+          .attr('x', widthNodeImage * 0.5)
           .attr('y', -10)
           .attr('text-anchor', 'middle')
           .attr('font-weight', '900')
@@ -214,7 +211,7 @@ const useTreeGraph = ({ trees = {}, onNodeClick }: TreeGraphParams) => {
         g.attr('transform', event.transform)
       })
     svg.call(cZoom as any)
-  }, [onNodeClick, treeState])
+  }, [onNodeClick, trees])
 
   return { svgRef, setTrees }
 }

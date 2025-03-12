@@ -364,11 +364,7 @@ export default class RedBlackTree {
     return { node: null, time: this.diffTime(endTime, startTime) }
   }
 
-  public findMany(
-    predicate: (data: ITreeNodeData) => boolean,
-    tree: TreeNode = this.root,
-    results: TreeNode[] = []
-  ) {
+  public findMany(predicate: (data: ITreeNodeData) => boolean, tree: TreeNode = this.root, results: TreeNode[] = []) {
     const startTime = performance.now()
 
     const searchTree = (node: TreeNode | null) => {

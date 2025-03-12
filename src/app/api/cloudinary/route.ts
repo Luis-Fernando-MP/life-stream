@@ -13,13 +13,10 @@ export async function POST(req: Request) {
       throw new Error('Invalid Base64 string')
     }
 
-    const uploadResponse = await cloudinary.uploader.upload(
-      `data:${matches[1]};base64,${matches[2]}`,
-      {
-        upload_preset: process.env.CLOUDINARY_PRESET,
-        folder: process.env.CLOUDINARY_PRESET
-      }
-    )
+    const uploadResponse = await cloudinary.uploader.upload(`data:${matches[1]};base64,${matches[2]}`, {
+      upload_preset: process.env.CLOUDINARY_PRESET,
+      folder: process.env.CLOUDINARY_PRESET
+    })
 
     setTimeout(
       async () => {

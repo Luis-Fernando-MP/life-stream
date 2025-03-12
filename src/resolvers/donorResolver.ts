@@ -5,20 +5,16 @@ import * as z from 'zod'
 
 const scheme = z.object({
   bloodType: z.enum(['ALL', ...bloodTypeArr]),
-  ageRange: z
-    .tuple([])
-    .rest(z.number({ message: 'La edad debería de estar en un rango de números' })),
-  weightRange: z
-    .tuple([])
-    .rest(z.number({ message: 'El peso debería de estar en un rango de números' })),
+  ageRange: z.tuple([]).rest(z.number({ message: 'La edad debería de estar en un rango de números' })),
+  weightRange: z.tuple([]).rest(z.number({ message: 'El peso debería de estar en un rango de números' })),
   firstName: z
     .string()
     .max(100, { message: 'Tu nombre no puede tener mas de 100 caracteres' })
-    .regex(/^[a-zA-Z\s]*$/, 'Tu nombre no puede contener números ni caracteres especiales'),
+    .regex(/^[a-zA-ZáéíóúÁÉÍÓÚ\s]*$/, 'Tu nombre no puede contener números ni caracteres especiales'),
   lastName: z
     .string()
     .max(100, { message: 'Tu apellido no puede tener mas de 100 caracteres' })
-    .regex(/^[a-zA-Z\s]*$/, 'Tu apellido no puede contener números ni caracteres especiales'),
+    .regex(/^[a-zA-ZáéíóúÁÉÍÓÚ\s]*$/, 'Tu apellido no puede contener números ni caracteres especiales'),
   dni: z
     .string()
     .regex(/^\d*$/, 'El DNI debe contener solo números')

@@ -1,23 +1,19 @@
 'use client'
 
-import useSelectPerson, {
-  type ISelectPersonTreeNode
-} from '@/app/(dashboard)/(pages)/chart/hooks/useSelectPerson'
+import useSelectPerson, { type ISelectPersonTreeNode } from '@/app/(dashboard)/(pages)/chart/hooks/useSelectPerson'
 import { type JSX, memo, useEffect, useState } from 'react'
 
 import Modal from '../Modal'
 import DoctorModalInfo from './DoctorModalInfo'
 import AnyModalInfo from './temporal'
 
-const ShowModalPersonData = (): JSX.Element | null => {
+const ShowModalPersonData = () => {
   const person = useSelectPerson(s => s.person)
-
   if (!person) return null
-
   return <ShowModal person={person} />
 }
 
-const ShowModal = ({ person }: { person: ISelectPersonTreeNode }): JSX.Element | null => {
+const ShowModal = ({ person }: { person: ISelectPersonTreeNode }) => {
   const [modal, setModal] = useState(false)
 
   useEffect(() => {
@@ -28,8 +24,8 @@ const ShowModal = ({ person }: { person: ISelectPersonTreeNode }): JSX.Element |
       if (!modalElement) return
       setModal(true)
     }
-    document.body.addEventListener('click', handleClick)
 
+    document.body.addEventListener('click', handleClick)
     return () => {
       document.body.removeEventListener('click', handleClick)
     }

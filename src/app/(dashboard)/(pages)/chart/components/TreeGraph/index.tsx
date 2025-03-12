@@ -6,9 +6,9 @@ import './style.scss'
 
 const TreeGraph = (): JSX.Element => {
   const { status, data } = useStoreTrees()
-  const trees = data.trees
-
   if (status === 'pending') return <p>Cargando...</p>
+
+  const trees = data.trees
   return <DrawTreeGraph className='delay animate-blurred-fade-in' trees={trees} />
 }
 

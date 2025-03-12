@@ -43,7 +43,7 @@ const ValidateIDform = ({ onSubmit }: IValidateIDform): JSX.Element => {
       })
     } else currentNode = data.trees.pacientes.find(Number(dni)).node?.data
     onSubmit((currentNode as PatientWithPerson) ?? { DNI: getValues('dni') })
-    if (!currentNode) return toast.error('No se encontraron resultados')
+    if (!currentNode) return toast.error('No se encontró el paciente, creemos uno nuevo')
 
     const nodoData = currentNode as PatientWithPerson
     const bodyData = `<section class='history-section'>
@@ -69,11 +69,7 @@ const ValidateIDform = ({ onSubmit }: IValidateIDform): JSX.Element => {
         <input placeholder='DNI: 12345678' autoComplete='off' {...register('dni')} />
       </div>
       {ThereErrors && <p className='dniForm-error'>{e.dni?.message}</p>}
-      <button
-        type='submit'
-        disabled={ThereErrors}
-        className={`dniForm-submit ${acl(ThereErrors, 'error')}`}
-      >
+      <button type='submit' disabled={ThereErrors} className={`dniForm-submit ${acl(ThereErrors, 'error')}`}>
         BUSCAR PACIENTE
       </button>
     </form>

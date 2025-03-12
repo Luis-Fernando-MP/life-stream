@@ -25,7 +25,7 @@ const DonorsComponent = ({ className }: IDonorsComponent): JSX.Element => {
     <article className={`${className} DonorsComponent`}>
       {view === 'array' && (
         <h5 className='DonorsComponent-subTitle'>
-          <Rows4Icon /> Tradicional con arrayList
+          <Rows4Icon /> Lista de donantes
         </h5>
       )}
       {view === 'tree' && (
@@ -38,7 +38,6 @@ const DonorsComponent = ({ className }: IDonorsComponent): JSX.Element => {
           <SearchCheck /> Búsqueda realizada
         </h5>
       )}
-
       {view === 'tree' && (
         <DrawTreeGraph
           className='animate-blurred-fade-in'
@@ -48,7 +47,6 @@ const DonorsComponent = ({ className }: IDonorsComponent): JSX.Element => {
         />
       )}
       {view === 'array' && <TailsDonorComponent donors={data.query?.bloodDonors ?? []} />}
-
       {view === 'search' && <SearchDonorsComponent />}
     </article>
   )

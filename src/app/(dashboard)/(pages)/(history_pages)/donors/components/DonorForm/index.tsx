@@ -3,13 +3,7 @@
 import useChartView from '@/app/(dashboard)/(pages)/chart/hooks/useChartView'
 import useStoreTrees from '@/app/(dashboard)/(pages)/hooks/useStoreTrees'
 import { useSetHistories } from '@/db/hooks/useHistory'
-import {
-  IDonorsSearchRes,
-  ageRanges,
-  donorsSearchResolver,
-  lastDonationDateMap,
-  weightRanges
-} from '@/resolvers/donorResolver'
+import { IDonorsSearchRes, ageRanges, donorsSearchResolver, lastDonationDateMap, weightRanges } from '@/resolvers/donorResolver'
 import { acl } from '@/shared/activeClass'
 import { bloodTypeArr, getBloodType } from '@/shared/getBloodType'
 import { fromDate } from '@/shared/time'
@@ -57,8 +51,7 @@ function DonorForm() {
         const { DNI, bloodType, age, person, weight } = data.patient
         const isValidDni = String(DNI).startsWith(String(f.dni))
         if (!isValidDni) return false
-        const equalBloodType =
-          getBloodType(bloodType)?.abbreviation === f.bloodType || f.bloodType === 'ALL'
+        const equalBloodType = getBloodType(bloodType)?.abbreviation === f.bloodType || f.bloodType === 'ALL'
         if (!equalBloodType) return false
         const inAgeRange = age >= f.ageRange[0] && age <= f.ageRange[1]
         const inWeightRange = weight >= f.weightRange[0] && weight <= f.weightRange[1]
@@ -118,12 +111,7 @@ function DonorForm() {
           {ageRanges.map(r => {
             const isActive = selectedAge.some((range: any) => range >= r[0] && range <= r[1])
             return (
-              <button
-                key={r.toString()}
-                className={acl(isActive)}
-                type='button'
-                onClick={() => setValue('ageRange', r)}
-              >
+              <button key={r.toString()} className={acl(isActive)} type='button' onClick={() => setValue('ageRange', r)}>
                 {r.join(' - ')}
               </button>
             )
@@ -137,22 +125,13 @@ function DonorForm() {
         </h5>
         {bloodType && <p className='searchDonorsForm-error'>{String(bloodType.message)}</p>}
         <section className='searchDonorsForm-range'>
-          <button
-            className={acl(selectedBloodType === 'ALL')}
-            type='button'
-            onClick={() => setValue('bloodType', 'ALL')}
-          >
+          <button className={acl(selectedBloodType === 'ALL')} type='button' onClick={() => setValue('bloodType', 'ALL')}>
             ALL
           </button>
           {bloodTypeArr.map(bl => {
             const isActive = selectedBloodType === bl
             return (
-              <button
-                key={bl + '-search'}
-                className={acl(isActive)}
-                type='button'
-                onClick={() => setValue('bloodType', bl)}
-              >
+              <button key={bl + '-search'} className={acl(isActive)} type='button' onClick={() => setValue('bloodType', bl)}>
                 {bl}
               </button>
             )
@@ -169,21 +148,14 @@ function DonorForm() {
           <button
             className={acl(selectedWeight[0] <= 0)}
             type='button'
-            onClick={() =>
-              setValue('weightRange', [Number.MIN_SAFE_INTEGER, Number.MAX_SAFE_INTEGER])
-            }
+            onClick={() => setValue('weightRange', [Number.MIN_SAFE_INTEGER, Number.MAX_SAFE_INTEGER])}
           >
             ALL
           </button>
           {weightRanges.map(we => {
             const isActive = selectedWeight.some((range: any) => range >= we[0] && range <= we[1])
             return (
-              <button
-                key={we.toString()}
-                className={acl(isActive)}
-                type='button'
-                onClick={() => setValue('weightRange', we)}
-              >
+              <button key={we.toString()} className={acl(isActive)} type='button' onClick={() => setValue('weightRange', we)}>
                 {we.join(' - ')}
               </button>
             )

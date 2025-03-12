@@ -1,13 +1,15 @@
 'use client'
 
-import { useSetHero } from '@/db/hooks/useSetHero'
+import { useHeroDonations, useSetHero } from '@/db/hooks/useSetHero'
 import { IHeroRegisterRes, heroRegisterResolver } from '@/resolvers/heroRegisterResolver'
 import { acl } from '@/shared/activeClass'
-import { bloodTypeArr } from '@/shared/getBloodType'
+import { bloodTypeAbb, bloodTypeArr } from '@/shared/getBloodType'
+import { useUser } from '@clerk/nextjs'
+import { BloodType } from '@prisma/client'
 import dayjs from 'dayjs'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { type JSX } from 'react'
+import { type JSX, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
 
@@ -19,35 +21,87 @@ interface IFormRegisterHero {
 
 const FormRegisterHero = ({ className }: IFormRegisterHero): JSX.Element => {
   const toastHeroId = 'id-donors-modal'
-  const { mutate: heroMutate } = useSetHero(toastHeroId)
+  const { mutate: heroMutate, isPending: isHeroMutating } = useSetHero(toastHeroId)
   const { push } = useRouter()
+  const { user } = useUser()
+  const { data: heroDonations, isLoading } = useHeroDonations(user?.id)
   const hookForm = useForm<IHeroRegisterRes>({
     resolver: heroRegisterResolver,
     mode: 'onChange',
     reValidateMode: 'onChange'
   })
 
+  const heroLastDonation = heroDonations?.donations[heroDonations.donations.length - 1]?.donationDate
+
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting }
+    formState: { errors }
   } = hookForm
 
-  const { age, bloodType, dni, firstName, donationDate, lastName, weight, lastDonationDate } =
-    errors
+  const { age, bloodType, dni, firstName, donationDate, lastName, weight, lastDonationDate } = errors
+
+  useEffect(() => {
+    if (!heroDonations) return
+    const { person, patient } = heroDonations
+    if (!person || !patient) return
+
+    const lastDonation = heroDonations.donations.length > 0 ? dayjs(heroLastDonation).format('YYYY-MM-DD') : ''
+
+    const formData = {
+      firstName: person.firstName,
+      lastName: person.lastName,
+      age: patient.age,
+      bloodType: bloodTypeAbb[patient.bloodType as BloodType],
+      weight: patient.weight,
+      dni: patient.DNI,
+      lastDonationDate: lastDonation
+    }
+    hookForm.reset(formData)
+  }, [heroDonations, hookForm])
 
   const onFormSubmit = async ({ donationDate, lastDonationDate, ...data }: IHeroRegisterRes) => {
-    toast.loading('Te estamos registrando :D', { id: toastHeroId, duration: Infinity })
+    toast.loading('Te estamos registrando 🚀', { id: toastHeroId })
+
+    const donDate = dayjs(donationDate)
+    const lastDonDate = lastDonationDate ? dayjs(lastDonationDate) : donDate
+
+    const parsedLastDonation = heroLastDonation ? dayjs(heroLastDonation) : donDate
+
+    if (heroLastDonation) {
+      if (donDate.isBefore(lastDonDate)) {
+        toast.error('Tu fecha de donación no puede ser anterior a la fecha de tu última donación.', { id: toastHeroId })
+        return
+      }
+      if (lastDonDate.isAfter(donDate)) {
+        toast.error('La última fecha de donación no puede ser superior a la fecha de donación seleccionada.', {
+          id: toastHeroId
+        })
+        return
+      }
+      if (donDate.isBefore(parsedLastDonation.add(2, 'month'))) {
+        toast.error('La fecha de donación debe ser al menos 2 meses después de la última donación registrada.', {
+          id: toastHeroId
+        })
+        return
+      }
+      if (parsedLastDonation && !parsedLastDonation.isSame(lastDonDate)) {
+        toast.error(
+          'Tu ultima fecha de donación no coincide con la fecha que registrada en el sistema. Esto podría generar resultados incorrectos en tus próximas donaciones.',
+          { id: toastHeroId }
+        )
+        return
+      }
+    }
+
+    const heroData = {
+      ...data,
+      donationDate: donDate.toDate(),
+      lastDonationDate: lastDonDate.toDate()
+    }
+
     heroMutate(
-      {
-        body: {
-          ...data,
-          donationDate: dayjs(donationDate).toDate(),
-          lastDonationDate: !lastDonationDate
-            ? dayjs(donationDate).toDate()
-            : dayjs(lastDonationDate).toDate()
-        }
-      },
+      { body: heroData },
       {
         onSuccess() {
           push('/want-donate/details')
@@ -62,14 +116,14 @@ const FormRegisterHero = ({ className }: IFormRegisterHero): JSX.Element => {
 
   return (
     <form
-      className={`${className} RDForm animate-fade-in-up`}
+      className={`${className ?? ''} ${acl(isLoading || isHeroMutating, 'loading')} RDForm animate-fade-in-up`}
       onSubmit={handleSubmit(onFormSubmit, onErrors)}
     >
       <Link href='/want-donate/details' className='RDForm-link'>
         Quiero ver mis fechas de donación
       </Link>
-      <button className='RDForm-submit' type='submit' disabled={isSubmitting}>
-        {isSubmitting ? 'Enviando...' : 'DONAR AHORA'}
+      <button className='RDForm-submit' type='submit' disabled={isHeroMutating}>
+        {isHeroMutating ? 'Enviando...' : 'DONAR AHORA'}
       </button>
 
       <section className={`RDForm-section ${acl(!!donationDate, 'error')}`}>
@@ -77,7 +131,14 @@ const FormRegisterHero = ({ className }: IFormRegisterHero): JSX.Element => {
           <h5>
             <b>Fecha</b> de <b>donación</b>
           </h5>
-          <input type='date' {...register('donationDate')} />
+          <input
+            {...register('donationDate')}
+            min={heroLastDonation ? dayjs(heroLastDonation).add(2, 'month').format('YYYY-MM-DD') : dayjs().format('YYYY-MM-DD')}
+            defaultValue={
+              heroLastDonation ? dayjs(heroLastDonation).add(2, 'month').format('YYYY-MM-DD') : dayjs().format('YYYY-MM-DD')
+            }
+            type='date'
+          />
         </div>
 
         {donationDate && <p className='error-message'>{donationDate.message as any}</p>}
@@ -88,7 +149,7 @@ const FormRegisterHero = ({ className }: IFormRegisterHero): JSX.Element => {
           <h5>
             <b>Última Fecha</b> de <b>donación</b>
           </h5>
-          <input type='date' {...register('lastDonationDate')} />
+          <input disabled={!heroLastDonation} type='date' {...register('lastDonationDate')} />
         </div>
 
         {lastDonationDate && <p className='error-message'>{lastDonationDate.message as any}</p>}
@@ -127,11 +188,7 @@ const FormRegisterHero = ({ className }: IFormRegisterHero): JSX.Element => {
             ¿Cuanto estas <b>Pesando</b>?
           </h5>
           <div className='RDForm-section__linear'>
-            <input
-              autoComplete='off'
-              id='RDFSec-linear'
-              {...register('weight', { valueAsNumber: true })}
-            />
+            <input autoComplete='off' id='RDFSec-linear' {...register('weight', { valueAsNumber: true })} />
             <label htmlFor='RDFSec-linear'>kg</label>
           </div>
         </div>
