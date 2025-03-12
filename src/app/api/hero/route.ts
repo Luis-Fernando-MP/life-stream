@@ -29,22 +29,25 @@ async function updateOrCreatePatient(personId: string, data: any) {
     personID: personId
   }
   const existPatient = await prisma.patient.findUnique({ where: { personID: personId } })
-  return await prisma.patient.upsert({
-    where: { id: existPatient?.id },
-    update: patientData,
-    create: patientData
-  })
+  if (existPatient) {
+    return await prisma.patient.update({
+      where: { id: existPatient.id },
+      data: patientData
+    })
+  }
+  return await prisma.patient.create({ data: patientData })
 }
 
 async function updateOrCreateDonor(userId: string, patientId: string, lastDonationDate: string) {
   const donorData = { AuthorID: userId, patientID: patientId, lastDonation: lastDonationDate }
   const existDonor = await prisma.bloodDonor.findUnique({ where: { patientID: patientId } })
-  return await prisma.bloodDonor.upsert({
-    where: { id: existDonor?.id },
-    update: { lastDonation: lastDonationDate },
-    create: donorData,
-    include: { patient: { include: { person: true } } }
-  })
+  if (existDonor) {
+    return await prisma.bloodDonor.update({
+      where: { id: existDonor.id },
+      data: { lastDonation: lastDonationDate }
+    })
+  }
+  return await prisma.bloodDonor.create({ data: donorData, include: { patient: { include: { person: true } } } })
 }
 
 async function createDonation(donorId: string, donationDate: string) {
