@@ -46,6 +46,11 @@ const History = ({ history, i }: IHistory): JSX.Element => {
     toast.loading('Borrando historia...', { id: deleteToastID })
     if (status === 'pending') return
     historyRef.current?.classList.add('remove')
+    setTimeout(() => {
+      if (historyRef.current) {
+        historyRef.current.style.display = 'none'
+      }
+    }, 1000)
     mutate({
       body: {
         id: history.id
@@ -56,7 +61,7 @@ const History = ({ history, i }: IHistory): JSX.Element => {
   return (
     <section className='history animate-fade-in-up' style={{ animationDelay: `${0.5 / i}s` }} ref={historyRef}>
       <article className='history-data'>
-        <div className='history-data-left'>
+        <div className='history-actions'>
           <Logo />
           <button onClick={handleDelete} disabled={status === 'pending'} className={status}>
             {status === 'pending' && <LoaderCircle />}

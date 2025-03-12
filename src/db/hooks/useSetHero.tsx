@@ -36,7 +36,7 @@ export function useSetHero(toastId: string) {
           <h3>¡Ahora eres un <u>HÉROE</u>! 🦸‍♂️</h3>
           <p>Tu generosa donación de sangre será destinada para el:</p>
           <p>${dayjs(donation.donationDate).format('DD/MM/YYYY')}</p>
-          <h4>${fromDate(donation.donationDate)}</h4>
+          <h5>${fromDate(donation.donationDate)}</h5>
         </div>
       </section>`
       historyMutate({ body })
