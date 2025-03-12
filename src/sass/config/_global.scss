@@ -2,6 +2,7 @@
 @use '@sass/config/vars' as *;
 @use '@sass/utils/media' as m;
 @use '@sass/utils/text' as t;
+@use '@sass/utils/loader' as loader;
 
 *,
 ::before,
@@ -225,4 +226,8 @@ svg {
   height: $icon;
   stroke: rgb($fn2);
   stroke-width: 1.7;
+}
+
+.loading {
+  @include loader.loader;
 }

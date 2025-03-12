@@ -1,11 +1,11 @@
 import { bodyFonts } from '@/shared/fonts'
+import dynamic from 'next/dynamic'
 import NextTopLoader from 'nextjs-toploader'
 import type { JSX, ReactNode } from 'react'
 import React from 'react'
 import { Toaster } from 'react-hot-toast'
 
 import Header from './components/Header'
-import Nav from './components/Nav'
 import './globals.css'
 import { metadata, viewport } from './metadata'
 import Providers from './providers'
@@ -15,6 +15,7 @@ interface IRootLayout {
   children?: Readonly<ReactNode[]> | null | Readonly<ReactNode>
 }
 
+const Nav = dynamic(() => import('./components/Nav'), {})
 const RootLayout = ({ children }: IRootLayout): JSX.Element => {
   return (
     <html lang='es'>

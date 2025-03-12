@@ -36,18 +36,7 @@ const scheme = z.object({
     { message: 'La fecha debe ser posterior a hoy' }
   ),
 
-  lastDonationDate: z
-    .string()
-    .optional()
-    .refine(
-      value => {
-        if (!value) return true
-        const inputDate = dayjs(value, 'YYYY-MM-DD', true)
-        const endOfDay = dayjs().endOf('day')
-        return inputDate.isValid() && inputDate.isSameOrBefore(endOfDay) && inputDate.isAfter(endOfDay.subtract(2, 'month'))
-      },
-      { message: 'La fecha debe ser al menos 2 meses antes de la fecha actual' }
-    )
+  lastDonationDate: z.string().optional()
 })
 
 export const heroRegisterResolver = zodResolver(scheme)
